@@ -1,35 +1,59 @@
+/**
+ * @fileoverview En este ficheor se implementa la clase circuito. Un circuito, se compone de una
+ * lista de componenentes.
+ * 
+ * @author David Gómez Pérez <dgpv2000@gmail.com>
+ */
+
+import { count } from "console";
 import { Component } from "../component.items/Component";
 
 export class Circuit {
-    private components: Map<string, Component>;
+   private components: Component[];
 
-    constructor(){
-        this.components = new Map<string, Component>();
-    }
+   constructor (){
+       this.components = [];
+   }
 
-    componentIsDefined(c: Component): boolean{
-        return this.components.has(c.getId());
-    }
-    
+   /**
+    * @returns Componentes del circuito
+    */
+   getComponents(): Component[] {
+       return this.components;
+   }
 
-    addComponent(c: Component): void{
-        if (!this.componentIsDefined(c)){
-            this.components.set(c.getId(), c);
-        }else{
-            console.log(`[SERVER] : Componente con ID:${c.getId()} ya existe`);
-        }
-    }
+   /**
+    * Reemplaza la lista de componentes del circuito por otra nueva
+    * @param {Component []}components Nuevos componentes
+    */
+   setComponentes(components: Component[]){
+       this.components = components;
+   }
 
-    deleteComponent(c: Component): void {
-        if (!this.componentIsDefined(c)){
-            console.log(`[SERVER] : Componente con ID:${c.getId()} no existe`);
-        }else{
-            this.components.delete(c.getId());
-        }
-    }
+   /**
+    * 
+    * @param {number} id Identificador del componente a buscar 
+    * @returns {number} Devuelte el índice del componente 
+    */
+   getComponentById(id: string): Component {
+        //TODO 
+   }
 
-    //TO-DO
-    updateComponent(c: Component): void{
-        
-    }
+   getComponentByDefinition(component: Component): Component {
+       let id = component.getId();
+       return this.getComponentById(id);
+   }
+
+   addComponent(component: Component){
+       this.components.push(component);
+   }
+
+
+   //private functions
+   private getComponentPositionById(id: string): Component {
+       //TO-DO
+   }
+
+   
+
 }

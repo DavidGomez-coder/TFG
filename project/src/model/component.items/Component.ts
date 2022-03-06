@@ -77,4 +77,6 @@ export class Component {
     setValue(value: number): void {
         this.value = value;
     }
+
+
 }
