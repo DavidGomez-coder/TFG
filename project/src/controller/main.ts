@@ -5,6 +5,7 @@ import { send } from "process";
 import { json } from "stream/consumers";
 import { Circuit } from "../model/circuit/Circuit";
 import { Component } from "../model/component.items/Component";
+import { SecretGenerator } from "../utilities/SecretGenerator";
 
 
 
@@ -18,9 +19,7 @@ module.exports = (app: Application) => {
         //JSON.parse(jsonObject) --> json -> objecto
         let c = new Component("Cell", "C0", 12);
         let c2 = new Component("Cell", "C1", 24);
-        
         let cir : Circuit = new Circuit();
-
         //cir.addComponent(c);
         //cir.addComponent(c2);
         //req.session.circuit = cir.toJSON();

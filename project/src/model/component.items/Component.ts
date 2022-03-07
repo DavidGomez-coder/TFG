@@ -79,4 +79,14 @@ export class Component {
     }
 
 
+    /**
+     * Método usado para comparar si un componente es igual o no a la instancia actual
+     * @param {Component} component Componente con el que comparar
+     * @returns {boolean} True si se trata del mismo componente, false en caso contrario
+     */
+    equals(component: Component): boolean{
+        return this.getId() === component.getId() && this.getType() === component.getType();
+    }
+
+
 }

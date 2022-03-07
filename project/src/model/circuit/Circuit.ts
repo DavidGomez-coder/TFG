@@ -5,12 +5,18 @@
  * @author David Gómez Pérez <dgpv2000@gmail.com>
  */
 
-import { count } from "console";
 import { Component } from "../component.items/Component";
 
+/**
+ * @class Clase circuito
+ */
 export class Circuit {
    private components: Component[];
 
+
+   /**
+    * @constructor Inicializa los componentes como una lista vacía
+    */
    constructor (){
        this.components = [];
    }
@@ -24,34 +30,75 @@ export class Circuit {
 
    /**
     * Reemplaza la lista de componentes del circuito por otra nueva
-    * @param {Component []}components Nuevos componentes
+    * @param {Component []} components Nuevos componentes
     */
-   setComponentes(components: Component[]){
+   setComponentes(components: Component[]): void{
        this.components = components;
    }
+
+   /**
+    * Método que añade un nuevo componente al circuito
+    * @param {Component} component Nuevo componente
+    */
+   addComponent(component: Component): void{
+        this.components.push(component);
+    }
+
+
+    /**
+     * Método que elimina un componente del circuito
+     * @param {string} id Id del elemento a borrar 
+     */
+    deleteComponent(id: string): void {
+        this.components.filter((elem: Component) => {
+            return elem.getId() !== id;
+        });
+    }
 
    /**
     * 
     * @param {number} id Identificador del componente a buscar 
     * @returns {number} Devuelte el índice del componente 
     */
-   getComponentById(id: string): Component {
-        //TODO 
-   }
+   getComponentById(id: string): Component | undefined {
+        let pos = this.getComponentPositionById(id);
+        if (pos >= 0){
+            return this.components[pos];
+        }
+        return undefined;
 
-   getComponentByDefinition(component: Component): Component {
-       let id = component.getId();
-       return this.getComponentById(id);
-   }
+    }
 
-   addComponent(component: Component){
-       this.components.push(component);
-   }
+
+    /**
+     * Este método actualiza el valor de un componente
+     * @param {Component} component Nuevo componente
+     */
+    updateComponent (component: Component): void {
+        let pos = this.getComponentPositionById(component.getId());
+        if (pos >= 0){
+            if (this.components[pos].equals(component)){
+                this.components[pos].setValue(component.getValue());
+            }
+        }
+    }
+
 
 
    //private functions
-   private getComponentPositionById(id: string): Component {
-       //TO-DO
+   /**
+    * Método usado para devolver la posición en la que se encuentra el componente
+    * con id pasado como parámetro
+    * @param {string} id Identificador del componente
+    * @returns {number} Posición del elemento a buscar. Devuelve -1 si el componente no ha 
+    *                   sido encontrado
+    */
+   private getComponentPositionById(id: string): number {
+        let count = 0;
+        while(this.components[count].getId() !== id){
+            count++;
+        }
+       return count>=0 ? count : -1;
    }
 
    
