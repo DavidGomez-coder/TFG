@@ -34,7 +34,7 @@ module.exports = (app: Application) => {
 
        // let cr = JSON.parse(JSON.stringify(cir));
         //console.log(cr)
-        res.sendStatus(200);
+        res.send(req.sessionID);
     })
 
     
