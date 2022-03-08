@@ -15,6 +15,14 @@ import { Circuit } from "./Circuit";
 
 
 export class CircuitFactory {
+
+    //ids asociados a los componentes de los circuitos
+    static CAPACITOR_ID: string = "C0";
+    static INDUCTOR_ID: string  = "L0";
+    static CELL_ID: string      = "V0";
+    static RESISTOR_ID: string   = "R0";
+    static SWITCH_ID: string    = "S0";
+
     /**
      * 
      * @param {string} type Tipo del circuito que se quiere utilizar.  
@@ -24,20 +32,20 @@ export class CircuitFactory {
     static createCircuit (type: string): Circuit | null {
         let circuit: Circuit = new Circuit();
         
-        let cell: Cell = ComponentFactory.createCell("V0", 5);
-        let resistor: Resistor = ComponentFactory.createResistor("R0", 10, "x1");
-        let swi: Switch = ComponentFactory.createSwitch("S0", 1);
+        let cell: Cell = ComponentFactory.createCell(this.CELL_ID, 5);
+        let resistor: Resistor = ComponentFactory.createResistor(this.RESISTOR_ID, 10, "x1");
+        let swi: Switch = ComponentFactory.createSwitch(this.SWITCH_ID, 1);
 
         circuit.addComponent(cell);
         circuit.addComponent(resistor);
         circuit.addComponent(swi);
 
         if (type === "RL"){
-            let inductor: Inductor = ComponentFactory.createInductor("L0", 50, "miliH");
+            let inductor: Inductor = ComponentFactory.createInductor(this.INDUCTOR_ID, 50, "miliH");
             circuit.addComponent(inductor);
             return circuit;
         }else if (type === "RC"){
-            let capacitor: Capacitor = ComponentFactory.createCapacitor("C0", 50, "miliF");
+            let capacitor: Capacitor = ComponentFactory.createCapacitor(this.CAPACITOR_ID, 50, "miliF");
             circuit.addComponent(capacitor);
             return circuit;
         }

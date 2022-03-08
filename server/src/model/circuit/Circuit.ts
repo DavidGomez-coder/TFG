@@ -50,13 +50,12 @@ export class Circuit {
      * @param {string} id Id del elemento a borrar 
      */
     deleteComponent(id: string): void {
-        this.components.filter((elem: Component) => {
+        this.components = this.components.filter((elem: Component) => {
             return elem.getId() !== id;
         });
     }
 
    /**
-    * 
     * @param {number} id Identificador del componente a buscar 
     * @returns {number} Devuelte el índice del componente 
     */
@@ -95,10 +94,15 @@ export class Circuit {
     */
    private getComponentPositionById(id: string): number {
         let count = 0;
-        while(this.components[count].getId() !== id){
+        let find = false;
+        while (!find && count < this.components.length){
+            if (this.components[count].getId() === id){
+                find = true;
+                return count;
+            }
             count++;
         }
-       return count>=0 ? count : -1;
+       return -1;
    }
 
    
