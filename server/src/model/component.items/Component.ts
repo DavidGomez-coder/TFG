@@ -18,9 +18,9 @@
  * @class Clase componente.
  */
 export class Component {
-    private type:  string;
-    private id:    string;
-    private value: number;
+    protected type:  string;
+    protected id:    string;
+    protected value: number;
 
     /**
      * @constructor

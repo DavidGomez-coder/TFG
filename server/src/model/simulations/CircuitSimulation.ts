@@ -16,10 +16,10 @@
 import { Circuit } from "../circuit/Circuit";
 
 export class CircuitSimulation {
-    private circuit: Circuit;
-    private t0: number;
-    private tT: number;
-    private status: string;
+    protected circuit: Circuit;
+    protected t0: number;
+    protected tT: number;
+    protected status: string;
 
     /**
      * 
