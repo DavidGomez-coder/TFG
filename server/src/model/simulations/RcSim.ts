@@ -48,15 +48,23 @@ export class RcSim extends CircuitSimulation {
         return this.isChargin() ? this.VcOnCharge(this.getT0()) : this.VcOnDischarge(this.getT0());
     }
     
-
+    /**
+     * @returns {number} Intensidad del circuito 
+     */
     getI(): number {
         return this.isChargin() ? this.IonCharge(this.getT0()) : this.IonDischarge(this.getT0());
     }
     
+    /**
+     * @returns {number} Diferencia de potencial entre los bornes de la resisntencia en el instante T0 de la simulacion
+     */
     getVr(): number {
         return this.isChargin() ? this.VrOnCharge(this.getT0()) : this.VrOnDischarge(this.getT0());
     }
 
+    /**
+     * @returns {number} Energía almacenada en el condensador en el instante T0
+     */
     getEnergy(): number {
         return this.isChargin() ? this.energyOnCharge(this.getT0()) : this.energyOnDischarge(this.getT0());
     }
