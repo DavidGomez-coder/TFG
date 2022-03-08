@@ -8,11 +8,10 @@ import session from "express-session";
 //importamos el fichero que contiene las variables de entorno
 dotenv.config();
 
-//comporobar si existe la variable puerto definida
-if (!process.env.PORT){
+//comporobar si existe las variables de entorno
+if (!process.env.PORT || !process.env.SESSION_SECRET){
     process.exit(1);
 }
-
 
 const PORT : number = parseInt(process.env.PORT as string, 10);
 

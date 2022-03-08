@@ -35,7 +35,7 @@ export class Component {
     }
 
     /**
-     * @returns TIPO
+     * @returns {string} TIPO
      */
     getType(): string {
         return this.type;
@@ -43,14 +43,14 @@ export class Component {
 
 
     /**
-     * @returns ID
+     * @returns {string} ID
      */
     getId(): string {
         return this.id;
     }
 
     /**
-     * @returns VALOR
+     * @returns {number} VALOR
      */
     getValue(): number {
         return this.value;
