@@ -45,8 +45,6 @@ describe("Actualizar valor de un componente no existente", () => {
     });
 });
 
-
-
 afterAll(()=> {
     reloadDataBase();
 });
