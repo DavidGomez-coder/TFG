@@ -8,6 +8,7 @@ import { Circuit } from "../circuit/Circuit";
 import { CircuitFactory } from "../circuit/CircuitFactory";
 import { CircuitSimulation } from "./CircuitSimulation";
 import { RcSim } from "./RcSim";
+import { RlSim } from "./RlSim";
 
 export class SimulationFactory {
 
@@ -19,7 +20,7 @@ export class SimulationFactory {
     static createSimulation (type: string): CircuitSimulation | null {
         if (type === "RL"){
             let circuit: Circuit = <Circuit>CircuitFactory.createCircuit("RL");
-            return new RcSim(circuit);
+            return new CircuitSimulation(circuit)
         }else if (type === "RC"){
             let circuit: Circuit = <Circuit>CircuitFactory.createCircuit("RC");
             return new CircuitSimulation(circuit);
