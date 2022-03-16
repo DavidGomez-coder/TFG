@@ -15,80 +15,67 @@
 
 import { Circuit } from "../circuit/Circuit";
 
-export class CircuitSimulation {
-    protected circuit: Circuit;
-    protected t0: number;
-    protected tT: number;
-    protected status: string;
+enum Status {
+    STOPPED = 0,
+    RUNNING = 1
+}
 
-    /**
-     * 
-     * @param {Circuit} circuit Circuito sobre el que se realiza la simulación (RC o RL)
-     */
+export class CircuitSimulation {
+
+    protected circuit: Circuit; //circuito a simular
+    protected status: Status;   //estado de la simulacion 
+    protected max_time: number;  //tiempo total empleado en la simulacion (4 veces la constante de tiempo, inicialmente 0)
+
     constructor (circuit: Circuit){
         this.circuit = circuit;
-        this.t0 = 0;
-        this.tT = 0;
-        this.status = "Paused";
+        this.status = Status.STOPPED;
+        this.max_time = 0;
     }
 
-    //GETTERS-SETTERS
+
+    /**
+     * @returns {Circuit} Circuito de la simulacion
+     */
     getCircuit (): Circuit {
         return this.circuit;
     }
 
+    /**
+     * @param {Circuit} circuit Nuevo circuito de la simulacion
+     */
     setCircuit (circuit: Circuit): void {
         this.circuit = circuit;
+        this.status = Status.STOPPED;
     }
 
-    getT0(): number {
-        return this.t0;
-    }
-
-    setT0(t0: number): void{
-        this.t0 = t0;
-    }
-
-    getT(): number {
-        return this.tT;
-    }
-
-    setT(t: number): void {
-        this.tT = t;
-    }
-
-    getStatus(): string {
+    /**
+     * @returns {Status} Estado de la simulacion
+     */
+    getStatus(): Status {
         return this.status;
     }
 
-    setStatus(status: string): void {
-        this.status = status;
-    }
-
-    //otros métodos
-
     /**
-     * Método utilizado para poner en marcha la simulación. Cambio del estado por "Runnin".
+     * Cambia el estado de la simulacion dependiendo del estado en el que se encuentre.
      */
-    resumeSimulation(): void {
-        this.status = "Running";
+    changeStatus(): void {
+        if (this.status === Status.STOPPED)
+            this.status = Status.RUNNING;
+        else
+            this.status = Status.STOPPED;
     }
 
     /**
-     * Método usado para pausar la simulación. Cambio del estado por "Paused"
+     * @returns {number} Tiempo durante el que se ejecuta la simulacion
      */
-    pauseSimulation(): void {
-        this.status = "Paused";
+    getMaxTime (): number {
+        return this.max_time;
     }
 
     /**
-     * Método usado para reiniciar la simulación. Los tiempos t0 y tT se ponen a 0, y 
-     * el estado a "Paused".
+     * @param {number} max_time Nuevo tiempo durante el que se ejecuta la simulacion
      */
-    restartSimulation(): void {
-        this.t0 = 0;
-        this.tT = 0;
-        this.status = "Paused";
+    setMaxTime (max_time: number): void {
+        this.max_time = max_time;
     }
-
 }

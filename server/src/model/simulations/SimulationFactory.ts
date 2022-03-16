@@ -1,5 +1,5 @@
 /**
- * @fileoverview Implemetación de un generador de simulaciones, dependiendo del tipo de circuito.
+ * @fileoverview Implemetación de un generador de simulaciones, dependiendo del tipo de circuito que queramos construir.
  * 
  * @author David Gómez Pérez <dpgv2000@gmail.com>
  */
@@ -12,7 +12,6 @@ export class SimulationFactory {
 
 
     /**
-     * 
      * @param {string} type Tipo del circuito a simular 
      * @returns {CircuitSimulation} Simulación según el tipo de circuito
      */
