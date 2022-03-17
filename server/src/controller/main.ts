@@ -12,7 +12,6 @@ import { SecretGenerator } from "../utilities/SecretGenerator";
 
 module.exports = (app: Application) => {
 
-
     app.get('/', (req: Request, res: Response) => {
         console.log("[SERVER] : BIENVENIDO");
         //JSON.stringfy(object)  --> objeto -> json
@@ -34,7 +33,7 @@ module.exports = (app: Application) => {
 
        // let cr = JSON.parse(JSON.stringify(cir));
         //console.log(cr)
-        res.send(req.sessionID);
+        res.json(req.sessionID)
     })
 
     

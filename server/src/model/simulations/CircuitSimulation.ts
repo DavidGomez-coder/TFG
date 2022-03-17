@@ -1,81 +1,87 @@
 /**
  * @fileoverview Implementacion logica de la simulacion. Una simulacion se compone de tres elementos fundamentales.
  *              - CIRCUITO. Es el circuito sobre el que se va a realizar la simulación: RC o RL
- *              - tT. Es el tiempo transcurrido desde el inicio de la simulacion hasta que se finaliza (este puede ser infinito)
- *              - t0. Es el tiempo transcurrido desde el último cambio en el circuito. 
- *                  -> Inicialmente tT = t0 = 0. Cuando el circuito sufre un cambio (cambio de valor en un componente, cambio de estado), entonces
- *                     tT = x, mientras que t0 = 0. Este valor t0 es el utilizado para calcular las propiedades (diferencia de potenciales, energía almacenada,
- *                     intensidad de corriente, ...)
- *              - STATUS. Indica el estado de la simulación. Estos pueden ser:
- *                        -> Paused. Simulación pausada. El tiempo no avanza.
- *                        -> Running. Simulación ejecutándose. El tiempo avanza, y por lo tanto, se calculan nuevos valores.
+ *              - tT. Es el tiempo total por el que se va a realizar la  simulación. En caso de los circuitos RC y RL, este tiempo
+ *                    será 4 veces su constante de tiempo.
+ *              - STATUS. Indica como afecta el estado del interruptor al resto del sistema. Si el interruptor está cerrado (s=1), entonces
+ *                        la simulación se orientará al almacenamiento de energía. Por otro lado, si el interruptor está abierto (s=0) se procederá
+ *                        a la disipación de dicha energía. En el primer caso, se supondrá que la energía almacenada para t=0 es 0 (E(0) = 0), mientras que
+ *                        cuando el interruptor se posiciona para la disipación de energía del condensador o del inductor, entonces esta energía será máxima 
+ *                        (condensador con máxima carga e inductor con máxima energía almacenada)
  * 
  * @author David Gómez Pérez <dgpv2000@gmail.com>
  */
 
+import { throwStatement } from "@babel/types";
 import { Circuit } from "../circuit/Circuit";
+import { ComponentsIds } from "../circuit/ComponentsIds";
+import { Switch } from "../component.items/Switch";
 
-enum Status {
-    STOPPED = 0,
-    RUNNING = 1
-}
+
 
 export class CircuitSimulation {
 
-    protected circuit: Circuit; //circuito a simular
-    protected status: Status;   //estado de la simulacion 
-    protected max_time: number;  //tiempo total empleado en la simulacion (4 veces la constante de tiempo, inicialmente 0)
+   protected circuit: Circuit;
+   protected tT: number = -1; //esta propiedad se define cuando se construya la simulación correspondiente (RC o RL)
+   protected status: number;
 
-    constructor (circuit: Circuit){
-        this.circuit = circuit;
-        this.status = Status.STOPPED;
-        this.max_time = 0;
-    }
+   constructor (circuit: Circuit){
+       this.circuit = circuit;
+       this.status = <number>circuit.getComponentById(ComponentsIds.SWITCH_ID)?.getValue();
+   }
 
+   /**
+    * @returns {Circuit} circuit
+    */
+   getCircuit(): Circuit {
+       return this.circuit;
+   }
 
-    /**
-     * @returns {Circuit} Circuito de la simulacion
-     */
-    getCircuit (): Circuit {
-        return this.circuit;
-    }
+   /**
+    * @param {Circuit} circuit 
+    */
+   setCircuit(circuit: Circuit): void {
+       this.circuit = circuit;
+   }
 
-    /**
-     * @param {Circuit} circuit Nuevo circuito de la simulacion
-     */
-    setCircuit (circuit: Circuit): void {
-        this.circuit = circuit;
-        this.status = Status.STOPPED;
-    }
+   /**
+    * @returns {number} Tiempo de la simulacion
+    */
+   getMaxTime(): number {
+       return this.tT;
+   }
 
-    /**
-     * @returns {Status} Estado de la simulacion
-     */
-    getStatus(): Status {
-        return this.status;
-    }
+   /**
+    * Metodo usado para actualizar el tiempo maximo de la simulacion de un circuito
+    * @param {number} maxTime 
+    */
+   updateMaxTime(maxTime: number): void {
+       this.tT = maxTime;
+   }
 
-    /**
-     * Cambia el estado de la simulacion dependiendo del estado en el que se encuentre.
-     */
-    changeStatus(): void {
-        if (this.status === Status.STOPPED)
-            this.status = Status.RUNNING;
-        else
-            this.status = Status.STOPPED;
-    }
+   /**
+    * @returns {number} number
+    */
+   getStatus(): number {
+       return this.status;
+   }
 
-    /**
-     * @returns {number} Tiempo durante el que se ejecuta la simulacion
-     */
-    getMaxTime (): number {
-        return this.max_time;
-    }
+   /**
+    * @param {number} status 
+    */
+   setStatus(status: number): void {
+       this.status = status;
+   }
 
-    /**
-     * @param {number} max_time Nuevo tiempo durante el que se ejecuta la simulacion
-     */
-    setMaxTime (max_time: number): void {
-        this.max_time = max_time;
-    }
+   /**
+    * Cambia el estado actual de la simulacion por otro
+    *   -> alterna entre ALMACENAMIENTO-DISIPACION de energía
+    */
+   changeStatus(): void {
+        let sC: Switch = <Switch>this.circuit.getComponentById(ComponentsIds.SWITCH_ID);
+        sC.changeValue();
+        this.circuit.updateComponent(sC);
+        this.status = <number>this.circuit.getComponentById(ComponentsIds.SWITCH_ID)?.getValue();
+   }
+
 }

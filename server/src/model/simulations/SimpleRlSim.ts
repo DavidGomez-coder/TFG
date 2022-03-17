@@ -6,16 +6,16 @@
 
 import { Circuit } from "../circuit/Circuit";
 import { CircuitFactory } from "../circuit/CircuitFactory";
-import { CircuitIds } from "../circuit/CircuitIDs";
+import { ComponentsIds } from "../circuit/ComponentsIds";
 import { ComponentFactory } from "../component.factory/ComponentFactory";
 import { CircuitSimulation } from "./CircuitSimulation";
 
-export class RlSim extends CircuitSimulation {
+export class SimpleRlSim extends CircuitSimulation {
     
-    private R: number = <number>this.circuit.getComponentById(CircuitIds.RESISTOR_ID)?.getValue();
-    private L: number = <number>this.circuit.getComponentById(CircuitIds.INDUCTOR_ID)?.getValue();
-    private V: number = <number>this.circuit.getComponentById(CircuitIds.CELL_ID)?.getValue();
-    private S: number = <number>this.circuit.getComponentById(CircuitIds.SWITCH_ID)?.getValue();
+    private R: number = <number>this.circuit.getComponentById(ComponentsIds.RESISTOR_ID)?.getValue();
+    private L: number = <number>this.circuit.getComponentById(ComponentsIds.INDUCTOR_ID)?.getValue();
+    private V: number = <number>this.circuit.getComponentById(ComponentsIds.CELL_ID)?.getValue();
+    private S: number = <number>this.circuit.getComponentById(ComponentsIds.SWITCH_ID)?.getValue();
 
     private constTimeRL = this.L/this.R;
 

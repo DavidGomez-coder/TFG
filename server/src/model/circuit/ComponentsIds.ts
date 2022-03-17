@@ -5,7 +5,7 @@
  * @author David Gómez Pérez <dgpv2000@gmail.com>
  */
 
-export class CircuitIds {
+export class ComponentsIds {
 
      //ids asociados a los componentes de los circuitos
      static CAPACITOR_ID: string = "C0";
