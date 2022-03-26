@@ -96,6 +96,10 @@ export class SimpleRcSim extends CircuitSimulation {
         return this.status == 1 ? this.getVrOnCharge(t) : this.getVrOnDischarge(t);
     }
 
+    /** 
+     * @param {number} t 
+     * @returns {number} Energía almacenada en el condensador en el instante t
+     */
     getCapacitorEnergy (t: number): number {
         return this.status == 1 ? this.getEnergyOnCharge(t) : this.getEnergyOnDischarge(t);
     }
