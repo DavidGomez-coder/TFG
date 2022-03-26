@@ -23,7 +23,7 @@ export class CircuitSimulation {
 
    protected circuit: Circuit;
    protected tT: number = -1; //esta propiedad se define cuando se construya la simulación correspondiente (RC o RL)
-   protected status: number;
+   protected status: number; 
 
    constructor (circuit: Circuit){
        this.circuit = circuit;

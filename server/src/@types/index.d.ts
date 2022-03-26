@@ -4,9 +4,10 @@
  */
 
 import { Circuit } from "../model/circuit/Circuit";
+import { CircuitSimulation } from "../model/simulations/CircuitSimulation";
 
 export declare module "express-session" {
   interface Session {
-    circuitSimulation: any;
+    circuitSimulation: CircuitSimulation;
   }
 }
