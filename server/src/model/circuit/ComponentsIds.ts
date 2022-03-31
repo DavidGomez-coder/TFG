@@ -13,4 +13,10 @@ export class ComponentsIds {
      static CELL_ID: string      = "V0";
      static RESISTOR_ID: string  = "R0";
      static SWITCH_ID: string    = "S0";
+
+     static CAPACITOR_TYPE: string = "Capacitor";
+     static INDUCTOR_TYPE: string  = "Inductor";
+     static CELL_TYPE: string      = "Cell";
+     static RESISTOR_TYPE: string  = "Resistor";
+     static SWITCH_TYPE: string    = "Switch";
 }
