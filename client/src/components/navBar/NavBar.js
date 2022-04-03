@@ -1,13 +1,16 @@
 import React, {Component} from 'react'
+
 import "bootstrap/dist/css/bootstrap.min.css"
+import "../../assets/css/component.navbar/NavBar.css"
+
 import logo from '../../assets/images/logo.svg'
-import house from '../../assets/images/house.svg'
+
 
 class NavBar extends Component {
 
     render (){
         return (
-           <nav className='navbar navbar-expand-sm navbar-dar bg-dark'>
+           <nav className='navbar navbar-expand-sm navbar-dar bg-dark right-side-nav' >
                <div className='container-fluid'>
                     <a className='navbar-brand' style={{color: 'white'}}>
                         <img src={logo} width='30'></img>

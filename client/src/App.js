@@ -10,9 +10,8 @@ function App() {
     <div className="App">
       <NavBar />
       <header className="App-header">
-
         <h1>Física Interactiva</h1>
-
+        
         <MainLogoComponent />
        
       </header>
