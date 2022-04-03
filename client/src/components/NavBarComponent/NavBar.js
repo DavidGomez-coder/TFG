@@ -20,16 +20,9 @@ class NavBar extends Component {
                     <div className='collapse navbar-collapse d-flex'>
                         <ul className='navbar-nav me-auto'>
                             <li className='nav-item'>
-                                <a className='nav-link' href='#'>Simulaciones</a>
-                            </li>
-                            <li className='nav-item'>
-                                <a className='nav-link' href='#'>Teoría</a>
-                            </li>
-                            <li className='nav-item'>
                                 <a className='nav-link' href='#'>About</a>
                             </li>
-                            <li className='nav-item'>
-                                
+                            <li className='nav-item'> 
                             </li>
                             <li className='nav-item'>
                                 <a className='nav-link' href='#'>

@@ -1,7 +1,6 @@
-import logo from './assets/images/logo.svg';
 import './assets/css/App.css';
 import MainLogoComponent from './components/MainLogoComponent/MainLogoComponent';
-import NavBar from './components/navBar/NavBar';
+import NavBar from './components/NavBarComponent/NavBar';
 
 
 
