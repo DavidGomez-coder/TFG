@@ -1,20 +1,22 @@
 import './assets/css/App.css';
-import MainLogoComponent from './components/MainLogoComponent/MainLogoComponent';
-import NavBar from './components/NavBarComponent/NavBar';
 
+
+import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom'
+import IndexComponent from './components/IndexComponent/IndexComponent';
+import AboutComponent from './components/AboutComponent/AboutComponent';
 
 
 function App() {
   return (
-    <div className="App">
-      <NavBar />
-      <header className="App-header">
-        <h1>Física Interactiva</h1>
-        
-        <MainLogoComponent />
-       
-      </header>
-    </div>
+    <>
+      <Router>
+        <Routes>
+            <Route exact path="/" element={<IndexComponent />} />
+            <Route exact path="/about" element={<AboutComponent />} />
+        </Routes>
+          
+      </Router>
+    </>
   );
 }
 
