@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import FooterComponent from "../FooterComponent/FooterComponent";
 import NavBar from "../NavBarComponent/NavBar";
 
 class IndexComponent extends Component {
@@ -6,7 +7,7 @@ class IndexComponent extends Component {
         return  (
             <div>
                 <NavBar />
-
+                <FooterComponent/>
             </div>
 
         );
