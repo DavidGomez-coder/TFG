@@ -5,7 +5,7 @@ import { Circuit } from "../circuit/Circuit";
  * @author David Gómez Pérez <dgpv2000@gmail.com>
  */
 
-export class CircuitSimulation {
+export abstract class CircuitSimulation {
 
     private circuit: Circuit;
 
@@ -26,4 +26,6 @@ export class CircuitSimulation {
     setCircuit(circuit: Circuit){
         this.circuit = circuit;
     }
+
+    abstract getResults (): any;
 }

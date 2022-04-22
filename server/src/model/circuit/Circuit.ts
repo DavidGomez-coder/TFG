@@ -32,7 +32,7 @@ export class Circuit {
     * Reemplaza la lista de componentes del circuito por otra nueva
     * @param {Component []} components Nuevos componentes
     */
-   setComponentes(components: Component[]): void{
+   setComponents(components: Component[]): void{
        this.components = components;
    }
 

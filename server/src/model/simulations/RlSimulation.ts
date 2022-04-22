@@ -4,10 +4,11 @@
  */
 
 import { Circuit } from "../circuit/Circuit";
+import { CircuitSimulation } from "./CircuitSimulation";
 
-export class RlSimulatin {
+export class RlSimulation extends CircuitSimulation{
 
-    static getResults (circuit: Circuit): any {
-
+    getResults() : any {
+        return "RES2"
     }
 }

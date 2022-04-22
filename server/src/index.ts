@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import session from "express-session";
+import { Application, NextFunction, Request, Response } from "express"
 
 
 //importamos el fichero que contiene las variables de entorno
@@ -27,10 +28,18 @@ app.use(session({
 
 //controllers
 require("./controller/main.ts")(app);
+require("./controller/simulations.ts")(app);
+require("./controller/updateComponents.ts")(app);
 
+
+app.use(function(req, res, next){
+    res.header("resistor", "*");
+    res.header("capacitor", "*");
+})
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+
 
 
 
