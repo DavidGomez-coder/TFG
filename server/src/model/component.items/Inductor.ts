@@ -10,10 +10,27 @@ import { Component } from "./Component";
 
 export class Inductor extends Component {
 
+
     constructor (id: string, value: number, multiplier: string) {
         super("Inductor", id, -1);
-        this.setValue(this.calculateValue(value, multiplier));
+        this.value = this.calculateValue(value, multiplier);
+        this.multiplier = multiplier;
+        this.setComponentValue();
     }
+
+
+    setValue(value: number): void {
+        this.value = value;
+        this.setComponentValue()
+    }
+    setMultiplier(multiplier: string): void {
+        this.multiplier = multiplier;
+        this.setComponentValue();
+    }
+    setComponentValue(): void {
+        this.componentValue = this.calculateValue(this.value, this.multiplier);
+    }
+
 
 
     //metodos privados

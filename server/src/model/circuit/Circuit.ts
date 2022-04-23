@@ -5,7 +5,9 @@
  * @author David Gómez Pérez <dgpv2000@gmail.com>
  */
 
+import { ComponentFactory } from "../component.factory/ComponentFactory";
 import { Component } from "../component.items/Component";
+import { Resistor } from "../component.items/Resistor";
 
 /**
  * @class Clase circuito
@@ -33,7 +35,7 @@ export class Circuit {
     * @param {Component []} components Nuevos componentes
     */
    setComponents(components: Component[]): void{
-       this.components = components;
+        this.components = components;    
    }
 
    /**
@@ -77,7 +79,7 @@ export class Circuit {
         let pos = this.getComponentPositionById(component.getId());
         if (pos >= 0){
             if (this.components[pos].equals(component)){
-                this.components[pos].setValue(component.getValue());
+                this.components[pos] = component;
             }
         }
     }

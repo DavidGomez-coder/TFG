@@ -62,7 +62,6 @@ module.exports = (app: Application) => {
                 res.status(400); // bad request
             }
             circuit.setComponents(JSON.parse(<string>req.session.circuitSimulation).components);
-            console.log(circuit.getComponents());
             res.send(circuit);
         }catch (e: any){
             if (e instanceof Error){

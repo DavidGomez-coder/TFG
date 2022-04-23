@@ -31,11 +31,6 @@ require("./controller/main.ts")(app);
 require("./controller/simulations.ts")(app);
 require("./controller/updateComponents.ts")(app);
 
-
-app.use(function(req, res, next){
-    res.header("resistor", "*");
-    res.header("capacitor", "*");
-})
 app.use(helmet());
 app.use(cors());
 app.use(express.json());

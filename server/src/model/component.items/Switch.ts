@@ -12,8 +12,21 @@ import { Component } from "./Component";
 
 export class Switch extends Component {
 
+
     constructor(id: string, value: number){
         super("Switch", id, value);
+        this.setComponentValue();
+    }
+
+    setValue(value: number): void {
+        this.value = value;
+        this.setComponentValue()
+    }
+    setMultiplier(multiplier: string): void {
+        this.multiplier = "x1"
+    }
+    setComponentValue(): void {
+        this.componentValue = this.value;
     }
 
     /**

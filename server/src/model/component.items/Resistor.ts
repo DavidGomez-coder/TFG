@@ -14,14 +14,32 @@ import { Component } from "./Component";
 import { valueBands, multiplerBands, multiplierValues} from "../constants/ResistorData";
 
 export class Resistor extends Component {
-    
+
     private colorBands: string[];
 
     constructor(id: string, value: number, multiplier: string){
         super("Resistor", id, -1);
-        this.setValue(this.calculateValue(value, multiplier));
+        this.multiplier = multiplier;
+        this.value = value;
         this.colorBands = this.calculateColorBands(value, multiplier);
+        this.setComponentValue();
     }
+
+    setComponentValue(): void {
+        this.componentValue = this.calculateValue(this.value, this.multiplier);
+    }
+
+    setValue(value: number): void {
+        this.value = value;
+        this.setComponentValue();
+        this.setColorBands(this.calculateColorBands(this.value, this.multiplier));
+    }
+    setMultiplier(multiplier: string): void {
+        this.multiplier = multiplier;
+        this.setComponentValue();
+        this.setColorBands(this.calculateColorBands(this.value, this.multiplier));
+    }
+    
 
     /** 
      * @returns {string[]} colorBands
@@ -61,7 +79,7 @@ export class Resistor extends Component {
             colors[1] = <string>valueBands.get(0);
         }else if (value>0 && value<10){
             colors[0] = <string>valueBands.get(0);
-            colors[1] = <string>valueBands.get(value);
+            colors[1] = <string>valueBands.get(Math.trunc(value));
         }else{
             let first_digit: number = Math.trunc(value/10);
             let secnd_digit: number = Math.trunc(value%10);

@@ -17,10 +17,12 @@
 /**
  * @class Clase componente.
  */
-export class Component {
+export abstract class Component {
     protected type:  string;
     protected id:    string;
     protected value: number;
+    protected multiplier: string;
+    protected componentValue: number;
 
     /**
      * @constructor
@@ -32,6 +34,9 @@ export class Component {
         this.type = type;
         this.id = id;
         this.value = value;
+        this.multiplier = "*";
+        this.componentValue = value;
+        this.setComponentValue()
     }
 
     /**
@@ -56,6 +61,10 @@ export class Component {
         return this.value;
     }
 
+    getMultiplier(): string{
+        return this.multiplier;
+    }
+
     /**
      * @param {string} type nuevo TIPO 
      */
@@ -74,9 +83,17 @@ export class Component {
     /**
      * @param {number} value nuevo VALOR 
      */
-    setValue(value: number): void {
-        this.value = value;
+    abstract setValue(value: number): void;
+
+    abstract setMultiplier(multiplier: string): void;
+
+
+    getComponentValue(): number {
+        return this.componentValue;
     }
+
+    abstract setComponentValue (): void;
+
 
 
     /**
