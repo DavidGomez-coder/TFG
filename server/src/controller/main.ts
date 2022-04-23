@@ -17,7 +17,8 @@ module.exports = (app: Application) => {
     app.get('/', (req: Request, res: Response) => {
         console.log(`[SERVER]: Welcome ${req.session.id}`)
         console.log(req.session.circuitSimulation)
-        res.redirect('/clear-circuit');
+        req.session.circuitSimulation = undefined;
+        res.sendStatus(200);
         
         //res.redirect("http://localhost:3000")
     })
@@ -25,7 +26,7 @@ module.exports = (app: Application) => {
     /**
      * Instancia el circuito como un circuito RC
      */
-    app.get('/create-simple-RC', (req: Request, res: Response) => {
+    app.get('/create/simple-RC', (req: Request, res: Response) => {
         console.log(`[SERVER]: GET /create-simple-RC from ${req.sessionID}`);
         let c: Circuit = <Circuit>CircuitFactory.createCircuit("RC");
         req.session.circuitSimulation = JSON.stringify(c);
@@ -35,7 +36,7 @@ module.exports = (app: Application) => {
     /**
      * Instancia el circuito como un circuito RL
      */
-    app.get('/create-simple-RL', (req: Request, res: Response) => {
+    app.get('/create/simple-RL', (req: Request, res: Response) => {
         console.log(`[SERVER]: GET /create-simple-RL from ${req.sessionID}`);
         let c: Circuit = <Circuit>CircuitFactory.createCircuit("RL");
         req.session.circuitSimulation = JSON.stringify(c);
@@ -45,7 +46,7 @@ module.exports = (app: Application) => {
     /**
      * Limpia el circuito de la sesión
      */
-    app.get('/clear-circuit', (req: Request, res: Response) => {
+    app.get('/clear/circuit', (req: Request, res: Response) => {
         req.session.circuitSimulation = undefined;
         res.sendStatus(200);
     })

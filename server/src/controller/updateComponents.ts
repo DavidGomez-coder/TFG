@@ -22,7 +22,7 @@ module.exports = (app: Application) => {
 
     // Este controlador hace un update de los componentes del circuito almacenado en la sesión con los
     // valores que se pasan como parámetro
-    app.get('/update-circuit', (req: Request, res: Response) => {
+    app.get('/circuit/update', (req: Request, res: Response) => {
         console.log(`[SERVER] : GET /update-circuit from ${req.sessionID}`);
         try {
             let circuit: Circuit = new Circuit();
@@ -38,7 +38,7 @@ module.exports = (app: Application) => {
                 if (req.query.resistor_multiplier != undefined){
                     multiplier = <string>req.query.resistor_multiplier;
                 }else{
-                    multiplier = "x1";
+                    multiplier = <string>(<Resistor>circuit.getComponentById(ComponentsIds.RESISTOR_ID))?.getMultiplier();
                 }
                 let resistor: Resistor = ComponentFactory.createResistor(ComponentsIds.RESISTOR_ID, parseFloat(<string>req.query.resistor_value), multiplier);
                 circuit.updateComponent(resistor);
@@ -50,7 +50,7 @@ module.exports = (app: Application) => {
                 if (req.query.capacitor_multiplier != undefined){
                     multiplier = <string>req.query.capacitor_multiplier;
                 }else {
-                    multiplier = "nanoF";
+                    multiplier = <string>(<Capacitor>circuit.getComponentById(ComponentsIds.CAPACITOR_ID))?.getMultiplier();
                 }
                 let capacitor: Capacitor = ComponentFactory.createCapacitor(ComponentsIds.CAPACITOR_ID, parseFloat(<string>req.query.capacitor_value), multiplier);
                 circuit.updateComponent(capacitor);
@@ -62,9 +62,9 @@ module.exports = (app: Application) => {
                 if (req.query.inductor_multiplier != undefined){
                     multiplier = <string>req.query.inductor_multiplier;
                 }else {
-                    multiplier = "nanoH";
+                    multiplier = <string>(<Inductor>circuit.getComponentById(ComponentsIds.INDUCTOR_ID))?.getMultiplier();
                 }
-                let inductor: Inductor = ComponentFactory.createInductor(ComponentsIds.CAPACITOR_ID, parseFloat(<string>req.query.inductor_value), multiplier);
+                let inductor: Inductor = ComponentFactory.createInductor(ComponentsIds.INDUCTOR_ID, parseFloat(<string>req.query.inductor_value), multiplier);
                 circuit.updateComponent(inductor);
             }
 
@@ -74,7 +74,7 @@ module.exports = (app: Application) => {
                 if (req.query.cell_multiplier != undefined){
                     multipler = <string>req.query.cell_multiplier;
                 }else {
-                    multipler = "V";
+                    multipler = <string>(<Cell>circuit.getComponentById(ComponentsIds.CELL_ID))?.getMultiplier();;
                 }
                 let cell: Cell = ComponentFactory.createCell(ComponentsIds.CELL_ID, parseFloat(<string>req.query.cell_value));
                 cell.setMultiplier(multipler);

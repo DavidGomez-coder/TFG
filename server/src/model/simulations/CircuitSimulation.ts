@@ -12,7 +12,7 @@ export abstract class CircuitSimulation {
 
     constructor (circuit: Circuit){
         this.circuit = circuit;
-        this.step = 0.001;
+        this.step = 0.00001;
     }
 
     /**

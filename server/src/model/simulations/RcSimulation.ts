@@ -27,23 +27,23 @@ export class RcSimulation extends CircuitSimulation {
         let swi: Switch = <Switch>this.getCircuit().getComponentById(ComponentsIds.SWITCH_ID);
         
         if (<Inductor>this.getCircuit().getComponentById(ComponentsIds.INDUCTOR_ID) != undefined){
-            throw new Error(`[SERVER]: ERROR RcSimulation over a circuit with an inductor`)
+            throw new Error(`[SERVER]: ERROR SimpleRcSimulation over a circuit with an inductor`)
         }
 
         if (capacitor == undefined){
-            throw new Error(`[SERVER]: ERROR RcSimulation over a circuit without a capacitor`)
+            throw new Error(`[SERVER]: ERROR SimpleRcSimulation over a circuit without a capacitor`)
         }
 
         if (resistor == undefined){
-            throw new Error(`[SERVER]: ERROR RcSimulation over a circuit without a resistor`) 
+            throw new Error(`[SERVER]: ERROR SimpleRcSimulation over a circuit without a resistor`) 
         }
 
         if (cell == undefined){
-            throw new Error(`[SERVER]: ERROR RcSimulation over a circuit without a cell`) 
+            throw new Error(`[SERVER]: ERROR SimpleRcSimulation over a circuit without a cell`) 
         }
 
         if (swi == undefined){
-            throw new Error(`[SERVER]: ERROR RcSimulation over a circuit without a switch`) 
+            throw new Error(`[SERVER]: ERROR SimpleRcSimulation over a circuit without a switch`) 
         }
 
 
@@ -52,10 +52,8 @@ export class RcSimulation extends CircuitSimulation {
         let time_constant: number = resistor.getComponentValue() * capacitor.getComponentValue();
 
         if (swi.getComponentValue() === 1){ // CARGA DE CONDENSADOR
-            console.log(`[SERVER]: RC Simulation on charge`)
             return this.simulationOnCharge(4*time_constant, cell, capacitor, resistor);
         }else if (swi.getComponentValue() === 0){ // DESCARGA DEL CONDENSADOR
-            console.log(`[SERVER]: RC Simulation on discharge`)
             return this.simulationOnDischarge(4*time_constant, cell, capacitor, resistor);
         }
 

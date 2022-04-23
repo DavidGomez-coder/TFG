@@ -22,17 +22,16 @@ module.exports = (app: Application) => {
     /**
      * Devuelve los resultados de una simulación RC
      */
-    app.get('/RC-sim-results', (req: Request, res: Response) => {
-        console.log(`[SERVER]: GET /RC-sim-results from ${req.sessionID}`)
+    app.get('/circuit/sim/simpleRc', (req: Request, res: Response) => {
+        console.log(`[SERVER]: GET /circuit/sim/simpleRc from ${req.sessionID}`)
         try {
             let circuit: Circuit = new Circuit();
             if (<string>req.session.circuitSimulation == undefined){
-                console.log(`[SERVER] : GET /update-circuit undefined from ${req.sessionID}`);
+                console.log(`[SERVER] : GET /circuit/sim/simpleRc  circuit is undefined from ${req.sessionID}`);
                 res.sendStatus(400);
             }
             circuit.setComponents(toComponents(JSON.parse(<string>req.session.circuitSimulation).components));
             let rcSim: RcSimulation = new RcSimulation(circuit);
-            
             res.send(rcSim.getResults());
         }catch (e: any){
             if (e instanceof Error){
@@ -45,12 +44,12 @@ module.exports = (app: Application) => {
      /**
      * Devuelve los resultados de una simulación RC
      */
-      app.get('/RL-sim-results', (req: Request, res: Response) => {
-        console.log(`[SERVER]: GET /RL-sim-results from ${req.sessionID}`)
+      app.get('/circuit/sim/simpleRl', (req: Request, res: Response) => {
+        console.log(`[SERVER]: GET /circuit/sim/simpleRl from ${req.sessionID}`)
         try {
             let circuit: Circuit = new Circuit();
             if (<string>req.session.circuitSimulation == undefined){
-                console.log(`[SERVER] : GET /circuit undefined from ${req.sessionID}`);
+                console.log(`[SERVER] : GET /circuit/sim/simpleRl circuit is undefined from ${req.sessionID}`);
                 res.sendStatus(400);
             }
             circuit.setComponents(toComponents(JSON.parse(<string>req.session.circuitSimulation).components));

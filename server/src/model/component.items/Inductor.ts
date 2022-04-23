@@ -13,7 +13,7 @@ export class Inductor extends Component {
 
     constructor (id: string, value: number, multiplier: string) {
         super("Inductor", id, -1);
-        this.value = this.calculateValue(value, multiplier);
+        this.value = value;
         this.multiplier = multiplier;
         this.setComponentValue();
     }
