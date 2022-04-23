@@ -23,10 +23,12 @@ export class Inductor extends Component {
         this.value = value;
         this.setComponentValue()
     }
+
     setMultiplier(multiplier: string): void {
         this.multiplier = multiplier;
         this.setComponentValue();
     }
+    
     setComponentValue(): void {
         this.componentValue = this.calculateValue(this.value, this.multiplier);
     }

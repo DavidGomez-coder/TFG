@@ -4,6 +4,13 @@ import { Application, NextFunction, Request, Response } from "express"
 
 import { Circuit } from "../model/circuit/Circuit";
 import { CircuitFactory } from "../model/circuit/CircuitFactory";
+import { ComponentsIds } from "../model/circuit/ComponentsIds";
+import { Capacitor } from "../model/component.items/Capacitor";
+import { Cell } from "../model/component.items/Cell";
+import { Component } from "../model/component.items/Component";
+import { Inductor } from "../model/component.items/Inductor";
+import { Resistor } from "../model/component.items/Resistor";
+import { Switch } from "../model/component.items/Switch";
 import { RcSimulation } from "../model/simulations/RcSimulation";
 import { RlSimulation } from "../model/simulations/RlSimulation";
 
@@ -20,11 +27,12 @@ module.exports = (app: Application) => {
         try {
             let circuit: Circuit = new Circuit();
             if (<string>req.session.circuitSimulation == undefined){
-                console.log(`[SERVER]: GET /RC-sim-results undefined circuit from ${req.sessionID}`);
-                res.status(400); // bad request                
+                console.log(`[SERVER] : GET /update-circuit undefined from ${req.sessionID}`);
+                res.sendStatus(400);
             }
-            circuit.setComponents(JSON.parse(<string>req.session.circuitSimulation).components);
+            circuit.setComponents(toComponents(JSON.parse(<string>req.session.circuitSimulation).components));
             let rcSim: RcSimulation = new RcSimulation(circuit);
+            
             res.send(rcSim.getResults());
         }catch (e: any){
             if (e instanceof Error){
@@ -42,10 +50,10 @@ module.exports = (app: Application) => {
         try {
             let circuit: Circuit = new Circuit();
             if (<string>req.session.circuitSimulation == undefined){
-                console.log(`[SERVER]: GET /RL-sim-results undefined circuit from ${req.sessionID}`);
-                res.status(400); // bad request                
+                console.log(`[SERVER] : GET /circuit undefined from ${req.sessionID}`);
+                res.sendStatus(400);
             }
-            circuit.setComponents(JSON.parse(<string>req.session.circuitSimulation).components);
+            circuit.setComponents(toComponents(JSON.parse(<string>req.session.circuitSimulation).components));
             let rlSim: RlSimulation = new RlSimulation(circuit);
             res.send(rlSim.getResults());
         }catch (e: any){
@@ -54,8 +62,42 @@ module.exports = (app: Application) => {
             }
             res.sendStatus(400);
         }
-    });
+    });  
+}
 
-
-    
+/**
+ * Método que transforma una lista de componentes en formato JSON a una lista de objetos tipo Componente
+ * @param {[]} jsonComponents Lista de componentes en formato JSON
+ * @returns Devuelve una lista de objetos componentes
+ */
+ function toComponents (jsonComponents: []){
+    let result: Component[] = []
+    jsonComponents.forEach((val: any) => {
+        if (val.type === "Resistor"){
+            let resistor: Resistor = new Resistor(ComponentsIds.RESISTOR_ID, 0, "*");
+            resistor.setValue(val.value);
+            resistor.setMultiplier(val.multiplier);
+            resistor.setColorBands(val.colorBands);
+            result.push(resistor);
+        }else if (val.type === "Cell"){
+            let cell: Cell = new Cell(ComponentsIds.CELL_ID, 0);
+            cell.setValue(val.value);
+            result.push(cell);
+        }else if (val.type === "Switch") {
+            let swi: Switch = new Switch(ComponentsIds.SWITCH_ID, 0);
+            swi.setValue(val.value);
+            result.push(swi);
+        }else if (val.type === "Capacitor"){
+            let capacitor: Capacitor = new Capacitor(ComponentsIds.CAPACITOR_ID, 0, "*");
+            capacitor.setValue(val.value);
+            capacitor.setMultiplier(val.multiplier)
+            result.push(capacitor);
+        }else if (val.type === "Inductor"){
+            let inductor: Inductor = new Inductor(ComponentsIds.INDUCTOR_ID, 0, "*");
+            inductor.setMultiplier(val.multiplier);
+            inductor.setValue(val.value);
+            result.push(inductor);
+        }
+    })
+    return result;
 }

@@ -34,6 +34,7 @@ export class Resistor extends Component {
         this.setComponentValue();
         this.setColorBands(this.calculateColorBands(this.value, this.multiplier));
     }
+    
     setMultiplier(multiplier: string): void {
         this.multiplier = multiplier;
         this.setComponentValue();

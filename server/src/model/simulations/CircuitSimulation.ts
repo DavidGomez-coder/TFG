@@ -8,9 +8,11 @@ import { Circuit } from "../circuit/Circuit";
 export abstract class CircuitSimulation {
 
     private circuit: Circuit;
+    private step: number;
 
     constructor (circuit: Circuit){
         this.circuit = circuit;
+        this.step = 0.001;
     }
 
     /**
@@ -25,6 +27,14 @@ export abstract class CircuitSimulation {
      */
     setCircuit(circuit: Circuit){
         this.circuit = circuit;
+    }
+
+    getStep(): number {
+        return this.step;
+    }
+
+    setStep(step: number): void{
+        this.step = step;
     }
 
     abstract getResults (): any;

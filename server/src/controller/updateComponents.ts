@@ -62,7 +62,7 @@ module.exports = (app: Application) => {
                 if (req.query.inductor_multiplier != undefined){
                     multiplier = <string>req.query.inductor_multiplier;
                 }else {
-                    multiplier = "nanoF";
+                    multiplier = "nanoH";
                 }
                 let inductor: Inductor = ComponentFactory.createInductor(ComponentsIds.CAPACITOR_ID, parseFloat(<string>req.query.inductor_value), multiplier);
                 circuit.updateComponent(inductor);
@@ -83,9 +83,10 @@ module.exports = (app: Application) => {
 
             // UPDATE SWITCH
             if (req.query.switch_value != undefined){
-                let swi: Switch = ComponentFactory.createSwitch(ComponentsIds.SWITCH_ID, parseInt(<string>req.query.switch_value));
-                circuit.updateComponent(swi);
+                let swi: Switch = <Switch>circuit.getComponentById(ComponentsIds.SWITCH_ID);
+                swi.changeValue()
             }
+            req.session.circuitSimulation = JSON.stringify(circuit); // actualizamos variable de sesión
             res.send(circuit)
         }catch (e: any){
             if (e instanceof Error){
@@ -98,17 +99,19 @@ module.exports = (app: Application) => {
     
 }
 
+
 /**
  * Método que transforma una lista de componentes en formato JSON a una lista de objetos tipo Componente
  * @param {[]} jsonComponents Lista de componentes en formato JSON
  * @returns Devuelve una lista de objetos componentes
  */
-function toComponents (jsonComponents: []){
+ function toComponents (jsonComponents: []){
     let result: Component[] = []
     jsonComponents.forEach((val: any) => {
         if (val.type === "Resistor"){
-            let resistor: Resistor = new Resistor(ComponentsIds.RESISTOR_ID, 0, "x1");
+            let resistor: Resistor = new Resistor(ComponentsIds.RESISTOR_ID, 0, "*");
             resistor.setValue(val.value);
+            resistor.setMultiplier(val.multiplier);
             resistor.setColorBands(val.colorBands);
             result.push(resistor);
         }else if (val.type === "Cell"){
@@ -120,11 +123,13 @@ function toComponents (jsonComponents: []){
             swi.setValue(val.value);
             result.push(swi);
         }else if (val.type === "Capacitor"){
-            let capacitor: Capacitor = new Capacitor(ComponentsIds.CAPACITOR_ID, 0, "x1");
+            let capacitor: Capacitor = new Capacitor(ComponentsIds.CAPACITOR_ID, 0, "*");
             capacitor.setValue(val.value);
+            capacitor.setMultiplier(val.multiplier)
             result.push(capacitor);
         }else if (val.type === "Inductor"){
-            let inductor: Inductor = new Inductor(ComponentsIds.INDUCTOR_ID, 0, "X1");
+            let inductor: Inductor = new Inductor(ComponentsIds.INDUCTOR_ID, 0, "*");
+            inductor.setMultiplier(val.multiplier);
             inductor.setValue(val.value);
             result.push(inductor);
         }

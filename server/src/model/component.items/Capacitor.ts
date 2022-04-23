@@ -14,7 +14,7 @@ export class Capacitor extends Component {
     constructor (id: string, value: number, multiplier: string){
         super("Capacitor", id, -1);
         this.multiplier = multiplier;
-        this.setValue(this.calculateValue(value, multiplier));
+        this.value = value;
         this.setComponentValue();
     }
 
@@ -22,10 +22,12 @@ export class Capacitor extends Component {
         this.value = value;
         this.setComponentValue();
     }
+
     setMultiplier(multiplier: string): void {
         this.multiplier = multiplier;
         this.setComponentValue();
     }
+    
     setComponentValue(): void {
         this.componentValue = this.calculateValue(this.value, this.multiplier);
     }

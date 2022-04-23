@@ -22,9 +22,11 @@ export class Switch extends Component {
         this.value = value;
         this.setComponentValue()
     }
+    
     setMultiplier(multiplier: string): void {
         this.multiplier = "x1"
     }
+
     setComponentValue(): void {
         this.componentValue = this.value;
     }
