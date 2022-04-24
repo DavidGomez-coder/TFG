@@ -1,14 +1,21 @@
 # Servidor API
 ## ÍNDICE
  * [Introducción](#introduccion)
-***
+ * [Instalacioón del Servidor API](#server-inst)
+    * [Variables de entorno](#env-variables)
+ * [Simulaciones Implementadas](#implemented-sims)
+ * [Lista de peticiones](#api-rest)
+ * [Ejemplo (Simulación circuito RC)](#rc-sim-example)
+
+ 
+ ***
 ## <a id="introduccion">Introducción</a>
 
 Este servidor se trata de un servicio basado en API REST utilizada como productora de resultados de simulaciones físicas. A diferencia de una API REST, las cuáles consumen datos alojados en una BBDD, aquí la información es generada en tiempo real por cada sesión de usuario, por lo que las instancias creadas de la simulaciones o los elementos generados durante el tiempo en el que la sesión está activa, serán borrados una vez dicha sesión haya caducado.
 
 ***
 
-## Instalación del Servidor API
+## <a id="server-inst">Instalación del Servidor API</a>
 * Visitar la web de [NodeJS](https://nodejs.org/en/) para instalar la última versión.
 * Descargar el código fuente del repositorio en https://github.com/DavidGomez-coder/TFG.git
 * Moverse al directorio 'server' con 
@@ -18,18 +25,18 @@ Este servidor se trata de un servicio basado en API REST utilizada como producto
 * Crear variables de entorno (ver más abajo)
 * Iniciar el servidor en el navegador escribiendo: _http://localhost:{PORT}_. Se recibirá un `OK` (status 200) por pantalla si el servidor se ha iniciado correctamente.
 
-### ⚠️ Variables de entorno 
+### ⚠️ <a id="env-variables"> Variables de entorno </a> 
 Crear en el directorio raiz un fichero con nombre **.env**. En este  fichero incluiremos todas las variables de entorno, las cuáles son utilizadas por el servidor para poder comenzar a ejecutarse. Inicialmente solamente son necesarias solamente las siguientes (escribir tal y como se muestra):
 
 * **PORT**. Puerto utilizado por el sevidor para atender las peticiones. (En el ejemplo de uso posterior se usa el puerto _8080_)
 * **SESSION_SECRET**. Valor utilizado para crear las sesiones. Se proporciona un fichero _SecretGenerator.ts_ para generar estos valores. (Se puede escribir uno al azar).
 
 ***
-## Simulaciones implementadas :electric_plug:
-
+## <a id="implemented-sims"> Simulaciones implementadas </a> :electric_plug:
 
 ***
-## Lista de peticiones
+## <a id="api-rest"> Lista de peticiones </a>
+
 A continuación, se muestra una lista de las peticiones que se encuentran implementadas.
 
 Tipo | URL | Descripción
@@ -46,7 +53,7 @@ GET | /circuit/update | Actualiza los componentes del circuito de la sesión y l
 ### [Parámetros usados en la actualización de un circuito RC o RL simple](#queryParams)
 
 ***
-## Obtener resultados de ejemplo (sobre un circuito RC Simple)
+## <a id="#rc-sim-example" > Obtener resultados de ejemplo (sobre un circuito RC Simple) </a>
 
 Como se ha comentado anteriormente, las peticiones a este servidor funciona de forma similar a una consola de comandos. Para ello, lo primero que tenemos que hacer es crear el circuito en nuestra sesión, y para realizamos una petición GET usando nuestro navegador a _http://localhost:8080/create/simpleRC_. Obtendremos lo siguiente:
 <div style="text-align: center">
