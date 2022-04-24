@@ -42,16 +42,16 @@ Crear en el directorio raiz un fichero con nombre **.env**. En este  fichero inc
 
 A continuación, se muestra una lista de las peticiones que se encuentran implementadas.
 
-Tipo | API REST Request| Descripción
-:-----:|:-----|:------------
-GET  | /   | Raíz. Inicializa la sesión. (La sesión se podrá inicializar también con cualquiera de las otras peticiones)
-GET  |/circuit | Devuelve el circuito actual de la sesión. En caso de que este no haya sido creado aún, retorna **BAD REQUEST** o **error 400**.
-GET  | /clear/circuit | Limpia el circuito usado en la sesión actual.
-GET  | /circuit/create/simpleRC | Asocia a la sesión actual un circuito RC simple. Retorna dicho circuito. 
-GET | /circuit/create/simpleRL | Asocia a la sesión actual un circuito RL simple. Devuelve el circuito creado.
-GET | /circuit/sim/simpleRc | Devuelve los resultados de la simulación de un circuito RC sobre el circuito instanciado en la variable de sesión. En caso de que este no haya sido creado o esté mal formado, retorna **BAD REQUEST**.
-GET | /circuit/sim/simpleRl | Devuelve los resultados de la simulación de un circuito RL sobre el circuito instanciado en la variable de sesión. En caso de que este no haya sido creado o esté mal formado, retorna **BAD REQUEST**.
-GET | /circuit/update | Actualiza los componentes del circuito de la sesión y lo devuelve. En caso de que este no se haya creado con anterioridad, retorna **BAD REQUEST**. Esta petición puede utiliza los siguientes <a id="queryParams">parámetros</a> de consulta.
+ API REST Request| Descripción
+|:-----|:------------
+ /   | Raíz. Inicializa la sesión. (La sesión se podrá inicializar también con cualquiera de las otras peticiones)
+/circuit | Devuelve el circuito actual de la sesión. En caso de que este no haya sido creado aún, retorna **BAD REQUEST** o **error 400**.
+ /clear/circuit | Limpia el circuito usado en la sesión actual.
+ /circuit/create/simpleRC | Asocia a la sesión actual un circuito RC simple. Retorna dicho circuito. 
+ /circuit/create/simpleRL | Asocia a la sesión actual un circuito RL simple. Devuelve el circuito creado.
+ /circuit/sim/simpleRc | Devuelve los resultados de la simulación de un circuito RC sobre el circuito instanciado en la variable de sesión. En caso de que este no haya sido creado o esté mal formado, retorna **BAD REQUEST**.
+ /circuit/sim/simpleRl | Devuelve los resultados de la simulación de un circuito RL sobre el circuito instanciado en la variable de sesión. En caso de que este no haya sido creado o esté mal formado, retorna **BAD REQUEST**.
+ /circuit/update | Actualiza los componentes del circuito de la sesión y lo devuelve. En caso de que este no se haya creado con anterioridad, retorna **BAD REQUEST**. Esta petición puede utiliza los siguientes <a id="queryParams">parámetros</a> de consulta.
 
 ### [Parámetros usados en la actualización de un circuito RC o RL simple](#queryParams)
 Query | Descripción
