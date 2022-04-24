@@ -10,9 +10,9 @@
 * Visitar la web de [NodeJS](https://nodejs.org/en/) para instalar la última versión.
 * Descargar el código fuente del repositorio en https://github.com/DavidGomez-coder/TFG.git
 * Moverse al directorio 'server' con:  
-> $ cd server
+``` $ cd server ```
 * Instalación de las dependencias del servidor
-> $ npm install
+``` $ npm install ```
 * Crear variables de entorno (ver más abajo)
 * Iniciar el servidor en el navegador escribiendo: _http://localhost:{PORT}_. Se recibirá un `OK` (status 200) por pantalla si el servidor se ha iniciado correctamente.
 
