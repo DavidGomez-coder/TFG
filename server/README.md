@@ -44,7 +44,7 @@ A continuación, se muestra una lista de las peticiones que se encuentran implem
 
 Tipo | URL | Descripción
 -----|-----|------------
-GET  | /   | Raíz. Inicializa la sesión.
+GET  | /   | Raíz. Inicializa la sesión. (La sesión se podrá inicializar también con cualquiera de las otras peticiones)
 GET  |/circuit | Devuelve el circuito actual de la sesión. En caso de que este no haya sido creado aún, retorna **BAD REQUEST** o **error 400**.
 GET  | /clear/circuit | Limpia el circuito usado en la sesión actual.
 GET  | /create/simpleRC | Asocia a la sesión actual un circuito RC simple. Retorna dicho circuito. 
@@ -61,7 +61,7 @@ resistor_multiplier | Multiplicador de la resistencia
 capacitor_value | Valor del condensador
 capacitor_multiplier | Multiplicador del condensador
 inductor_value | Valor del inductor
-inductor_multipiplier | Multiplicador del inductor
+inductor_multiplier | Multiplicador del inductor
 cell_value | Valor de la fuente
 cell_multiplier | Multiplicador de la fuente
 switch_value | Valor del interruptor
