@@ -43,7 +43,7 @@ Crear en el directorio raiz un fichero con nombre **.env**. En este  fichero inc
 A continuación, se muestra una lista de las peticiones que se encuentran implementadas.
 
 Tipo | URL (API REST Request)| Descripción
-:-----:|-----:|:------------
+:-----:|:-----|:------------
 GET  | /   | Raíz. Inicializa la sesión. (La sesión se podrá inicializar también con cualquiera de las otras peticiones)
 GET  |/circuit | Devuelve el circuito actual de la sesión. En caso de que este no haya sido creado aún, retorna **BAD REQUEST** o **error 400**.
 GET  | /clear/circuit | Limpia el circuito usado en la sesión actual.
