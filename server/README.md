@@ -16,7 +16,7 @@
 * Crear variables de entorno (ver más abajo)
 * Iniciar el servidor en el navegador escribiendo: _http://localhost:{PORT}_. Se recibirá un `OK` (status 200) por pantalla si el servidor se ha iniciado correctamente.
 
-### Variables de entorno 
+### ⚠️ Variables de entorno 
 Crear en el directorio raiz un fichero con nombre **.env**. En este  fichero incluiremos todas las variables de entorno, las cuáles son utilizadas por el servidor para poder comenzar a ejecutarse. Inicialmente solamente son necesarias solamente las siguientes (escribir tal y como se muestra):
 
 * **PORT**. Puerto utilizado por el sevidor para atender las peticiones.
