@@ -34,6 +34,9 @@ Crear en el directorio raiz un fichero con nombre **.env**. En este  fichero inc
 ***
 ## <a id="implemented-sims"> Simulaciones implementadas </a> :electric_plug:
 
+- Simulación de un circuito RC simple
+- Simulación de un circuito RL simple
+
 ***
 ## <a id="api-rest"> Lista de peticiones </a>
 
@@ -51,9 +54,21 @@ GET | /circuit/sim/simpleRl | Devuelve los resultados de la simulación de un ci
 GET | /circuit/update | Actualiza los componentes del circuito de la sesión y lo devuelve. En caso de que este no se haya creado con anterioridad, retorna **BAD REQUEST**. Esta petición puede utiliza los siguientes <a id="queryParams">parámetros</a> de consulta.
 
 ### [Parámetros usados en la actualización de un circuito RC o RL simple](#queryParams)
+Query | Descripción
+------|------------
+resistor_value | Valor de la resistencia
+resistor_multiplier | Multiplicador de la resistencia
+capacitor_value | Valor del condensador
+capacitor_multiplier | Multiplicador del condensador
+inductor_value | Valor del inductor
+inductor_multipiplier | Multiplicador del inductor
+cell_value | Valor de la fuente
+cell_multiplier | Multiplicador de la fuente
+switch_value | Valor del interruptor
+
 
 ***
-## <a id="#rc-sim-example" > Obtener resultados de ejemplo (sobre un circuito RC Simple) </a>
+## <a id="rc-sim-example" > Obtener resultados de ejemplo (sobre un circuito RC Simple) </a>
 
 Como se ha comentado anteriormente, las peticiones a este servidor funciona de forma similar a una consola de comandos. Para ello, lo primero que tenemos que hacer es crear el circuito en nuestra sesión, y para realizamos una petición GET usando nuestro navegador a _http://localhost:8080/create/simpleRC_. Obtendremos lo siguiente:
 <div style="text-align: center">
