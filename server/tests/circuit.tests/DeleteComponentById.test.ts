@@ -1,3 +1,6 @@
+/**
+ * @author David Gómez Pérez <dgpv2000@gmail.com>
+ */
 import { circuit, circuit2, reloadDataBase} from "../globalDatabase";
 
 beforeAll(() => {

@@ -1,3 +1,6 @@
+/**
+ * @author David Gómez Pérez <dgpv2000@gmail.com>
+ */
 import { ComponentFactory } from "../../src/model/component.factory/ComponentFactory";
 import { Capacitor } from "../../src/model/component.items/Capacitor";
 import { Cell } from "../../src/model/component.items/Cell";

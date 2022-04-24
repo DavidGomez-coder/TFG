@@ -1,3 +1,6 @@
+/**
+ * @author David Gómez Pérez <dgpv2000@gmail.com>
+ */
 import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
