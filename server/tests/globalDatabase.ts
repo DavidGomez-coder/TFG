@@ -18,7 +18,7 @@ circuit.addComponent(cell);
 circuit.addComponent(inductor);
 
 export let circuit2: Circuit = new Circuit();
-circuit2.setComponentes(circuit.getComponents());
+circuit2.setComponents(circuit.getComponents());
 circuit2.deleteComponent("R0");
 
 
@@ -32,7 +32,7 @@ export function reloadDataBase() {
     circuit.addComponent(inductor);
 
     circuit2 = new Circuit();
-    circuit2.setComponentes(circuit.getComponents());
+    circuit2.setComponents(circuit.getComponents());
     circuit2.deleteComponent("R0");
 
 }

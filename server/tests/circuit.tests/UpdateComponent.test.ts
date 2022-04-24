@@ -1,4 +1,6 @@
+import { ComponentFactory } from "../../src/model/component.factory/ComponentFactory";
 import { Capacitor } from "../../src/model/component.items/Capacitor";
+import { Cell } from "../../src/model/component.items/Cell";
 import { Component } from "../../src/model/component.items/Component";
 import { Inductor } from "../../src/model/component.items/Inductor";
 import { Resistor } from "../../src/model/component.items/Resistor"
@@ -33,7 +35,7 @@ describe("Actualizar valor de un componente existente", () => {
 
 describe("Actualizar valor de un componente no existente", () => {
     test("Cambia valor a U7", () => {
-        let noExistentComponent: Component = new Component("Cell", "U7", 0);
+        let noExistentComponent: Cell = ComponentFactory.createCell("V1",40);
         circuit.updateComponent(noExistentComponent);
         expect(circuit.getComponentById("U7")?.getValue()).toBeUndefined();
     });

@@ -53,7 +53,7 @@ export class RcSimulation extends CircuitSimulation {
 
         if (swi.getComponentValue() === 1){ // CARGA DE CONDENSADOR
             return this.simulationOnCharge(4*time_constant, cell, capacitor, resistor);
-        }else if (swi.getComponentValue() === 0){ // DESCARGA DEL CONDENSADOR
+        }else if (swi.getComponentValue() === 0 || cell.getComponentValue() === 0){ // DESCARGA DEL CONDENSADOR
             return this.simulationOnDischarge(4*time_constant, cell, capacitor, resistor);
         }
 

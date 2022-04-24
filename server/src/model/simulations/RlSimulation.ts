@@ -48,7 +48,7 @@ export class RlSimulation extends CircuitSimulation{
         let time_constant: number = inductor.getComponentValue()/resistor.getComponentValue();
         if (swi.getComponentValue() === 1){ // ALMACENAMIENTO DE ENERGÍA
             return this.simulationOnCharge(4*time_constant, cell, inductor, resistor);
-        }else if (swi.getComponentValue() === 0){ // DISIPACIÓN DE ENERGÍA
+        }else if (swi.getComponentValue() === 0 || cell.getComponentValue() === 0){ // DISIPACIÓN DE ENERGÍA
             return this.simulationOnDischarge(4*time_constant, cell, inductor, resistor);
         }
         return undefined;
