@@ -7,6 +7,9 @@
  * 
  *      - VALUE: Capacidad resistiva del componente. Su unidad de medida es el ohmio ()
  * 
+ *      NOTA: El color de las bandas se muestra correctamente solo para valores comprendidos entre 0 y 99. Si se quieren
+ *      utilizar valores superiores a este último, se recomienda el uso de los multiplicadores.
+ * 
  * @author David Gómez Pérez <dgpv2000@gmail.com>
  */
 
