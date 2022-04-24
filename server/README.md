@@ -1,8 +1,8 @@
 # Servidor API
 ## ÍNDICE
- * <a id="introduccion">Introducción</a>
+ * [Introducción](#introduccion)
 ***
-## [Introducción](#introduccion)
+## <a id="introduccion">Introducción</a>
 
 Este servidor se trata de un servicio basado en API REST utilizada como productora de resultados de simulaciones físicas. A diferencia de una API REST, las cuáles consumen datos alojados en una BBDD, aquí la información es generada en tiempo real por cada sesión de usuario, por lo que las instancias creadas de la simulaciones o los elementos generados durante el tiempo en el que la sesión está activa, serán borrados una vez dicha sesión haya caducado.
 
