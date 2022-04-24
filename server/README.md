@@ -1,5 +1,14 @@
 # Servidor API
 
+  * [Introducción](#introducci-n)
+  * [Instalación del Servidor API](#instalaci-n-del-servidor-api)
+    + [⚠️ Variables de entorno](#---variables-de-entorno)
+  * [Simulaciones implementadas :electric_plug:](#simulaciones-implementadas--electric-plug-)
+  * [Peticiones](#peticiones)
+  * [Obtener resultados de ejemplo (sobre un circuito RC Simple)](#obtener-resultados-de-ejemplo--sobre-un-circuito-rc-simple-)
+  * [Lenguajes utilizados](#lenguajes-utilizados)
+
+**
 ## Introducción 
 
 Este servidor se trata de un servicio basado en API REST utilizada como productora de resultados de simulaciones físicas. A diferencia de una API REST, las cuáles consumen datos alojados en una BBDD, aquí la información es generada en tiempo real por cada sesión de usuario, por lo que las instancias creadas de la simulaciones o los elementos generados durante el tiempo en el que la sesión está activa, serán borrados una vez dicha sesión haya caducado.
@@ -24,6 +33,11 @@ Crear en el directorio raiz un fichero con nombre **.env**. En este  fichero inc
 
 ***
 ## Simulaciones implementadas :electric_plug:
+
+
+***
+## Peticiones
+
 ***
 ## Obtener resultados de ejemplo (sobre un circuito RC Simple)
 
@@ -41,6 +55,17 @@ o bien
 ```
 http://localhost:8080/circuit/update?resistor_value=62&resistor_multiplier=x0.1
 ```
+El resultado obtenido debería de ser el mostrado a continuación:
+<div style="text-align: center">
+    <img src="./imgs/rc-out-2.png" height="500"></img>
+</div>
+
+Para obtener los resultados de la simulación del circuito de ejemplo, bastaría con realizar la siguiente petición (Es posible que el objeto JSON devuelto puede que sea demasiado grande debido a que se generan muchos datos):
+```
+http://localhost:8080/circuit/sim/simpleRc
+```
+
+
 
 ***
 ## Lenguajes utilizados
