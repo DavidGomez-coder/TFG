@@ -16,8 +16,8 @@ module.exports = (app: Application) => {
 
     app.get('/', (req: Request, res: Response) => {
         console.log(`[SERVER]: Welcome ${req.session.id}`)
-        console.log(req.session.circuitSimulation)
-        req.session.circuitSimulation = undefined;
+        console.log(req.session.simulationObject)
+        req.session.simulationObject = undefined;
         res.sendStatus(200);
         
         //res.redirect("http://localhost:3000")
@@ -26,20 +26,20 @@ module.exports = (app: Application) => {
     /**
      * Instancia el circuito como un circuito RC
      */
-    app.get('/create/simpleRC', (req: Request, res: Response) => {
+    app.get('/circuit/create/simpleRC', (req: Request, res: Response) => {
         console.log(`[SERVER]: GET /create/simpleRC from ${req.sessionID}`);
         let c: Circuit = <Circuit>CircuitFactory.createCircuit("RC");
-        req.session.circuitSimulation = JSON.stringify(c);
+        req.session.simulationObject = JSON.stringify(c);
         res.send(c);
     });
 
     /**
      * Instancia el circuito como un circuito RL
      */
-    app.get('/create/simpleRL', (req: Request, res: Response) => {
-        console.log(`[SERVER]: GET /create/simpleRL from ${req.sessionID}`);
+    app.get('/circuit/create/simpleRL', (req: Request, res: Response) => {
+        console.log(`[SERVER]: GET /circuit/create/simpleRL from ${req.sessionID}`);
         let c: Circuit = <Circuit>CircuitFactory.createCircuit("RL");
-        req.session.circuitSimulation = JSON.stringify(c);
+        req.session.simulationObject = JSON.stringify(c);
         res.send(c);
     })
 
@@ -47,7 +47,7 @@ module.exports = (app: Application) => {
      * Limpia el circuito de la sesión
      */
     app.get('/clear/circuit', (req: Request, res: Response) => {
-        req.session.circuitSimulation = undefined;
+        req.session.simulationObject = undefined;
         res.sendStatus(200);
     })
 
@@ -58,11 +58,11 @@ module.exports = (app: Application) => {
         console.log(`[SERVER] : GET /circuit from ${req.sessionID}`);
         try {
             let circuit: Circuit = new Circuit()
-            if (<string>req.session.circuitSimulation == undefined){
+            if (<string>req.session.simulationObject == undefined){
                 console.log(`[SERVER]: GET /circuit undefined from ${req.sessionID}`);
                 res.status(400); // bad request
             }
-            circuit.setComponents(JSON.parse(<string>req.session.circuitSimulation).components);
+            circuit.setComponents(JSON.parse(<string>req.session.simulationObject).components);
             res.send(circuit);
         }catch (e: any){
             if (e instanceof Error){

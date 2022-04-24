@@ -26,11 +26,11 @@ module.exports = (app: Application) => {
         console.log(`[SERVER] : GET /update-circuit from ${req.sessionID}`);
         try {
             let circuit: Circuit = new Circuit();
-            if (<string>req.session.circuitSimulation == undefined){
+            if (<string>req.session.simulationObject == undefined){
                 console.log(`[SERVER] : GET /update-circuit undefined from ${req.sessionID}`);
                 res.sendStatus(400);
             }
-            circuit.setComponents(toComponents(JSON.parse(<string>req.session.circuitSimulation).components));
+            circuit.setComponents(toComponents(JSON.parse(<string>req.session.simulationObject).components));
 
             // UPDATE RESISTOR ?
             if (req.query.resistor_value != undefined){
@@ -86,7 +86,7 @@ module.exports = (app: Application) => {
                 let swi: Switch = <Switch>circuit.getComponentById(ComponentsIds.SWITCH_ID);
                 swi.changeValue()
             }
-            req.session.circuitSimulation = JSON.stringify(circuit); // actualizamos variable de sesión
+            req.session.simulationObject = JSON.stringify(circuit); // actualizamos variable de sesión
             res.send(circuit)
         }catch (e: any){
             if (e instanceof Error){

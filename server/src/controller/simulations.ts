@@ -26,11 +26,11 @@ module.exports = (app: Application) => {
         console.log(`[SERVER]: GET /circuit/sim/simpleRc from ${req.sessionID}`)
         try {
             let circuit: Circuit = new Circuit();
-            if (<string>req.session.circuitSimulation == undefined){
+            if (<string>req.session.simulationObject == undefined){
                 console.log(`[SERVER] : GET /circuit/sim/simpleRc  circuit is undefined from ${req.sessionID}`);
                 res.sendStatus(400);
             }
-            circuit.setComponents(toComponents(JSON.parse(<string>req.session.circuitSimulation).components));
+            circuit.setComponents(toComponents(JSON.parse(<string>req.session.simulationObject).components));
             let rcSim: RcSimulation = new RcSimulation(circuit);
             res.send(rcSim.getResults());
         }catch (e: any){
@@ -48,11 +48,11 @@ module.exports = (app: Application) => {
         console.log(`[SERVER]: GET /circuit/sim/simpleRl from ${req.sessionID}`)
         try {
             let circuit: Circuit = new Circuit();
-            if (<string>req.session.circuitSimulation == undefined){
+            if (<string>req.session.simulationObject == undefined){
                 console.log(`[SERVER] : GET /circuit/sim/simpleRl circuit is undefined from ${req.sessionID}`);
                 res.sendStatus(400);
             }
-            circuit.setComponents(toComponents(JSON.parse(<string>req.session.circuitSimulation).components));
+            circuit.setComponents(toComponents(JSON.parse(<string>req.session.simulationObject).components));
             let rlSim: RlSimulation = new RlSimulation(circuit);
             res.send(rlSim.getResults());
         }catch (e: any){
