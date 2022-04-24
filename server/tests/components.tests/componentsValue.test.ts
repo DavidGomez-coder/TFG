@@ -11,7 +11,7 @@ import { capacitorMults } from "../../src/model/constants/CapacitorData";
 import { cellMuls } from "../../src/model/constants/CellData";
 import { inductorMuls } from "../../src/model/constants/InductorData";
 import { multiplierValues } from "../../src/model/constants/ResistorData";
-import { reloadDataBase } from "../globalDatabase"
+import { reloadDataBase } from "../globalDatabase";
 
 beforeAll(() => {
     reloadDataBase();
