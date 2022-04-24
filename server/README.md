@@ -1,15 +1,8 @@
 # Servidor API
-
-  * [Introducción](#introducci-n)
-  * [Instalación del Servidor API](#instalaci-n-del-servidor-api)
-    + [⚠️ Variables de entorno](#---variables-de-entorno)
-  * [Simulaciones implementadas :electric_plug:](#simulaciones-implementadas--electric-plug-)
-  * [Peticiones](#peticiones)
-  * [Obtener resultados de ejemplo (sobre un circuito RC Simple)](#obtener-resultados-de-ejemplo--sobre-un-circuito-rc-simple-)
-  * [Lenguajes utilizados](#lenguajes-utilizados)
-
-**
-## Introducción 
+## ÍNDICE
+ * <a id="introduccion">Introducción</a>
+***
+## [Introducción](#introduccion)
 
 Este servidor se trata de un servicio basado en API REST utilizada como productora de resultados de simulaciones físicas. A diferencia de una API REST, las cuáles consumen datos alojados en una BBDD, aquí la información es generada en tiempo real por cada sesión de usuario, por lo que las instancias creadas de la simulaciones o los elementos generados durante el tiempo en el que la sesión está activa, serán borrados una vez dicha sesión haya caducado.
 
@@ -36,12 +29,26 @@ Crear en el directorio raiz un fichero con nombre **.env**. En este  fichero inc
 
 
 ***
-## Peticiones
+## Lista de peticiones
+A continuación, se muestra una lista de las peticiones que se encuentran implementadas.
+
+Tipo | URL | Descripción
+-----|-----|------------
+GET  | /   | Raíz. Inicializa la sesión.
+GET  |/circuit | Devuelve el circuito actual de la sesión. En caso de que este no haya sido creado aún, retorna **BAD REQUEST** o **error 400**.
+GET  | /clear/circuit | Limpia el circuito usado en la sesión actual.
+GET  | /create/simpleRC | Asocia a la sesión actual un circuito RC simple. Retorna dicho circuito. 
+GET | /create/simpleRL | Asocia a la sesión actual un circuito RL simple. Devuelve el circuito creado.
+GET | /circuit/sim/simpleRc | Devuelve los resultados de la simulación de un circuito RC sobre el circuito instanciado en la variable de sesión. En caso de que este no haya sido creado o esté mal formado, retorna **BAD REQUEST**.
+GET | /circuit/sim/simpleRl | Devuelve los resultados de la simulación de un circuito RL sobre el circuito instanciado en la variable de sesión. En caso de que este no haya sido creado o esté mal formado, retorna **BAD REQUEST**.
+GET | /circuit/update | Actualiza los componentes del circuito de la sesión y lo devuelve. En caso de que este no se haya creado con anterioridad, retorna **BAD REQUEST**. Esta petición puede utiliza los siguientes <a id="queryParams">parámetros</a> de consulta.
+
+### [Parámetros usados en la actualización de un circuito RC o RL simple](#queryParams)
 
 ***
 ## Obtener resultados de ejemplo (sobre un circuito RC Simple)
 
-Como se ha comentado anteriormente, las peticiones a este servidor funciona de forma similar a una consola de comandos. Para ello, lo primero que tenemos que hacer es crear el circuito en nuestra sesión, y para realizamos una petición GET usando nuestro navegador a _http://localhost:8080/create/simple-RC_. Obtendremos lo siguiente:
+Como se ha comentado anteriormente, las peticiones a este servidor funciona de forma similar a una consola de comandos. Para ello, lo primero que tenemos que hacer es crear el circuito en nuestra sesión, y para realizamos una petición GET usando nuestro navegador a _http://localhost:8080/create/simpleRC_. Obtendremos lo siguiente:
 <div style="text-align: center">
     <img src="./imgs/rc-out.png" height="500"></img>
 </div>
@@ -68,8 +75,4 @@ http://localhost:8080/circuit/sim/simpleRc
 
 
 ***
-## Lenguajes utilizados
-[![My GitHub Language Stats](https://github-readme-stats.vercel.app/api/top-langs/?username=DavidGomez-coder&langs_count=5&theme=tokyonight)]()
-
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=DavidGomez-coder&layout=compact)](https://github.com/DavidGomez-coder/TFG/github-readme-stats)
 

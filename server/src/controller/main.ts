@@ -26,8 +26,8 @@ module.exports = (app: Application) => {
     /**
      * Instancia el circuito como un circuito RC
      */
-    app.get('/create/simple-RC', (req: Request, res: Response) => {
-        console.log(`[SERVER]: GET /create-simple-RC from ${req.sessionID}`);
+    app.get('/create/simpleRC', (req: Request, res: Response) => {
+        console.log(`[SERVER]: GET /create/simpleRC from ${req.sessionID}`);
         let c: Circuit = <Circuit>CircuitFactory.createCircuit("RC");
         req.session.circuitSimulation = JSON.stringify(c);
         res.send(c);
@@ -36,8 +36,8 @@ module.exports = (app: Application) => {
     /**
      * Instancia el circuito como un circuito RL
      */
-    app.get('/create/simple-RL', (req: Request, res: Response) => {
-        console.log(`[SERVER]: GET /create-simple-RL from ${req.sessionID}`);
+    app.get('/create/simpleRL', (req: Request, res: Response) => {
+        console.log(`[SERVER]: GET /create/simpleRL from ${req.sessionID}`);
         let c: Circuit = <Circuit>CircuitFactory.createCircuit("RL");
         req.session.circuitSimulation = JSON.stringify(c);
         res.send(c);
