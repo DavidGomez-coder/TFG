@@ -5,6 +5,7 @@
     * [Variables de entorno](#env-variables)
  * [Simulaciones Implementadas](#implemented-sims)
  * [Lista de peticiones](#api-rest)
+ * [Pruebas unitarias](#jest-tests)
  * [Ejemplo (Simulación circuito RC)](#rc-sim-example)
 
  
@@ -54,7 +55,7 @@ GET | /circuit/sim/simpleRl | Simulación de un circuito RL simple.
 GET | /circuit/update | Actualizar componentes del circuito. Pulsa <a id="queryParams">aquí</a> para ver los parámetros de consulta.
 
 ### [Parámetros usados en la actualización de un circuito RC o RL simple](#queryParams)
-Query | Descripción
+Parámetro| Descripción
 ------|------------
 resistor_value | Valor de la resistencia
 resistor_multiplier | Multiplicador de la resistencia
@@ -68,6 +69,19 @@ switch_value | Valor del interruptor
 
 
 ***
+## <a id="jest-tests">Pruebas Unitarias</a> :test_tube:
+Junto al código del modelo del sistema, se proporciona una serie de pruebas unitarias sobre dicho modelo para comprobar su correcto funcionamiento. Estos _tets_ unitarios se han construido usando [Jest](https://jestjs.io/), un framework construido sobre Javascript que nos permiten realizar pruebas unitarias sobre nuestro código. Además, este framework puede utilizarse con _Typescript_.
+
+Para ejecutar las pruebas, bastaría con situarse en el directorio raíz del servidor y ejecutar
+```
+$ npm run tests
+```
+Pruebas| Resultado esperado |
+--------------------------|--------------------|
+La instancia de cada componente generado es correcta | OK
+El valor del componente es el esperado de acuerdo con su valor y el multiplicador | OK
+
+***
 ## <a id="rc-sim-example" > Obtener resultados de ejemplo (sobre un circuito RC Simple) </a>
 
 Como se ha comentado anteriormente, las peticiones a este servidor funciona de forma similar a una consola de comandos. Para ello, lo primero que tenemos que hacer es crear el circuito en nuestra sesión, y para realizamos una petición GET usando nuestro navegador a _http://localhost:8080/circuit/create/simpleRC_. Obtendremos lo siguiente:
@@ -75,7 +89,7 @@ Como se ha comentado anteriormente, las peticiones a este servidor funciona de f
     <img src="./imgs/rc-out.png" height="500"></img>
 </div>
 
-A continuación, procedemos a actualizar alguno de sus valores. Para ello utilizaremos las _querys_ de las URLs. Por ejemplo, imaginemos que queremos actualizar el valor de la resistencia para que tenga un valor de _6.2_ Ω tenemos dos opciones. Una es actualizar solamente el atributo _value_, y otra, es modificando tanto _value_ como _multiplier_. (⚠️NOTA: El atributo _multiplier_ no se puede modificar si no se cambia también el valor del parámetro _value_).
+A continuación, procedemos a actualizar alguno de sus valores. Para ello utilizaremos las _querys_ de las URLs. Por ejemplo, imaginemos que queremos actualizar el valor de la resistencia para que tenga un valor de _6.2_ Ω tenemos dos opciones. Una es actualizar solamente el atributo _value_, y otra, es modificando tanto _value_ como _multiplier_. (⚠️**NOTA**: El atributo _multiplier_ no se puede modificar si no se cambia también el valor del parámetro _value_).
 
 ```
 http://localhost:8080/circuit/update?resistor_value=6.2
