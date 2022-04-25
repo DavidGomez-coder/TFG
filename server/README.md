@@ -74,12 +74,26 @@ Junto al código del modelo del sistema, se proporciona una serie de pruebas uni
 
 Para ejecutar las pruebas, bastaría con situarse en el directorio raíz del servidor y ejecutar
 ```
-$ npm run tests
+$ npm run test
 ```
 Pruebas| Resultado esperado |
 --------------------------|--------------------|
-La instancia de cada componente generado es correcta | OK
-El valor del componente es el esperado de acuerdo con su valor y el multiplicador | OK
+La instancia de cada componente generado es correcta | <p style="color: green">PASS</p>
+El valor de cada componente es el esperado de acuerdo con su valor y el multiplicador | <p style="color: green">PASS</p>
+Interruptor intercambia su valor entre 0 y 1 al usar la función _changeValue_ | <p style="color: green">PASS</p>
+Elimnar componente dado un Id | <p style="color: green">PASS</p>
+Eliminar un componente que no existe del circuito| <p style="color: green">PASS</p>
+Obtener un componente dado un Id | <p style="color: green">PASS</p>
+Obtener un componente que no existe en el circuito | <p style="color: green">PASS</p>
+Si el valor de la fuente es cero, los circuitos SimpleRC y simplRL pasarán a estado de disipación de energía | <p style="color: green">PASS</p>
+Resultados de una simulación RC esperada coincide con la generada | <p style="color: green">PASS</p>
+Resultados de una simulación RL esperada coincide con la generada | <p style="color: green">PASS</p>
+
+<div style="text-align: center">
+    <img src="./imgs/tests-img.png" height="150"></img>
+</div>
+
+
 
 ***
 ## <a id="rc-sim-example" > Obtener resultados de ejemplo (sobre un circuito RC Simple) </a>
