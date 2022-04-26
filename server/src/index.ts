@@ -29,20 +29,21 @@ app.use(session({
     saveUninitialized : true
 }));
 
-//controllers
-require("./controller/main.ts")(app);
-require("./controller/simulations.ts")(app);
-require("./controller/updateComponents.ts")(app);
+// permitir que una aplicación externa (cliente react) tenga acceso a las peticiones de la api
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-
-
-
-
-
+//controllers (importante colocarlas después de la definicón del middleware)
+require("./controller/main.ts")(app);
+require("./controller/simulations.ts")(app);
+require("./controller/updateComponents.ts")(app);
 
 
 app.listen(PORT, () => {

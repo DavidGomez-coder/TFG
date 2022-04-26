@@ -1,22 +1,38 @@
-import './assets/css/App.css';
-
-
-import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom'
-import IndexComponent from './components/IndexComponent/IndexComponent';
-import AboutComponent from './components/AboutComponent/AboutComponent';
-
+import logo from './logo.svg';
+import './App.css';
+import SideBar from './components/SideBar/SideBar';
+import { useEffect, useState } from 'react';
 
 function App() {
+
+  const [circuito, setCircuito] = useState([])
+
+  useEffect(() => {
+    fetch('http://localhost:8080/circuit/create/simpleRC')
+      .then((response) => {
+        return response.json()
+      })
+      .then((circuito) => {
+        console.log(circuito.components)
+        setCircuito(circuito.components)
+      })
+  }, []);
+
+
   return (
-    <>
-      <Router>
-        <Routes>
-            <Route exact path="/" element={<IndexComponent />} />
-            <Route exact path="/about" element={<AboutComponent />} />
-        </Routes>
-          
-      </Router>
-    </>
+    <div className="App">
+    <SideBar></SideBar>
+      <div>
+        {circuito.map( item => {
+          return (
+            <div key={item.id}>
+              <p>Value: {item.value}, Multiplier: {item.multiplier}, C.Value: {item.componentValue}</p>
+            </div>
+          )
+        })}
+      </div>
+
+    </div>
   );
 }
 
