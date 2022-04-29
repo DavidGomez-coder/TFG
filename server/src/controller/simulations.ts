@@ -1,5 +1,6 @@
 
 import { Application, NextFunction, Request, Response } from "express"
+import { json } from "stream/consumers";
 
 
 import { Circuit } from "../model/circuit/Circuit";
@@ -26,11 +27,13 @@ module.exports = (app: Application) => {
         console.log(`[SERVER]: GET /circuit/sim/simpleRc from ${req.sessionID}`)
         try {
             let circuit: Circuit = new Circuit();
-            if (<string>req.session.simulationObject == undefined){
+            if (<string>req.query.circuit == undefined){
                 console.log(`[SERVER] : GET /circuit/sim/simpleRc  circuit is undefined from ${req.sessionID}`);
                 res.sendStatus(400);
             }
-            circuit.setComponents(toComponents(JSON.parse(<string>req.session.simulationObject).components));
+            let jsonC = JSON.parse(atob(<string>req.query.circuit));
+
+            circuit.setComponents(toComponents(jsonC.components));
             let rcSim: RcSimulation = new RcSimulation(circuit);
             res.send(rcSim.getResults());
         }catch (e: any){
@@ -48,11 +51,13 @@ module.exports = (app: Application) => {
         console.log(`[SERVER]: GET /circuit/sim/simpleRl from ${req.sessionID}`)
         try {
             let circuit: Circuit = new Circuit();
-            if (<string>req.session.simulationObject == undefined){
-                console.log(`[SERVER] : GET /circuit/sim/simpleRl circuit is undefined from ${req.sessionID}`);
+            if (<string>req.query.circuit == undefined){
+                console.log(`[SERVER] : GET /circuit/sim/simpleRc  circuit is undefined from ${req.sessionID}`);
                 res.sendStatus(400);
             }
-            circuit.setComponents(toComponents(JSON.parse(<string>req.session.simulationObject).components));
+            let jsonC = JSON.parse(atob(<string>req.query.circuit));
+
+            circuit.setComponents(toComponents(jsonC.components));
             let rlSim: RlSimulation = new RlSimulation(circuit);
             res.send(rlSim.getResults());
         }catch (e: any){

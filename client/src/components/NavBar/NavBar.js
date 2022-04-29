@@ -3,8 +3,7 @@ import React, {Component} from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'jquery/dist/jquery.min.js'
-import './SideBarJS.js'
-import './SideBar.css'
+import './NavBar.css'
 
 class SideBar extends Component {
     render () {

@@ -18,6 +18,7 @@ module.exports = (app: Application) => {
         console.log(`[SERVER]: Welcome ${req.session.id}`)
         console.log(req.session.simulationObject)
         req.session.simulationObject = undefined;
+        req.session.save();
         res.sendStatus(200);
         
         //res.redirect("http://localhost:3000")
@@ -30,6 +31,7 @@ module.exports = (app: Application) => {
         console.log(`[SERVER]: GET /create/simpleRC from ${req.sessionID}`);
         let c: Circuit = <Circuit>CircuitFactory.createCircuit("RC");
         req.session.simulationObject = JSON.stringify(c);
+        req.session.save();
         res.send(c);
     });
 
@@ -40,40 +42,8 @@ module.exports = (app: Application) => {
         console.log(`[SERVER]: GET /circuit/create/simpleRL from ${req.sessionID}`);
         let c: Circuit = <Circuit>CircuitFactory.createCircuit("RL");
         req.session.simulationObject = JSON.stringify(c);
+        req.session.save();
         res.send(c);
     })
-
-    /**
-     * Limpia el circuito de la sesión
-     */
-    app.get('/clear/circuit', (req: Request, res: Response) => {
-        req.session.simulationObject = undefined;
-        res.sendStatus(200);
-    })
-
-    /**
-     * Devuelve el circuito de la sessión actual
-     */
-    app.get('/circuit', (req: Request, res: Response) => {
-        console.log(`[SERVER] : GET /circuit from ${req.sessionID}`);
-        try {
-            let circuit: Circuit = new Circuit()
-            if (<string>req.session.simulationObject == undefined){
-                console.log(`[SERVER]: GET /circuit undefined from ${req.sessionID}`);
-                res.status(400); // bad request
-            }
-            circuit.setComponents(JSON.parse(<string>req.session.simulationObject).components);
-            res.send(circuit);
-        }catch (e: any){
-            if (e instanceof Error){
-                console.log(`[SERVER]: ERROR > ${e.message}`);
-            }
-            res.sendStatus(400);
-        }
-        
-    });
-
-
-
     
 }
