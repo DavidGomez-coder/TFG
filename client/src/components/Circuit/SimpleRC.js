@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Component} from 'react'
-import { Navbar } from 'react-bootstrap';
+import RCChartList from '../ChartList/RCChartList';
 import ErrorComponent from '../Errors/ErrorComponent';
 import NavBar from '../NavBar/NavBar';
 
@@ -7,40 +7,52 @@ class SimpleRC extends Component {
     constructor (){
         super();
         this.state = {
-            done: false, 
-            components : []
-        };
-        //this.getExampleCircuit()
+            circuit: [],
+            simulation: []
+        }
+        this.getExampleCircuit()
+        this.getSimulationResults()
     }
 
-   getExampleCircuit () {
+    getExampleCircuit () {
         fetch("http://localhost:8080/circuit/create/simpleRC")
         .then(result => result.json())
-        .then(response => this.setState({
-            done: true, 
-            components : response
-        }))
-        .catch(()=> {
+        .then(response => {
             this.setState({
-                done: true, 
-                success: false
+                circuit: response,
+                done: true
             })
         })
+        .catch(()=> console.error("ERROR"))
     }
+
+    getSimulationResults (circuit){    
+        let jsonCircuit = JSON.stringify(circuit);
+        let cipherCircuit = btoa(jsonCircuit)
+        fetch(`http://localhost:8080/circuit/sim/simpleRc?circuit=${cipherCircuit}`)
+        .then(result => result.json())
+        .then(response => {
+            this.setState({
+                simulation: response,
+                done: true
+            })
+        })
+        .catch(()=> {console.error("ERROR")})
+    }
+
+    showCircuit (circuit){
+        console.log(circuit)
+    }
+
+    
 
     render () {
 
         if (this.state.done){
             return(
                 <div>
-                    <NavBar />
-                    {this.state.components.components.map((elem) => {
-                        return (
-                            <p key={elem.id}>
-                                {elem.type}
-                            </p>
-                        )
-                    })}
+                    <NavBar />  
+                    <RCChartList />
                 </div>
             )
         } else{
