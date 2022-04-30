@@ -1,9 +1,16 @@
 .vertical-scrollable > .row {
     position: absolute;
     height: 90%;
-    width: 35%;
+    width: 30%;
     padding-top: 1%;
     padding-left: 1%;
     padding-bottom: 1%;
     overflow-y: scroll; 
+    overflow-x: auto;
   }
+
+.run-button {
+    position: absolute;
+    bottom: 2%;
+    left: 9%;
+}
