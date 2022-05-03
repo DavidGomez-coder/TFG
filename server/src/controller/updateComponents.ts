@@ -53,7 +53,7 @@ module.exports = (app: Application) => {
             let resistor: Resistor = new Resistor(ComponentsIds.RESISTOR_ID, 0, "*");
             resistor.setValue(val.value);
             resistor.setMultiplier(val.multiplier);
-            resistor.setColorBands(val.colorBands);
+            //resistor.setColorBands(val.colorBands);
             result.push(resistor);
         }else if (val.type === "Cell"){
             let cell: Cell = new Cell(ComponentsIds.CELL_ID, 0);

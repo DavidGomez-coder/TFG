@@ -2,13 +2,17 @@ import React, {Component} from 'react'
 import ErrorComponent from '../Errors/ErrorComponent';
 import NavBar from '../NavBar/NavBar';
 import "./SimpleCircuits.css"
+
 import  MetricsGraphics  from 'react-metrics-graphics';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import resistor_img from "../../assets/img/resistor.png"
 
 
 
 
 class SimpleRC extends Component {
+
     constructor (props){
         super(props);
         this.state = {
@@ -24,12 +28,14 @@ class SimpleRC extends Component {
         //this.getExampleCircuit()
         this.getSimulationResults = this.getSimulationResults.bind(this);
         this.updateComponent = this.updateComponent.bind(this);
+        this.resistor_value = 0.1;
+        this.resistor_multiplier = "x0.1";
+        this.resistor_color_bands = [];
     }
 
     componentDidMount(){
         this.getExampleCircuit()
     }
-
 
     getQ(sim) {
         if (sim.length > 0){     
@@ -137,6 +143,10 @@ class SimpleRC extends Component {
                 }else{
                     element.value = value;
                 }
+
+                if (element.type === "Resistor") {
+                    this.resistor_color_bands = element.colorBands;
+                }
                 
                 element.multiplier = multiplier;
             }
@@ -185,6 +195,7 @@ class SimpleRC extends Component {
         })
 
         .catch(() => console.error("ERROR"));  
+
     }
 
     /* *************************************************************** */
@@ -197,93 +208,166 @@ class SimpleRC extends Component {
             return(
                 <div>
                     <NavBar /> 
+                    <div className='d-md-flex h-md-100 align-items-center'>
                     {/*********************************************************************/}
                     {/*                  RESULTADOS DE LA SIMULACION                      */}
                     {/*********************************************************************/}
-                    <div className='row'>
                         <div className='vertical-scrollable'>
-                            <div className='row'>
-                                        <div className='col-md-12'>    
-                                        <MetricsGraphics 
-                                            title="Q(t)"
-                                            data={ this.state.simulationQ }
-                                            x_accessor="t"
-                                            y_accessor="q"
-                                            full_width={true}
-                                            colors="#fcce02"
-                                            linked={true}
-                                            animate_on_load={true}
-                                            transition_on_update={true}
-                                        /> 
-                                        </div>
-                                        <div className="w-100 d-none d-md-block"></div>
-                                        <div className='col-md-12'>    
+                                <div className='row'>
+                                            <div className='col-md-12'>    
                                             <MetricsGraphics 
-                                                title="I(t)"
-                                                data={ this.state.simulationI }
+                                                title="Q(t)"
+                                                data={ this.state.simulationQ }
                                                 x_accessor="t"
-                                                y_accessor="I"
+                                                y_accessor="q"
                                                 full_width={true}
-                                                colors="#0882b2"
+                                                colors="#fcce02"
                                                 linked={true}
                                                 animate_on_load={true}
                                                 transition_on_update={true}
-                                            />
+                                            /> 
+                                            </div>
+                                            <div className="w-100 d-none d-md-block"></div>
+                                            <div className='col-md-12'>    
+                                                <MetricsGraphics 
+                                                    title="I(t)"
+                                                    data={ this.state.simulationI }
+                                                    x_accessor="t"
+                                                    y_accessor="I"
+                                                    full_width={true}
+                                                    colors="#0882b2"
+                                                    linked={true}
+                                                    animate_on_load={true}
+                                                    transition_on_update={true}
+                                                />
+                                            </div>
+                                            <div className="w-100 d-none d-md-block"></div>
+                                            <div className='col-md-12'>    
+                                                <MetricsGraphics 
+                                                    title="Vr(t)"
+                                                    data={ this.state.simulationVr }
+                                                    x_accessor="t"
+                                                    y_accessor="Vr"
+                                                    full_width={true}
+                                                    colors="#2ab208"
+                                                    linked={true}
+                                                    animate_on_load={true}
+                                                    transition_on_update={true}
+                                                />
+                                            </div>
+                                            <div className="w-100 d-none d-md-block"></div>
+                                            <div className='col-md-12'>    
+                                                <MetricsGraphics 
+                                                    title="Vc(t)"
+                                                    data={ this.state.simulationVc }
+                                                    x_accessor="t"
+                                                    y_accessor="Vc"
+                                                    full_width={true}
+                                                    colors="#e50000"
+                                                    linked={true}
+                                                    animate_on_load={true}
+                                                    transition_on_update={true}
+                                                />
+                                            </div>
+                                            <div className="w-100 d-none d-md-block"></div>
+                                            <div className='col-md-12'>    
+                                                <MetricsGraphics 
+                                                    title="E(t)"
+                                                    data={ this.state.simulationE }
+                                                    x_accessor="t"
+                                                    y_accessor="E"
+                                                    full_width={true}
+                                                    colors="#f47f11"
+                                                    linked={true}
+                                                    animate_on_load={true}
+                                                    transition_on_update={true}
+                                                />
+                                            </div>     
                                         </div>
-                                        <div className="w-100 d-none d-md-block"></div>
-                                        <div className='col-md-12'>    
-                                            <MetricsGraphics 
-                                                title="Vr(t)"
-                                                data={ this.state.simulationVr }
-                                                x_accessor="t"
-                                                y_accessor="Vr"
-                                                full_width={true}
-                                                colors="#2ab208"
-                                                linked={true}
-                                                animate_on_load={true}
-                                                transition_on_update={true}
-                                            />
-                                        </div>
-                                        <div className="w-100 d-none d-md-block"></div>
-                                        <div className='col-md-12'>    
-                                            <MetricsGraphics 
-                                                title="Vc(t)"
-                                                data={ this.state.simulationVc }
-                                                x_accessor="t"
-                                                y_accessor="Vc"
-                                                full_width={true}
-                                                colors="#e50000"
-                                                linked={true}
-                                                animate_on_load={true}
-                                                transition_on_update={true}
-                                            />
-                                        </div>
-                                        <div className="w-100 d-none d-md-block"></div>
-                                        <div className='col-md-12'>    
-                                            <MetricsGraphics 
-                                                title="E(t)"
-                                                data={ this.state.simulationE }
-                                                x_accessor="t"
-                                                y_accessor="E"
-                                                full_width={true}
-                                                colors="#f47f11"
-                                                linked={true}
-                                                animate_on_load={true}
-                                                transition_on_update={true}
-                                            />
-                                        </div>     
-                                    </div>
-                                   
+                                    
                         </div>
+
+                        <div className='control-circuit-panel'>
+                            <div className='row align-items-bottom justify-content-md-center'>
+                                {/*********************************************************************/}
+                                {/*                           CIRCUITO                                */}
+                                {/*********************************************************************/}
+                                <div className='col'>
+                                    CIRCUITO
+                                </div>
+                                <div className="w-100 d-none d-md-block"></div>
+                                <div className="w-100 d-none d-md-block"></div>
+                                <div className="w-100 d-none d-md-block"></div>
+                                <div className="w-100 d-none d-md-block"></div>
+                                {/*********************************************************************/}
+                                {/*                  CAMBIO DE COMPONENTES                            */}
+                                {/*********************************************************************/}   
+                                <div className='col'>
+                                    <div className='row align-items-bottom justify-content-md-center' >
+                                        {/*********************************************************************/}
+                                        {/*                  CONTROLADOR DE LA RESISTENCIA                         */}
+                                        {/*********************************************************************/}   
+                                        <div className='col'>
+                                                <div className="w-50">
+                                                    <div className="d-flex flex-column align-items-center">                                                     
+                                                        <div className="form-label resistor-value">
+                                                            <label htmlFor="range" >{this.resistor_value} Ω </label>
+                                                        </div>
+                                                        <div className="row ">
+                                                            <div className='d-flex flex-row align-items-center'>
+                                                                <input type="range" className="form-range" min="0.1" max="99" step="0.1" value={this.resistor_value} 
+                                                                    onChange={(ev) => {
+                                                                    this.resistor_value = ev.target.value;
+                                                                    this.updateComponent("R0", this.resistor_value, this.resistor_multiplier);
+                                                                }}/>
+                                                            </div>
+                                                            
+                                                            <div className="w-100 d-none d-md-block"></div>
+                                                            <select className="form-select" aria-label="Default select example" onChange={(ev) => {
+                                                                    this.resistor_multiplier = ev.target.value;
+                                                                    this.updateComponent("R0", this.resistor_value, this.resistor_multiplier);
+                                                                }}>
+                                                                <option value="x0.1">x0.1</option>
+                                                                <option value="x1">x1</option>
+                                                                <option value="x10">x10</option>
+                                                                <option value="x100">x100</option>
+                                                                <option value="x1K">x1K</option>
+                                                            </select>
+                                                        </div>
+                                                        
+                                                           
+                                                        <div className='row justify-content-center '>
+                                                            <div className='resistor-view'>
+                                                                <div className='resistor-band1' style={{"background" : this.resistor_color_bands[0]}}></div>  
+                                                                <div className='resistor-band2' style={{"background" : this.resistor_color_bands[1]}}></div> 
+                                                                <div className='resistor-band3' style={{"background" : this.resistor_color_bands[2]}}></div> 
+                                                                <div className='resistor-band4' style={{"background" : this.resistor_color_bands[3]}}></div> 
+                                                            </div>
+                                                        </div>                                                   
+                                                        
+                                                        
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        {/*********************************************************************/}
+                                        {/*                  CONTROLADOR DE LA FUENTE                         */}
+                                        {/*********************************************************************/}   
+                                        <div className='col'>
+                                            FUENTE
+                                        </div>
+                                        {/*********************************************************************/}
+                                        {/*                  CONTROLADOR DEL CONDENSADOR                      */}
+                                        {/*********************************************************************/}   
+                                        <div className='col'>
+                                            CONDENSADOR
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
-                    
-                    {/****************************************************/}
-                    {/*             EJECUTAR SIMULACIÓN                  */}
-                    {/****************************************************/}
-                    {/*<input type="button" className='run-button' value="RUN" onClick={this.getSimulationResults}/>*/}
-                    <br></br>
-                    
-                    
+                    {/*<input type="button" className='run-button' value="RUN" onClick={this.getSimulationResults}/>*/}                   
                 </div>
             )
         } else{
