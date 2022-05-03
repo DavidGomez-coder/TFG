@@ -1,8 +1,12 @@
-import React, { useEffect, useState, Component} from 'react'
+import React, {Component} from 'react'
 import ErrorComponent from '../Errors/ErrorComponent';
 import NavBar from '../NavBar/NavBar';
 import "./SimpleCircuits.css"
-import MetricsGraphics from 'react-metrics-graphics';
+import  MetricsGraphics  from 'react-metrics-graphics';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+
 
 class SimpleRC extends Component {
     constructor (props){
@@ -19,7 +23,13 @@ class SimpleRC extends Component {
         }
         //this.getExampleCircuit()
         this.getSimulationResults = this.getSimulationResults.bind(this);
+        this.updateComponent = this.updateComponent.bind(this);
     }
+
+    componentDidMount(){
+        this.getExampleCircuit()
+    }
+
 
     getQ(sim) {
         if (sim.length > 0){     
@@ -28,8 +38,8 @@ class SimpleRC extends Component {
                 let elem = sim[i];
                 
                 result.push({
-                    "t" : elem.t === NaN ? 0 : elem.t,
-                    "q" : elem.q === NaN ? 0 : elem.q
+                    "t" : isNaN(elem.t) ? 0 : elem.t,
+                    "q" : isNaN(elem.q) ? 0 : elem.q
                 })
             }      
             return result   
@@ -44,8 +54,8 @@ class SimpleRC extends Component {
                 let elem = sim[i];
                 
                 result.push({
-                    "t" : elem.t === NaN ? 0 : elem.t,
-                    "I" : elem.I === NaN ? 0 : elem.I
+                    "t" : isNaN(elem.t) ? 0 : elem.t,
+                    "I" : isNaN(elem.I) ? 0 : elem.I
                 })
             }      
             return result   
@@ -60,8 +70,8 @@ class SimpleRC extends Component {
                 let elem = sim[i];
                 
                 result.push({
-                    "t" : elem.t === NaN ? 0 : elem.t,
-                    "Vr" : elem.Vr === NaN ? 0 : elem.Vr
+                    "t" : isNaN(elem.t) ? 0 : elem.t,
+                    "Vr" : isNaN(elem.Vr) ? 0 : elem.Vr
                 })
             }      
             return result   
@@ -76,8 +86,8 @@ class SimpleRC extends Component {
                 let elem = sim[i];
                 
                 result.push({
-                    "t" : elem.t === NaN ? 0 : elem.t,
-                    "Vc" : elem.Vc === NaN ? 0 : elem.Vc
+                    "t" : isNaN(elem.t) ? 0 : elem.t,
+                    "Vc" : isNaN(elem.Vc) ? 0 : elem.Vc
                 })
             }      
             return result   
@@ -92,22 +102,60 @@ class SimpleRC extends Component {
                 let elem = sim[i];
                 
                 result.push({
-                    "t" : elem.t === NaN ? 0 : elem.t,
-                    "E" : elem.E === NaN ? 0 : elem.E
+                    "t" : isNaN(elem.t) ? 0 : elem.t,
+                    "E" : isNaN(elem.E) ? 0 : elem.E
                 })
             }      
             return result   
         }
         return []
     }
-    
 
-    componentDidMount(){
-        this.getExampleCircuit()
+    /* *************************************************************** */
+    /*                       PETICIONES A LA API                       */
+    /* *************************************************************** */
+    /**
+     * Este petición actualiza el circuito actual con los cambios realizados en la interfaz. Cada vez que se 
+     * actualiza un componente, se obtiene los resultados de dicha simulación con el componente actualizado.
+     * En caso de que el componente sea un interruptor (switch) se cambiará entre 0 y 1 cada vez que se llame
+     * a este método.
+     * @param {string} componentId 
+     * @param {number} value 
+     * @param {string} multiplier 
+     */
+    async updateComponent(componentId, value, multiplier) {
+        let old_components = this.state.circuit;
+        // buscamos el componente
+        old_components.components.forEach(element => {
+            if (element.id === componentId){
+                if (element.type === "Switch") {
+                    if (element.value === 0){
+                        element.value = 1;
+                    }else {
+                        element.value = 0;
+                    }
+                }else{
+                    element.value = value;
+                }
+                
+                element.multiplier = multiplier;
+            }
+        });
+        console.log(old_components)
+        let ciph_circuit = btoa(JSON.stringify(old_components))
+        await fetch(`http://localhost:8080/circuit/update?circuit=${ciph_circuit}`)
+        .then(result => result.json())
+        .then(response => {
+            this.setState({
+                circuit: response,
+                done: true
+            })
+        })
+       await this.getSimulationResults()
     }
 
-   getExampleCircuit () {
-        fetch("http://localhost:8080/circuit/create/simpleRC")
+    async getExampleCircuit () {
+        await fetch("http://localhost:8080/circuit/create/simpleRC")
         .then(result => result.json())
         .then(response => {
             this.setState({
@@ -118,13 +166,13 @@ class SimpleRC extends Component {
         .catch(()=> console.error("ERROR"))
     }
 
-    getSimulationResults () {
+    async getSimulationResults () {
+        console.log(this.state.circuit)
         let circuit_components_json = JSON.stringify(this.state.circuit)
         let ciph_circuit = btoa(circuit_components_json)
-        fetch(`http://localhost:8080/circuit/sim/simpleRc?circuit=${ciph_circuit}`)
+        await fetch(`http://localhost:8080/circuit/sim/simpleRc?circuit=${ciph_circuit}`)
         .then(result => result.json())
         .then(response => {
-            console.log(response)
             this.setState({
                 simulation: response,
                 simulationQ: this.getQ(response),
@@ -136,13 +184,15 @@ class SimpleRC extends Component {
             });
         })
 
-        .catch(() => console.error("ERROR"));    
+        .catch(() => console.error("ERROR"));  
     }
 
-
+    /* *************************************************************** */
+    /*                      CONTROL DE COMPONENTES                      */
+    /* *************************************************************** */    
+    
 
     render () {
-        let CHART_SIZE = 500;
         if (this.state.done){
             return(
                 <div>
@@ -150,67 +200,89 @@ class SimpleRC extends Component {
                     {/*********************************************************************/}
                     {/*                  RESULTADOS DE LA SIMULACION                      */}
                     {/*********************************************************************/}
-                    <div className='vertical-scrollable'>
-                        <div className='row'>
-                                    <div className='col'>    
-                                    <MetricsGraphics 
-                                        title="Q(t)"
-                                        data={ this.state.simulationQ }
-                                        x_accessor="t"
-                                        y_accessor="q"
-                                        width = {CHART_SIZE}
-                                        height = {CHART_SIZE/2}
-                                    /> 
-                                    </div>
-                                    <div className="w-100 d-none d-md-block"></div>
-                                    <div className='col'>    
+                    <div className='row'>
+                        <div className='vertical-scrollable'>
+                            <div className='row'>
+                                        <div className='col-md-12'>    
                                         <MetricsGraphics 
-                                            title="I(t)"
-                                            data={ this.state.simulationI }
+                                            title="Q(t)"
+                                            data={ this.state.simulationQ }
                                             x_accessor="t"
-                                            y_accessor="I"
-                                            width = {CHART_SIZE}
-                                        />
+                                            y_accessor="q"
+                                            full_width={true}
+                                            colors="#fcce02"
+                                            linked={true}
+                                            animate_on_load={true}
+                                            transition_on_update={true}
+                                        /> 
+                                        </div>
+                                        <div className="w-100 d-none d-md-block"></div>
+                                        <div className='col-md-12'>    
+                                            <MetricsGraphics 
+                                                title="I(t)"
+                                                data={ this.state.simulationI }
+                                                x_accessor="t"
+                                                y_accessor="I"
+                                                full_width={true}
+                                                colors="#0882b2"
+                                                linked={true}
+                                                animate_on_load={true}
+                                                transition_on_update={true}
+                                            />
+                                        </div>
+                                        <div className="w-100 d-none d-md-block"></div>
+                                        <div className='col-md-12'>    
+                                            <MetricsGraphics 
+                                                title="Vr(t)"
+                                                data={ this.state.simulationVr }
+                                                x_accessor="t"
+                                                y_accessor="Vr"
+                                                full_width={true}
+                                                colors="#2ab208"
+                                                linked={true}
+                                                animate_on_load={true}
+                                                transition_on_update={true}
+                                            />
+                                        </div>
+                                        <div className="w-100 d-none d-md-block"></div>
+                                        <div className='col-md-12'>    
+                                            <MetricsGraphics 
+                                                title="Vc(t)"
+                                                data={ this.state.simulationVc }
+                                                x_accessor="t"
+                                                y_accessor="Vc"
+                                                full_width={true}
+                                                colors="#e50000"
+                                                linked={true}
+                                                animate_on_load={true}
+                                                transition_on_update={true}
+                                            />
+                                        </div>
+                                        <div className="w-100 d-none d-md-block"></div>
+                                        <div className='col-md-12'>    
+                                            <MetricsGraphics 
+                                                title="E(t)"
+                                                data={ this.state.simulationE }
+                                                x_accessor="t"
+                                                y_accessor="E"
+                                                full_width={true}
+                                                colors="#f47f11"
+                                                linked={true}
+                                                animate_on_load={true}
+                                                transition_on_update={true}
+                                            />
+                                        </div>     
                                     </div>
-                                    <div className="w-100 d-none d-md-block"></div>
-                                    <div className='col'>    
-                                        <MetricsGraphics 
-                                            title="Vr(t)"
-                                            data={ this.state.simulationVr }
-                                            x_accessor="t"
-                                            y_accessor="Vr"
-                                            width = {CHART_SIZE}
-                                        />
-                                    </div>
-                                    <div className="w-100 d-none d-md-block"></div>
-                                    <div className='col'>    
-                                        <MetricsGraphics 
-                                            title="Vc(t)"
-                                            data={ this.state.simulationVc }
-                                            x_accessor="t"
-                                            y_accessor="Vc"
-                                            width = {CHART_SIZE}
-                                        />
-                                    </div>
-                                    <div className="w-100 d-none d-md-block"></div>
-                                    <div className='col'>    
-                                        <MetricsGraphics 
-                                            title="E(t)"
-                                            data={ this.state.simulationE }
-                                            x_accessor="t"
-                                            y_accessor="E"
-                                            width = {CHART_SIZE}
-                                        />
-                                    </div>     
-                                </div>
-                            
-
-                    </div> 
+                                   
+                        </div>
+                    </div>
+                    
                     {/****************************************************/}
                     {/*             EJECUTAR SIMULACIÓN                  */}
                     {/****************************************************/}
-                    <input type="button" className='run-button' value="RUN" onClick={this.getSimulationResults}/>
+                    {/*<input type="button" className='run-button' value="RUN" onClick={this.getSimulationResults}/>*/}
                     <br></br>
+                    
                     
                 </div>
             )

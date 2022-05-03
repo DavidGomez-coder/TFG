@@ -4,6 +4,7 @@
  */
 
 import { Application, NextFunction, Request, Response } from "express"
+import { appendFile } from "fs";
 
 import { Circuit } from "../model/circuit/Circuit";
 import { CircuitFactory } from "../model/circuit/CircuitFactory";
@@ -25,17 +26,19 @@ module.exports = (app: Application) => {
     // valores que se pasan como parámetro
     app.get('/circuit/update', (req: Request, res: Response) => {
         console.log(`[SERVER] : GET /update-circuit from ${req.sessionID}`);
-        if (req.query.circuit == undefined){
-            console.log(`[SERVER] : ERROR A circuit should be pass`);
+        let circuit: Circuit = new Circuit();
+        if (<string>req.query.circuit == undefined){
+            console.log(`[SERVER] : GET /circuit/sim/simpleRc  circuit is undefined from ${req.sessionID}`);
             res.sendStatus(400);
         }
-        let decoded: string = atob(<string>req.query.circuit)
-        console.log("DECODED STRING: " + decoded)
-        res.send(200)
-    });
+        let jsonC = JSON.parse(atob(<string>req.query.circuit));
+        circuit.setComponents(toComponents(jsonC.components));
+        res.send(circuit);
+    });    
 
-    
 }
+
+
 
 
 /**
