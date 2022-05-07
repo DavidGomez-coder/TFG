@@ -34,39 +34,24 @@ module.exports = (app: Application) => {
             let jsonC = JSON.parse(atob(<string>req.query.circuit));
 
             circuit.setComponents(toComponents(jsonC.components));
-            let rcSim: RcSimulation = new RcSimulation(circuit);
-            res.send(rcSim.getResults());
-        }catch (e: any){
-            if (e instanceof Error){
-                console.log(`[SERVER]: ERROR > ${e.message}`);
-            }
-            res.sendStatus(400);
-        }
-    });
 
-    app.get('/circuit/sim/simpleRc/maxData', (req: Request, res: Response) => {
-        console.log(`[SERVER]: GET /circuit/sim/simpleRcData/:data from ${req.sessionID}`)
-        try {
-            let circuit: Circuit = new Circuit();
-            if (<string>req.query.circuit == undefined){
-                console.log(`[SERVER] : GET /circuit/sim/simpleRc  circuit is undefined from ${req.sessionID}`);
-                res.sendStatus(400);
-            }
-            let jsonC = JSON.parse(atob(<string>req.query.circuit));
-
-            circuit.setComponents(toComponents(jsonC.components));
             let cell: Cell = <Cell>circuit.getComponentById(ComponentsIds.CELL_ID);
-            let resistor: Resistor = <Resistor>circuit.getComponentById(ComponentsIds.RESISTOR_ID);
             let capacitor: Capacitor = <Capacitor>circuit.getComponentById(ComponentsIds.CAPACITOR_ID);
-            let swi: Switch = <Switch>circuit.getComponentById(ComponentsIds.SWITCH_ID); //1 carga, 0 descarga
-
-            let result = {
-                "qmax" : swi.getComponentValue() === 1 ? (cell.getComponentValue() * capacitor.getComponentValue()) : 0,
-                "Vcmax" : swi.getComponentValue() === 1 ? cell.getComponentValue() : 0,
-                "Emax" : swi.getComponentValue() === 1 ? ((1/2) * capacitor.getComponentValue()*Math.pow(cell.getComponentValue(),2)) : 0
+            let resistor: Resistor = <Resistor>circuit.getComponentById(ComponentsIds.RESISTOR_ID);
+            let swi: Switch = <Switch>circuit.getComponentById(ComponentsIds.SWITCH_ID);
+            let max_data = {
+                "qmax" : swi.getComponentValue() === 1 ? (capacitor.getComponentValue()*cell.getComponentValue()) : 0,
+                "emax" : swi.getComponentValue() === 1 ? ((1/2)*capacitor.getComponentValue()*Math.pow(cell.getComponentValue(),2)) : 0,
+                "Vcmax": swi.getComponentValue() === 1 ? cell.getComponentValue() : 0,
+                "imax" : swi.getComponentValue() === 1 ? 0 : (cell.getComponentValue() / resistor.getComponentValue()),
+                "Vrmax" : swi.getComponentValue() === 1 ? 0 : cell.getComponentValue()
             }
-            return result;
-            
+            let rcSim: RcSimulation = new RcSimulation(circuit);
+            let result = {
+                "limits" : max_data,
+                "simulation" : rcSim.getResults()
+            }
+            res.send(result);
         }catch (e: any){
             if (e instanceof Error){
                 console.log(`[SERVER]: ERROR > ${e.message}`);

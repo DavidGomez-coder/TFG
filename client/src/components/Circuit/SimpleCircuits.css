@@ -1,27 +1,74 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
-.vertical-scrollable> .row {
+.vertical-scrollable>.row {
   position: absolute;
   top: 120px;
   bottom: 100px;
   left: 180px;
   width: 50%;
-  overflow-y: scroll; 
+  overflow-y: scroll;
 }
-  .container {
-    width: 100%;
-    margin:0px !important;
-    padding: 0px !important;
-    max-width: unset;
-  }
-  
-  .row {
-    display: -ms-flexbox;
-    display: -webkit-box;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: 0px !important;
-    margin-left: 0px !important;
-  }
 
+.container {
+  width: 100%;
+  margin: 0px !important;
+  padding: 0px !important;
+  max-width: unset;
+}
+
+.row {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+}
+
+h1 {
+  font-family: cursive;
+  text-align: center;
+  font-size: 80px;
+}
+
+.options-box {
+  padding-left: 5%;
+  padding-top: 5%;
+  text-align: left;
+  font-family: cursive;
+  font-size: medium;
+}
+
+.limits-text-box {
+  padding-right: 5%;
+  padding-top: 5%;
+  text-align: right;
+  font-family: cursive;
+  font-size: medium;
+}
+
+.resistor-value {
+  font-size: 40px;
+  font-family: cursive;
+  text-align: start;
+
+}
+
+.resistor-frame {
+  background-color: rgb(248, 199, 140);
+  font-size: 40px;
+  text-align: center;
+  width: 60%;
+  height: 100%;
+  margin-left: 10%;
+  margin-bottom: 5%;
+
+  border-radius: 15%;
+}
+
+.resistor-band1 {
+  background-color: black;
+  width: 75%;
+  height: 4em;
+}

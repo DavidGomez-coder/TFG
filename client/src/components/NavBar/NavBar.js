@@ -29,13 +29,6 @@ class SideBar extends Component {
                             <a className="dropdown-item" href="#">Circuito RL Simple</a>
                         </div>
                     </li>
-                    <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Teoría</a>
-                        <div className="dropdown-menu" aria-labelledby="dropdown03">
-                            <a className="dropdown-item" href="#">Circuito RC Simple</a>
-                            <a className="dropdown-item" href="#">Circuito RL Simple</a>
-                        </div>
-                    </li>
                     </ul>
                 </div>
             </nav>
