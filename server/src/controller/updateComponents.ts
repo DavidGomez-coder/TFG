@@ -58,6 +58,7 @@ module.exports = (app: Application) => {
         }else if (val.type === "Cell"){
             let cell: Cell = new Cell(ComponentsIds.CELL_ID, 0);
             cell.setValue(val.value);
+            cell.setMultiplier(val.multiplier)
             result.push(cell);
         }else if (val.type === "Switch") {
             let swi: Switch = new Switch(ComponentsIds.SWITCH_ID, 0);

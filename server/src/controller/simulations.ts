@@ -44,6 +44,37 @@ module.exports = (app: Application) => {
         }
     });
 
+    app.get('/circuit/sim/simpleRc/maxData', (req: Request, res: Response) => {
+        console.log(`[SERVER]: GET /circuit/sim/simpleRcData/:data from ${req.sessionID}`)
+        try {
+            let circuit: Circuit = new Circuit();
+            if (<string>req.query.circuit == undefined){
+                console.log(`[SERVER] : GET /circuit/sim/simpleRc  circuit is undefined from ${req.sessionID}`);
+                res.sendStatus(400);
+            }
+            let jsonC = JSON.parse(atob(<string>req.query.circuit));
+
+            circuit.setComponents(toComponents(jsonC.components));
+            let cell: Cell = <Cell>circuit.getComponentById(ComponentsIds.CELL_ID);
+            let resistor: Resistor = <Resistor>circuit.getComponentById(ComponentsIds.RESISTOR_ID);
+            let capacitor: Capacitor = <Capacitor>circuit.getComponentById(ComponentsIds.CAPACITOR_ID);
+            let swi: Switch = <Switch>circuit.getComponentById(ComponentsIds.SWITCH_ID); //1 carga, 0 descarga
+
+            let result = {
+                "qmax" : swi.getComponentValue() === 1 ? (cell.getComponentValue() * capacitor.getComponentValue()) : 0,
+                "Vcmax" : swi.getComponentValue() === 1 ? cell.getComponentValue() : 0,
+                "Emax" : swi.getComponentValue() === 1 ? ((1/2) * capacitor.getComponentValue()*Math.pow(cell.getComponentValue(),2)) : 0
+            }
+            return result;
+            
+        }catch (e: any){
+            if (e instanceof Error){
+                console.log(`[SERVER]: ERROR > ${e.message}`);
+            }
+            res.sendStatus(400);
+        }
+    });
+
      /**
      * Devuelve los resultados de una simulación RC
      */
@@ -74,7 +105,7 @@ module.exports = (app: Application) => {
  * @param {[]} jsonComponents Lista de componentes en formato JSON
  * @returns Devuelve una lista de objetos componentes
  */
- function toComponents (jsonComponents: []){
+ function toComponents (jsonComponents: []): Component[]{
     let result: Component[] = []
     jsonComponents.forEach((val: any) => {
         if (val.type === "Resistor"){

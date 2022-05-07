@@ -45,11 +45,10 @@ export class RcSimulation extends CircuitSimulation {
         if (swi == undefined){
             throw new Error(`[SERVER]: ERROR SimpleRcSimulation over a circuit without a switch`) 
         }
-
-
         
         // START TO GET VALUES
         let time_constant: number = resistor.getComponentValue() * capacitor.getComponentValue();
+        this.calculateStep(4* time_constant);
         if (cell.getComponentValue() === 0){
             return this.simulationOnDischarge(4*time_constant, cell, capacitor, resistor);
         }
@@ -108,5 +107,9 @@ export class RcSimulation extends CircuitSimulation {
             time_results.push(partial_res);
         }
         return time_results;
+    }
+
+    private calculateStep (max_time: number) : void {
+        this.setStep(max_time/810 * 10)
     }
 }

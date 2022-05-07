@@ -42,7 +42,7 @@ export class CircuitFactory {
             circuit.addComponent(inductor);
             return circuit;
         }else if (type === "RC"){
-            let capacitor: Capacitor = ComponentFactory.createCapacitor(ComponentsIds.CAPACITOR_ID, 50, "miliF");
+            let capacitor: Capacitor = ComponentFactory.createCapacitor(ComponentsIds.CAPACITOR_ID, 99, "microF");
             circuit.addComponent(capacitor);
             return circuit;
         }
