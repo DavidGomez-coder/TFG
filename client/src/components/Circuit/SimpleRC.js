@@ -144,6 +144,18 @@ class SimpleRC extends Component {
         return []
     }
 
+    getComponent(component_type) {
+        if (this.state.circuit !== []){
+            let i = 0;
+            while (i<this.state.circuit.components.length && this.state.circuit.components[i].type !== component_type){
+                i++;
+            }
+            return this.state.circuit.components[i]
+
+        }
+        return undefined;
+    }
+
     extractResults(sim) {
         let q = []
         let Vr = []
@@ -175,6 +187,25 @@ class SimpleRC extends Component {
         }
         return result;
     }
+
+    limit_format(num) {
+        return num.toExponential(2)
+    }
+
+    change_show_legend() {
+        let legenCheck = !this.state.showLegend;
+        this.setState({
+            showLegend: legenCheck
+        })
+    }
+
+    change_show_multipliers (){
+        let multCheck = !this.state.showMultipliers;
+        this.setState({
+            showMultipliers : multCheck
+        })
+    }
+
 
     /* *************************************************************** */
     /*                       PETICIONES A LA API                       */
@@ -226,7 +257,6 @@ class SimpleRC extends Component {
                 this.state.resistor_color_bands = component.colorBands;
             }
         })
-        this.getSimulationResults();
     }
 
 
@@ -239,7 +269,22 @@ class SimpleRC extends Component {
                     done: true
                 })
             })
+
             .catch(() => console.error("ERROR"))
+        let resistor = this.getComponent("Resistor");
+        let capacitor = this.getComponent("Capacitor");
+        let cell = this.getComponent("Cell");
+        let swi = this.getComponent("Switch")
+        this.setState({
+            resistor_value: resistor.value,
+            resistor_multiplier: resistor.multiplier,
+            resistor_color_bands: resistor.colorBands,
+            capacitor_value: capacitor.value,
+            capacitor_multiplier: capacitor.multiplier,
+            cell_value: cell.value,
+            cell_multiplier: cell.multiplier,
+            switch_value: (swi.value === 1) ? "On" : "Off"
+        })
     }
 
     async getSimulationResults() {
@@ -268,23 +313,6 @@ class SimpleRC extends Component {
 
     }
 
-    limit_format(num) {
-        return num.toExponential(2)
-    }
-
-    change_show_legend() {
-        let legenCheck = !this.state.showLegend;
-        this.setState({
-            showLegend: legenCheck
-        })
-    }
-
-    change_show_multipliers (){
-        let multCheck = !this.state.showMultipliers;
-        this.setState({
-            showMultipliers : multCheck
-        })
-    }
 
     /* *************************************************************** */
     /*                      VISTA                                      */
@@ -294,10 +322,6 @@ class SimpleRC extends Component {
             return (
                 <div >
                     <NavBar />
-                    <div className='row'>
-
-                    </div>
-                    <h1>Simulador circuito RC</h1>
                     <div className='row'>
 
 
@@ -318,6 +342,7 @@ class SimpleRC extends Component {
                                                     if (true) {
                                                         return (
                                                             <div className='row'>
+                                                                {/*Q*/}
                                                                 <div className='col-6 col-lg-6'>
                                                                     <MetricsGraphics
                                                                         data={this.state.simulationQ}
@@ -336,7 +361,7 @@ class SimpleRC extends Component {
 
                                                                     />
                                                                 </div>
-
+                                                                {/*I*/}
                                                                 <div className='col-6 col-lg-6'>
                                                                     <MetricsGraphics
                                                                         data={this.state.simulationI}
@@ -354,6 +379,7 @@ class SimpleRC extends Component {
                                                                         linked={true}
                                                                     />
                                                                 </div>
+                                                                {/*VR*/}
                                                                 <div className='col-6 col-lg-6'>
                                                                     <MetricsGraphics
                                                                         data={this.state.simulationVr}
@@ -371,6 +397,7 @@ class SimpleRC extends Component {
                                                                         linked={true}
                                                                     />
                                                                 </div>
+                                                                {/*VC*/}
                                                                 <div className='col-6 col-lg-6'>
                                                                     <MetricsGraphics
                                                                         data={this.state.simulationVc}
@@ -388,6 +415,7 @@ class SimpleRC extends Component {
                                                                         linked={true}
                                                                     />
                                                                 </div>
+                                                                {/*E*/}
                                                                 <div className='col-6 col-lg-6'>
                                                                     <MetricsGraphics
                                                                         data={this.state.simulationE}
@@ -407,18 +435,26 @@ class SimpleRC extends Component {
                                                                 </div>
                                                                 <div className='col-3 col-lg-3'>
                                                                     <div className='options-box'>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onChange={this.change_show_legend} />
-                                                                            <label class="form-check-label" for="flexCheckDefault">
+                                                                        <div className="form-check">
+                                                                            <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" onChange={this.change_show_legend} />
+                                                                            <label className="form-check-label" htmlFor="flexCheckDefault">
                                                                                 Rollover Info.
                                                                             </label>
                                                                         </div>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onChange={this.change_show_multipliers} />
-                                                                            <label class="form-check-label" for="flexCheckDefault">
-                                                                                Multipliers
+                                                                        <div className="form-check">
+                                                                            <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" onChange={this.change_show_multipliers} />
+                                                                            <label className="form-check-label" htmlFor="flexCheckDefault">
+                                                                                Multiplicadores
                                                                             </label>
                                                                         </div>
+                                                                        <br />
+                                                                        <br />
+                                                                        <button type="button" className="btn btn-success" onClick={this.getSimulationResults} style={{"width" : "75%"}}>
+                                                                            SIM <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                                                                                <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+                                                                                <path fillRule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+                                                                            </svg>
+                                                                        </button>
                                                                     </div>
                                                                 </div>
                                                                 <div className='col-3 col-lg-3'>
@@ -472,7 +508,7 @@ class SimpleRC extends Component {
                                     <div className='row'>
                                         <div className='col-12 col-lg-12'>
                                             <div className='row'>
-                                                <div className='col-6 col-lg-6'>
+                                                <div className='col-12 col-lg-12'>
                                                     <input type="range" className="form-range" min="0.1" max="99" step="0.1"
                                                         onChange={(ev) => {
                                                             this.state.resistor_value = ev.target.value;
@@ -480,19 +516,17 @@ class SimpleRC extends Component {
                                                         }}
                                                     />
                                                 </div>
-                                                <div className='col-4 col-lg-4'>
+                                                <div className='col-12 col-lg-12'>
                                                     <select className="form-select" aria-label="Default select example" onChange={(ev) => {
                                                         this.state.resistor_multiplier = ev.target.value;
                                                         this.updateComponent("R0", this.state.resistor_value, this.state.resistor_multiplier)
                                                     }} disabled={this.state.showMultipliers === false}>
-                                                        <option value="x1">x1</option>
-                                                        <option value="x0.1">x0.1</option>
-                                                        <option value="x10">x10</option>
-                                                        <option value="x100">x100</option>
+                                                        <option value="x1">{Number.parseFloat(this.state.resistor_value).toFixed(2)} Ω </option>
+                                                        <option value="x0.1">{Number.parseFloat(this.state.resistor_value*0.1).toFixed(2)} Ω</option>
+                                                        <option value="x10">{Number.parseFloat(this.state.resistor_value*10).toFixed(2)} Ω</option>
+                                                        <option value="x100">{Number.parseFloat(this.state.resistor_value*100).toFixed(2)} Ω</option>
                                                     </select>
                                                 </div>
-                                                <label className='resistor-value'>{this.state.resistor_value} Ω</label>
-
                                             </div>
                                         </div>
                                     </div>
@@ -502,11 +536,11 @@ class SimpleRC extends Component {
                             {/*                 CONTROLADOR DEL CONDENSADOR                        */}
                             {/**********************************************************************/}
                             <div className='col-3 col-lg-3'>
+                                
                                 <div className='row'>
                                     <div className='col-12 col-lg-12'>
-                                        <label className="form-label">{this.state.capacitor_value}</label>
-                                        <div className='row'>
-                                            <div className='col-6 col-lg-6'>
+                                        <div className='row justify-content-center'>
+                                            <div className='col-12 col-lg-12'>
 
                                                 <input type="range" className="form-range" min="0.1" max="99" step="0.1"
                                                     onChange={(ev) => {
@@ -515,19 +549,21 @@ class SimpleRC extends Component {
                                                     }}
                                                 />
                                             </div>
-                                            <div className='col-4 col-lg-4'>
+                                            <div className='col-12 col-lg-12'>
                                                 <select className="form-select" aria-label="Default select example" onChange={(ev) => {
                                                     this.state.capacitor_multiplier = ev.target.value;
                                                     this.updateComponent("C0", this.state.capacitor_value, this.state.capacitor_multiplier)
                                                 }} disabled={this.state.showMultipliers === false}>
-                                                    <option value="nanoF">nanoF</option>
-                                                    <option value="microF">microF</option>
-                                                    <option value="miliF">miliF</option>
+                                                    <option value="nanoF">{this.state.capacitor_value} nanoF</option>
+                                                    <option value="microF">{this.state.capacitor_value} microF</option>
+                                                    <option value="miliF">{this.state.capacitor_value} miliF</option>
                                                 </select>
-                                            </div>
-
+                                                
+                                            </div>                                            
 
                                         </div>
+                                        <div className="w-100 d-none d-md-block"></div>
+                                                                                   
                                     </div>
                                 </div>
                             </div>
@@ -537,9 +573,9 @@ class SimpleRC extends Component {
                             <div className='col-3 col-lg-3'>
                                 <div className='row'>
                                     <div className='col-12 col-lg-12'>
-                                        <label className="form-label">{this.state.cell_value}</label>
+
                                         <div className='row'>
-                                            <div className='col-6 col-lg-6'>
+                                            <div className='col-12 col-lg-12'>
 
                                                 <input type="range" className="form-range" min="0.1" max="99" step="0.1"
                                                     onChange={(ev) => {
@@ -548,14 +584,14 @@ class SimpleRC extends Component {
                                                     }}
                                                 />
                                             </div>
-                                            <div className='col-4 col-lg-4'>
+                                            <div className='col-12 col-lg-12'>
                                                 <select className="form-select" aria-label="Default select example" onChange={(ev) => {
                                                     this.state.cell_multiplier = ev.target.value;
                                                     this.updateComponent("V0", this.state.cell_value, this.state.cell_multiplier)
                                                 }} disabled={this.state.showMultipliers === false}>
-                                                    <option value="V">V</option>
-                                                    <option value="microV">microV</option>
-                                                    <option value="miliV">miliV</option>
+                                                    <option value="V">{this.state.cell_value} V</option>
+                                                    <option value="microV">{this.state.cell_value} microV</option>
+                                                    <option value="miliV">{this.state.cell_value} miliV</option>
                                                 </select>
                                             </div>
 
@@ -573,14 +609,19 @@ class SimpleRC extends Component {
                                     <div className='col-12 col-lg-12'>
                                         <div className='row'>
                                             <div className='col-6 col-lg-6'>
-                                                <button type="button" className="btn btn-outline-primary" onClick={(ev) => {
+                                                <div type="button" className="toogle-container">
+                                                <input  type="checkbox"  onClick={(ev) => {
                                                     if (this.state.switch_value === "On") {
                                                         this.state.switch_value = "Off"
+
                                                     } else {
                                                         this.state.switch_value = "On"
+
                                                     }
-                                                    this.updateComponent("S0", this.state.switch_value === "On" ? 1 : 0, "*")
-                                                }}>{this.state.switch_value}</button>
+                                                    this.updateComponent("S0", this.state.switch_value === "On" ? 1 : 0, "*")}} />
+
+                                                
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
