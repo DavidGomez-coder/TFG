@@ -1,5 +1,6 @@
+/* CAPACITOR STYLES */
 .capacitor-box {
-    background: linear-gradient(to right, rgb(226, 0, 0) 10% , rgb(243, 80, 80) 10%, rgb(237, 145, 145), 10%, red 20%, rgb(148, 0, 0) 30%, black 40%, black 70%, rgb(148, 0, 0) 80%, red 90%);
+    background: linear-gradient();
     height: 100px;
     width: 60%;
     margin-top: 3%;

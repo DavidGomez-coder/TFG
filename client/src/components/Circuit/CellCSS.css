@@ -1,15 +1,26 @@
 /* CELL STYLES */
 .cell-box {
-    background: linear-gradient(to right, rgb(209, 160, 0) 35%, black 35%);
+    background: linear-gradient(to right, rgb(209, 160, 0) 35%, rgb(15, 13, 13) 35%);
     height: 100px;
     width: 60%;
     margin-top: 3%;
     margin-left: 20%;
     border-radius: 10px;
+    clip-path: circle(60%);
+}
+
+.cell-box:before{
+    content: "";
+    position: absolute;
+    height: 40px;
+    width: 50%;
+    margin-top: 2000px;
+    background-color: black;
 }
 
 .cell-box-shadow {
-    background: linear-gradient(rgb(255, 255, 255) 1%, black 80%);
+    border-top: 30px solid rgb(253, 248, 248);
+    border-bottom: 30px solid rgb(70, 70, 70);
     height: 100%;
     width: 100%;
     border-radius: 10px;
@@ -18,11 +29,10 @@
 
 
 .cell-PLUS {
-    color: rgb(238, 229, 219);
+    color: rgb(255, 255, 255);
     height: 100%;
     width: 100%;
-    font-size: 60px;
-    margin-left: 10%;
+    font-size: 400%;
+    margin-left: 12%;
+    margin-top: -10%;
 }
-
-
