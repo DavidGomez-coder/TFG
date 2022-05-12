@@ -37,6 +37,6 @@ module.exports = (app: Application) => {
         console.log(`[SERVER]: GET /circuit/create/simpleRL from ${req.sessionID}`);
         let c: Circuit = <Circuit>CircuitFactory.createCircuit("RL");
         res.send(c);
-    })
+    });
     
 }

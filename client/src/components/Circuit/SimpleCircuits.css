@@ -49,66 +49,23 @@ h1 {
 }
 
 .component-value {
-  font-size: 40px;
+  font-size: 20px;
   font-family: cursive;
   text-align: center;
 
 }
 
-/* CAPACITOR */
+/* SWITCH BUTTON */
+.switch-button {
+  background: none;
+  border: none;
+  height: 100%;
+  height: 100%;
 
-.capacitor-value {
-  font-size: 40px;
-  margin-bottom: 5%;
-  color: rgb(0, 0, 0);
 }
 
-
-/* SELECT */
-/* TOOGLE BUTTON */
-
-.toggle-container
-{
-	position:absolute;
-	top:50%;
-	left:50%;
-	transform:translate(-5%,-50%);
-}
-.toggle-container input[type="checkbox"] 
-{
-	width:130px;
-	height:60px;
-	appearance:none;
-	-webkit-appearance:none;
-	-moz-appearance:none;
-	background-color:#dfdfdf;
-	box-shadow:inset 2px 5px 2px rgba(0,0,0,.2);
-	border-radius:30px;
-	position:relative;
-	cursor:pointer;
-}
-
-.toggle-container input:checked[type="checkbox"]
-{
-	background-color:#53afe6;
-}
-
-.toggle-container input[type="checkbox"]:before
-{
-	content:'';
-	position:absolute;
-	top:0;
-	left:0;
-	width:60px;
-	height:60px;
-	background-color:#fff;
-	border-radius:50%;
-	transform:scale(1.1);
-	box-shadow:0 0 5px rgba(0,0,0,.3);
-	transition:all .3s linear;
-}
-
-.toggle-container input:checked[type="checkbox"]:before
-{
-	left:70px;
+.circuit-state {
+  font-family: cursive;
+  font-size: 25px;
+  text-align: center;
 }

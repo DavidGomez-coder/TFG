@@ -15,6 +15,7 @@
 
 import { Component } from "./Component";
 import { valueBands, multiplerBands, multiplierValues} from "../constants/ResistorData";
+import { send } from "process";
 
 export class Resistor extends Component {
 
@@ -77,7 +78,13 @@ export class Resistor extends Component {
      */
     private calculateColorBands(value: number, multiplier: string): string[] {
         let colors: string[] = ["","","","#B22222"];
+        let value_str: string = value.toString().replace(".","");
+        let first_digit: number = parseInt(value_str[0]);
+        let secnd_digit: number = parseInt(value_str[1]);
+        colors[0] = <string>valueBands.get(first_digit);
+        colors[1] = <string>valueBands.get(secnd_digit);
         //cálculo de las bandas asociadas al valor
+        /*
         if (value === 0){
             colors[0] = <string>valueBands.get(0);
             colors[1] = <string>valueBands.get(0);
@@ -90,7 +97,7 @@ export class Resistor extends Component {
             colors[0] = <string>valueBands.get(first_digit);
             colors[1] = <string>valueBands.get(secnd_digit);
         }
-
+        */
         //banda asociada al multiplicador
         colors[2] = <string>multiplerBands.get(multiplier);
         return colors;

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import "./CircuitNotFound.css"
+
 
 class ErrorComponent extends Component {
     constructor (props){
@@ -10,8 +10,8 @@ class ErrorComponent extends Component {
     render() {
         if (this.err_type === "CIRCUIT_NOT_FOUND"){
             return (
-                <div className="circuit_not_found">
-                    <p className="err_paragraph">{this.err_msg}</p>
+                <div >
+                    <p>{this.err_msg}</p>
                 </div>
             )
         }

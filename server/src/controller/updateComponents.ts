@@ -36,6 +36,15 @@ module.exports = (app: Application) => {
         res.send(circuit);
     });    
 
+    app.get('/colorBands', (req: Request, res: Response) => {
+        console.log(`[SERVER] : GET /colorBands from ${req.sessionID}`);
+        if (req.query.resistor_value === undefined || req.query.resistor_multiplier === undefined){
+            console.log(`[SERVER] : GET /colorBands query params "resistor_value" & "resistor_multiplier are undefined from ${req.sessionID}`);
+            res.sendStatus(400);
+        }
+        let resistor: Resistor = <Resistor>ComponentFactory.createResistor(ComponentsIds.RESISTOR_ID, parseFloat(<string>req.query.resistor_value), <string>req.query.resistor_multiplier);
+        res.send(resistor.getColorBands())
+    });
 }
 
 

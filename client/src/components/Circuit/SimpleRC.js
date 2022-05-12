@@ -2,6 +2,9 @@ import React, { Component, useCallback } from 'react'
 import ErrorComponent from '../Errors/ErrorComponent';
 
 import "./SimpleCircuits.css"
+import "./ResistorCSS.css"
+import "./CellCSS.css"
+import "./CapacitorCSS.css"
 
 import MetricsGraphics from 'react-metrics-graphics';
 import NavBar from '../NavBar/NavBar.js'
@@ -9,6 +12,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap';
 
 import resistor_img from "../../assets/img/resistor.png"
+import switch_on from "../../assets/img/switch_on.png"
+import switch_off from "../../assets/img/switch_off.png"
 
 
 class SimpleRC extends Component {
@@ -64,90 +69,10 @@ class SimpleRC extends Component {
         this.getExampleCircuit()
     }
 
-    getQ(sim) {
-        if (sim.length > 0) {
-            let result = []
-            for (let i = 0; i < sim.length; i++) {
-                let elem = sim[i];
-
-                result.push({
-                    "t": isNaN(elem.t) ? 0 : elem.t,
-                    "q": isNaN(elem.q) ? 0 : elem.q
-                })
-            }
-            return result
-        }
-        return []
-    }
-
-    getI(sim) {
-        if (sim.length > 0) {
-            let result = []
-            for (let i = 0; i < sim.length; i++) {
-                let elem = sim[i];
-
-                result.push({
-                    "t": isNaN(elem.t) ? 0 : elem.t,
-                    "I": isNaN(elem.I) ? 0 : elem.I
-                })
-            }
-            return result
-        }
-        return []
-    }
-
-    getVr(sim) {
-        if (sim.length > 0) {
-            let result = []
-            for (let i = 0; i < sim.length; i++) {
-                let elem = sim[i];
-
-                result.push({
-                    "t": isNaN(elem.t) ? 0 : elem.t,
-                    "Vr": isNaN(elem.Vr) ? 0 : elem.Vr
-                })
-            }
-            return result
-        }
-        return []
-    }
-
-    getVc(sim) {
-        if (sim.length > 0) {
-            let result = []
-            for (let i = 0; i < sim.length; i++) {
-                let elem = sim[i];
-
-                result.push({
-                    "t": isNaN(elem.t) ? 0 : elem.t,
-                    "Vc": isNaN(elem.Vc) ? 0 : elem.Vc
-                })
-            }
-            return result
-        }
-        return []
-    }
-
-    getE(sim) {
-        if (sim.length > 0) {
-            let result = []
-            for (let i = 0; i < sim.length; i++) {
-                let elem = sim[i];
-
-                result.push({
-                    "t": isNaN(elem.t) ? 0 : elem.t,
-                    "E": isNaN(elem.E) ? 0 : elem.E
-                })
-            }
-            return result
-        }
-        return []
-    }
-
     getComponent(component_type) {
-        if (this.state.circuit !== []){
+        if (this.state.circuit !== []) {
             let i = 0;
-            while (i<this.state.circuit.components.length && this.state.circuit.components[i].type !== component_type){
+            while (i < this.state.circuit.components.length && this.state.circuit.components[i].type !== component_type) {
                 i++;
             }
             return this.state.circuit.components[i]
@@ -199,10 +124,10 @@ class SimpleRC extends Component {
         })
     }
 
-    change_show_multipliers (){
+    change_show_multipliers() {
         let multCheck = !this.state.showMultipliers;
         this.setState({
-            showMultipliers : multCheck
+            showMultipliers: multCheck
         })
     }
 
@@ -234,15 +159,13 @@ class SimpleRC extends Component {
                     element.value = value;
                 }
 
-                if (element.type === "Resistor") {
-                    this.state.resistor_color_bands = element.colorBands;
-                }
+
 
                 element.multiplier = multiplier;
             }
         });
         let ciph_circuit = btoa(JSON.stringify(old_components))
-        await fetch(`http://localhost:8080/circuit/update?circuit=${ciph_circuit}`)
+        await fetch(`${process.env.REACT_APP_API_SERVER}/circuit/update?circuit=${ciph_circuit}`)
             .then(result => result.json())
             .then(response => {
                 this.setState({
@@ -250,18 +173,20 @@ class SimpleRC extends Component {
                     done: true
                 })
             });
-        //buscamos la resistencia y hacemos un update de las bandas
-        let new_components = this.state.circuit;
-        new_components.components.forEach(component => {
-            if (component.type === "Resistor") {
-                this.state.resistor_color_bands = component.colorBands;
-            }
-        })
     }
 
+    async updateColorBands(resistor_value, resistor_multiplier) {
+        await fetch(`${process.env.REACT_APP_API_SERVER}/colorBands?resistor_value=${resistor_value}&resistor_multiplier=${resistor_multiplier}`)
+            .then(result => result.json())
+            .then(response => {
+                this.setState({
+                    resistor_color_bands: response
+                })
+            })
+    }
 
     async getExampleCircuit() {
-        await fetch("http://localhost:8080/circuit/create/simpleRC")
+        await fetch(`${process.env.REACT_APP_API_SERVER}/circuit/create/simpleRC`)
             .then(result => result.json())
             .then(response => {
                 this.setState({
@@ -290,7 +215,7 @@ class SimpleRC extends Component {
     async getSimulationResults() {
         let circuit_components_json = JSON.stringify(this.state.circuit)
         let ciph_circuit = btoa(circuit_components_json)
-        await fetch(`http://localhost:8080/circuit/sim/simpleRc?circuit=${ciph_circuit}`)
+        await fetch(`${process.env.REACT_APP_API_SERVER}/circuit/sim/simpleRc?circuit=${ciph_circuit}`)
             .then(result => result.json())
             .then(response => {
                 this.setState({
@@ -310,7 +235,6 @@ class SimpleRC extends Component {
             })
 
             .catch(() => console.error("ERROR"));
-
     }
 
 
@@ -321,7 +245,7 @@ class SimpleRC extends Component {
         if (this.state.done) {
             return (
                 <div >
-                    <NavBar />
+
                     <div className='row'>
 
 
@@ -449,12 +373,13 @@ class SimpleRC extends Component {
                                                                         </div>
                                                                         <br />
                                                                         <br />
-                                                                        <button type="button" className="btn btn-success" onClick={this.getSimulationResults} style={{"width" : "75%"}}>
+                                                                        <button type="button" className="btn btn-success" onClick={this.getSimulationResults} style={{ "width": "75%" }}>
                                                                             SIM <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-repeat" viewBox="0 0 16 16">
-                                                                                <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
-                                                                                <path fillRule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+                                                                                <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
+                                                                                <path fillRule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z" />
                                                                             </svg>
                                                                         </button>
+                                                                        <p><b>Estado: </b> {this.state.switch_value === "On" ? "Carga" : "Descarga"}</p>
                                                                     </div>
                                                                 </div>
                                                                 <div className='col-3 col-lg-3'>
@@ -512,20 +437,30 @@ class SimpleRC extends Component {
                                                     <input type="range" className="form-range" min="0.1" max="99" step="0.1"
                                                         onChange={(ev) => {
                                                             this.state.resistor_value = ev.target.value;
+                                                            this.updateColorBands(ev.target.value, this.state.resistor_multiplier);
                                                             this.updateComponent("R0", this.state.resistor_value, this.state.resistor_multiplier)
                                                         }}
                                                     />
                                                 </div>
                                                 <div className='col-12 col-lg-12'>
-                                                    <select className="form-select" aria-label="Default select example" onChange={(ev) => {
+                                                    <select className="form-select component-value" aria-label="Default select example" onChange={(ev) => {
                                                         this.state.resistor_multiplier = ev.target.value;
+                                                        this.updateColorBands(this.state.resistor_value, ev.target.value)
                                                         this.updateComponent("R0", this.state.resistor_value, this.state.resistor_multiplier)
                                                     }} disabled={this.state.showMultipliers === false}>
                                                         <option value="x1">{Number.parseFloat(this.state.resistor_value).toFixed(2)} Ω </option>
-                                                        <option value="x0.1">{Number.parseFloat(this.state.resistor_value*0.1).toFixed(2)} Ω</option>
-                                                        <option value="x10">{Number.parseFloat(this.state.resistor_value*10).toFixed(2)} Ω</option>
-                                                        <option value="x100">{Number.parseFloat(this.state.resistor_value*100).toFixed(2)} Ω</option>
+                                                        <option value="x0.1">{Number.parseFloat(this.state.resistor_value * 0.1).toFixed(2)} Ω</option>
+                                                        <option value="x10">{Number.parseFloat(this.state.resistor_value * 10).toFixed(2)} Ω</option>
+                                                        <option value="x100">{Number.parseFloat(this.state.resistor_value * 100).toFixed(2)} Ω</option>
                                                     </select>
+                                                </div>
+                                                <div className='col-12 col-lg-12'>
+                                                    <div className='resistor-box'>
+                                                        <div className='resistor-band-1' style={{ "background": this.state.resistor_color_bands[0] }}></div>
+                                                        <div className='resistor-band-2' style={{ "background": this.state.resistor_color_bands[1] }}></div>
+                                                        <div className='resistor-band-3' style={{ "background": this.state.resistor_color_bands[2] }}></div>
+                                                        <div className='resistor-band-4' style={{ "background": this.state.resistor_color_bands[3] }}></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -536,7 +471,7 @@ class SimpleRC extends Component {
                             {/*                 CONTROLADOR DEL CONDENSADOR                        */}
                             {/**********************************************************************/}
                             <div className='col-3 col-lg-3'>
-                                
+
                                 <div className='row'>
                                     <div className='col-12 col-lg-12'>
                                         <div className='row justify-content-center'>
@@ -550,7 +485,7 @@ class SimpleRC extends Component {
                                                 />
                                             </div>
                                             <div className='col-12 col-lg-12'>
-                                                <select className="form-select" aria-label="Default select example" onChange={(ev) => {
+                                                <select className="form-select component-value" aria-label="Default select example" onChange={(ev) => {
                                                     this.state.capacitor_multiplier = ev.target.value;
                                                     this.updateComponent("C0", this.state.capacitor_value, this.state.capacitor_multiplier)
                                                 }} disabled={this.state.showMultipliers === false}>
@@ -558,12 +493,17 @@ class SimpleRC extends Component {
                                                     <option value="microF">{this.state.capacitor_value} microF</option>
                                                     <option value="miliF">{this.state.capacitor_value} miliF</option>
                                                 </select>
-                                                
-                                            </div>                                            
 
+                                            </div>  
+                                            <div className='col-12 col-lg-12'>
+                                                <div className='capacitor-box'>
+                                                    <div className='capacitor-shadow'>
+                                                    </div>    
+                                                </div>
+                                            </div>
                                         </div>
                                         <div className="w-100 d-none d-md-block"></div>
-                                                                                   
+
                                     </div>
                                 </div>
                             </div>
@@ -585,17 +525,19 @@ class SimpleRC extends Component {
                                                 />
                                             </div>
                                             <div className='col-12 col-lg-12'>
-                                                <select className="form-select" aria-label="Default select example" onChange={(ev) => {
+                                                <select className="form-select component-value" aria-label="Default select example" onChange={(ev) => {
                                                     this.state.cell_multiplier = ev.target.value;
                                                     this.updateComponent("V0", this.state.cell_value, this.state.cell_multiplier)
                                                 }} disabled={this.state.showMultipliers === false}>
-                                                    <option value="V">{this.state.cell_value} V</option>
+                                                    <option  value="V">{this.state.cell_value} V</option>
                                                     <option value="microV">{this.state.cell_value} microV</option>
                                                     <option value="miliV">{this.state.cell_value} miliV</option>
                                                 </select>
+                                                <div className='cell-box'>
+                                                    <div className='cell-box-shadow'>
+                                                    </div>
+                                                </div>
                                             </div>
-
-
                                         </div>
                                     </div>
                                 </div>
@@ -610,19 +552,20 @@ class SimpleRC extends Component {
                                         <div className='row'>
                                             <div className='col-6 col-lg-6'>
                                                 <div type="button" className="toogle-container">
-                                                <input  type="checkbox"  onClick={(ev) => {
-                                                    if (this.state.switch_value === "On") {
-                                                        this.state.switch_value = "Off"
+                                                    <button className='switch-button' onClick={(ev) => {
+                                                        if (this.state.switch_value === "On") {
+                                                            this.state.switch_value = "Off"
+                                                        } else {
+                                                            this.state.switch_value = "On"
+                                                        }
+                                                        this.updateComponent("S0", this.state.switch_value === "On" ? 1 : 0, "*")
+                                                    }}>
+                                                        <img src={this.state.switch_value === "On" ? switch_on : switch_off} height={200}></img>
+                                                    </button>
 
-                                                    } else {
-                                                        this.state.switch_value = "On"
-
-                                                    }
-                                                    this.updateComponent("S0", this.state.switch_value === "On" ? 1 : 0, "*")}} />
-
-                                                
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
 
@@ -637,11 +580,10 @@ class SimpleRC extends Component {
                 <div>
                     <ErrorComponent err_type="CIRCUIT_NOT_FOUND"></ErrorComponent>
                 </div>
+
             )
         }
     }
 }
 
 export default SimpleRC;
-
-
