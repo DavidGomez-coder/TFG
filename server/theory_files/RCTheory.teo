@@ -1,0 +1,16 @@
+{
+    "theory" : {
+     "plain_text" : {
+         "introduction" : [
+                            "Definimos como un circuito RC, como un circuito eléctrico que se encuentra formado por resistencias y condensadores. En este caso, ",
+                            "estudiaremos el caso más simple de estos circuitos, es decir, aquellos formados por una resistencia, un condensador y una fuente de ",
+                            "corriente contínua. Además, se dispondrá de un interruptor, que alterará el estado del circuito y que nos permitirá estudiar diferentes ",
+                            "parámetros del sistema, según el condensador esté en proceso de carga o de descarga." 
+                          ]
+     }
+    },
+    "variables" : {
+
+    }
+    
+}

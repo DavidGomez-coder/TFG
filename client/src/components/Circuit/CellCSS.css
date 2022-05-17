@@ -6,17 +6,8 @@
     margin-top: 3%;
     margin-left: 20%;
     border-radius: 10px;
-    clip-path: circle(60%);
 }
 
-.cell-box:before{
-    content: "";
-    position: absolute;
-    height: 40px;
-    width: 50%;
-    margin-top: 2000px;
-    background-color: black;
-}
 
 .cell-box-shadow {
     border-top: 30px solid rgb(253, 248, 248);
@@ -25,14 +16,4 @@
     width: 100%;
     border-radius: 10px;
     opacity: 56%;
-}
-
-
-.cell-PLUS {
-    color: rgb(255, 255, 255);
-    height: 100%;
-    width: 100%;
-    font-size: 400%;
-    margin-left: 12%;
-    margin-top: -10%;
 }

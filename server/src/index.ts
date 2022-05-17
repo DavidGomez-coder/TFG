@@ -44,6 +44,7 @@ app.use(express.json());
 require("./controller/main.ts")(app);
 require("./controller/simulations.ts")(app);
 require("./controller/updateComponents.ts")(app);
+require("./controller/getFiles.ts")(app);
 
 
 app.listen(PORT, () => {

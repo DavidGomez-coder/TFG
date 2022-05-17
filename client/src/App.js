@@ -4,6 +4,7 @@ import NavBar from './components/NavBar/NavBar.js';
 import Home from './components/Home/Home.js';
 import './App.css';
 import SimpleRC from './components/Circuit/SimpleRC';
+import RCTheory from './components/Theory/RCTheory.js';
 
 
 
@@ -13,12 +14,13 @@ function App() {
 
   return (
     <div>
-      <NavBar />
+        <NavBar />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
           <Route index element={<Home />} />
+          <Route path="/" element={<Home />}/>
           <Route path='/RCSim' element={<SimpleRC />} />
+          <Route path='/RC-theory' element={<RCTheory />} />
         </Routes>
       </BrowserRouter>
     </div>

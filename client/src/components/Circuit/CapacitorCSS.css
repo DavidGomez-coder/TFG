@@ -1,17 +1,141 @@
+/* https://techmidpoint.com/pure-css-battery-charging-animation-using-html-and-css/ */
 /* CAPACITOR STYLES */
-.capacitor-box {
-    background: linear-gradient();
-    height: 100px;
-    width: 60%;
-    margin-top: 3%;
-    margin-left: 20%;
-    border-radius: 20px;
+.capacitorOnCharge{
+
+    height: 110px;
+    width: 225px;
+    border: 8px solid rgb(0, 0, 0);
+    position: absolute;
+    margin: auto;
+    margin-top: 2%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 12px;
 }
 
-.capacitor-shadow {
-    background: linear-gradient(rgb(255, 255, 255) 1%, black 80%);
-    height: 100%;
-    width: 100%;
-    border-radius: 20px;
-    opacity: 56%;
+.capacitorOnCharge:after{
+    content: "";
+    position: absolute;
+    height: 80px;
+    width: 40px;
+    background-color: rgb(8, 161, 0);
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 10px;
+    border-radius: 5px;
+    box-shadow: 50px 0 transparent,
+                100px 0 transparent,
+                150px 0 transparent;
+    animation: charge 4s infinite;
+}
+
+.capacitorOnDisCharge{
+    height: 110px;
+    width: 225px;
+    border: 8px solid rgb(0, 0, 0);
+    position: absolute;
+    margin: auto;
+    margin-top: 2%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 12px;
+}
+
+.capacitorOnDisCharge:after{
+    content: "";
+    position: absolute;
+    height: 80px;
+    width: 40px;
+    background-color: rgb(161, 0, 0);
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 10px;
+    border-radius: 5px;
+    box-shadow: 50px 0 transparent,
+                100px 0 transparent,
+                150px 0 transparent;
+    animation: discharge 4s infinite reverse;
+}
+
+/* ANIMACIONES */
+@keyframes charge{
+    22%{
+        box-shadow: 50px 0 transparent,
+        100px 0 transparent,
+        150px 0 transparent;
+    }
+    25%{
+        box-shadow: 50px 0 rgb(161, 0, 0),
+        100px 0 transparent,
+        150px 0 transparent;
+    }
+    47%{
+        box-shadow: 50px 0 #ffa200,
+        100px 0 transparent,
+        150px 0 transparent;
+    }
+    50%{
+        box-shadow: 50px 0 #ffa200,
+        100px 0 #ffa200,
+        150px 0 transparent;
+    }
+    72%{
+        box-shadow: 50px 0 #eaff00,
+        100px 0 #eaff00,
+        150px 0 transparent;
+    }
+    75%{
+        box-shadow: 50px 0 #ff8800,
+        100px 0 #ff8800,
+        150px 0 #ff8800;
+    }
+    95%{
+        box-shadow: 50px 0 #00ff15,
+        100px 0 #00ff15,
+        150px 0 #00ff15;
+    }
+}
+
+@keyframes discharge {
+    22%{ 
+        box-shadow: 50px 0 transparent,
+        100px 0 transparent,
+        150px 0 transparent;
+    }
+    25%{
+        box-shadow: 50px 0 rgb(161, 0, 0),
+        100px 0 transparent,
+        150px 0 transparent;
+    }
+    47%{
+        box-shadow: 50px 0 rgb(161, 0, 0),
+        100px 0 transparent,
+        150px 0 transparent;
+    }
+    50%{
+        box-shadow: 50px 0 rgb(161, 0, 0),
+        100px 0 rgb(161, 0, 0),
+        150px 0 transparent;
+    }
+    72%{
+        box-shadow: 50px 0 rgb(161, 0, 0),
+        100px 0 rgb(161, 0, 0),
+        150px 0 transparent;
+    }
+    75%{
+        box-shadow: 50px 0 rgb(161, 0, 0),
+        100px 0 rgb(161, 0, 0),
+        150px 0 rgb(161, 0, 0);
+    }
+    95%{
+        box-shadow: 50px 0 rgb(161, 0, 0),
+        100px 0 rgb(161, 0, 0),
+        150px 0 rgb(161, 0, 0);
+    }
 }

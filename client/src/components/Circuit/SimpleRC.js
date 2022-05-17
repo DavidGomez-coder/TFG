@@ -5,6 +5,7 @@ import "./SimpleCircuits.css"
 import "./ResistorCSS.css"
 import "./CellCSS.css"
 import "./CapacitorCSS.css"
+import "./ToogleSwitch.css"
 
 import MetricsGraphics from 'react-metrics-graphics';
 import NavBar from '../NavBar/NavBar.js'
@@ -52,7 +53,8 @@ class SimpleRC extends Component {
             //OTROS
             showLegend: false,
             showMultipliers: false,
-            done: false
+            componentsChange: false,
+            done: false,
         }
         //this.getExampleCircuit()
         this.getSimulationResults = this.getSimulationResults.bind(this);
@@ -173,6 +175,9 @@ class SimpleRC extends Component {
                     done: true
                 })
             });
+        this.setState({
+            componentsChange: true
+        })
     }
 
     async updateColorBands(resistor_value, resistor_multiplier) {
@@ -230,11 +235,13 @@ class SimpleRC extends Component {
                     Vrmax: response.limits.Vrmax,
                     Vcmax: response.limits.Vcmax,
                     imax: response.limits.imax,
+                    componentsChange: false,
                     done: true
                 });
             })
 
             .catch(() => console.error("ERROR"));
+        
     }
 
 
@@ -244,11 +251,10 @@ class SimpleRC extends Component {
     render() {
         if (this.state.done) {
             return (
+
                 <div >
-
+                    
                     <div className='row'>
-
-
                         <div className='col-6 col-lg-6'>
                             <div className='container'>
                                 <div className='row'>
@@ -282,7 +288,7 @@ class SimpleRC extends Component {
                                                                         xax_count={3}
                                                                         decimals={6}
                                                                         linked={true}
-
+                                                                        yax_tick_length={0}
                                                                     />
                                                                 </div>
                                                                 {/*I*/}
@@ -301,6 +307,7 @@ class SimpleRC extends Component {
                                                                         xax_count={3}
                                                                         decimals={6}
                                                                         linked={true}
+                                                                        yax_tick_length={0}
                                                                     />
                                                                 </div>
                                                                 {/*VR*/}
@@ -319,6 +326,7 @@ class SimpleRC extends Component {
                                                                         xax_count={3}
                                                                         decimals={6}
                                                                         linked={true}
+                                                                        yax_tick_length={0}
                                                                     />
                                                                 </div>
                                                                 {/*VC*/}
@@ -337,6 +345,7 @@ class SimpleRC extends Component {
                                                                         xax_count={3}
                                                                         decimals={6}
                                                                         linked={true}
+                                                                        yax_tick_length={0}
                                                                     />
                                                                 </div>
                                                                 {/*E*/}
@@ -355,6 +364,7 @@ class SimpleRC extends Component {
                                                                         xax_count={3}
                                                                         decimals={6}
                                                                         linked={true}
+                                                                        yax_tick_length={0}
                                                                     />
                                                                 </div>
                                                                 <div className='col-3 col-lg-3'>
@@ -373,7 +383,7 @@ class SimpleRC extends Component {
                                                                         </div>
                                                                         <br />
                                                                         <br />
-                                                                        <button type="button" className="btn btn-success" onClick={this.getSimulationResults} style={{ "width": "75%" }}>
+                                                                        <button type="button" className={this.state.componentsChange ? "btn btn-warning" : "btn btn-success"} onClick={this.getSimulationResults} style={{ "width": "75%" }}>
                                                                             SIM <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-repeat" viewBox="0 0 16 16">
                                                                                 <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
                                                                                 <path fillRule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z" />
@@ -415,7 +425,7 @@ class SimpleRC extends Component {
                                     <div className="w-100 d-none d-md-block"></div>
                                     <div className='row'>
                                         <div className='col-12 col-lg-12'>
-                                            <hr />
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -434,7 +444,7 @@ class SimpleRC extends Component {
                                         <div className='col-12 col-lg-12'>
                                             <div className='row'>
                                                 <div className='col-12 col-lg-12'>
-                                                    <input type="range" className="form-range" min="0.1" max="99" step="0.1"
+                                                    <input type="range" className="form-range" min="1" max="99" step="0.1"
                                                         onChange={(ev) => {
                                                             this.state.resistor_value = ev.target.value;
                                                             this.updateColorBands(ev.target.value, this.state.resistor_multiplier);
@@ -471,13 +481,12 @@ class SimpleRC extends Component {
                             {/*                 CONTROLADOR DEL CONDENSADOR                        */}
                             {/**********************************************************************/}
                             <div className='col-3 col-lg-3'>
-
+                            
                                 <div className='row'>
                                     <div className='col-12 col-lg-12'>
                                         <div className='row justify-content-center'>
                                             <div className='col-12 col-lg-12'>
-
-                                                <input type="range" className="form-range" min="0.1" max="99" step="0.1"
+                                                <input type="range" className="form-range" min="1" max="99" step="0.1"
                                                     onChange={(ev) => {
                                                         this.state.capacitor_value = ev.target.value;
                                                         this.updateComponent("C0", this.state.capacitor_value, this.state.capacitor_multiplier)
@@ -496,10 +505,7 @@ class SimpleRC extends Component {
 
                                             </div>  
                                             <div className='col-12 col-lg-12'>
-                                                <div className='capacitor-box'>
-                                                    <div className='capacitor-shadow'>
-                                                    </div>    
-                                                </div>
+                                                <div className={this.state.switch_value === "On" ? "capacitorOnCharge" : "capacitorOnDisCharge"}></div>
                                             </div>
                                         </div>
                                         <div className="w-100 d-none d-md-block"></div>
@@ -513,11 +519,7 @@ class SimpleRC extends Component {
                             <div className='col-3 col-lg-3'>
                                 <div className='row'>
                                     <div className='col-12 col-lg-12'>
-
-                                        <div className='row'>
-                                            <div className='col-12 col-lg-12'>
-
-                                                <input type="range" className="form-range" min="0.1" max="99" step="0.1"
+                                                <input type="range" className="form-range" min="1" max="99" step="0.1"
                                                     onChange={(ev) => {
                                                         this.state.cell_value = ev.target.value;
                                                         this.updateComponent("V0", this.state.cell_value, this.state.cell_multiplier)
@@ -539,8 +541,6 @@ class SimpleRC extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
 
                             </div>
                             {/**********************************************************************/}
@@ -550,22 +550,19 @@ class SimpleRC extends Component {
                                 <div className='row'>
                                     <div className='col-12 col-lg-12'>
                                         <div className='row'>
-                                            <div className='col-6 col-lg-6'>
-                                                <div type="button" className="toogle-container">
-                                                    <button className='switch-button' onClick={(ev) => {
-                                                        if (this.state.switch_value === "On") {
-                                                            this.state.switch_value = "Off"
-                                                        } else {
-                                                            this.state.switch_value = "On"
-                                                        }
-                                                        this.updateComponent("S0", this.state.switch_value === "On" ? 1 : 0, "*")
-                                                    }}>
-                                                        <img src={this.state.switch_value === "On" ? switch_on : switch_off} height={200}></img>
-                                                    </button>
-
-                                                </div>
+                                            <div className='col-12 col-lg-12'>
+                                            <label className="switch">
+                                                <input type="checkbox" onClick={(ev) => {
+                                                    if (this.state.switch_value === "On") {
+                                                        this.state.switch_value = "Off"
+                                                    } else {
+                                                        this.state.switch_value = "On"
+                                                    }
+                                                    this.updateComponent("S0", this.state.switch_value === "On" ? 1 : 0, "*")
+                                                }}/>
+                                                <span className="slider"></span>
+                                                </label>
                                             </div>
-
                                         </div>
                                     </div>
 
