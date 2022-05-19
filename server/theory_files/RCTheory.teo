@@ -1,16 +1,67 @@
 {
     "theory" : {
      "plain_text" : {
-         "introduction" : [
-                            "Definimos como un circuito RC, como un circuito eléctrico que se encuentra formado por resistencias y condensadores. En este caso, ",
-                            "estudiaremos el caso más simple de estos circuitos, es decir, aquellos formados por una resistencia, un condensador y una fuente de ",
-                            "corriente contínua. Además, se dispondrá de un interruptor, que alterará el estado del circuito y que nos permitirá estudiar diferentes ",
-                            "parámetros del sistema, según el condensador esté en proceso de carga o de descarga." 
-                          ]
-     }
+        "introduction" : [
+                            "Definimos un circuito RC, como un circuito eléctrico que se encuentra formado por resistencias y condensadores. En este caso, estudiaremos el caso más simple de estos circuitos, es decir, aquellos formados por una resistencia, un condensador y una fuente de corriente contínua. Además, se dispondrá de un interruptor, que alterará el estado del circuito y que nos permitirá estudiar diferentes parámetros del sistema, según el condensador esté en proceso de carga o de descarga. " 
+                          ],
+        "time_constant_def" : [
+                            "En primer lugar, definiremos la constante de tiempo. Se trata de un parámetro invariante en el tiempo, que depende del valor de la resistencia y de la capacidad del condensador. Además, este valor indica el tiempo total necesario para que la carga de dicho condensador sea del 63.2%. En caso de la descarga, este valor indica el tiempo que tarda en pasar del 100% de la carga total a un 36.8% de ésta."
+                            ],
+        "capacitor_on_charge" : [
+                                "Para comenzar con el análisis del circuito, aplicaremos la ley de Kirckchoff sobre la malla de éste, y, atendiendo a las definiciones de carga del condensador la ley de Ohm y la definición de intensidad de corriente, obtendremos una ecuación diferencial que resolveremos utilizando el método de separación de variables. Además, supondremos que en el instante cero, el condensador estará descargado completamente, por lo que serán consideradas las condiciones iniciales que se muestran a continuación.",
+                                "Una vez resuelta la ecuación diferencial anterior bajo las condiciones iniciales propuestas, obtendremos la siguiente expresión, la cuál modelará el comportamiento de la carga del condensador mientras éste se encuentre en su estado de almacenamiento de energía.",
+                                "Del mismo modo, podremos obtener la variación que presentan el resto de los parámetros de nuestro circuito, utilizando para ello las expresiones adecuadas que se presentan en la columna de conceptos. Dichas expresiones son las siguientes:"
+                                
+                                ]
+        
+        }
     },
-    "variables" : {
-
+    "formulas" : {
+        "charge_init_conditions" : {
+            "name" : "Condiciones Iniciales",
+            "formula" : "$$q(0) = 0$$"
+        },
+        "RC_ConstantTime" : {
+            "name" : "Constante de tiempo RC",
+            "formula" : "$$\\tau_{RC} = R \\cdot C$$ "
+            },
+        "RC_KirckchoffLaw" : {
+            "name" : "Ley de Kirckchoff",
+            "formula" : "$$\\varepsilon = V_R(t) + V_C(t)$$"
+        },
+        "RC_Vcrelation" : {
+            "name" : "Diferencia de potencial en el condensador",
+            "formula" : "$$V_C(t) = \\frac{q(t)}{C}$$"
+        },
+        "Ohm_law" : {
+            "name" : "Ley de Ohm",
+            "formula" : "$$V_R(t) = R \\cdot I(t)$$"
+        },
+        "I_definition" : {
+            "name" : "Definición de Intesidad de corriente",
+            "formula" : "$$I(t) = \\frac{\\partial q(t)}{\\partial t}$$"
+        },
+        "charge_diff_equation" : {
+            "name" : "Ecuación diferencial a resolver",
+            "formula" : "$$\\varepsilon = R\\cdot \\frac{\\partial q(t)}{\\partial t} + \\frac{q(t)}{C} $$"
+        },
+        "q_charge" : {
+            "name" : "Carga del condensador",
+            "formula" : "$$q(t) = C \\cdot \\varepsilon \\cdot \\left( 1 - e^{-t/RC} \\right)$$"
+        },
+        "vc_t" : {
+            "name" : "Diferencia de potencial en el condensador",
+            "formula" : "$$Vc(t) = \\varepsilon \\cdot \\left( 1 - e^{-t/RC}\\right)$$"
+        },
+        "i_t" : {
+            "name" : "Intensidad de corriente",
+            "formula" : "$$I(t) = \\frac{\\varepsilon}{R} \\cdot e^{-t/RC}$$"
+        },
+        "vr_t" : {
+            "name" : "Diferencia de potencial en la resistencia",
+            "formula" : "$$V_R(t) = R \\cdot e^{-t/RC}$$"
+        }
+                            
     }
     
 }
