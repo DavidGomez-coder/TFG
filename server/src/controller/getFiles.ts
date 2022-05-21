@@ -7,7 +7,7 @@ const fs = require('fs')
 module.exports = (app: Application) => {
 
 
-    app.get('/RCTheory', (req: Request, res: Response) => {
+    app.get('/file/RCTheory', (req: Request, res: Response) => {
         console.log(`[SERVER]: GET /RCTheory ${req.session.id}`)
 
         fs.readFile("theory_files/RCTheory.teo", (err: Error, data: any) => {

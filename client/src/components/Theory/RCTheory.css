@@ -8,8 +8,7 @@
 }
 
 .left-menu-theory {
-    position: sticky;
-    top: 10%;
+    top: 5%;
 }
 
 .formula-content-box {  
@@ -24,4 +23,8 @@
     width: 50%;
     left: 25%;
     position: absolute;
+}
+
+li {
+    border-style: none;
 }
