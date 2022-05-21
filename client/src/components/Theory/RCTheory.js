@@ -5,6 +5,7 @@ import { MathJaxContext, MathJax } from 'better-react-mathjax';
 import "./RCTheory.css"
 import 'katex/dist/katex.min.css';
 
+import rc_circuit from "../../assets/img/rc-circuit.png"
 
 class RCTheory extends Component {
 
@@ -160,8 +161,11 @@ class RCTheory extends Component {
                                     )
                                 })
                             }
+                            < br />
+                            <div style={{"textAlign" : "center"}}>
+                                <img src={rc_circuit} alt="Imagen circuito RC" width={400}></img>
+                            </div>
 
-                            <p> IMAGEN CIRCUITO RC!!!!</p>
                             < br />
                             <h2 id="carga-del-condensador" className='title'>Carga del condensador</h2>
                             <br />
