@@ -48,15 +48,17 @@ export class RcSimulation extends CircuitSimulation {
         
         // START TO GET VALUES
         let time_constant: number = resistor.getComponentValue() * capacitor.getComponentValue();
-        this.calculateStep(4* time_constant);
+        let simulation_time: number = 10 * time_constant;
+        this.setSimulationTime(simulation_time);
+        this.calculateStep(simulation_time);
         if (cell.getComponentValue() === 0){
-            return this.simulationOnDischarge(4*time_constant, cell, capacitor, resistor);
+            return this.simulationOnDischarge(simulation_time, cell, capacitor, resistor);
         }
 
         if (swi.getComponentValue() === 1){ // CARGA DE CONDENSADOR
-            return this.simulationOnCharge(4*time_constant, cell, capacitor, resistor);
+            return this.simulationOnCharge(simulation_time, cell, capacitor, resistor);
         }else if (swi.getComponentValue() === 0){ // DESCARGA DEL CONDENSADOR
-            return this.simulationOnDischarge(4*time_constant, cell, capacitor, resistor);
+            return this.simulationOnDischarge(simulation_time, cell, capacitor, resistor);
         }
 
         return undefined;

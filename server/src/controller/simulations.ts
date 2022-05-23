@@ -39,17 +39,20 @@ module.exports = (app: Application) => {
             let capacitor: Capacitor = <Capacitor>circuit.getComponentById(ComponentsIds.CAPACITOR_ID);
             let resistor: Resistor = <Resistor>circuit.getComponentById(ComponentsIds.RESISTOR_ID);
             let swi: Switch = <Switch>circuit.getComponentById(ComponentsIds.SWITCH_ID);
-            let max_data = {
-                "qmax" : swi.getComponentValue() === 1 ? (capacitor.getComponentValue()*cell.getComponentValue()) : 0,
-                "emax" : swi.getComponentValue() === 1 ? ((1/2)*capacitor.getComponentValue()*Math.pow(cell.getComponentValue(),2)) : 0,
-                "Vcmax": swi.getComponentValue() === 1 ? cell.getComponentValue() : 0,
-                "imax" : swi.getComponentValue() === 1 ? 0 : (cell.getComponentValue() / resistor.getComponentValue()),
-                "Vrmax" : swi.getComponentValue() === 1 ? 0 : cell.getComponentValue()
-            }
+            
             let rcSim: RcSimulation = new RcSimulation(circuit);
+            let simulationResults = rcSim.getResults();
+            let max_data = {
+                "qmax" : (capacitor.getComponentValue()*cell.getComponentValue()),
+                "emax" : ((1/2)*capacitor.getComponentValue()*Math.pow(cell.getComponentValue(),2)),
+                "Vcmax": cell.getComponentValue() ,
+                "imax" : (cell.getComponentValue() / resistor.getComponentValue()),
+                "Vrmax" : cell.getComponentValue(),
+                "RC_time_markers" : rcSim.getSimulationTime() === 0 ? [] : getSimulationRCMarkers(rcSim.getSimulationTime(), capacitor.getComponentValue()*resistor.getComponentValue())
+            }
             let result = {
                 "limits" : max_data,
-                "simulation" : rcSim.getResults()
+                "simulation" : simulationResults
             }
             res.send(result);
         }catch (e: any){
@@ -83,6 +86,18 @@ module.exports = (app: Application) => {
             res.sendStatus(400);
         }
     });  
+}
+
+function getSimulationRCMarkers (simulation_time: number, rc_value: number) {
+    let rc_times = simulation_time / rc_value;
+    let time_markers = []
+    let i: number = 1;
+    while (i*rc_value< simulation_time){
+        time_markers.push(rc_value*i)
+        i++;
+    }
+
+    return time_markers;
 }
 
 /**

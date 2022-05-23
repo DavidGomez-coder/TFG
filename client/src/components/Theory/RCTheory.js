@@ -7,6 +7,7 @@ import 'katex/dist/katex.min.css';
 
 import rc_circuit from "../../assets/img/rc-circuit.png"
 
+
 class RCTheory extends Component {
 
     constructor(props) {
