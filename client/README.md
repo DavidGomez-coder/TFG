@@ -27,5 +27,5 @@ Crear en el directorio raíz del <strong>cliente</strong> un fichero con el nomb
 * **REACT_APP_API_SERVER**. Es la dirección donde está ejecutándose el servidor que atiende las peticiones. Si éste está ejecutándose en el puerto _8080_ en _localhost_, entonces <strong>REACT_APP_API_SERVER=http://localhost:8080</strong>
 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
 
