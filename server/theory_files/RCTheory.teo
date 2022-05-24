@@ -21,7 +21,24 @@
         "energy" : [
                 "Otro aspecto importante a analizar, sería la energía almacenada por nuestro condensador en un instante de tiempo. Para ello, usaremos la definición de potencia. Se define potencia, como la cantidad de trabajo que se realiza por unidad de tiempo. Dicha energía, depende de la capacidad del condensador y de la diferencia de potencial en éste en ese instante de tiempo.",
                 "(NOTA: dependiendo de si el condensador se encuentra en estado de carga o descarga, se utilizará la expresión de su d.p.p correspondiente.)"
-        ]
+                ],
+        "example" : ["Supongamos de ejemplo, el circuito que se muestra en la siguiente figura." ,
+                     "Sustituimos además los parámetros correspondientes a los valores de la resistencia, la fuente y la capacidad del condensador, para así obtener las expresiones que modelan este circuito. Dicha expresiones quedarían de la siguiente manera:",
+                     [
+                         "$$q(t) = 15 \\mu F \\cdot 3.5 V \\cdot \\left( 1 - e^{-t/\\tau_{RC} } \\right)$$",
+                         "$$V_C(t) = 3.5V \\cdot \\left( 1 - e^{-t/ \\tau_{RC} }\\right)$$",
+                         "$$I(t) = \\frac{3.5V}{5K \\Omega} \\cdot e^{-t/ \\tau_{RC} }$$",
+                         "$$V_R(t) = 5K \\Omega \\cdot e^{-t/ \\tau_{RC} }$$"
+                     ],
+                     [
+                         "$$q(t) = q_0 V e^{ \\frac{-t}{\\tau_{RC} } }$$",
+                         "$$V_C(t) = \\frac{q_0}{15 \\mu F}e^{ \\frac{-t}{\\tau_{RC} } }$$",
+                         "$$I(t) = \\frac{-q_0}{\\tau_{RC} }e^{ \\frac{-t}{\\tau_{RC} } }$$",
+                         "$$V_R(t) = \\frac{-q_0}{15 \\mu F}e^{ \\frac{-t}{\\tau_{RC} } }$$"
+                     ],
+                     "Donde se sabe que $q_0$ se corresponde a la carga máxima del condensador y $\\tau_{RC}$ la constante de tiempo del circuito asociada. Bastaría con sustituir el instante de tiempo en cada una de las expresiones anteriores para conocer el valor de cada uno de los parámetros en dicho momento"
+                    ]
+                    
         
         }
     },

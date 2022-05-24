@@ -6,7 +6,8 @@ import "./RCTheory.css"
 import 'katex/dist/katex.min.css';
 
 import rc_circuit from "../../assets/img/rc-circuit.png"
-
+import rc_circuit_example from "../../assets/img/rc-circuit-example.png"
+import { toHaveDisplayValue } from '@testing-library/jest-dom/dist/matchers';
 
 class RCTheory extends Component {
 
@@ -18,6 +19,7 @@ class RCTheory extends Component {
             capacitor_on_charge: [],
             capacitor_on_discharge: [],
             energy: [],
+            example: [],
             //EXPRESIONES
             charge_init_conditions: {},
             discharge_init_conditions: {},
@@ -27,7 +29,7 @@ class RCTheory extends Component {
             vc_relation: {},
             i_def: {},
             charge_diff_equation: {},
-            discharge_diff_equation : {},
+            discharge_diff_equation: {},
             //RESOLUCIÓN ECUACIÓN DIFERENCIAL
             charge_diff_solution: [],
             discharge_diff_solution: [],
@@ -49,10 +51,10 @@ class RCTheory extends Component {
         this.config = {
             loader: { load: ["input/asciimath"] }
         }
-        
+
     }
 
-    componentDidMount () {
+    componentDidMount() {
         this.readFile()
     }
     async readFile() {
@@ -76,6 +78,7 @@ class RCTheory extends Component {
                     i_def: json_file.formulas.I_definition,
                     charge_diff_equation: json_file.formulas.charge_diff_equation,
                     discharge_diff_equation: json_file.formulas.discharge_diff_equation,
+                    example: json_file.theory.plain_text.example,
                     //RESOLUCIÓN ECUACIÓN DIFERENCIAL
                     charge_diff_solution: json_file.math_resolution.RC_diff_equation,
                     discharge_diff_solution: json_file.math_resolution.RC_dis_diff_equation,
@@ -91,7 +94,7 @@ class RCTheory extends Component {
                     i_discharge: json_file.formulas.i_discharge,
                     vr_discharge: json_file.formulas.vr_discharge,
                     //ENERGÍA EN EL CONDENSADOR
-                    energy_form : json_file.formulas.energy
+                    energy_form: json_file.formulas.energy
                 })
             });
     }
@@ -163,7 +166,7 @@ class RCTheory extends Component {
                                 })
                             }
                             < br />
-                            <div style={{"textAlign" : "center"}}>
+                            <div style={{ "textAlign": "center" }}>
                                 <img src={rc_circuit} alt="Imagen circuito RC" width={400}></img>
                             </div>
 
@@ -229,18 +232,18 @@ class RCTheory extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <br/>
+                            <br />
                             <div>{this.state.capacitor_on_discharge[2]}</div>
                             <br />
                             {this.createLatexFormula(this.state.q_discharge.formula, this.state.q_discharge.name, false)}
-                            <br/>
+                            <br />
                             <div>{this.state.capacitor_on_discharge[3]}</div>
-                            <br/>
+                            <br />
                             {this.createLatexFormula(this.state.vc_discharge.formula, this.state.vc_discharge.name, false)}
                             {this.createLatexFormula(this.state.vr_discharge.formula, this.state.vr_discharge.name, false)}
                             {this.createLatexFormula(this.state.i_discharge.formula, this.state.i_discharge.name, false)}
                             <h2 id="energia-del-condensador">Energía almacenada</h2>
-                            <br/>
+                            <br />
 
                             <div>{this.state.energy[0]}</div>
                             <br />
@@ -268,8 +271,16 @@ class RCTheory extends Component {
                             <h2 id="ejemplo">Ejemplo teórico</h2>
                             <br />
                         </div>
-
-
+                        <p>(<strong>NOTA</strong>: Se recomienda visitar el siguiente <a href='/RCSim'>simulador</a> si se desea conocer más sobre este fenómeno)</p>
+                        <p>{this.state.example[0]}</p>
+                        <div style={{ "textAlign": "center" }}>
+                            <img src={rc_circuit_example} alt="Ejemplo circuito RC" width={400}></img>
+                        </div>
+                        <p>{this.state.example[1]}</p>
+                        {this.createLatexFormula(this.state.example[2], "Expresiones correspondientes al modelo (Carga del condensador)")}
+                        {this.createLatexFormula(this.state.example[3], "Expresiones correspondientes al modelo (Descarga del condensador)")}
+                        {this.createLatexFormula(this.state.example[4], "")}
+                        
                     </MathJaxContext>
 
                 </div>
@@ -283,7 +294,6 @@ class RCTheory extends Component {
                             {this.createLatexFormula(this.state.ohm_law.formula, this.state.ohm_law.name, true)}
                             {this.createLatexFormula(this.state.vc_relation.formula, this.state.vc_relation.name, true)}
                             {this.createLatexFormula(this.state.i_def.formula, this.state.i_def.name, true)}
-
                         </MathJaxContext>
                     </div>
 
