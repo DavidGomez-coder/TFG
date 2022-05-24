@@ -7,7 +7,8 @@ import 'katex/dist/katex.min.css';
 
 import rc_circuit from "../../assets/img/rc-circuit.png"
 import rc_circuit_example from "../../assets/img/rc-circuit-example.png"
-import { toHaveDisplayValue } from '@testing-library/jest-dom/dist/matchers';
+
+
 
 class RCTheory extends Component {
 

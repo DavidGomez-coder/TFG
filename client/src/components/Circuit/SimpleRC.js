@@ -17,6 +17,18 @@ import Latex from 'react-latex';
 import { MathJaxContext, MathJax } from 'better-react-mathjax';
 
 
+import rc_chargeFast from "../../assets/animations/rc_charge/rc_chargeFast.gif"
+import rc_chargeMid from "../../assets/animations/rc_charge/rc_chargeMid.gif"
+import rc_chargeMid2 from "../../assets/animations/rc_charge/rc_chargeMid2.gif"
+import rc_chargeSlow from "../../assets/animations/rc_charge/rc_chargeSlow.gif"
+
+import rc_dischargeFast from "../../assets/animations/rc_discharge/rc_chargeFast.gif"
+import rc_dischargeMid from "../../assets/animations/rc_discharge/rc_chargeMid.gif"
+import rc_dischargeMid2 from "../../assets/animations/rc_discharge/rc_chargeMid2.gif"
+import rc_dischargeSlow from "../../assets/animations/rc_discharge/rc_chargeSlow.gif"
+
+import circuit_back from "../../assets/animations/rc_charge.png"
+
 class SimpleRC extends Component {
 
     constructor(props) {
@@ -51,14 +63,18 @@ class SimpleRC extends Component {
             Vcmax: 0,
             Vrmax: 0,
             RC_time_markers: [{}],
+            RC_constant: 0,
             //OTROS
             showLegend: false,
             showMultipliers: false,
             showMarkers: false,
             componentsChange: false,
             done: false,
+            simFirstClicked: false
             //
         }
+        // MAX RC_constat
+        this.MAX_RC_constant = 980.1; //100%
         //this.getExampleCircuit()
         this.getSimulationResults = this.getSimulationResults.bind(this);
         this.updateComponent = this.updateComponent.bind(this);
@@ -157,6 +173,34 @@ class SimpleRC extends Component {
         return [{}]
     }
 
+    setAnimationImage(time_constant){
+        let perc = (time_constant*100)/this.MAX_RC_constant;
+        let status = this.state.switch_value === "On" ? "charge" : "discharge"
+        if (status === "charge"){
+            if (perc <= 15){
+                return rc_chargeFast
+            }else if (perc <= 30){
+                return rc_chargeMid
+            }else if (perc <= 65){
+                return rc_chargeMid2
+            }else {
+                return rc_chargeSlow
+            }
+        }else {
+            if (perc <= 15){
+                return rc_dischargeFast
+            }else if (perc <= 30){
+                return rc_dischargeMid
+            }else if (perc <= 65){
+                return rc_dischargeMid2
+            }else {
+                return rc_dischargeSlow
+            }
+        }
+        
+        return undefined
+    }
+
     /* *************************************************************** */
     /*                       PETICIONES A LA API                       */
     /* *************************************************************** */
@@ -195,7 +239,8 @@ class SimpleRC extends Component {
             .then(response => {
                 this.setState({
                     circuit: response,
-                    done: true
+                    done: true,
+                    simFirstClicked: false,
                 })
             });
         this.setState({
@@ -258,9 +303,11 @@ class SimpleRC extends Component {
                     Vrmax: response.limits.Vrmax,
                     Vcmax: response.limits.Vcmax,
                     imax: response.limits.imax,
+                    RC_constant: response.limits.RC_constant,
                     RC_time_markers: this.buildTimeMarkers(response.limits.RC_time_markers),
                     componentsChange: false,
-                    done: true
+                    done: true,
+                    simFirstClicked: true
                 });
             })
 
@@ -468,7 +515,7 @@ class SimpleRC extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className='col-6 col-lg-6 bg-warning'>
+                        <div className='col-6 col-lg-6'>
                             <br />
                             <div className="alert alert-success alert-dismissible fade show" role="alert">
                                 <strong>NOTA: </strong>Prueba a modificar los componentes para obtener diferentes resultados.
@@ -476,6 +523,7 @@ class SimpleRC extends Component {
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
+                            <img src={this.state.simFirstClicked ? this.setAnimationImage(this.state.RC_constant) : circuit_back} className="w-100"></img>
                         </div>
 
                         <div className='row'>
@@ -549,7 +597,16 @@ class SimpleRC extends Component {
 
                                             </div>
                                             <div className='col-12 col-lg-12'>
-                                                <div className={this.state.switch_value === "On" ? "capacitorOnCharge" : "capacitorOnDisCharge"}></div>
+                                                {
+                                                    (() => {
+                                                       if (this.state.simFirstClicked){
+                                                           return (
+                                                                <div className={this.state.switch_value === "On" ? "capacitorOnCharge" : "capacitorOnDisCharge"}></div>
+                                                           )
+                                                       } 
+                                                    })()
+                                                }
+                                                
                                             </div>
                                         </div>
                                         <div className="w-100 d-none d-md-block"></div>

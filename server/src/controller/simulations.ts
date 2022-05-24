@@ -48,6 +48,7 @@ module.exports = (app: Application) => {
                 "Vcmax": cell.getComponentValue() ,
                 "imax" : (cell.getComponentValue() / resistor.getComponentValue()),
                 "Vrmax" : cell.getComponentValue(),
+                "RC_constant" : resistor.getComponentValue() * capacitor.getComponentValue(),
                 "RC_time_markers" : rcSim.getSimulationTime() === 0 ? [] : getSimulationRCMarkers(rcSim.getSimulationTime(), capacitor.getComponentValue()*resistor.getComponentValue())
             }
             let result = {
