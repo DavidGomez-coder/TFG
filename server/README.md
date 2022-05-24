@@ -1,7 +1,7 @@
 # Servidor API
 ## ÍNDICE
  * [Introducción](#introduccion)
- * [Instalacioón del Servidor API](#server-inst)
+ * [Instalación del Servidor](#server-inst)
     * [Variables de entorno](#env-variables)
  * [Simulaciones Implementadas](#implemented-sims)
  * [Lista de peticiones](#api-rest)
@@ -12,25 +12,25 @@
  ***
 ## <a id="introduccion">Introducción</a>
 
-Este servidor se trata de un servicio basado en API REST utilizada como productora de resultados de simulaciones físicas. A diferencia de una API REST, las cuáles consumen datos alojados en una BBDD, aquí la información es generada en tiempo real por cada sesión de usuario, por lo que las instancias creadas de la simulaciones o los elementos generados durante el tiempo en el que la sesión está activa, serán borrados una vez dicha sesión haya caducado.
+Se trata de un servidor API REST para la obtención de resultados de simulaciones y otros datos. Normalmente, los servicios basados en este tipo suele hacer uso de una BBDD (Base de Datos) en la que se tratan diversos datos. En este caso, el uso de una BBDD no es necesaria, pues los resultados de estas simulaciones son utilizadas solamente por un cliente (en este caso una aplicación en React) y estos no tienen mayor trato.
 
 ***
 
-## <a id="server-inst">Instalación del Servidor API</a>
+## <a id="server-inst">Instalación del Servidor</a>
 * Visitar la web de [NodeJS](https://nodejs.org/en/) para instalar la última versión.
-* Descargar el código fuente del repositorio en https://github.com/DavidGomez-coder/TFG.git
+* Descargar el código fuente del <strong>servidor</strong>.
 * Moverse al directorio 'server' con 
 ``` $ cd server ```
 * Instalación de las dependencias del servidor
 ``` $ npm install ```
-* Crear variables de entorno (ver más abajo)
+* Crear variables de entorno si no están creadas (ver más abajo)
 * Iniciar el servidor en el navegador escribiendo: _http://localhost:{PORT}_. Se recibirá un `OK` (status 200) por pantalla si el servidor se ha iniciado correctamente.
 
 ### ⚠️ <a id="env-variables"> Variables de entorno </a> 
-Crear en el directorio raiz un fichero con nombre **.env**. En este  fichero incluiremos todas las variables de entorno, las cuáles son utilizadas por el servidor para poder comenzar a ejecutarse. Inicialmente solamente son necesarias las siguientes (escribir el nombre de ellas tal y como se muestra a continuación):
+Crear en el directorio raiz del servidor (directorio <strong>server</strong>) un fichero con nombre **.env** (si no existe). En este  fichero incluiremos todas las variables de entorno mínimas y necesarias que el servidor necesita para poder comenzar a ejecutarse. Inicialmente solamente son necesarias las siguientes (escribir el nombre de ellas tal y como se muestra a continuación):
 
-* **PORT**. Puerto utilizado por el sevidor para atender las peticiones. (En el ejemplo de uso posterior se usa el puerto _8080_)
-* **SESSION_SECRET**. Valor utilizado para crear las sesiones. Se proporciona un fichero _SecretGenerator.ts_ para generar estos valores. (Se puede escribir uno al azar).
+* **PORT**. Puerto utilizado por el sevidor para atender las peticiones. (En el ejemplo de uso posterior se usa el puerto _8080_) (Ej. <strong>PORT=8080</strong>)
+* **SESSION_SECRET**. Valor utilizado para crear las sesiones. Se proporciona un fichero _SecretGenerator.ts_ para generar estos valores. (Se puede escribir uno al azar). (Ej. <strong>SESSION_SECRET=KDpdiPSDF234</strong>)
 
 ***
 ## <a id="implemented-sims"> Simulaciones implementadas </a> :electric_plug:
@@ -53,6 +53,7 @@ GET | /circuit/create/simpleRL | Creación de un circuito RL simple.
 GET | /circuit/sim/simpleRc | Simulación de un circuito RC simple.
 GET | /circuit/sim/simpleRl | Simulación de un circuito RL simple.
 GET | /circuit/update | Actualizar componentes del circuito. Pulsa <a id="queryParams">aquí</a> para ver los parámetros de consulta.
+GET | /file/RCTheory | Obtener fichero para mostrar teoría en el cliente
 
 ### [Parámetros usados en la actualización de un circuito RC o RL simple](#queryParams)
 Parámetro| Descripción

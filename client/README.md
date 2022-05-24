@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+# Cliente ReactJs
+## ÍNDICE
+* [Introducción](#introduccion)
+* [Instalación del cliente](#client-inst)
+    * [Variables de entorno](#env-var)
+
+***
+## <a id="introduccion">Introducción</a>
+Se trata de una aplicación cliente, que toma peticiones de un servidor basado en API REST para mostrar los resultados de simulaciones. Como base, se utiliza JavaScript (no TypeScript como en el servidor), pues su uso no tiene en cuenta el tipado de las variables y es más flexible en la asignación de estas.
+
+
+## <a id="client-inst">Instalación del cliente</a>
+* Visitar la web de [NodeJS](https://nodejs.org/en/) para instalar la última versión.
+* Descargar el código fuente del <strong>cliente</strong> del repositorio.
+* Moverse al directorio 'client' descargado utilizando 
+```$ cd client```
+* Instalación de las dependiencias del cliente
+```$ npm install  ```
+* Crear variables de entorno si no están creadas (ver más abajo).
+* Existen dos formas de iniciar la aplicación:
+    * Utilizando el comando ``` $ npm start ``` en el directorio raíz del cliente. A continuación se abrirá automaticamente una ventana del navegador con la aplicación.
+    * En caso de que la pestaña/ventana anterior no se abriese, ingresar en la barra de búsqueda la dirección dónde se aloja la aplicación.
+
+### ⚠️ <a id="env-variables"> Variables de entorno </a>
+Crear en el directorio raíz del <strong>cliente</strong> un fichero con el nombre **.env** si este no ha sido creado. En este fichero serán incluidas todas las variables de entorno que el cliente utilizará durante su ejecución. Las únicas variables que son necesarias hasta la fecha son las siiguientes (escribir el nombre de las variables tal y como se muestra a continuación) 
+* **PORT**. Puerto utilizado por el cliente. Debe de ser diferente al del servidor y además este no debería de estar en uso (se avisaría de un conflicto existente en caso de que dicho puerto ya se esté utilizando. Ej. <strong>PORT=3030</strong>)
+* **REACT_APP_API_SERVER**. Es la dirección donde está ejecutándose el servidor que atiende las peticiones. Si éste está ejecutándose en el puerto _8080_ en _localhost_, entonces <strong>REACT_APP_API_SERVER=http://localhost:8080</strong>
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
