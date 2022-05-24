@@ -53,7 +53,8 @@ GET | /circuit/create/simpleRL | Creación de un circuito RL simple.
 GET | /circuit/sim/simpleRc | Simulación de un circuito RC simple.
 GET | /circuit/sim/simpleRl | Simulación de un circuito RL simple.
 GET | /circuit/update | Actualizar componentes del circuito. Pulsa <a id="queryParams">aquí</a> para ver los parámetros de consulta.
-GET | /file/RCTheory | Obtener fichero para mostrar teoría en el cliente
+GET | /file/RCTheory | Obtener fichero para mostrar teoría del circuito RC en el cliente
+GET | /file/RLTheory | <strong> No implementado aún :soon:</strong>
 
 ### [Parámetros usados en la actualización de un circuito RC o RL simple](#queryParams)
 Parámetro| Descripción
