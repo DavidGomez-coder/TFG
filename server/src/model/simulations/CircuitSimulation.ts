@@ -10,11 +10,13 @@ export abstract class CircuitSimulation {
     private circuit: Circuit;
     private step: number;
     private simulation_time: number;
+    private simulation_periods: number;
 
     constructor (circuit: Circuit){
         this.circuit = circuit;
         this.step = 0.1;
         this.simulation_time = 0;
+        this.simulation_periods = 4;
     }
 
     /**
@@ -45,6 +47,14 @@ export abstract class CircuitSimulation {
 
     setStep(step: number): void{
         this.step = step;
+    }
+
+    getSimulationPeriods (): number {
+        return this.simulation_periods;
+    }
+
+    setSimulationPeriods(simulation_periods: number): void {
+        this.simulation_periods = simulation_periods;
     }
 
     abstract getResults (): any;

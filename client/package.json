@@ -26,6 +26,7 @@
     "react-metrics-graphics": "^1.1.2",
     "react-scripts": "5.0.1",
     "react-select": "^5.3.1",
+    "source-map-resolve": "^0.6.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

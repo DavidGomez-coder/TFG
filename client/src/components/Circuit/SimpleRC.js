@@ -70,7 +70,8 @@ class SimpleRC extends Component {
             showMarkers: false,
             componentsChange: false,
             done: false,
-            simFirstClicked: false
+            simFirstClicked: false,
+            simulation_periods: 4
             //
         }
         // MAX RC_constat
@@ -173,33 +174,42 @@ class SimpleRC extends Component {
         return [{}]
     }
 
-    setAnimationImage(time_constant){
-        let perc = (time_constant*100)/this.MAX_RC_constant;
+    setAnimationImage(time_constant) {
+        let perc = (time_constant * 100) / this.MAX_RC_constant;
         let status = this.state.switch_value === "On" ? "charge" : "discharge"
-        if (status === "charge"){
-            if (perc <= 15){
+        if (status === "charge") {
+            if (perc <= 15) {
                 return rc_chargeFast
-            }else if (perc <= 30){
+            } else if (perc <= 30) {
                 return rc_chargeMid
-            }else if (perc <= 65){
+            } else if (perc <= 65) {
                 return rc_chargeMid2
-            }else {
+            } else {
                 return rc_chargeSlow
             }
-        }else {
-            if (perc <= 15){
+        } else {
+            if (perc <= 15) {
                 return rc_dischargeFast
-            }else if (perc <= 30){
+            } else if (perc <= 30) {
                 return rc_dischargeMid
-            }else if (perc <= 65){
+            } else if (perc <= 65) {
                 return rc_dischargeMid2
-            }else {
+            } else {
                 return rc_dischargeSlow
             }
         }
-        
+
         return undefined
     }
+
+    async updateSimulationPeriod (nval) {
+        this.setState({
+            simulation_periods: nval,
+            componentsChange: true,
+            simFirstClicked: false
+        })
+    }
+
 
     /* *************************************************************** */
     /*                       PETICIONES A LA API                       */
@@ -241,6 +251,7 @@ class SimpleRC extends Component {
                     circuit: response,
                     done: true,
                     simFirstClicked: false,
+                    componentsChange: false
                 })
             });
         this.setState({
@@ -264,6 +275,7 @@ class SimpleRC extends Component {
             .then(response => {
                 this.setState({
                     circuit: response,
+                    simulation_periods: 4,
                     done: true
                 })
             })
@@ -288,7 +300,8 @@ class SimpleRC extends Component {
     async getSimulationResults() {
         let circuit_components_json = JSON.stringify(this.state.circuit)
         let ciph_circuit = btoa(circuit_components_json)
-        await fetch(`${process.env.REACT_APP_API_SERVER}/circuit/sim/simpleRc?circuit=${ciph_circuit}`)
+        let simulation_periods = this.state.simulation_periods
+        await fetch(`${process.env.REACT_APP_API_SERVER}/circuit/sim/simpleRc?circuit=${ciph_circuit}&simulation_periods=${simulation_periods}`)
             .then(result => result.json())
             .then(response => {
                 this.setState({
@@ -314,6 +327,7 @@ class SimpleRC extends Component {
             .catch(() => console.error("ERROR"));
 
     }
+
 
 
     /* *************************************************************** */
@@ -355,13 +369,15 @@ class SimpleRC extends Component {
                                                                         animate_on_load={true}
                                                                         transition_on_update={true}
                                                                         show_rollover_text={this.state.simulation !== undefined && this.state.showLegend}
-                                                                        x_label={this.state.simulation !== undefined ? "q(t)" : ""}
+                                                                        title={this.state.simulation !== undefined ? "q(t)" : ""}
                                                                         y_axis={true}
                                                                         xax_count={3}
                                                                         decimals={6}
                                                                         linked={true}
                                                                         yax_tick_length={0}
                                                                         markers={this.state.showMarkers ? this.state.RC_time_markers : []}
+                                                                        inflator={10/8}                               
+
                                                                     />
                                                                 </div>
                                                                 {/*I*/}
@@ -375,13 +391,14 @@ class SimpleRC extends Component {
                                                                         animate_on_load={true}
                                                                         transition_on_update={true}
                                                                         show_rollover_text={this.state.simulation !== undefined && this.state.showLegend}
-                                                                        x_label={this.state.simulation !== undefined ? "I(t)" : ""}
+                                                                        title={this.state.simulation !== undefined ? (this.state.switch_value === "On" ? "I(t)" : "-I(t)") : ""}
                                                                         y_axis={true}
                                                                         xax_count={3}
                                                                         decimals={6}
                                                                         linked={true}
                                                                         yax_tick_length={0}
                                                                         markers={this.state.showMarkers ? this.state.RC_time_markers : []}
+                                                                        inflator={10/8}
                                                                     />
                                                                 </div>
                                                                 {/*VR*/}
@@ -395,13 +412,14 @@ class SimpleRC extends Component {
                                                                         animate_on_load={true}
                                                                         transition_on_update={true}
                                                                         show_rollover_text={this.state.simulation !== undefined && this.state.showLegend}
-                                                                        x_label={this.state.simulation !== undefined ? "Vr(t)" : ""}
+                                                                        title={this.state.simulation !== undefined ? (this.state.switch_value === "On" ? "Vr(t)" : "-Vr(t)") : ""}
                                                                         y_axis={true}
                                                                         xax_count={3}
                                                                         decimals={6}
                                                                         linked={true}
                                                                         yax_tick_length={0}
                                                                         markers={this.state.showMarkers ? this.state.RC_time_markers : []}
+                                                                        inflator={10/8}
                                                                     />
                                                                 </div>
                                                                 {/*VC*/}
@@ -415,13 +433,14 @@ class SimpleRC extends Component {
                                                                         animate_on_load={true}
                                                                         transition_on_update={true}
                                                                         show_rollover_text={this.state.simulation !== undefined && this.state.showLegend}
-                                                                        x_label={this.state.simulation !== undefined ? "Vc(t)" : ""}
+                                                                        title={this.state.simulation !== undefined ? "Vc(t)" : ""}
                                                                         y_axis={true}
                                                                         xax_count={3}
                                                                         decimals={6}
                                                                         linked={true}
                                                                         yax_tick_length={0}
                                                                         markers={this.state.showMarkers ? this.state.RC_time_markers : []}
+                                                                        inflator={10/8}
                                                                     />
                                                                 </div>
                                                                 {/*E*/}
@@ -435,13 +454,14 @@ class SimpleRC extends Component {
                                                                         animate_on_load={true}
                                                                         transition_on_update={true}
                                                                         show_rollover_text={this.state.simulation !== undefined && this.state.showLegend}
-                                                                        x_label={this.state.simulation !== undefined ? "E(t)" : ""}
+                                                                        title={this.state.simulation !== undefined ? "E(t)" : ""}
                                                                         y_axis={true}
                                                                         xax_count={3}
                                                                         decimals={6}
                                                                         linked={true}
                                                                         yax_tick_length={0}
                                                                         markers={this.state.showMarkers ? this.state.RC_time_markers : []}
+                                                                        inflator={10/8}
                                                                     />
                                                                 </div>
                                                                 <div className='col-3 col-lg-3'>
@@ -460,11 +480,22 @@ class SimpleRC extends Component {
                                                                             </label>
                                                                         </div>
                                                                         <div className="form-check">
-                                                                            <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault3" onChange={this.change_show_markers} />
+                                                                            <input className="form-check-input" type="checkbox"  id="flexCheckDefault3" onChange={this.change_show_markers} checked={this.state.showMarkers}/>
                                                                             <label className="form-check-label" htmlFor="flexCheckDefault">
-                                                                                Marcadores const. <Latex >$$\tau$$</Latex>
+                                                                                Simular durante: <Latex >{this.state.simulation_periods + "$$\\times \\tau_{RC}$$"}</Latex> 
                                                                             </label>
                                                                         </div>
+                                                                        <div>
+                                                                            <input type="range" value={this.state.simulation_periods} className="form-range" min="1" max="30" step="1"
+                                                                                onChange={(ev) => {
+                                                                                    this.updateSimulationPeriod(ev.target.value)
+                                                                                }}
+                                                                            />
+                                                                            <label className="form-check-label" htmlFor="flexCheckDefault">
+                                                                                
+                                                                            </label>
+                                                                        </div>
+
                                                                         <br />
                                                                         <br />
                                                                         <button type="button" className={this.state.componentsChange ? "btn btn-warning" : "btn btn-success"} onClick={this.getSimulationResults} style={{ "width": "75%" }}>
@@ -599,14 +630,14 @@ class SimpleRC extends Component {
                                             <div className='col-12 col-lg-12'>
                                                 {
                                                     (() => {
-                                                       if (this.state.simFirstClicked){
-                                                           return (
+                                                        if (this.state.simFirstClicked) {
+                                                            return (
                                                                 <div className={this.state.switch_value === "On" ? "capacitorOnCharge" : "capacitorOnDisCharge"}></div>
-                                                           )
-                                                       } 
+                                                            )
+                                                        }
                                                     })()
                                                 }
-                                                
+
                                             </div>
                                         </div>
                                         <div className="w-100 d-none d-md-block"></div>

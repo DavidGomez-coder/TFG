@@ -48,7 +48,7 @@ export class RcSimulation extends CircuitSimulation {
         
         // START TO GET VALUES
         let time_constant: number = resistor.getComponentValue() * capacitor.getComponentValue();
-        let simulation_time: number = 10 * time_constant;
+        let simulation_time: number = time_constant * this.getSimulationPeriods();
         this.setSimulationTime(simulation_time);
         this.calculateStep(simulation_time);
         if (cell.getComponentValue() === 0){
@@ -101,8 +101,8 @@ export class RcSimulation extends CircuitSimulation {
         for (let t=0; t<=maxTime; t+=this.getStep()){
             let q: number  = q_max*Math.pow(Math.E, (-t)/(resistor.getComponentValue()*capacitor.getComponentValue()));
             let Vc: number = q/capacitor.getComponentValue();
-            let I: number  = (-q_max)/(resistor.getComponentValue()*capacitor.getComponentValue())*Math.pow(Math.E, (-t)/(resistor.getComponentValue()*capacitor.getComponentValue()));
-            let Vr: number = I*resistor.getComponentValue();
+            let I: number  = Math.abs((-q_max)/(resistor.getComponentValue()*capacitor.getComponentValue())*Math.pow(Math.E, (-t)/(resistor.getComponentValue()*capacitor.getComponentValue())));
+            let Vr: number = Math.abs(I*resistor.getComponentValue());
             let E: number = (1/2)*capacitor.getComponentValue()*Math.pow(Vc, 2);
 
             let partial_res: SimpleRCCircuitResult = new SimpleRCCircuitResult(t, q, Vc, Vr, I, E);
@@ -111,7 +111,7 @@ export class RcSimulation extends CircuitSimulation {
         return time_results;
     }
 
-    private calculateStep (max_time: number) : void {
-        this.setStep(max_time/810 * 10)
+    private calculateStep (simulation_time: number) : void {
+        this.setStep(simulation_time/810  * this.getSimulationPeriods())
     }
 }

@@ -31,6 +31,12 @@ module.exports = (app: Application) => {
                 console.log(`[SERVER] : GET /circuit/sim/simpleRc  circuit is undefined from ${req.sessionID}`);
                 res.sendStatus(400);
             }
+
+            if (<string>req.query.simulation_periods == undefined){
+                console.log(`[SERVER] : GET /circuit/sim/simpleRc  simulation_periods is undefined from ${req.sessionID}`);
+                res.sendStatus(400);
+            }
+
             let jsonC = JSON.parse(atob(<string>req.query.circuit));
 
             circuit.setComponents(toComponents(jsonC.components));
@@ -41,6 +47,7 @@ module.exports = (app: Application) => {
             let swi: Switch = <Switch>circuit.getComponentById(ComponentsIds.SWITCH_ID);
             
             let rcSim: RcSimulation = new RcSimulation(circuit);
+            rcSim.setSimulationPeriods(parseInt(<string>req.query.simulation_periods))
             let simulationResults = rcSim.getResults();
             let max_data = {
                 "qmax" : (capacitor.getComponentValue()*cell.getComponentValue()),
@@ -53,7 +60,8 @@ module.exports = (app: Application) => {
             }
             let result = {
                 "limits" : max_data,
-                "simulation" : simulationResults
+                "simulation" : simulationResults,
+                "simulation_periods" : rcSim.getSimulationPeriods()
             }
             res.send(result);
         }catch (e: any){
@@ -75,6 +83,7 @@ module.exports = (app: Application) => {
                 console.log(`[SERVER] : GET /circuit/sim/simpleRc  circuit is undefined from ${req.sessionID}`);
                 res.sendStatus(400);
             }
+            
             let jsonC = JSON.parse(atob(<string>req.query.circuit));
 
             circuit.setComponents(toComponents(jsonC.components));
