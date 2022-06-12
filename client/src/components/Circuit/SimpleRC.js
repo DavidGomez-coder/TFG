@@ -16,7 +16,6 @@ import 'katex/dist/katex.min.css';
 import Latex from 'react-latex';
 import { MathJaxContext, MathJax } from 'better-react-mathjax';
 
-
 import rc_chargeFast from "../../assets/animations/rc_charge/rc_chargeFast.gif"
 import rc_chargeMid from "../../assets/animations/rc_charge/rc_chargeMid.gif"
 import rc_chargeMid2 from "../../assets/animations/rc_charge/rc_chargeMid2.gif"
@@ -71,8 +70,17 @@ class SimpleRC extends Component {
             componentsChange: false,
             done: false,
             simFirstClicked: false,
-            simulation_periods: 4
+            simulation_periods: 4,
+            simulation_periods_array: Array.from(Array(4).keys()),
             //
+            time_simulation_seconds: [],
+            current_selected_time: 0,
+            current_index_time: 0,
+            current_q: 0,
+            current_I: 0,
+            current_E: 0,
+            current_Vr: 0,
+            current_Vc: 0
         }
         // MAX RC_constat
         this.MAX_RC_constant = 980.1; //100%
@@ -110,6 +118,8 @@ class SimpleRC extends Component {
         let Vc = []
         let E = []
         let I = []
+        let ts = []
+
         let result = {}
         if (sim.length > 0) {
             sim.forEach((elem) => {
@@ -124,6 +134,8 @@ class SimpleRC extends Component {
                 Vc.push({ "t": t, "Vc": Vc_n });
                 E.push({ "t": t, "E": E_n });
                 I.push({ "t": t, "I": I_n });
+                ts.push(t)
+
             });
             result = {
                 "q": q,
@@ -132,6 +144,15 @@ class SimpleRC extends Component {
                 "E": E,
                 "I": I
             }
+
+            this.setState({
+                time_simulation_seconds: ts,
+                current_q: q[0].q,
+                current_I: I[0].I,
+                current_E: E[0].E,
+                current_Vc: Vc[0].Vc,
+                current_Vr: Vr[0].Vr
+            })
         }
         return result;
     }
@@ -202,14 +223,28 @@ class SimpleRC extends Component {
         return undefined
     }
 
-    async updateSimulationPeriod (nval) {
+
+
+    async updateSimulationPeriod(nval) {
         this.setState({
             simulation_periods: nval,
+            simulation_periods_array: Array.from(Array(parseInt(nval)).keys()),
             componentsChange: true,
             simFirstClicked: false
         })
     }
 
+    async updateCurrentTimeSimulation(index) {
+        this.setState({
+            current_selected_time: this.limit_format(this.state.time_simulation_seconds[index]),
+            current_q: this.state.simulationQ[index].q,
+            current_E: this.state.simulationE[index].E,
+            current_I: this.state.simulationI[index].I,
+            current_Vc: this.state.simulationVc[index].Vc,
+            current_Vr: this.state.simulationVr[index].Vr,
+            current_index_time: index
+        })
+    }
 
     /* *************************************************************** */
     /*                       PETICIONES A LA API                       */
@@ -276,6 +311,7 @@ class SimpleRC extends Component {
                 this.setState({
                     circuit: response,
                     simulation_periods: 4,
+                    simulation_periods_array: Array.from(Array(4).keys()),
                     done: true
                 })
             })
@@ -320,7 +356,8 @@ class SimpleRC extends Component {
                     RC_time_markers: this.buildTimeMarkers(response.limits.RC_time_markers),
                     componentsChange: false,
                     done: true,
-                    simFirstClicked: true
+                    simFirstClicked: true,
+                    current_selected_time: 0
                 });
             })
 
@@ -376,7 +413,7 @@ class SimpleRC extends Component {
                                                                         linked={true}
                                                                         yax_tick_length={0}
                                                                         markers={this.state.showMarkers ? this.state.RC_time_markers : []}
-                                                                        inflator={10/8}                               
+                                                                        inflator={10 / 8}
 
                                                                     />
                                                                 </div>
@@ -398,7 +435,7 @@ class SimpleRC extends Component {
                                                                         linked={true}
                                                                         yax_tick_length={0}
                                                                         markers={this.state.showMarkers ? this.state.RC_time_markers : []}
-                                                                        inflator={10/8}
+                                                                        inflator={10 / 8}
                                                                     />
                                                                 </div>
                                                                 {/*VR*/}
@@ -419,7 +456,7 @@ class SimpleRC extends Component {
                                                                         linked={true}
                                                                         yax_tick_length={0}
                                                                         markers={this.state.showMarkers ? this.state.RC_time_markers : []}
-                                                                        inflator={10/8}
+                                                                        inflator={10 / 8}
                                                                     />
                                                                 </div>
                                                                 {/*VC*/}
@@ -440,7 +477,7 @@ class SimpleRC extends Component {
                                                                         linked={true}
                                                                         yax_tick_length={0}
                                                                         markers={this.state.showMarkers ? this.state.RC_time_markers : []}
-                                                                        inflator={10/8}
+                                                                        inflator={10 / 8}
                                                                     />
                                                                 </div>
                                                                 {/*E*/}
@@ -461,7 +498,7 @@ class SimpleRC extends Component {
                                                                         linked={true}
                                                                         yax_tick_length={0}
                                                                         markers={this.state.showMarkers ? this.state.RC_time_markers : []}
-                                                                        inflator={10/8}
+                                                                        inflator={10 / 8}
                                                                     />
                                                                 </div>
                                                                 <div className='col-3 col-lg-3'>
@@ -480,48 +517,46 @@ class SimpleRC extends Component {
                                                                             </label>
                                                                         </div>
                                                                         <div className="form-check">
-                                                                            <input className="form-check-input" type="checkbox"  id="flexCheckDefault3" onChange={this.change_show_markers} checked={this.state.showMarkers}/>
+                                                                            <input className="form-check-input" type="checkbox" id="flexCheckDefault3" onChange={this.change_show_markers} checked={this.state.showMarkers} />
                                                                             <label className="form-check-label" htmlFor="flexCheckDefault">
-                                                                                Simular durante: <Latex >{this.state.simulation_periods + "$$\\times \\tau_{RC}$$"}</Latex> 
+                                                                                Mostrar <Latex >{this.state.simulation_periods + "$$\\times \\tau_{RC}$$"}</Latex> s.
                                                                             </label>
-                                                                        </div>
-                                                                        <div>
-                                                                            <input type="range" value={this.state.simulation_periods} className="form-range" min="1" max="30" step="1"
-                                                                                onChange={(ev) => {
-                                                                                    this.updateSimulationPeriod(ev.target.value)
-                                                                                }}
-                                                                            />
+
+                                                                            <br />
+                                                                            <br />
+
                                                                             <label className="form-check-label" htmlFor="flexCheckDefault">
-                                                                                
+                                                                                Simular por <Latex>{this.state.simulation_periods + "$$ \\cdot \\tau_{RC} $$"}</Latex>
                                                                             </label>
+                                                                            <select className="form-select component-value" aria-label="Default select example" onChange={(ev) => {
+                                                                                this.updateSimulationPeriod(ev.target.value)
+                                                                            }} defaultValue={this.state.simulation_periods}>
+                                                                                {
+                                                                                    Array.from(Array(30).keys()).map((elem) => {
+                                                                                        return (
+                                                                                            <option value={elem + 1} >{elem + 1}</option>
+                                                                                        )
+                                                                                    })
+                                                                                }
+                                                                            </select>
                                                                         </div>
 
                                                                         <br />
                                                                         <br />
-                                                                        <button type="button" className={this.state.componentsChange ? "btn btn-warning" : "btn btn-success"} onClick={this.getSimulationResults} style={{ "width": "75%" }}>
-                                                                            SIM <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-repeat" viewBox="0 0 16 16">
-                                                                                <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
-                                                                                <path fillRule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z" />
-                                                                            </svg>
-                                                                        </button>
-                                                                        <p><strong>Estado: </strong> {this.state.switch_value === "On" ? "Carga" : "Descarga"}</p>
+
                                                                     </div>
                                                                 </div>
                                                                 <div className='col-3 col-lg-3'>
-
                                                                     <div className='limits-text-box'>
-                                                                        <p> <strong>Carga máx.</strong> : {this.limit_format(this.state.qmax)} C</p>
-                                                                        <p> <strong>Energía máx.</strong> : {this.limit_format(this.state.emax)} J</p>
-                                                                        <p><strong>I. máx.</strong> : {this.limit_format(this.state.imax)} A</p>
-                                                                        <p><strong>Vc. máx.</strong> : {this.limit_format(this.state.Vcmax)} V</p>
-                                                                        <p><strong>Vr. max.</strong> : {this.limit_format(this.state.Vrmax)} V</p>
+                                                                        <p> <strong>Q(t)</strong> : {this.limit_format(this.state.current_q)} C</p>
+                                                                        <p> <strong>E(t)</strong> : {this.limit_format(this.state.current_E)} J</p>
+                                                                        <p><strong>I(t)</strong> : {this.limit_format(this.state.current_I)} A</p>
+                                                                        <p><strong>Vc(t)</strong> : {this.limit_format(this.state.current_Vc)} V</p>
+                                                                        <p><strong>Vr(t)</strong> : {this.limit_format(this.state.current_Vr)} V</p>
                                                                         <br />
-
                                                                     </div>
-
                                                                 </div>
                                                             </div>
-
                                                         )
                                                     } else {
                                                         return (
@@ -539,8 +574,51 @@ class SimpleRC extends Component {
                                     </div>
                                     <div className="w-100 d-none d-md-block"></div>
                                     <div className='row'>
-                                        <div className='col-12 col-lg-12'>
+                                        <div className='col-6 col-lg-6'>
 
+                                        </div>
+                                        <div className='col-6 col-lg-6'>
+                                            <div className='row'>
+                                                {/* TIME CONTROLLER */}
+                                                <div className='col-12 col-lg-12'>
+                                                    <div className='row'>
+                                                        <div className='col-3 col-lg-3'>
+                                                            <input type="button" className="btn btn-primary w-100" value="-" onClick={(ev) => {
+                                                                if (this.state.current_index_time - 1 >= 0) {
+                                                                    this.updateCurrentTimeSimulation(parseInt(this.state.current_index_time - 1))
+                                                                }
+                                                            }} disabled={!this.state.simFirstClicked || this.state.simulation === undefined}></input>
+                                                        </div>
+
+                                                        <div className='col-6 col-lg-6'>
+                                                            <input type="range" value={this.state.current_index_time} className="form-range" min={0} max={this.state.time_simulation_seconds.length - 1} step="1" onChange={(ev) => {
+                                                                this.updateCurrentTimeSimulation(parseInt(ev.target.value))
+                                                            }} disabled={!this.state.simFirstClicked || this.state.simulation === undefined}
+                                                            />
+                                                        </div>
+
+                                                        <div className='col-3 col-lg-3'>
+                                                            <input type="button" className="btn btn-primary w-100" value="+" onClick={(ev) => {
+                                                                if (this.state.current_index_time + 1 < this.state.time_simulation_seconds.length - 1) {
+                                                                    this.updateCurrentTimeSimulation(parseInt(this.state.current_index_time + 1))
+                                                                }
+                                                            }} disabled={!this.state.simFirstClicked || this.state.simulation === undefined}></input>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <div className='col-12 col-lg-12'>
+                                                    <p style={{ "textAlign": "center" }}><strong>Tiempo seleccionado: </strong>{this.state.current_selected_time} s</p>
+                                                </div>
+
+                                            </div>
+                                            <button type="button" className={this.state.componentsChange ? "btn btn-warning" : "btn btn-success"} onClick={this.getSimulationResults} style={{ "width": "100%" }}>
+                                                SIMULAR
+                                                (<strong>Estado: </strong> {this.state.switch_value === "On" ? "Carga" : "Descarga"})
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -550,7 +628,7 @@ class SimpleRC extends Component {
                             <br />
                             <div className="alert alert-success alert-dismissible fade show" role="alert">
                                 <strong>NOTA: </strong>Prueba a modificar los componentes para obtener diferentes resultados.
-                                <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                                <button disabled type="button" className="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
