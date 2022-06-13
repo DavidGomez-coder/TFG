@@ -73,14 +73,7 @@ class SimpleRC extends Component {
             simulation_periods: 4,
             simulation_periods_array: Array.from(Array(4).keys()),
             //
-            time_simulation_seconds: [],
-            current_selected_time: 0,
-            current_index_time: 0,
-            current_q: 0,
-            current_I: 0,
-            current_E: 0,
-            current_Vr: 0,
-            current_Vc: 0
+
         }
         // MAX RC_constat
         this.MAX_RC_constant = 980.1; //100%
@@ -223,8 +216,6 @@ class SimpleRC extends Component {
         return undefined
     }
 
-
-
     async updateSimulationPeriod(nval) {
         this.setState({
             simulation_periods: nval,
@@ -234,17 +225,7 @@ class SimpleRC extends Component {
         })
     }
 
-    async updateCurrentTimeSimulation(index) {
-        this.setState({
-            current_selected_time: this.limit_format(this.state.time_simulation_seconds[index]),
-            current_q: this.state.simulationQ[index].q,
-            current_E: this.state.simulationE[index].E,
-            current_I: this.state.simulationI[index].I,
-            current_Vc: this.state.simulationVc[index].Vc,
-            current_Vr: this.state.simulationVr[index].Vr,
-            current_index_time: index
-        })
-    }
+
 
     /* *************************************************************** */
     /*                       PETICIONES A LA API                       */
@@ -357,7 +338,6 @@ class SimpleRC extends Component {
                     componentsChange: false,
                     done: true,
                     simFirstClicked: true,
-                    current_selected_time: 0
                 });
             })
 
@@ -374,12 +354,11 @@ class SimpleRC extends Component {
         if (this.state.done) {
             return (
 
-                <div >
-
-                    <div className='row'>
-                        <div className='col-6 col-lg-6'>
+                <div className='container'>
+                    <div className='row justify-content-md-center'>
+                        <div className='col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6'>
                             <div className='container'>
-                                <div className='row'>
+                                <div className='row justify-content-md-center'>
                                     <br></br> <br />
                                     {/*******************************************************/}
                                     {/*                LEFT PANEL                           */}
@@ -388,14 +367,14 @@ class SimpleRC extends Component {
                                         {/***************************************************/}
                                         {/*                 RESULTADOS                      */}
                                         {/***************************************************/}
-                                        <div className='col-12 col-lg-12'>
+                                        <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
                                             {
                                                 (() => {
                                                     if (true) {
                                                         return (
-                                                            <div className='row'>
+                                                            <div className='row justify-content-md-center'>
                                                                 {/*Q*/}
-                                                                <div className='col-6 col-lg-6'>
+                                                                <div className='col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6'>
                                                                     <MetricsGraphics
                                                                         subtitle="Q(t)"
                                                                         data={this.state.simulationQ}
@@ -418,7 +397,7 @@ class SimpleRC extends Component {
                                                                     />
                                                                 </div>
                                                                 {/*I*/}
-                                                                <div className='col-6 col-lg-6'>
+                                                                <div className='col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6'>
                                                                     <MetricsGraphics
                                                                         data={this.state.simulationI}
                                                                         x_accessor="t"
@@ -439,7 +418,7 @@ class SimpleRC extends Component {
                                                                     />
                                                                 </div>
                                                                 {/*VR*/}
-                                                                <div className='col-6 col-lg-6'>
+                                                                <div className='col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6'>
                                                                     <MetricsGraphics
                                                                         data={this.state.simulationVr}
                                                                         x_accessor="t"
@@ -460,7 +439,7 @@ class SimpleRC extends Component {
                                                                     />
                                                                 </div>
                                                                 {/*VC*/}
-                                                                <div className='col-6 col-lg-6'>
+                                                                <div className='col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6'>
                                                                     <MetricsGraphics
                                                                         data={this.state.simulationVc}
                                                                         x_accessor="t"
@@ -481,7 +460,7 @@ class SimpleRC extends Component {
                                                                     />
                                                                 </div>
                                                                 {/*E*/}
-                                                                <div className='col-6 col-lg-6'>
+                                                                <div className='col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6'>
                                                                     <MetricsGraphics
                                                                         data={this.state.simulationE}
                                                                         x_accessor="t"
@@ -501,7 +480,7 @@ class SimpleRC extends Component {
                                                                         inflator={10 / 8}
                                                                     />
                                                                 </div>
-                                                                <div className='col-3 col-lg-3'>
+                                                                <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3'>
                                                                     { /*  OPTIONS  */}
                                                                     <div className='options-box'>
                                                                         <div className="form-check">
@@ -546,13 +525,13 @@ class SimpleRC extends Component {
 
                                                                     </div>
                                                                 </div>
-                                                                <div className='col-3 col-lg-3'>
+                                                                <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3'>
                                                                     <div className='limits-text-box'>
-                                                                        <p> <strong>Q(t)</strong> : {this.limit_format(this.state.current_q)} C</p>
-                                                                        <p> <strong>E(t)</strong> : {this.limit_format(this.state.current_E)} J</p>
-                                                                        <p><strong>I(t)</strong> : {this.limit_format(this.state.current_I)} A</p>
-                                                                        <p><strong>Vc(t)</strong> : {this.limit_format(this.state.current_Vc)} V</p>
-                                                                        <p><strong>Vr(t)</strong> : {this.limit_format(this.state.current_Vr)} V</p>
+                                                                        <p> <strong>Q. max</strong> : {this.limit_format(this.state.qmax)} C</p>
+                                                                        <p> <strong>E. max</strong> : {this.limit_format(this.state.emax)} J</p>
+                                                                        <p><strong>I. max</strong> : {this.limit_format(this.state.imax)} A</p>
+                                                                        <p><strong>Vc. max</strong> : {this.limit_format(this.state.Vcmax)} V</p>
+                                                                        <p><strong>Vr. max</strong> : {this.limit_format(this.state.Vrmax)} V</p>
                                                                         <br />
                                                                     </div>
                                                                 </div>
@@ -573,58 +552,25 @@ class SimpleRC extends Component {
                                         </div>
                                     </div>
                                     <div className="w-100 d-none d-md-block"></div>
+                                    
                                     <div className='row'>
-                                        <div className='col-6 col-lg-6'>
+                                        <div className='col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6'>
 
                                         </div>
-                                        <div className='col-6 col-lg-6'>
-                                            <div className='row'>
-                                                {/* TIME CONTROLLER */}
-                                                <div className='col-12 col-lg-12'>
-                                                    <div className='row'>
-                                                        <div className='col-3 col-lg-3'>
-                                                            <input type="button" className="btn btn-primary w-100" value="-" onClick={(ev) => {
-                                                                if (this.state.current_index_time - 1 >= 0) {
-                                                                    this.updateCurrentTimeSimulation(parseInt(this.state.current_index_time - 1))
-                                                                }
-                                                            }} disabled={!this.state.simFirstClicked || this.state.simulation === undefined}></input>
-                                                        </div>
-
-                                                        <div className='col-6 col-lg-6'>
-                                                            <input type="range" value={this.state.current_index_time} className="form-range" min={0} max={this.state.time_simulation_seconds.length - 1} step="1" onChange={(ev) => {
-                                                                this.updateCurrentTimeSimulation(parseInt(ev.target.value))
-                                                            }} disabled={!this.state.simFirstClicked || this.state.simulation === undefined}
-                                                            />
-                                                        </div>
-
-                                                        <div className='col-3 col-lg-3'>
-                                                            <input type="button" className="btn btn-primary w-100" value="+" onClick={(ev) => {
-                                                                if (this.state.current_index_time + 1 < this.state.time_simulation_seconds.length - 1) {
-                                                                    this.updateCurrentTimeSimulation(parseInt(this.state.current_index_time + 1))
-                                                                }
-                                                            }} disabled={!this.state.simFirstClicked || this.state.simulation === undefined}></input>
-                                                        </div>
-                                                    </div>
+                                        <div className='col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6'>
 
 
-
-                                                </div>
-
-                                                <div className='col-12 col-lg-12'>
-                                                    <p style={{ "textAlign": "center" }}><strong>Tiempo seleccionado: </strong>{this.state.current_selected_time} s</p>
-                                                </div>
-
-                                            </div>
-                                            <button type="button" className={this.state.componentsChange ? "btn btn-warning" : "btn btn-success"} onClick={this.getSimulationResults} style={{ "width": "100%" }}>
+                                        <button type="button" className={this.state.componentsChange ? "btn btn-warning" : "btn btn-success"} onClick={this.getSimulationResults} style={{ "width": "100%" }}>
                                                 SIMULAR
                                                 (<strong>Estado: </strong> {this.state.switch_value === "On" ? "Carga" : "Descarga"})
                                             </button>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className='col-6 col-lg-6'>
+                        <div className='col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6'>
                             <br />
                             <div className="alert alert-success alert-dismissible fade show" role="alert">
                                 <strong>NOTA: </strong>Prueba a modificar los componentes para obtener diferentes resultados.
@@ -634,16 +580,20 @@ class SimpleRC extends Component {
                             </div>
                             <img src={this.state.simFirstClicked ? this.setAnimationImage(this.state.RC_constant) : circuit_back} className="w-100"></img>
                         </div>
+                        <div className='col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6'></div>
 
-                        <div className='row'>
+
+
+                        <div className='row justify-content-md-center'>
+
                             {/**********************************************************************/}
                             {/*                 CONTROLADOR DE LA RESISTENCIA                      */}
                             {/**********************************************************************/}
-                            <div className='col-3 col-lg-3'>
+                            <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3'>
                                 <div className='container'>
-                                    <div className='row'>
-                                        <div className='col-12 col-lg-12'>
-                                            <div className='row'>
+                                    <div className='row justify-content-md-center'>
+                                        <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
+                                            <div className='row justify-content-md-center'>
                                                 <div className='col-12 col-lg-12'>
                                                     <input type="range" className="form-range" min="1" max="99" step="0.1"
                                                         onChange={(ev) => {
@@ -653,7 +603,7 @@ class SimpleRC extends Component {
                                                         }}
                                                     />
                                                 </div>
-                                                <div className='col-12 col-lg-12'>
+                                                <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
                                                     <select className="form-select component-value" aria-label="Default select example" onChange={(ev) => {
                                                         this.state.resistor_multiplier = ev.target.value;
                                                         this.updateColorBands(this.state.resistor_value, ev.target.value)
@@ -665,7 +615,7 @@ class SimpleRC extends Component {
                                                         <option value="x100">{Number.parseFloat(this.state.resistor_value * 100).toFixed(2)} Ω</option>
                                                     </select>
                                                 </div>
-                                                <div className='col-12 col-lg-12'>
+                                                <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
                                                     <div className='resistor-box'>
                                                         <div className='resistor-band-1' style={{ "background": this.state.resistor_color_bands[0] }}></div>
                                                         <div className='resistor-band-2' style={{ "background": this.state.resistor_color_bands[1] }}></div>
@@ -681,12 +631,12 @@ class SimpleRC extends Component {
                             {/**********************************************************************/}
                             {/*                 CONTROLADOR DEL CONDENSADOR                        */}
                             {/**********************************************************************/}
-                            <div className='col-3 col-lg-3'>
+                            <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3'>
 
-                                <div className='row'>
-                                    <div className='col-12 col-lg-12'>
+                                <div className='row justify-content-md-center'>
+                                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
                                         <div className='row justify-content-center'>
-                                            <div className='col-12 col-lg-12'>
+                                            <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
                                                 <input type="range" className="form-range" min="1" max="99" step="0.1"
                                                     onChange={(ev) => {
                                                         this.state.capacitor_value = ev.target.value;
@@ -694,7 +644,7 @@ class SimpleRC extends Component {
                                                     }}
                                                 />
                                             </div>
-                                            <div className='col-12 col-lg-12'>
+                                            <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
                                                 <select className="form-select component-value" aria-label="Default select example" onChange={(ev) => {
                                                     this.state.capacitor_multiplier = ev.target.value;
                                                     this.updateComponent("C0", this.state.capacitor_value, this.state.capacitor_multiplier)
@@ -705,7 +655,7 @@ class SimpleRC extends Component {
                                                 </select>
 
                                             </div>
-                                            <div className='col-12 col-lg-12'>
+                                            <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
                                                 {
                                                     (() => {
                                                         if (this.state.simFirstClicked) {
@@ -726,9 +676,9 @@ class SimpleRC extends Component {
                             {/**********************************************************************/}
                             {/*                 CONTROLADOR DE LA FUENTE                           */}
                             {/**********************************************************************/}
-                            <div className='col-3 col-lg-3'>
-                                <div className='row'>
-                                    <div className='col-12 col-lg-12'>
+                            <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3'>
+                                <div className='row justify-content-md-center' >
+                                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
                                         <input type="range" className="form-range" min="1" max="99" step="0.1"
                                             onChange={(ev) => {
                                                 this.state.cell_value = ev.target.value;
@@ -736,7 +686,7 @@ class SimpleRC extends Component {
                                             }}
                                         />
                                     </div>
-                                    <div className='col-12 col-lg-12'>
+                                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
                                         <select className="form-select component-value" aria-label="Default select example" onChange={(ev) => {
                                             this.state.cell_multiplier = ev.target.value;
                                             this.updateComponent("V0", this.state.cell_value, this.state.cell_multiplier)
@@ -756,11 +706,11 @@ class SimpleRC extends Component {
                             {/**********************************************************************/}
                             {/*                 CONTROLADOR DEL INTERRUPTOR                        */}
                             {/**********************************************************************/}
-                            <div className='col-3 col-lg-3'>
-                                <div className='row'>
-                                    <div className='col-12 col-lg-12'>
-                                        <div className='row'>
-                                            <div className='col-12 col-lg-12'>
+                            <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3'>
+                                <div className='row justify-content-md-center'>
+                                    <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
+                                        <div className='row justify-content-md-center'>
+                                            <div className='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
                                                 <label className="switch">
                                                     <input type="checkbox" onClick={(ev) => {
                                                         if (this.state.switch_value === "On") {
@@ -778,6 +728,7 @@ class SimpleRC extends Component {
 
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
