@@ -7,7 +7,7 @@ class Home extends Component {
     render(){
         return (
             <div>
-                <div className='web-title'>FÍSICA INTERACTIVA</div>
+                <div className='web-title'></div>
             </div>
         )
     }

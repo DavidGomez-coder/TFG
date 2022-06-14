@@ -106,11 +106,11 @@ class RCTheory extends Component {
                     <div id={formula_name} className="formula-content-box center-text justify-content-center">
                         <br />
                         <ul className='list-group list-group-flush'>
-                            <li className='list-group-item disabled'>
+                            <li className='list-group-item disabled' key={formula_name}>
                                 {formula_name}
                             </li>
 
-                            <li className='list-group-item'>
+                            <li className='list-group-item' key={formula_name+"_items"}>
                                 <div>
                                     {!Array.isArray(string_formula) ? <Latex >{string_formula}</Latex> : (string_formula.map((formula) => {
                                         return (<div> <Latex id={formula}>{formula}</Latex><br /><br /></div>)

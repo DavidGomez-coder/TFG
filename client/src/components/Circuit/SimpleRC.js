@@ -393,7 +393,6 @@ class SimpleRC extends Component {
                                                                         yax_tick_length={0}
                                                                         markers={this.state.showMarkers ? this.state.RC_time_markers : []}
                                                                         inflator={10 / 8}
-
                                                                     />
                                                                 </div>
                                                                 {/*I*/}
