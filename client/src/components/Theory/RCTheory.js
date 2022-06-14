@@ -20,7 +20,6 @@ class RCTheory extends Component {
             capacitor_on_charge: [],
             capacitor_on_discharge: [],
             energy: [],
-            example: [],
             //EXPRESIONES
             charge_init_conditions: {},
             discharge_init_conditions: {},
@@ -79,7 +78,6 @@ class RCTheory extends Component {
                     i_def: json_file.formulas.I_definition,
                     charge_diff_equation: json_file.formulas.charge_diff_equation,
                     discharge_diff_equation: json_file.formulas.discharge_diff_equation,
-                    example: json_file.theory.plain_text.example,
                     //RESOLUCIÓN ECUACIÓN DIFERENCIAL
                     charge_diff_solution: json_file.math_resolution.RC_diff_equation,
                     discharge_diff_solution: json_file.math_resolution.RC_dis_diff_equation,
@@ -144,7 +142,6 @@ class RCTheory extends Component {
                             <a className="dropdown-item" href="#carga-del-condensador">Carga del condensador</a>
                             <a className="dropdown-item" href="#descarga-del-condensador">Descarga del condensador</a>
                             <a className="dropdown-item" href="#energia-del-condensador">Enegía almacenada</a>
-                            <a className="dropdown-item" href="#ejemplo">Ejemplo teórico</a>
                         </div>
                     </div>
                 </div>
@@ -269,18 +266,10 @@ class RCTheory extends Component {
                             <br />
                             <div>{this.state.energy[1]}</div>
                             <br />
-                            <h2 id="ejemplo">Ejemplo teórico</h2>
-                            <br />
+                            
                         </div>
-                        <p>(<strong>NOTA</strong>: Se recomienda visitar el siguiente <a href='/RCSim'>simulador</a> si se desea conocer más sobre este fenómeno)</p>
-                        <p>{this.state.example[0]}</p>
-                        <div style={{ "textAlign": "center" }}>
-                            <img src={rc_circuit_example} alt="Ejemplo circuito RC" width={400}></img>
-                        </div>
-                        <p>{this.state.example[1]}</p>
-                        {this.createLatexFormula(this.state.example[2], "Expresiones correspondientes al modelo (Carga del condensador)")}
-                        {this.createLatexFormula(this.state.example[3], "Expresiones correspondientes al modelo (Descarga del condensador)")}
-                        {this.createLatexFormula(this.state.example[4], "")}
+                        
+                        
                         
                     </MathJaxContext>
 

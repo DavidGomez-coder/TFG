@@ -555,11 +555,9 @@ class SimpleRC extends Component {
                                     
                                     <div className='row'>
                                         <div className='col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6'>
-
                                         </div>
+                                        {/* SIMUL. BUTTON */}
                                         <div className='col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6'>
-
-
                                         <button type="button" className={this.state.componentsChange ? "btn btn-warning" : "btn btn-success"} onClick={this.getSimulationResults} style={{ "width": "100%" }}>
                                                 SIMULAR
                                                 (<strong>Estado: </strong> {this.state.switch_value === "On" ? "Carga" : "Descarga"})
@@ -570,6 +568,7 @@ class SimpleRC extends Component {
                                 </div>
                             </div>
                         </div>
+                        {/* BANNER */}
                         <div className='col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6'>
                             <br />
                             <div className="alert alert-success alert-dismissible fade show" role="alert">
@@ -581,9 +580,6 @@ class SimpleRC extends Component {
                             <img src={this.state.simFirstClicked ? this.setAnimationImage(this.state.RC_constant) : circuit_back} className="w-100"></img>
                         </div>
                         <div className='col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6'></div>
-
-
-
                         <div className='row justify-content-md-center'>
 
                             {/**********************************************************************/}
