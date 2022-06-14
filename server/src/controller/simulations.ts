@@ -56,7 +56,7 @@ module.exports = (app: Application) => {
                 "imax" : (cell.getComponentValue() / resistor.getComponentValue()),
                 "Vrmax" : cell.getComponentValue(),
                 "RC_constant" : resistor.getComponentValue() * capacitor.getComponentValue(),
-                "RC_time_markers" : rcSim.getSimulationTime() === 0 ? [] : getSimulationRCMarkers(rcSim.getSimulationTime(), capacitor.getComponentValue()*resistor.getComponentValue())
+                "RC_time_markers" : rcSim.getSimulationTime() === 0 ? [] : getSimulationRCMarkers(rcSim.getSimulationTime(), capacitor.getComponentValue()*resistor.getComponentValue(), rcSim.getSimulationPeriods())
             }
             let result = {
                 "limits" : max_data,
@@ -98,11 +98,11 @@ module.exports = (app: Application) => {
     });  
 }
 
-function getSimulationRCMarkers (simulation_time: number, rc_value: number) {
+function getSimulationRCMarkers (simulation_time: number, rc_value: number, simulation_periods: number) {
     let rc_times = simulation_time / rc_value;
     let time_markers = []
     let i: number = 1;
-    while (i*rc_value< simulation_time){
+    while (i <= simulation_periods +1){
         time_markers.push(rc_value*i)
         i++;
     }

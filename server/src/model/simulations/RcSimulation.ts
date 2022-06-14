@@ -48,7 +48,7 @@ export class RcSimulation extends CircuitSimulation {
         
         // START TO GET VALUES
         let time_constant: number = resistor.getComponentValue() * capacitor.getComponentValue();
-        let simulation_time: number = time_constant * this.getSimulationPeriods();
+        let simulation_time: number = 1.02*time_constant * this.getSimulationPeriods();
         this.setSimulationTime(simulation_time);
         this.calculateStep(simulation_time);
         if (cell.getComponentValue() === 0){

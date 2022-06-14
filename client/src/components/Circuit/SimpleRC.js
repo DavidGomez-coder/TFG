@@ -177,11 +177,13 @@ class SimpleRC extends Component {
 
     buildTimeMarkers(time_markers) {
         if (time_markers.length > 0) {
+            let tau_count = 0;
             let result = time_markers.map((t_value) => {
-                let alertFunc = function () {
-                    alert("OK")
-                }
-                return ({ 't': t_value, 'label': '', 'click': alertFunc })
+                tau_count++;
+                let label = time_markers.length < 15 ? `${tau_count}τ` : ''
+                return ({ 't': t_value, 'label': label, 'mouseover': (() => {
+                    
+                }) })
             })
             return result;
         }
@@ -393,6 +395,7 @@ class SimpleRC extends Component {
                                                                         yax_tick_length={0}
                                                                         markers={this.state.showMarkers ? this.state.RC_time_markers : []}
                                                                         inflator={10 / 8}
+                                                                        buffer={0}
                                                                     />
                                                                 </div>
                                                                 {/*I*/}
@@ -414,6 +417,7 @@ class SimpleRC extends Component {
                                                                         yax_tick_length={0}
                                                                         markers={this.state.showMarkers ? this.state.RC_time_markers : []}
                                                                         inflator={10 / 8}
+                                                                        buffer={0}
                                                                     />
                                                                 </div>
                                                                 {/*VR*/}
@@ -435,6 +439,7 @@ class SimpleRC extends Component {
                                                                         yax_tick_length={0}
                                                                         markers={this.state.showMarkers ? this.state.RC_time_markers : []}
                                                                         inflator={10 / 8}
+                                                                        buffer={0}
                                                                     />
                                                                 </div>
                                                                 {/*VC*/}
@@ -456,6 +461,7 @@ class SimpleRC extends Component {
                                                                         yax_tick_length={0}
                                                                         markers={this.state.showMarkers ? this.state.RC_time_markers : []}
                                                                         inflator={10 / 8}
+                                                                        buffer={0}
                                                                     />
                                                                 </div>
                                                                 {/*E*/}
@@ -477,6 +483,7 @@ class SimpleRC extends Component {
                                                                         yax_tick_length={0}
                                                                         markers={this.state.showMarkers ? this.state.RC_time_markers : []}
                                                                         inflator={10 / 8}
+                                                                        buffer={0}
                                                                     />
                                                                 </div>
                                                                 <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3'>
