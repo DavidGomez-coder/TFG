@@ -1,0 +1,19 @@
+/* CELL STYLES */
+.cell-box {
+    background: linear-gradient(to right, rgb(209, 160, 0) 35%, rgb(15, 13, 13) 35%);
+    height: 100px;
+    width: 60%;
+    margin-top: 3%;
+    margin-left: 20%;
+    border-radius: 10px;
+}
+
+
+.cell-box-shadow {
+    border-top: 30px solid rgb(253, 248, 248);
+    border-bottom: 30px solid rgb(70, 70, 70);
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    opacity: 56%;
+}

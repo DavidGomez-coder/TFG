@@ -1,0 +1,53 @@
+/* RESISTOR STYLES*/
+.resistor-box {
+    background: linear-gradient(rgb(230, 198, 156), rgb(139, 102, 55));
+    height: 100px;
+    width: 60%;
+    margin-top: 3%;
+    margin-left: 20%;
+    border-radius: 40px;
+    clip-path: circle(70%);  
+  }
+  
+  .resistor-band-1 {
+    background-color: black;
+    height: 100%;
+    width: 10%;
+    left: 200px;
+    margin-left: 15%;
+    border-top: 30px solid rgba(252, 252, 252, 0.1);
+    border-bottom: 30px solid rgba(0, 0, 0, 0.12);
+  }
+  
+  .resistor-band-2 {
+    background-color: black;
+    height: 100%;
+    width: 10%;
+    left: 200px;
+    margin-left: 30%;
+    margin-top: -100px;
+    border-top: 30px solid rgba(252, 252, 252, 0.1);
+    border-bottom: 30px solid rgba(0, 0, 0, 0.12);
+  }
+  
+  .resistor-band-3 {
+    background-color: black;
+    height: 100%;
+    width: 10%;
+    left: 200px;
+    margin-left: 45%;
+    margin-top: -100px;
+    border-top: 30px solid rgba(252, 252, 252, 0.1);
+    border-bottom: 30px solid rgba(0, 0, 0, 0.12);
+  }
+  
+  .resistor-band-4 {
+    background-color: black;
+    height: 100%;
+    width: 10%;
+    left: 200px;
+    margin-left: 70%;
+    margin-top: -100px;
+    border-top: 30px solid rgba(252, 252, 252, 0.1);
+    border-bottom: 30px solid rgba(0, 0, 0, 0.12);
+  }

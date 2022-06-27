@@ -355,7 +355,6 @@ class SimpleRC extends Component {
     render() {
         if (this.state.done) {
             return (
-
                 <div className='container'>
                     <div className='row justify-content-md-center'>
                         <div className='col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6'>
