@@ -36,26 +36,25 @@ export default class SimpleRC extends Component {
             vr_data: [],
             e_data: [],
             //components value
-            C: 0,
-            R: 0,
-            V: 0,
+            C: 10,
+            R: 3,
+            V: 5,
             q_0: 0,
             //others
-            R_v: 0,
+            R_v: 3,
             R_m: 1,
             R_color_bands: [],
-            C_v: 0,
+            C_v: 10,
             C_m: 1,
-            V_v: 0,
+            V_v: 5,
             V_m: 1,
             //circuit state
             capacitorCharging: true,
             data_length: 0,
             //simulation state
-            running: false,
+            running: true,
             //time interval Id
             intervalId: 0,
-            lineCharts: []
 
         }
 
@@ -186,20 +185,26 @@ export default class SimpleRC extends Component {
 
     /** RESISTOR CONTROLLER */
     updateResistorValue(value) {
-        this.setState({
-            R_v: parseFloat(value),
-            R: parseFloat(value) * this.state.R_m,
-        });
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                R_v : parseFloat(value),
+                R : parseFloat(value) * prevState.R_m
+            }
+        })
+
         this.resetDataArray();
         this.updateMaxValues();
     }
 
     updateResistorMultiplier(multiplier) {
-
-        this.setState({
-            R_m: valueOfMultiplier(multiplier),
-            R: this.state.R_v * valueOfMultiplier(multiplier)
-        });
+        this.setState(prevState => {
+            return {
+                ...prevState, 
+                R_m : valueOfMultiplier(multiplier),
+                R : prevState.R_v * valueOfMultiplier(multiplier)
+            }
+        })
         this.resetDataArray();
         this.updateMaxValues();
 
@@ -215,38 +220,51 @@ export default class SimpleRC extends Component {
     }
 
     updateCapacitorMultiplier(multiplier) {
-        this.setState({
-            C_m: getCapacitorMult(multiplier),
-            C: parseFloat(this.state.C_v) * getCapacitorMult(multiplier)
-        });
+        this.setState(prevState => {
+            return {
+                ...prevState, 
+                C_m : getCapacitorMult(multiplier),
+                C: prevState.C_v * getCapacitorMult(multiplier)
+            }
+        })
+
         this.resetDataArray();
         this.updateMaxValues();
     }
 
     updateCapacitorValue(value) {
-        this.setState({
-            C_v: parseFloat(value),
-            C: parseFloat(value) * this.state.C_m
-        });
+        this.setState(prevState => {
+            return {
+                ...prevState, 
+            C_v : parseFloat(value),
+            C: parseFloat(value) * prevState.C_m
+            }
+        })
         this.resetDataArray();
         this.updateMaxValues();
     }
 
 
     updateCellValue(value) {
-        this.setState({
-            V_v: parseFloat(value),
-            V: parseFloat(value) * this.state.C_m
-        });
+        this.setState(prevState => {
+            return {
+                ...prevState, 
+                V_v: parseFloat(value),
+                V:  parseFloat(value) * prevState.C_m
+            }
+        })
         this.resetDataArray();
         this.updateMaxValues();
     }
 
     updateCellMultiplier(multiplier) {
-        this.setState({
-            V_m: getCellMultiplier(multiplier),
-            V: parseFloat(this.state.V_v) * getCellMultiplier(multiplier)
-        });
+        this.setState(prevState => {
+            return {
+                ...prevState, 
+                V_m : getCellMultiplier(multiplier),
+                V : prevState.V_v * getCellMultiplier(multiplier)
+            }
+        })
         this.resetDataArray();
         this.updateMaxValues();
 
@@ -287,11 +305,10 @@ export default class SimpleRC extends Component {
                                                     left: 20,
                                                     bottom: 5,
                                                 }}
-                                                key="q_t"
                                             >
-                                                <CartesianGrid strokeDasharray="3 3 3 3" />
+                                                <CartesianGrid strokeDasharray="3 3" />
                                                 <XAxis dataKey="t" tick={false} />
-                                                <YAxis type="number" tick={true} interval={0} />
+                                                <YAxis type="number" tick={true}  />
 
                                                 <Tooltip />
                                                 <Legend />
@@ -372,7 +389,7 @@ export default class SimpleRC extends Component {
                                                     bottom: 5,
                                                 }}
                                             >
-                                                <CartesianGrid strokeDasharray="0" />
+                                                <CartesianGrid strokeDasharray="3 3" />
                                                 <XAxis dataKey="t" tick={false} />
                                                 <YAxis type="number" />
 
@@ -410,7 +427,7 @@ export default class SimpleRC extends Component {
                                                     bottom: 5,
                                                 }}
                                             >
-                                                <CartesianGrid strokeDasharray="0" />
+                                                <CartesianGrid strokeDasharray="3 3" />
                                                 <XAxis dataKey="t" tick={false} />
                                                 <YAxis type="number" />
 
@@ -451,7 +468,7 @@ export default class SimpleRC extends Component {
                                                     bottom: 5,
                                                 }}
                                             >
-                                                <CartesianGrid strokeDasharray="0" />
+                                                <CartesianGrid strokeDasharray="3 3" />
                                                 <XAxis dataKey="t" tick={false} />
                                                 <YAxis type="number" />
 
@@ -503,15 +520,8 @@ export default class SimpleRC extends Component {
                                                 <option value="microF">{this.state.C_v} microF</option>
                                                 <option value="miliF">{this.state.C_v} miliF</option>
                                             </select>
-                                            {
-                                                (() => {
-                                                    if (this.state.running) {
-                                                        return (
-                                                            <div className={this.state.capacitorCharging ? "capacitorOnCharge" : "capacitorOnDisCharge"}></div>
-                                                        )
-                                                    }
-                                                })()
-                                            }
+                                            
+                                            
 
                                         </Col>
                                        

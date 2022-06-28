@@ -1,11 +1,10 @@
 /* https://techmidpoint.com/pure-css-battery-charging-animation-using-html-and-css/ */
 /* CAPACITOR STYLES */
 .capacitorOnCharge{
-
     height: 110px;
     width: 225px;
     border: 8px solid rgb(0, 0, 0);
-    position: absolute;
+    position: relative;
     margin: auto;
     margin-top: 2%;
     top: 0;
@@ -36,7 +35,7 @@
     height: 110px;
     width: 225px;
     border: 8px solid rgb(0, 0, 0);
-    position: absolute;
+    position: relative;
     margin: auto;
     margin-top: 2%;
     top: 0;
