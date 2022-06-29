@@ -9,7 +9,7 @@ import './Capacitor/CapacitorCSS.css'
 import './Cell/CellCSS.css'
 
 
-import { MAX_DATA, SIMULATION_SPEED } from "../Utils/Utils";
+import { MAX_DATA, SIMULATION_EXEC, SIMULATION_STEP } from "../Utils/Utils";
 import { getChargeInstant, getDischargeInstant } from "../Utils/RCFormulas";
 import { Row, Col, Container } from "react-bootstrap";
 // resistor functions
@@ -19,8 +19,6 @@ import { getCellMultiplier } from "./Cell/Cell";
 
 
 
-var timeInterval = SIMULATION_SPEED; //time interval ms
-var simulationSpeed = 1;
 
 export default class SimpleRC extends Component {
 
@@ -48,6 +46,8 @@ export default class SimpleRC extends Component {
             C_m: 1,
             V_v: 5,
             V_m: 1,
+            //carga maxima
+            q_max: 10 * 5,
             //circuit state
             capacitorCharging: true,
             data_length: 0,
@@ -55,7 +55,7 @@ export default class SimpleRC extends Component {
             running: true,
             //time interval Id
             intervalId: 0,
-
+            rcIntervalId: 0,
         }
 
         this.updateCharging = this.updateCharging.bind(this);
@@ -68,6 +68,7 @@ export default class SimpleRC extends Component {
      * de setInterval, y obtener datos y mostrarlos cada cierto tiempo
      */
     componentDidMount() {
+        this.updateColorBands(this.state.R_v, this.state.R_m)
         const newInterval = setInterval(() => {
 
             this.updateMaxValues();
@@ -87,6 +88,7 @@ export default class SimpleRC extends Component {
                     oldVcData.shift();
                 }
                 let t_i = this.state.t_i;
+
                 //new values
                 let instant_values = this.state.capacitorCharging ? getChargeInstant(t_i, this.state.q_0, this.state.V, this.state.C, this.state.R) :
                     getDischargeInstant(t_i, this.state.q_0, this.state.V, this.state.C, this.state.R);
@@ -94,13 +96,13 @@ export default class SimpleRC extends Component {
 
                     return {
                         ...prevState,
-                        q_data: [...oldQData, { "t": t_i, "Q(t)": instant_values.Q }],
-                        i_data: [...oldIData, { "t": t_i, "I(t)": instant_values.I }],
-                        vr_data: [...oldVrData, { "t": t_i, "Vr(t)": instant_values.Vr }],
-                        vc_data: [...oldVcData, { "t": t_i, "Vc(t)": instant_values.Vc }],
-                        e_data: [...oldEData, { "t": t_i, "E(t)": instant_values.E }],
+                        q_data: [...oldQData, { "t": Number.parseFloat(t_i).toFixed(2), "Q(t)": instant_values.Q }],
+                        i_data: [...oldIData, { "t": Number.parseFloat(t_i).toFixed(2), "I(t)": instant_values.I }],
+                        vr_data: [...oldVrData, { "t": Number.parseFloat(t_i).toFixed(2), "Vr(t)": instant_values.Vr }],
+                        vc_data: [...oldVcData, { "t": Number.parseFloat(t_i).toFixed(2), "Vc(t)": instant_values.Vc }],
+                        e_data: [...oldEData, { "t": Number.parseFloat(t_i).toFixed(2), "E(t)": instant_values.E }],
                         //time update
-                        t_i: t_i + timeInterval / 1000,
+                        t_i: t_i + SIMULATION_STEP / 1000,
 
                         //current capacitor charge update
                         q_0: instant_values.Q,
@@ -109,17 +111,22 @@ export default class SimpleRC extends Component {
 
                     }
                 });
-            }
-            this.render()
 
-        }, timeInterval);
+
+                if (this.state.q_0 >= this.state.q_max) {
+                    this.updateRunning();
+                }
+            }
+
+
+        }, SIMULATION_EXEC);
 
 
         //update time interval id
         this.setState(prevState => {
             return {
                 ...prevState,
-                intervalId: newInterval
+                intervalId: newInterval,
             }
         });
     }
@@ -184,25 +191,27 @@ export default class SimpleRC extends Component {
     }
 
     /** RESISTOR CONTROLLER */
+
     updateResistorValue(value) {
         this.setState(prevState => {
             return {
                 ...prevState,
-                R_v : parseFloat(value),
-                R : parseFloat(value) * prevState.R_m
+                R_v: parseFloat(value),
+                R: parseFloat(value) * prevState.R_m
             }
         })
 
         this.resetDataArray();
         this.updateMaxValues();
+
     }
 
     updateResistorMultiplier(multiplier) {
         this.setState(prevState => {
             return {
-                ...prevState, 
-                R_m : valueOfMultiplier(multiplier),
-                R : prevState.R_v * valueOfMultiplier(multiplier)
+                ...prevState,
+                R_m: valueOfMultiplier(multiplier),
+                R: prevState.R_v * valueOfMultiplier(multiplier)
             }
         })
         this.resetDataArray();
@@ -222,8 +231,8 @@ export default class SimpleRC extends Component {
     updateCapacitorMultiplier(multiplier) {
         this.setState(prevState => {
             return {
-                ...prevState, 
-                C_m : getCapacitorMult(multiplier),
+                ...prevState,
+                C_m: getCapacitorMult(multiplier),
                 C: prevState.C_v * getCapacitorMult(multiplier)
             }
         })
@@ -235,9 +244,9 @@ export default class SimpleRC extends Component {
     updateCapacitorValue(value) {
         this.setState(prevState => {
             return {
-                ...prevState, 
-            C_v : parseFloat(value),
-            C: parseFloat(value) * prevState.C_m
+                ...prevState,
+                C_v: parseFloat(value),
+                C: parseFloat(value) * prevState.C_m
             }
         })
         this.resetDataArray();
@@ -248,9 +257,9 @@ export default class SimpleRC extends Component {
     updateCellValue(value) {
         this.setState(prevState => {
             return {
-                ...prevState, 
+                ...prevState,
                 V_v: parseFloat(value),
-                V:  parseFloat(value) * prevState.C_m
+                V: parseFloat(value) * prevState.C_m
             }
         })
         this.resetDataArray();
@@ -260,9 +269,9 @@ export default class SimpleRC extends Component {
     updateCellMultiplier(multiplier) {
         this.setState(prevState => {
             return {
-                ...prevState, 
-                V_m : getCellMultiplier(multiplier),
-                V : prevState.V_v * getCellMultiplier(multiplier)
+                ...prevState,
+                V_m: getCellMultiplier(multiplier),
+                V: prevState.V_v * getCellMultiplier(multiplier)
             }
         })
         this.resetDataArray();
@@ -308,10 +317,10 @@ export default class SimpleRC extends Component {
                                             >
                                                 <CartesianGrid strokeDasharray="3 3" />
                                                 <XAxis dataKey="t" tick={false} />
-                                                <YAxis type="number" tick={true}  />
+                                                <YAxis type="number" tick={true} />
 
                                                 <Tooltip />
-                                                <Legend />
+                                                <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                 <Line type="monotone" dataKey="Q(t)" stroke="orange" strokeWidth={3} dot={false} isAnimationActive={false} />
                                             </LineChart>
                                         </ResponsiveContainer>
@@ -347,12 +356,12 @@ export default class SimpleRC extends Component {
                                                 }}
 
                                             >
-                                                <CartesianGrid strokeDasharray="0" />
+                                                <CartesianGrid strokeDasharray="3 3" />
                                                 <XAxis dataKey="t" tick={false} />
                                                 <YAxis type="number" />
 
                                                 <Tooltip />
-                                                <Legend />
+                                                <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                 <Line type="monotone" dataKey="I(t)" stroke="blue" strokeWidth={3} dot={false} isAnimationActive={false} />
                                             </LineChart>
                                         </ResponsiveContainer>
@@ -394,7 +403,7 @@ export default class SimpleRC extends Component {
                                                 <YAxis type="number" />
 
                                                 <Tooltip />
-                                                <Legend />
+                                                <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                 <Line type="monotone" dataKey="Vc(t)" stroke="green" strokeWidth={3} dot={false} isAnimationActive={false} />
                                             </LineChart>
                                         </ResponsiveContainer>
@@ -432,7 +441,7 @@ export default class SimpleRC extends Component {
                                                 <YAxis type="number" />
 
                                                 <Tooltip />
-                                                <Legend />
+                                                <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                 <Line type="monotone" dataKey="Vr(t)" stroke="#eb3474" strokeWidth={3} dot={false} isAnimationActive={false} />
                                             </LineChart>
                                         </ResponsiveContainer>
@@ -473,7 +482,7 @@ export default class SimpleRC extends Component {
                                                 <YAxis type="number" />
 
                                                 <Tooltip />
-                                                <Legend />
+                                                <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                 <Line type="monotone" dataKey="E(t)" stroke="red" strokeWidth={3} dot={false} isAnimationActive={false} />
                                             </LineChart>
                                         </ResponsiveContainer>
@@ -497,76 +506,76 @@ export default class SimpleRC extends Component {
                     </Col>
                 </Row>
                 {/* CONTROLLERS ROW */}
-                <Row className="justify-content-md-center"> 
+                <Row className="justify-content-md-center">
                     {/* Capacitor controller */}
                     <Col xs={3} sm={3} md={3} lg={3} xl={3} xxl={3}>
-                            <Row>
-                                <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
-                                    <Row>
-                                        <Col sm={12} md={12} lg={12} xl={12} xxl={12}>
-                                            <input type="range" className="form-range" min="0" max="99" step="0.1"
-                                                onChange={(ev) => {
-                                                    this.updateCapacitorValue(ev.target.value);
+                        <Row>
+                            <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
+                                <Row>
+                                    <Col sm={12} md={12} lg={12} xl={12} xxl={12}>
+                                        <input type="range" className="form-range" min="0" max="99" step="0.1"
+                                            onChange={(ev) => {
+                                                this.updateCapacitorValue(ev.target.value);
 
-                                                }}
-                                            />
-                                        </Col>
-                                        <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
-                                            <select className="form-select component-value" aria-label="Default select example" onChange={(ev) => {
-                                                this.updateCapacitorMultiplier(ev.target.value)
-                                            }} disabled={this.state.showMultipliers === false}>
-                                                <option defaultValue={true} value="F">{this.state.C_v} F </option>
-                                                <option value="nanoF">{this.state.C_v} nanoF</option>
-                                                <option value="microF">{this.state.C_v} microF</option>
-                                                <option value="miliF">{this.state.C_v} miliF</option>
-                                            </select>
-                                            
-                                            
+                                            }}
+                                        />
+                                    </Col>
+                                    <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
+                                        <select className="form-select component-value" aria-label="Default select example" onChange={(ev) => {
+                                            this.updateCapacitorMultiplier(ev.target.value)
+                                        }} disabled={this.state.showMultipliers === false}>
+                                            <option defaultValue={true} value="F">{this.state.C_v} F </option>
+                                            <option value="nanoF">{this.state.C_v} nanoF</option>
+                                            <option value="microF">{this.state.C_v} microF</option>
+                                            <option value="miliF">{this.state.C_v} miliF</option>
+                                        </select>
 
-                                        </Col>
-                                       
 
-                                    </Row>
-                                </Col>
-                            </Row>
+
+                                    </Col>
+
+
+                                </Row>
+                            </Col>
+                        </Row>
                     </Col>
 
                     {/* Resistor controller */}
                     <Col xs={3} sm={3} md={3} lg={3} xl={3} xxl={3}>
-                            <Row>
-                                <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
-                                    <Row>
-                                        <Col sm={12} md={12} lg={12} xl={12} xxl={12}>
-                                            <input type="range" className="form-range" min="0" max="99" step="0.1"
-                                                onChange={(ev) => {
-                                                    this.updateResistorValue(ev.target.value);
-                                                    this.updateColorBands(this.state.R_v, this.state.R_m);
-                                                }}
-                                            />
-                                        </Col>
-                                        <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
-                                            <select className="form-select component-value" aria-label="Default select example" onChange={(ev) => {
-                                                this.updateResistorMultiplier(ev.target.value)
-                                                this.updateColorBands(this.state.R_v, this.state.R_m)
-                                            }} disabled={this.state.showMultipliers === false}>
-                                                <option defaultValue={true} value="x1">{Number.parseFloat(this.state.R_v).toFixed(2)} Ω </option>
-                                                <option value="x0.1">{Number.parseFloat(this.state.R_v * 0.1).toFixed(2)} Ω</option>
-                                                <option value="x10">{Number.parseFloat(this.state.R_v * 10).toFixed(2)} Ω</option>
-                                                <option value="x100">{Number.parseFloat(this.state.R_v * 100).toFixed(2)} Ω</option>
-                                            </select>
+                        <Row>
+                            <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
+                                <Row>
+                                    <Col sm={12} md={12} lg={12} xl={12} xxl={12}>
+                                        <input type="range" className="form-range" min="0" max="99" step="0.1"
+                                            onChange={(ev) => {
+                                                this.updateResistorValue(ev.target.value);
+                                                this.updateColorBands(this.state.R_v, this.state.R_m);
+                                            }}
+                                        />
+                                    </Col>
+                                    <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
+                                        <select className="form-select component-value" aria-label="Default select example" onChange={(ev) => {
+                                            this.updateResistorMultiplier(ev.target.value)
+                                            this.updateColorBands(this.state.R_v, this.state.R_m)
+                                        }} disabled={this.state.showMultipliers === false}>
+                                            <option defaultValue={true} value="x1">{Number.parseFloat(this.state.R_v).toFixed(2)} Ω </option>
+                                            <option value="x0.1">{Number.parseFloat(this.state.R_v * 0.1).toFixed(2)} Ω</option>
+                                            <option value="x10">{Number.parseFloat(this.state.R_v * 10).toFixed(2)} Ω</option>
+                                            <option value="x100">{Number.parseFloat(this.state.R_v * 100).toFixed(2)} Ω</option>
+                                        </select>
 
-                                        </Col>
-                                        <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
-                                            <div className='resistor-box'>
-                                                <div className='resistor-band-1' style={{ "background": this.state.R_color_bands[0] }}></div>
-                                                <div className='resistor-band-2' style={{ "background": this.state.R_color_bands[1] }}></div>
-                                                <div className='resistor-band-3' style={{ "background": this.state.R_color_bands[2] }}></div>
-                                                <div className='resistor-band-4' style={{ "background": this.state.R_color_bands[3] }}></div>
-                                            </div>
-                                        </Col>
-                                    </Row>
-                                </Col>
-                            </Row>
+                                    </Col>
+                                    <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
+                                        <div className='resistor-box'>
+                                            <div className='resistor-band-1' style={{ "background": this.state.R_color_bands[0] }}></div>
+                                            <div className='resistor-band-2' style={{ "background": this.state.R_color_bands[1] }}></div>
+                                            <div className='resistor-band-3' style={{ "background": this.state.R_color_bands[2] }}></div>
+                                            <div className='resistor-band-4' style={{ "background": this.state.R_color_bands[3] }}></div>
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </Col>
+                        </Row>
                     </Col>
 
                     {/* Cell controller */}
@@ -588,9 +597,9 @@ export default class SimpleRC extends Component {
                                     <option value="miliV">{this.state.V_v} miliV</option>
                                 </select>
                                 <div className='cell-box'>
-                                            <div className='cell-box-shadow'>
-                                            </div>
-                                        </div>
+                                    <div className='cell-box-shadow'>
+                                    </div>
+                                </div>
                             </Col>
                         </Row>
                     </Col>

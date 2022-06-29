@@ -15,7 +15,5 @@ export function calculateColorBands (value, multiplier) {
 }
 
 export function valueOfMultiplier (multiplier){
-    console.log(multiplier)
-    console.log(MULTIPLIER_VALUES[multiplier])
     return parseFloat(MULTIPLIER_VALUES[multiplier]);
 }
