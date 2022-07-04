@@ -7,6 +7,7 @@ import './SimpleRC.css'
 import './Resistor/ResistorCSS.css'
 import './Capacitor/CapacitorCSS.css'
 import './Cell/CellCSS.css'
+import './ToogleSwitch/ToogleSwitch.css'
 
 
 import { MAX_DATA, SIMULATION_EXEC, SIMULATION_STEP } from "../Utils/Utils";
@@ -565,6 +566,8 @@ export default class SimpleRC extends Component {
                                         </select>
 
                                     </Col>
+                                    <Container>
+                                    <Row>
                                     <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                                         <div className='resistor-box'>
                                             <div className='resistor-band-1' style={{ "background": this.state.R_color_bands[0] }}></div>
@@ -573,6 +576,10 @@ export default class SimpleRC extends Component {
                                             <div className='resistor-band-4' style={{ "background": this.state.R_color_bands[3] }}></div>
                                         </div>
                                     </Col>
+                                    </Row>
+                                    </Container>
+                                    
+                                    
                                 </Row>
                             </Col>
                         </Row>
@@ -606,7 +613,16 @@ export default class SimpleRC extends Component {
 
 
                     {/* Switch controller */}
-                    <Col>
+                    <Col xs={3} sm={3} md={3} lg={3} xl={3} xxl={3}>
+
+
+                                        <label className="switch">
+                                           < input type="checkbox" onClick={(ev) => {
+                                                        this.updateCharging()
+                                                    }} />
+                                                    <span className="slider"></span>
+                                        </label>
+                                
                     </Col>
                 </Row>
             </div>
