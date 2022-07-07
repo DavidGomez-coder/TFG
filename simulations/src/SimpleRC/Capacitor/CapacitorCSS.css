@@ -16,7 +16,7 @@
     border: 6px solid black;
     margin: auto;
     transform: rotate(180deg);
-    background: red;
+    background: #c94f1e;
 }
 
 .charge_charge_complete {
@@ -27,7 +27,7 @@
     border: 6px solid black;
     margin: auto;
     transform: rotate(180deg);
-    background: green;
+    background: #569c02;
 }
 
 .charge_stop {

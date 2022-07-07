@@ -12,7 +12,9 @@ import './ToogleSwitch/ToogleSwitch.css'
 
 import { MAX_DATA, SIMULATION_EXEC, SIMULATION_STEP } from "../Utils/Utils";
 import { getChargeInstant, getDischargeInstant } from "../Utils/RCFormulas";
-import { Row, Col, Container, Alert, Button, OverlayTrigger, Tooltip as ToolTipReact} from "react-bootstrap";
+import { Row, Col, Container, Alert, Button, OverlayTrigger, Form, Tooltip as ToolTipReact } from "react-bootstrap";
+
+
 
 
 // resistor functions
@@ -44,8 +46,8 @@ export default class SimpleRC extends Component {
         this.state = {
             //time controller
             t_i: 0,
-            simulation_step: SIMULATION_STEP,
-            simulation_exec: SIMULATION_EXEC,
+            simulation_step_multiplier: 1,
+            simulation_exec_multiplier: 1,
             //data arrays
             q_data: [],
             i_data: [],
@@ -122,7 +124,7 @@ export default class SimpleRC extends Component {
                         vc_data: [...oldVcData, { "t": t_i, "Vc(t)": instant_values.Vc }],
                         e_data: [...oldEData, { "t": t_i, "E(t)": instant_values.E }],
                         //time update
-                        t_i: t_i + prevState.simulation_step / 1000,
+                        t_i: t_i + ((SIMULATION_STEP * prevState.simulation_step_multiplier) / 1000),
 
                         //current capacitor charge update
                         q_0: instant_values.Q,
@@ -142,8 +144,7 @@ export default class SimpleRC extends Component {
                 }
             }
 
-
-        }, this.state.simulation_exec);
+        }, SIMULATION_EXEC * parseFloat(this.state.simulation_exec_multiplier));
 
 
         //update time interval id
@@ -263,6 +264,18 @@ export default class SimpleRC extends Component {
         })
     }
 
+    updateSimulationStepMultiplier(multiplier) {
+        this.setState({
+            simulation_step_multiplier: multiplier
+        });
+    }
+
+    updateSimulationExecMultiplier(multiplier) {
+        this.setState({
+            simulation_exec_multiplier: multiplier
+        });
+    }
+
     /** RESISTOR CONTROLLER */
 
     updateResistorValue(value) {
@@ -357,7 +370,7 @@ export default class SimpleRC extends Component {
 
         return (
 
-            <div >
+            <div style={{ "padding": "1%" }}>
                 {/* UP ROW */}
                 <Row>
                     {/* DATA CHARTS */}
@@ -365,7 +378,7 @@ export default class SimpleRC extends Component {
                         <Row className="d-flex p-15">
                             <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
                                 <div style={{
-                                    paddingBottom: '56.25%', /* 16:9 */
+                                    paddingBottom: '50%', /* 16:9 */
                                     position: 'relative',
                                     height: 0
                                 }} >
@@ -405,7 +418,7 @@ export default class SimpleRC extends Component {
 
                             <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
                                 <div style={{
-                                    paddingBottom: '56.25%', /* 16:9 */
+                                    paddingBottom: '50%', /* 16:9 */
                                     position: 'relative',
                                     height: 0
                                 }} >
@@ -448,7 +461,7 @@ export default class SimpleRC extends Component {
                         <Row>
                             <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
                                 <div style={{
-                                    paddingBottom: '56.25%', /* 16:9 */
+                                    paddingBottom: '50%', /* 16:9 */
                                     position: 'relative',
                                     height: 0
                                 }} >
@@ -486,7 +499,7 @@ export default class SimpleRC extends Component {
 
                             <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
                                 <div style={{
-                                    paddingBottom: '56.25%', /* 16:9 */
+                                    paddingBottom: '50%', /* 16:9 */
                                     position: 'relative',
                                     height: 0
                                 }} >
@@ -527,7 +540,7 @@ export default class SimpleRC extends Component {
                         <Row>
                             <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
                                 <div style={{
-                                    paddingBottom: '56.25%', /* 16:9 */
+                                    paddingBottom: '50%', /* 16:9 */
                                     position: 'relative',
                                     height: 0
                                 }} >
@@ -561,31 +574,67 @@ export default class SimpleRC extends Component {
                                         </ResponsiveContainer>
                                     </div>
                                 </div>
-                            </Col >
+                            </Col>
 
                             {/* BUTTONS CONTROLLER */}
                             <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
-                                <OverlayTrigger
-                                    key="top"
-                                    placement="top"
-                                    overlay={
-                                        <ToolTipReact id={`tooltip-top-1`}>
-                                            Estado de la simulación. Pulsa para <strong>{this.state.running ? "detener" : "reanudar"}</strong> la simulación
-                                        </ToolTipReact>
-                                    }>
-                                    <Button variant={this.state.running ? "danger" : "outline-warning"} onClick={this.updateRunning} size="lg">{this.state.running ? "STOP" : "RESUME"}</Button>
-                                </OverlayTrigger>
+
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <br></br>
+
+                                <Row>
+                                    <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
+                                        <p>Velocidad:</p>
+                                        <Form.Select onChange={(ev) => { this.updateSimulationExecMultiplier(parseFloat(ev.target.value)) }}>
+                                            <option defaultValue={true} value="1">Normal</option>
+                                            <option value="1000">Muy Lento</option>
+                                            <option value="100">Lento</option>
+                                            <option value="0.001">Rápido</option>
+                                            <option value="0.0001">Muy rápido</option>
+                                        </Form.Select>
+                                        <p>{SIMULATION_EXEC * this.state.simulation_exec_multiplier}</p>
+                                    </Col>
+                                    <Col xs={2} sm={2} md={2} lg={2} xl={2} xxl={2}>
+                                    </Col>
+                                    <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
+                                        <p>Precisión:</p>
+                                        <Form.Select onChange={(ev) => { this.updateSimulationStepMultiplier(parseFloat(ev.target.value)) }}>
+                                            <option defaultValue={true} value="1">Normal</option>
+                                            <option value="10">Nada Preciso</option>
+                                            <option value="5">Poco Preciso</option>
+                                            <option value="0.05">Preciso</option>
+                                            <option value="0.001">Muy preciso</option>
+                                        </Form.Select>
+                                    </Col>
+                                </Row>
+                                <br></br>
+                                <Row>
+                                    <OverlayTrigger
+                                        key="top"
+                                        placement="top"
+                                        overlay={
+                                            <ToolTipReact id={`tooltip-top-1`}>
+                                                Estado de la simulación. Pulsa para <strong>{this.state.running ? "detener" : "reanudar"}</strong> la simulación
+                                            </ToolTipReact>
+                                        }>
+                                        <div className="d-grid gap-2">
+                                            <Button variant={this.state.running ? "danger" : "outline-warning"} onClick={this.updateRunning} size="xs" >{this.state.running ? "STOP" : "RESUME"}</Button>
+                                        </div>
+
+                                    </OverlayTrigger>
+                                </Row>
+
+
                             </Col>
                         </Row>
                     </Col>
 
                     {/* CIRCUIT ANIMATION */}
                     <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
-
-                        <Alert variant="success">
-                            <strong>NOTA: </strong>Prueba a modificar los distintos componentes para obtener diferentes resultados
-                        </Alert>
-
                         <img src={this.getCurrentAnimation()} className="w-100"></img>
                     </Col>
                 </Row>
@@ -616,12 +665,12 @@ export default class SimpleRC extends Component {
 
                                     </Col>
                                     <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
-                                    
 
-                                    <div className={this.state.running ? "charge" : (this.state.q_percent == 0 ? "charge_discharge_complete" : "charge_charge_complete")} style={{"background" : this.state.capacitorCharging ? "green" : "red"}}>
-                                        <p className="percent_charge">{this.state.q_percent}%</p>
-                                    </div>
-                                    
+
+                                        <div className={this.state.running ? "charge" : (this.state.q_percent == 0 ? "charge_discharge_complete" : "charge_charge_complete")} style={{ "background": this.state.capacitorCharging ? "#569c02" : "#c94f1e" }}>
+                                            <p className="percent_charge">{this.state.q_percent}%</p>
+                                        </div>
+
                                     </Col>
                                 </Row>
                             </Col>
@@ -701,13 +750,13 @@ export default class SimpleRC extends Component {
 
                     {/* Switch controller */}
                     <Col xs={3} sm={3} md={3} lg={3} xl={3} xxl={3}>
-                    <OverlayTrigger
-                        key="top"
-                        placement="top"
-                        overlay={
-                             <ToolTipReact id={`tooltip-top-2`}>
-                                Pulsa sobre el interruptor para <strong>{this.state.capacitorCharging ? "descargar" : "cargar"}</strong> el condensador
-                            </ToolTipReact>
+                        <OverlayTrigger
+                            key="top"
+                            placement="top"
+                            overlay={
+                                <ToolTipReact id={`tooltip-top-2`}>
+                                    Pulsa sobre el interruptor para <strong>{this.state.capacitorCharging ? "descargar" : "cargar"}</strong> el condensador
+                                </ToolTipReact>
                             }>
                             <label className="switch">
                                 < input type="checkbox" onClick={(ev) => {
@@ -715,7 +764,7 @@ export default class SimpleRC extends Component {
                                 }} />
                                 <span className="slider"></span>
                             </label>
-                    </OverlayTrigger>
+                        </OverlayTrigger>
                     </Col>
                 </Row>
             </div>
