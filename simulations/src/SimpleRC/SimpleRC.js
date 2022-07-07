@@ -36,7 +36,6 @@ import rc_discharge_90_99 from "../assets/animations/rc-discharge/rc_discharge_9
 import rc_discharge_100 from "../assets/animations/rc-discharge/rc_discharge_100.png";
 import rc_discharge_background from "../assets/animations/rc-discharge/rc_discharge_background.png";
 
-const ANIMATIONS_ROUTE = "../assets/animations/";
 
 export default class SimpleRC extends Component {
 
@@ -45,6 +44,8 @@ export default class SimpleRC extends Component {
         this.state = {
             //time controller
             t_i: 0,
+            simulation_step: SIMULATION_STEP,
+            simulation_exec: SIMULATION_EXEC,
             //data arrays
             q_data: [],
             i_data: [],
@@ -115,13 +116,13 @@ export default class SimpleRC extends Component {
 
                     return {
                         ...prevState,
-                        q_data: [...oldQData, { "t": Number.parseFloat(t_i).toFixed(2), "Q(t)": instant_values.Q }],
-                        i_data: [...oldIData, { "t": Number.parseFloat(t_i).toFixed(2), "I(t)": instant_values.I }],
-                        vr_data: [...oldVrData, { "t": Number.parseFloat(t_i).toFixed(2), "Vr(t)": instant_values.Vr }],
-                        vc_data: [...oldVcData, { "t": Number.parseFloat(t_i).toFixed(2), "Vc(t)": instant_values.Vc }],
-                        e_data: [...oldEData, { "t": Number.parseFloat(t_i).toFixed(2), "E(t)": instant_values.E }],
+                        q_data: [...oldQData, { "t": t_i, "Q(t)": instant_values.Q }],
+                        i_data: [...oldIData, { "t": t_i, "I(t)": instant_values.I }],
+                        vr_data: [...oldVrData, { "t": t_i, "Vr(t)": instant_values.Vr }],
+                        vc_data: [...oldVcData, { "t": t_i, "Vc(t)": instant_values.Vc }],
+                        e_data: [...oldEData, { "t": t_i, "E(t)": instant_values.E }],
                         //time update
-                        t_i: t_i + SIMULATION_STEP / 1000,
+                        t_i: t_i + prevState.simulation_step / 1000,
 
                         //current capacitor charge update
                         q_0: instant_values.Q,
@@ -142,7 +143,7 @@ export default class SimpleRC extends Component {
             }
 
 
-        }, SIMULATION_EXEC);
+        }, this.state.simulation_exec);
 
 
         //update time interval id
@@ -564,14 +565,12 @@ export default class SimpleRC extends Component {
 
                             {/* BUTTONS CONTROLLER */}
                             <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
-                                
-                                
                                 <OverlayTrigger
                                     key="top"
                                     placement="top"
                                     overlay={
                                         <ToolTipReact id={`tooltip-top-1`}>
-                                            Estado del circuito. Pulsa para <strong>{this.state.running ? "detener" : "reanudar"}</strong> la simulación
+                                            Estado de la simulación. Pulsa para <strong>{this.state.running ? "detener" : "reanudar"}</strong> la simulación
                                         </ToolTipReact>
                                     }>
                                     <Button variant={this.state.running ? "danger" : "outline-warning"} onClick={this.updateRunning} size="lg">{this.state.running ? "STOP" : "RESUME"}</Button>
@@ -702,13 +701,21 @@ export default class SimpleRC extends Component {
 
                     {/* Switch controller */}
                     <Col xs={3} sm={3} md={3} lg={3} xl={3} xxl={3}>
-                        <label className="switch">
-                            < input type="checkbox" onClick={(ev) => {
-                                this.updateCharging()
-                            }} />
-                            <span className="slider"></span>
-                        </label>
-
+                    <OverlayTrigger
+                        key="top"
+                        placement="top"
+                        overlay={
+                             <ToolTipReact id={`tooltip-top-2`}>
+                                Pulsa sobre el interruptor para <strong>{this.state.capacitorCharging ? "descargar" : "cargar"}</strong> el condensador
+                            </ToolTipReact>
+                            }>
+                            <label className="switch">
+                                < input type="checkbox" onClick={(ev) => {
+                                    this.updateCharging()
+                                }} />
+                                <span className="slider"></span>
+                            </label>
+                    </OverlayTrigger>
                     </Col>
                 </Row>
             </div>
