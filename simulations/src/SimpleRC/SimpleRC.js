@@ -12,7 +12,7 @@ import './ToogleSwitch/ToogleSwitch.css'
 
 import { MAX_DATA, SIMULATION_EXEC, SIMULATION_STEP } from "../Utils/Utils";
 import { getChargeInstant, getDischargeInstant } from "../Utils/RCFormulas";
-import { Row, Col, Container, Alert, Button } from "react-bootstrap";
+import { Row, Col, Container, Alert, Button, OverlayTrigger, Tooltip as ToolTipReact} from "react-bootstrap";
 
 
 // resistor functions
@@ -564,7 +564,18 @@ export default class SimpleRC extends Component {
 
                             {/* BUTTONS CONTROLLER */}
                             <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
-                                <Button variant={this.state.running ? "danger" : "outline-warning"} onClick={this.updateRunning} size="lg">{this.state.running ? "STOP" : "RESUME"}</Button>
+                                
+                                
+                                <OverlayTrigger
+                                    key="top"
+                                    placement="top"
+                                    overlay={
+                                        <ToolTipReact id={`tooltip-top-1`}>
+                                            Estado del circuito. Pulsa para <strong>{this.state.running ? "detener" : "reanudar"}</strong> la simulación
+                                        </ToolTipReact>
+                                    }>
+                                    <Button variant={this.state.running ? "danger" : "outline-warning"} onClick={this.updateRunning} size="lg">{this.state.running ? "STOP" : "RESUME"}</Button>
+                                </OverlayTrigger>
                             </Col>
                         </Row>
                     </Col>
