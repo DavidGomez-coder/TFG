@@ -1,5 +1,5 @@
 {
-  "name": "rc-sim",
+  "name": "simulations",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -1,0 +1,85 @@
+.charge {
+    top: 10%;
+    position: relative;
+    width: 45%;
+    height: 6.25rem;
+    border: 6px solid black;
+    margin: auto;
+    transform: rotate(180deg);
+}
+
+.charge_discharge_complete {
+    top: 10%;
+    position: relative;
+    width: 45%;
+    height: 6.25rem;
+    border: 6px solid black;
+    margin: auto;
+    transform: rotate(180deg);
+    background: red;
+}
+
+.charge_charge_complete {
+    top: 10%;
+    position: relative;
+    width: 45%;
+    height: 6.25rem;
+    border: 6px solid black;
+    margin: auto;
+    transform: rotate(180deg);
+    background: green;
+}
+
+.charge_stop {
+    top: 10%;
+    position: relative;
+    width: 45%;
+    height: 6.25rem;
+    border: 6px solid black;
+    margin: auto;
+    transform: rotate(180deg);
+    background: gray;
+}
+
+.charge::before {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 101%;
+    background: white;
+    top: 0%;
+    left: 0%;  
+    animation: move 3s infinite reverse;
+}
+
+
+
+@keyframes move {
+    0% {
+        width: 0;
+    }
+
+    100%{
+        width:100%;
+    }
+
+}
+
+.charge::after, .charge_charge_complete::after, .charge_discharge_complete::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 70px;
+    background: black;
+    top: 8px;
+    left: -10%;
+    border-radius: 4px;
+}
+
+.percent_charge {
+    top: 25%;
+    left: 25%;
+    transform: rotate(180deg);
+    font-size: 200%;
+    position: absolute;
+}

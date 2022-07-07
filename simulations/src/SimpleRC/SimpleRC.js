@@ -12,27 +12,29 @@ import './ToogleSwitch/ToogleSwitch.css'
 
 import { MAX_DATA, SIMULATION_EXEC, SIMULATION_STEP } from "../Utils/Utils";
 import { getChargeInstant, getDischargeInstant } from "../Utils/RCFormulas";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container, Alert, Button } from "react-bootstrap";
+
+
 // resistor functions
 import { calculateColorBands, valueOfMultiplier } from "./Resistor/Resistor";
 import { getCapacitorMult } from "./Capacitor/CapacitorData";
 import { getCellMultiplier } from "./Cell/Cell";
 
 //capacitor on charge animations
-import rc_charge_0_63  from "../assets/animations/rc-charge/rc_charge_0_63.gif";
+import rc_charge_0_63 from "../assets/animations/rc-charge/rc_charge_0_63.gif";
 import rc_charge_63_80 from "../assets/animations/rc-charge/rc_charge_63_80.gif";
 import rc_charge_80_90 from "../assets/animations/rc-charge/rc_charge_80_90.gif";
 import rc_charge_90_99 from "../assets/animations/rc-charge/rc_charge_90_99.gif";
-import rc_charge_100   from "../assets/animations/rc-charge/rc_charge_100.png";
-import rc_charge_background   from "../assets/animations/rc-charge/rc_charge_background.png";
+import rc_charge_100 from "../assets/animations/rc-charge/rc_charge_100.png";
+import rc_charge_background from "../assets/animations/rc-charge/rc_charge_background.png";
 
 //capacitor on discharge animations
-import rc_discharge_0_63  from "../assets/animations/rc-discharge/rc_discharge_0_63.gif";
+import rc_discharge_0_63 from "../assets/animations/rc-discharge/rc_discharge_0_63.gif";
 import rc_discharge_63_80 from "../assets/animations/rc-discharge/rc_discharge_63_80.gif";
 import rc_discharge_80_90 from "../assets/animations/rc-discharge/rc_discharge_80_90.gif";
 import rc_discharge_90_99 from "../assets/animations/rc-discharge/rc_discharge_90_99.gif";
-import rc_discharge_100   from "../assets/animations/rc-discharge/rc_discharge_100.png";
-import rc_discharge_background   from "../assets/animations/rc-discharge/rc_discharge_background.png";
+import rc_discharge_100 from "../assets/animations/rc-discharge/rc_discharge_100.png";
+import rc_discharge_background from "../assets/animations/rc-discharge/rc_discharge_background.png";
 
 const ANIMATIONS_ROUTE = "../assets/animations/";
 
@@ -108,7 +110,7 @@ export default class SimpleRC extends Component {
 
                 //new values
                 let instant_values = this.state.capacitorCharging ? getChargeInstant(t_i, this.state.q_0, this.state.V, this.state.C, this.state.R) :
-                    getDischargeInstant(t_i, this.state.q_0, this.state.V, this.state.C, this.state.R);
+                    getDischargeInstant(t_i, this.state.q_max, this.state.V, this.state.C, this.state.R);
                 this.setState(prevState => {
 
                     return {
@@ -123,24 +125,20 @@ export default class SimpleRC extends Component {
 
                         //current capacitor charge update
                         q_0: instant_values.Q,
-                        q_percent: Number.parseFloat((instant_values.Q/prevState.q_max)*100).toFixed(2),
+                        q_percent: Number.parseFloat((instant_values.Q / prevState.q_max) * 100).toFixed(2),
                         //data length update
                         data_length: prevState.data_length + 1
 
                     }
                 });
 
-
-                if (this.state.capacitorCharging){
-                    if (this.state.q_percent >= 100) {
-                        this.updateRunning();
-                    }
-                }else {
-                    if (this.state.q_percent == 0){
-                        this.updateRunning();
-                    }
+                if (this.state.capacitorCharging && this.state.q_percent == 100) {
+                    this.updateRunning();
                 }
-                
+
+                if (!this.state.capacitorCharging && this.state.q_percent == 0) {
+                    this.updateRunning();
+                }
             }
 
 
@@ -164,44 +162,44 @@ export default class SimpleRC extends Component {
     }
 
     getCurrentAnimation() {
-        
-        switch(this.state.capacitorCharging){
-            
+
+        switch (this.state.capacitorCharging) {
+
             case true:
-                if (!this.state.running){
+                if (!this.state.running) {
                     return rc_charge_background;
                 }
 
-                if (this.state.q_percent == 100){
+                if (this.state.q_percent == 100) {
                     return rc_charge_100;
                 }
 
-                if (this.state.q_percent <= 63.2){
+                if (this.state.q_percent <= 63.2) {
                     return rc_charge_0_63;
-                }else if (this.state.q_percent > 63.2 && this.state.q_percent <= 80){
+                } else if (this.state.q_percent > 63.2 && this.state.q_percent <= 80) {
                     return rc_charge_63_80;
-                }else if (this.state.q_percent > 80 && this.state.q_percent <= 90){
+                } else if (this.state.q_percent > 80 && this.state.q_percent <= 90) {
                     return rc_charge_80_90;
-                }else if (this.state.q_percent > 90 && this.state.q_percent < 100){
+                } else if (this.state.q_percent > 90 && this.state.q_percent < 100) {
                     return rc_charge_90_99;
                 }
                 break;
             default:
 
-                if (!this.state.running){
+                if (!this.state.running) {
                     return rc_discharge_background;
                 }
-                if (this.state.q_percent == 100 || !this.state.running){
+                if (this.state.q_percent == 100 || !this.state.running) {
                     return rc_discharge_100;
                 }
 
-                if (this.state.q_percent <= 10){
+                if (this.state.q_percent <= 10) {
                     return rc_discharge_90_99;
-                }else if (this.state.q_percent> 10 && this.state.q_percent <= 20){
+                } else if (this.state.q_percent > 10 && this.state.q_percent <= 20) {
                     return rc_discharge_80_90;
-                }else if (this.state.q_percent > 20 && this.state.q_percent <= 37.7){
+                } else if (this.state.q_percent > 20 && this.state.q_percent <= 37.7) {
                     return rc_discharge_63_80;
-                }else if (this.state.q_percent > 37.7 && this.state.q_percent < 100){
+                } else if (this.state.q_percent > 37.7 && this.state.q_percent < 100) {
                     return rc_discharge_0_63;
                 }
                 break;
@@ -219,7 +217,9 @@ export default class SimpleRC extends Component {
                 vr_data: [],
                 vc_data: [],
                 e_data: [],
-                data_length: 0
+                data_length: 0,
+                running: false,
+                q_percent: !prevState.capacitorCharging ? 0 : 100
 
             }
         })
@@ -229,7 +229,7 @@ export default class SimpleRC extends Component {
         this.setState(prevState => {
             return {
                 ...prevState,
-                running: !prevState.running,
+                running: !this.state.running,
             }
         });
 
@@ -256,7 +256,9 @@ export default class SimpleRC extends Component {
             vr_data: [],
             e_data: [],
             data_length: 0,
-            t_i: 0
+            t_i: 0,
+            running: false,
+            q_percent: this.state.capacitorCharging ? 0 : 100
         })
     }
 
@@ -562,17 +564,19 @@ export default class SimpleRC extends Component {
 
                             {/* BUTTONS CONTROLLER */}
                             <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
-                                <button onClick={this.updateRunning}>{this.state.running ? "STOP" : "RESUME"}</button>
-                                <button onClick={this.updateCharging}>{this.state.capacitorCharging ? "DISCHARGE" : "CHARGE"}</button>.
-
-                                <p>Q (%): {this.state.q_percent}</p>
+                                <Button variant={this.state.running ? "danger" : "outline-warning"} onClick={this.updateRunning} size="lg">{this.state.running ? "STOP" : "RESUME"}</Button>
                             </Col>
                         </Row>
                     </Col>
 
                     {/* CIRCUIT ANIMATION */}
                     <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
-                    <img src={this.getCurrentAnimation()} className="w-100"></img>
+
+                        <Alert variant="success">
+                            <strong>NOTA: </strong>Prueba a modificar los distintos componentes para obtener diferentes resultados
+                        </Alert>
+
+                        <img src={this.getCurrentAnimation()} className="w-100"></img>
                     </Col>
                 </Row>
                 {/* CONTROLLERS ROW */}
@@ -600,11 +604,15 @@ export default class SimpleRC extends Component {
                                             <option value="miliF">{this.state.C_v} miliF</option>
                                         </select>
 
-
-
                                     </Col>
+                                    <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
+                                    
 
-
+                                    <div className={this.state.running ? "charge" : (this.state.q_percent == 0 ? "charge_discharge_complete" : "charge_charge_complete")} style={{"background" : this.state.capacitorCharging ? "green" : "red"}}>
+                                        <p className="percent_charge">{this.state.q_percent}%</p>
+                                    </div>
+                                    
+                                    </Col>
                                 </Row>
                             </Col>
                         </Row>
