@@ -10,9 +10,9 @@ import './Cell/CellCSS.css'
 import './ToogleSwitch/ToogleSwitch.css'
 
 
-import { MAX_DATA, SIMULATION_EXEC, SIMULATION_STEP } from "../Utils/Utils";
+import { EXACT_TIME, MAX_DATA, PERCENT_Q, SIMULATION_EXEC, SIMULATION_STEP, WITHOUT_RESTRICTIONS } from "../Utils/Utils";
 import { getChargeInstant, getDischargeInstant } from "../Utils/RCFormulas";
-import { Row, Col, Container, Alert, Button, OverlayTrigger, Form, Tooltip as ToolTipReact } from "react-bootstrap";
+import { Row, Col, Container, Alert, Button, OverlayTrigger, Form, Tooltip as ToolTipReact, FormControl } from "react-bootstrap";
 
 
 
@@ -46,8 +46,12 @@ export default class SimpleRC extends Component {
         this.state = {
             //time controller
             t_i: 0,
+            //stop conditions
+            selected_stop_condition: WITHOUT_RESTRICTIONS,
+            value_stop_condition: undefined,
+            condition_complete: false,
+            //precision multiplier
             simulation_step_multiplier: 1,
-            simulation_exec_multiplier: 1,
             //data arrays
             q_data: [],
             i_data: [],
@@ -84,6 +88,25 @@ export default class SimpleRC extends Component {
         this.updateRunning = this.updateRunning.bind(this);
     }
 
+    updateSelectedCondition(nCondition) {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                selected_stop_condition: nCondition
+            }
+        });
+    }
+
+    updateConditionValue(nConditionValue) {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                value_stop_condition: nConditionValue
+            }
+
+        })
+    }
+
     /**
      * Método utilizado para la actualización de los datos a lo 
      * largo de la simulación. Para ello, se hace uso de la función predefinida
@@ -114,26 +137,51 @@ export default class SimpleRC extends Component {
                 //new values
                 let instant_values = this.state.capacitorCharging ? getChargeInstant(t_i, this.state.q_0, this.state.V, this.state.C, this.state.R) :
                     getDischargeInstant(t_i, this.state.q_max, this.state.V, this.state.C, this.state.R);
-                this.setState(prevState => {
 
-                    return {
-                        ...prevState,
-                        q_data: [...oldQData, { "t": t_i, "Q(t)": instant_values.Q }],
-                        i_data: [...oldIData, { "t": t_i, "I(t)": instant_values.I }],
-                        vr_data: [...oldVrData, { "t": t_i, "Vr(t)": instant_values.Vr }],
-                        vc_data: [...oldVcData, { "t": t_i, "Vc(t)": instant_values.Vc }],
-                        e_data: [...oldEData, { "t": t_i, "E(t)": instant_values.E }],
-                        //time update
-                        t_i: t_i + ((SIMULATION_STEP * prevState.simulation_step_multiplier) / 1000),
+                //condiciones más restrictivas
+                if (this.state.value_stop_condition !== undefined) {
+                    if ((this.state.selected_stop_condition === PERCENT_Q && this.state.capacitorCharging && this.state.value_stop_condition >= 100) ||
+                        this.state.selected_stop_condition === PERCENT_Q && !this.state.capacitorCharging && this.state.value_stop_condition <= 0) {
+                        this.updateConditionValue(100);
+                        this.updateConditionState(true);
 
-                        //current capacitor charge update
-                        q_0: instant_values.Q,
-                        q_percent: Number.parseFloat((instant_values.Q / prevState.q_max) * 100).toFixed(2),
-                        //data length update
-                        data_length: prevState.data_length + 1
-
+                    } else if ((this.state.selected_stop_condition === PERCENT_Q && this.state.capacitorCharging && this.state.value_stop_condition <= this.state.q_percent) ||
+                    (this.state.selected_stop_condition === PERCENT_Q && !this.state.capacitorCharging && this.state.value_stop_condition >= this.state.q_percent)) {
+                        this.updateRunning();
+                        this.updateConditionState(true);
+                    } else if (this.state.selected_stop_condition === EXACT_TIME && this.state.value_stop_condition <= t_i) {
+                        this.updateRunning();
+                        this.updateConditionState(true);
+                    } else {
+                        this.updateConditionState(false);
                     }
-                });
+                }
+
+
+                if (!this.state.condition_complete) {
+                    this.setState(prevState => {
+
+                        return {
+                            ...prevState,
+                            q_data: [...oldQData, { "t": t_i, "Q(t)": instant_values.Q }],
+                            i_data: [...oldIData, { "t": t_i, "I(t)": instant_values.I }],
+                            vr_data: [...oldVrData, { "t": t_i, "Vr(t)": instant_values.Vr }],
+                            vc_data: [...oldVcData, { "t": t_i, "Vc(t)": instant_values.Vc }],
+                            e_data: [...oldEData, { "t": t_i, "E(t)": instant_values.E }],
+                            //time update
+                            t_i: t_i + ((SIMULATION_STEP * prevState.simulation_step_multiplier) / 1000),
+
+                            //current capacitor charge update
+                            q_0: instant_values.Q,
+                            q_percent: Number.parseFloat((instant_values.Q / prevState.q_max) * 100).toFixed(2),
+                            //data length update
+                            data_length: prevState.data_length + 1
+
+                        }
+                    });
+                }
+
+
 
                 if (this.state.capacitorCharging && this.state.q_percent == 100) {
                     this.updateRunning();
@@ -144,7 +192,8 @@ export default class SimpleRC extends Component {
                 }
             }
 
-        }, SIMULATION_EXEC * parseFloat(this.state.simulation_exec_multiplier));
+
+        }, SIMULATION_EXEC);
 
 
         //update time interval id
@@ -227,14 +276,25 @@ export default class SimpleRC extends Component {
         })
     }
 
-    updateRunning() {
+    updateConditionState(cState) {
         this.setState(prevState => {
             return {
                 ...prevState,
-                running: !this.state.running,
+                condition_complete: cState
             }
-        });
+        })
+    }
 
+    updateRunning() {
+        if (!this.state.condition_complete) {
+            this.setState(prevState => {
+                return {
+                    ...prevState,
+                    running: !this.state.running,
+                    condition_complete: false,
+                }
+            });
+        }
     }
 
     updateMaxValues() {
@@ -251,33 +311,35 @@ export default class SimpleRC extends Component {
     }
 
     resetDataArray() {
-        this.setState({
-            q_data: [],
-            i_data: [],
-            vc_data: [],
-            vr_data: [],
-            e_data: [],
-            data_length: 0,
-            t_i: 0,
-            running: false,
-            q_percent: this.state.capacitorCharging ? 0 : 100
-        })
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                q_data: [],
+                i_data: [],
+                vc_data: [],
+                vr_data: [],
+                e_data: [],
+                data_length: 0,
+                t_i: 0,
+                running: false,
+                q_percent: this.state.capacitorCharging ? 0 : 100,
+                condition_complete: false
+            }
+        });
     }
 
     updateSimulationStepMultiplier(multiplier) {
-        this.setState({
-            simulation_step_multiplier: multiplier
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                simulation_step_multiplier: multiplier
+            }
         });
-    }
-
-    updateSimulationExecMultiplier(multiplier) {
-        this.setState({
-            simulation_exec_multiplier: multiplier
-        });
+        this.resetDataArray();
+        this.updateMaxValues();
     }
 
     /** RESISTOR CONTROLLER */
-
     updateResistorValue(value) {
         this.setState(prevState => {
             return {
@@ -579,53 +641,92 @@ export default class SimpleRC extends Component {
                             {/* BUTTONS CONTROLLER */}
                             <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
 
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
+
 
                                 <Row>
+                                    <strong style={{ "textAlign": "left" }}>Condiciones de parada (aprox.): </strong>
                                     <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
-                                        <p>Velocidad:</p>
-                                        <Form.Select onChange={(ev) => { this.updateSimulationExecMultiplier(parseFloat(ev.target.value)) }}>
-                                            <option defaultValue={true} value="1">Normal</option>
-                                            <option value="1000">Muy Lento</option>
-                                            <option value="100">Lento</option>
-                                            <option value="0.001">Rápido</option>
-                                            <option value="0.0001">Muy rápido</option>
+                                        <Form.Select onChange={(ev) => {
+                                            this.updateSelectedCondition(ev.target.value);
+                                            this.updateConditionState(false);
+                                        }} disabled={this.state.running}>
+                                            <option defaultValue={true} value={WITHOUT_RESTRICTIONS}>Ninguna</option>
+                                            <option value={PERCENT_Q}>Porcentaje de carga</option>
+                                            <option value={EXACT_TIME}>Tiempo de simulación</option>
                                         </Form.Select>
-                                        <p>{SIMULATION_EXEC * this.state.simulation_exec_multiplier}</p>
+
+                                    </Col>
+
+                                    <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
+                                        <FormControl type="number" disabled={this.state.selected_stop_condition === WITHOUT_RESTRICTIONS || this.state.running}
+                                            min={
+                                                this.state.capacitorCharging ? (this.state.selected_stop_condition === PERCENT_Q ? (Number.parseFloat(this.state.q_percent)) : (this.state.selected_stop_condition === EXACT_TIME ? this.state.t_i : "")) : 0}
+                                            max={this.state.capacitorCharging ? (this.state.selected_stop_condition === PERCENT_Q ? 100 : (this.state.selected_stop_condition === EXACT_TIME ? "" : "")) : (Number.parseFloat(this.state.q_percent))
+                                                }
+                                            onChange={(ev) => {
+                                                this.updateConditionState(false);
+                                                let nVal = this.state.selected_stop_condition === PERCENT_Q ? Number.parseFloat(ev.target.value) : (this.state.selected_stop_condition === EXACT_TIME ? (Number.parseFloat(ev.target.value) * 1000) : undefined);
+                                                this.updateConditionValue(Number.parseFloat(ev.target.value));
+                                            }}></FormControl>
+                                    </Col>
+                                </Row>
+                                <br></br>
+                                <br></br>
+                                <Row>
+                                    <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
+                                        <strong>Precisión:</strong>
+                                        <Form.Select onChange={(ev) => { this.updateSimulationStepMultiplier(parseFloat(ev.target.value)) }}>
+                                            <option defaultValue={true} value="1">Normal</option>
+                                            <option value="100">Demasiado baja</option>
+                                            <option value="10">Muy baja</option>
+                                            <option value="5">Baja</option>
+                                            <option value="0.05">Alta</option>
+                                            <option value="0.001">Muy alta</option>
+                                            <option value="0.000001">Demasiado alta</option>
+                                        </Form.Select>
                                     </Col>
                                     <Col xs={2} sm={2} md={2} lg={2} xl={2} xxl={2}>
                                     </Col>
                                     <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
-                                        <p>Precisión:</p>
-                                        <Form.Select onChange={(ev) => { this.updateSimulationStepMultiplier(parseFloat(ev.target.value)) }}>
-                                            <option defaultValue={true} value="1">Normal</option>
-                                            <option value="10">Nada Preciso</option>
-                                            <option value="5">Poco Preciso</option>
-                                            <option value="0.05">Preciso</option>
-                                            <option value="0.001">Muy preciso</option>
-                                        </Form.Select>
+
                                     </Col>
                                 </Row>
                                 <br></br>
                                 <Row>
-                                    <OverlayTrigger
-                                        key="top"
-                                        placement="top"
-                                        overlay={
-                                            <ToolTipReact id={`tooltip-top-1`}>
-                                                Estado de la simulación. Pulsa para <strong>{this.state.running ? "detener" : "reanudar"}</strong> la simulación
-                                            </ToolTipReact>
-                                        }>
-                                        <div className="d-grid gap-2">
-                                            <Button variant={this.state.running ? "danger" : "outline-warning"} onClick={this.updateRunning} size="xs" >{this.state.running ? "STOP" : "RESUME"}</Button>
-                                        </div>
+                                    <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
+                                        <OverlayTrigger
+                                            key="top"
+                                            placement="top"
+                                            overlay={
+                                                <ToolTipReact id={`tooltip-top-1`}>
+                                                    Estado de la simulación. Pulsa para <strong>{this.state.running ? "detener" : "reanudar"}</strong> la simulación
+                                                </ToolTipReact>
+                                            }>
+                                            <div className="d-grid gap-2">
+                                                <Button variant={this.state.running ? "danger" : "outline-warning"} onClick={this.updateRunning} size="xs" >{this.state.running ? "STOP" : "RESUME"}</Button>
+                                            </div>
 
-                                    </OverlayTrigger>
+                                        </OverlayTrigger>
+                                    </Col>
+
+                                    <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
+                                        <OverlayTrigger
+                                            key="top"
+                                            placement="top"
+                                            overlay={
+                                                <ToolTipReact id={`tooltip-top-1`}>
+                                                    Reiniciar valores de la simulación actual.
+                                                </ToolTipReact>
+                                            }>
+                                            <div className="d-grid gap-2">
+                                                <Button variant={"outline-info"} onClick={(ev) => {
+                                                    this.resetDataArray();
+                                                    this.updateMaxValues();
+                                                }} size="xs" >RELOAD</Button>
+                                            </div>
+
+                                        </OverlayTrigger>
+                                    </Col>
                                 </Row>
 
 
@@ -646,7 +747,7 @@ export default class SimpleRC extends Component {
                             <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                                 <Row>
                                     <Col sm={12} md={12} lg={12} xl={12} xxl={12}>
-                                        <input type="range" className="form-range" min="0" max="99" step="0.1"
+                                        <input type="range" className="form-range" min="1" max="99" step="0.1"
                                             onChange={(ev) => {
                                                 this.updateCapacitorValue(ev.target.value);
 

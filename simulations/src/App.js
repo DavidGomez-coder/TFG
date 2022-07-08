@@ -29,8 +29,8 @@ class ExternalView extends Component {
               Física Interactiva
             </Navbar.Brand>
             <Nav className='me-auto'>
-              <Nav.Link href="#home">Home</Nav.Link>
               <Nav.Link href="#about">About</Nav.Link>
+              <Nav.Link href="#teoría">Teoría</Nav.Link>
               <Nav.Link href="#rc-sim">Simulación RC</Nav.Link>
               <Nav.Link href="#rl-sim">Simulación RL</Nav.Link>
             </Nav>
