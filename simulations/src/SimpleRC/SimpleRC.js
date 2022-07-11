@@ -10,7 +10,7 @@ import './Cell/CellCSS.css'
 import './ToogleSwitch/ToogleSwitch.css'
 
 
-import { EXACT_TIME, MAX_DATA, PERCENT_Q, SIMULATION_EXEC, SIMULATION_STEP, WITHOUT_RESTRICTIONS } from "../Utils/Utils";
+import { EXACT_TIME, MAX_DATA, PERCENT_Q, QUESTION_ICON, SIMULATION_EXEC, SIMULATION_STEP, WITHOUT_RESTRICTIONS } from "../Utils/Utils";
 import { getChargeInstant, getDischargeInstant } from "../Utils/RCFormulas";
 import { Row, Col, Container, Alert, Button, OverlayTrigger, Form, Tooltip as ToolTipReact, FormControl } from "react-bootstrap";
 
@@ -146,7 +146,7 @@ export default class SimpleRC extends Component {
                         this.updateConditionState(true);
 
                     } else if ((this.state.selected_stop_condition === PERCENT_Q && this.state.capacitorCharging && this.state.value_stop_condition <= this.state.q_percent) ||
-                    (this.state.selected_stop_condition === PERCENT_Q && !this.state.capacitorCharging && this.state.value_stop_condition >= this.state.q_percent)) {
+                        (this.state.selected_stop_condition === PERCENT_Q && !this.state.capacitorCharging && this.state.value_stop_condition >= this.state.q_percent)) {
                         this.updateRunning();
                         this.updateConditionState(true);
                     } else if (this.state.selected_stop_condition === EXACT_TIME && this.state.value_stop_condition <= t_i) {
@@ -644,15 +644,27 @@ export default class SimpleRC extends Component {
 
 
                                 <Row>
-                                    <strong style={{ "textAlign": "left" }}>Condiciones de parada (aprox.): </strong>
-                                    <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
+                                    <strong style={{ "textAlign": "left" }}>
+                                        <OverlayTrigger
+                                            key="top"
+                                            placement="top"
+                                            overlay={
+                                                <ToolTipReact id={`tooltip-top-3`}>
+                                                    Los resultados obtenidos dependerán de la <strong>precisión</strong> utilizada.
+                                                </ToolTipReact>
+                                            }>
+
+                                            {QUESTION_ICON}
+
+                                        </OverlayTrigger> Condiciones de parada (aprox.): </strong>
+                                    <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
                                         <Form.Select onChange={(ev) => {
                                             this.updateSelectedCondition(ev.target.value);
                                             this.updateConditionState(false);
                                         }} disabled={this.state.running}>
                                             <option defaultValue={true} value={WITHOUT_RESTRICTIONS}>Ninguna</option>
                                             <option value={PERCENT_Q}>Porcentaje de carga</option>
-                                            <option value={EXACT_TIME}>Tiempo de simulación</option>
+                                            <option value={EXACT_TIME}>Tiempo de simulación (s)</option>
                                         </Form.Select>
 
                                     </Col>
@@ -662,7 +674,7 @@ export default class SimpleRC extends Component {
                                             min={
                                                 this.state.capacitorCharging ? (this.state.selected_stop_condition === PERCENT_Q ? (Number.parseFloat(this.state.q_percent)) : (this.state.selected_stop_condition === EXACT_TIME ? this.state.t_i : "")) : 0}
                                             max={this.state.capacitorCharging ? (this.state.selected_stop_condition === PERCENT_Q ? 100 : (this.state.selected_stop_condition === EXACT_TIME ? "" : "")) : (Number.parseFloat(this.state.q_percent))
-                                                }
+                                            }
                                             onChange={(ev) => {
                                                 this.updateConditionState(false);
                                                 let nVal = this.state.selected_stop_condition === PERCENT_Q ? Number.parseFloat(ev.target.value) : (this.state.selected_stop_condition === EXACT_TIME ? (Number.parseFloat(ev.target.value) * 1000) : undefined);
@@ -715,7 +727,7 @@ export default class SimpleRC extends Component {
                                             placement="top"
                                             overlay={
                                                 <ToolTipReact id={`tooltip-top-1`}>
-                                                    Reiniciar valores de la simulación actual.
+                                                    Reiniciar valores.
                                                 </ToolTipReact>
                                             }>
                                             <div className="d-grid gap-2">
