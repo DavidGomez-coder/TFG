@@ -32,7 +32,7 @@ class ExternalView extends Component {
             </Navbar.Brand>
             <Nav className='me-auto'>
               <Nav.Link href="#about"  onClick={(ev) => {this.updateWindow("home")}}>About</Nav.Link>
-              <Nav.Link href="#teoria" onClick={(ev) => {this.updateWindow("teoria")}}>Teoría</Nav.Link>
+              <Nav.Link href="#teoria" onClick={(ev) => {this.updateWindow("teoria");     window.location.reload(true);} }>Teoría</Nav.Link>
               <Nav.Link href="#rc-sim" onClick={(ev) => {this.updateWindow("rc-sim")}}>Simulación RC</Nav.Link>
               <Nav.Link href="#rl-sim" onClick={(ev) => {this.updateWindow("rl-sim")}}>Simulación RL</Nav.Link>
             </Nav>

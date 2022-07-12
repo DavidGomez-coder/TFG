@@ -1,0 +1,1 @@
+export const SCND_KIRKCHOFF = "\\sum_{i=0}^{n} v_i = 0";

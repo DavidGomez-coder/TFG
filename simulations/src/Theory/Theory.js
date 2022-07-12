@@ -18,6 +18,8 @@ export default class Theory extends Component {
         this.setState({
             theory_window : nWindow
         });
+        
+
     }
 
     render() {
@@ -34,7 +36,7 @@ export default class Theory extends Component {
                 <Container fluid="xs sm md lg xl xxl">
                     {
                         this.state.theory_window === "teoria-circuito-rc" ? <RCTheory /> :
-                        this.state.theory_window === "teoria-circuito-rl" ? <RLTheory /> : undefined
+                        this.state.theory_window === "teoria-circuito-rl" ? <RLTheory /> : ""
                     }
                 </Container>
             </div>

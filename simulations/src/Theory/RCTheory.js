@@ -1,8 +1,11 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import React, { Component } from "react";
+import MathJax from 'react-mathjax';
 import { Container, Row, Col, ListGroup, Accordion } from "react-bootstrap";
 
 import rc_circuit from "../assets/img/rc-circuit.png"
+import { SCND_KIRKCHOFF } from './TheoryFormulas';
+
 
 
 export default class RCTheory extends Component {
@@ -47,7 +50,11 @@ export default class RCTheory extends Component {
                                         La segunda Ley de Kirchhoff, dice lo siguiente: <i>En cada una de las mallas que definen un circuito, la suma de las diferencias de potencial de cada uno de los elementos es cero. Es decir,
                                             la suma de todas las tensiones suministradas es igual a la suma de todas las tensiones consumidas. <br />
                                         </i>
-
+                                        <MathJax.Provider>
+                                            
+                                                <MathJax.Node formula="\sum_{i=0}^{n} v_i = 0" />
+                                            
+                                        </MathJax.Provider>
                                         
                                     </Accordion.Body>
                                 </Accordion.Item>
