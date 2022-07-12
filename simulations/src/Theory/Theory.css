@@ -1,0 +1,14 @@
+html, body {margin: 0; height: 100%; overflow: hidden}
+
+
+#scrool_section {
+    text-align:start;
+}
+
+.scroll-div {
+    height: 90%;
+    padding: 1%;
+    overscroll-behavior: auto;
+    overflow-y: scroll;
+}
+

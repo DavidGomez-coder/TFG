@@ -27,7 +27,7 @@ class ExternalView extends Component {
         <Navbar bg="dark" variant="dark">
           <Container fluid>
             {/* NAVBAR */}
-            <Navbar.Brand href="#home" onClick={(ev) => {this.updateWindow("home")}}>
+            <Navbar.Brand href="#teoria" onClick={(ev) => {this.updateWindow("teoria")}}>
               Física Interactiva
             </Navbar.Brand>
             <Nav className='me-auto'>
