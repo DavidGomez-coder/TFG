@@ -135,7 +135,7 @@ export default class SimpleRC extends Component {
                 let t_i = this.state.t_i;
 
                 //new values
-                let instant_values = this.state.capacitorCharging ? getChargeInstant(t_i, this.state.q_0, this.state.V, this.state.C, this.state.R) :
+                let instant_values = this.state.capacitorCharging ? getChargeInstant(t_i, this.state.q_max, this.state.V, this.state.C, this.state.R) :
                     getDischargeInstant(t_i, this.state.q_max, this.state.V, this.state.C, this.state.R);
 
                 //condiciones más restrictivas
@@ -432,7 +432,7 @@ export default class SimpleRC extends Component {
 
         return (
 
-            <div style={{ "padding": "1%" }}>
+            <div style={{"paddingLeft" : "1%", "paddingRight" : "1%"}}>
                 {/* UP ROW */}
                 <Row>
                     {/* DATA CHARTS */}
@@ -706,30 +706,13 @@ export default class SimpleRC extends Component {
                                 <br></br>
                                 <Row>
                                     <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
-                                        <OverlayTrigger
-                                            key="top"
-                                            placement="top"
-                                            overlay={
-                                                <ToolTipReact id={`tooltip-top-1`}>
-                                                    Estado de la simulación. Pulsa para <strong>{this.state.running ? "detener" : "reanudar"}</strong> la simulación
-                                                </ToolTipReact>
-                                            }>
                                             <div className="d-grid gap-2">
                                                 <Button variant={this.state.running ? "danger" : "outline-warning"} onClick={this.updateRunning} size="xs" >{this.state.running ? "STOP" : "RESUME"}</Button>
                                             </div>
-
-                                        </OverlayTrigger>
                                     </Col>
 
                                     <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
-                                        <OverlayTrigger
-                                            key="top"
-                                            placement="top"
-                                            overlay={
-                                                <ToolTipReact id={`tooltip-top-1`}>
-                                                    Reiniciar valores.
-                                                </ToolTipReact>
-                                            }>
+       
                                             <div className="d-grid gap-2">
                                                 <Button variant={"outline-info"} onClick={(ev) => {
                                                     this.resetDataArray();
@@ -737,7 +720,6 @@ export default class SimpleRC extends Component {
                                                 }} size="xs" >RELOAD</Button>
                                             </div>
 
-                                        </OverlayTrigger>
                                     </Col>
                                 </Row>
 
