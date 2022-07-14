@@ -8,7 +8,7 @@ export default class RLTheory extends Component {
     render(){
         return (
             <div>
-                TEORIA CIRCUITO RL
+                <h1 id="introduccion-rl" style={{ "textAlign": "center" }}>Simulación de un circuito RL</h1>
             </div>
         )
     }

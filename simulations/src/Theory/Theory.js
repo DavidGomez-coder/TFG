@@ -80,6 +80,7 @@ export default class Theory extends Component {
 
                             <div id="#top"> </div>
                             <RCTheory />
+                            <hr />
                             <RLTheory />
                             
                         </Col>

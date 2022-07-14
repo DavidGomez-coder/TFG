@@ -4,7 +4,7 @@ import MathJax from 'react-mathjax';
 import { Container, Row, Col, ListGroup, Accordion } from "react-bootstrap";
 
 import rc_circuit from "../assets/img/rc-circuit.png"
-import { ECR_CAPACITOR_CHARGE, I_DEFINITION, RCI_ON_CHARGE, OHM_LAW, SCND_KIRKCHOFF, SUST_DEFINITION, SUST_DEFINITION2, VR_ON_CHARGE, VC_ON_CHARGE, SUST_DEFINITION3, RCI_ON_DISCHARGE, VR_ON_DISCHARGE, VC_ON_DISCHARGE } from './TheoryFormulas';
+import { ECR_CAPACITOR_CHARGE, I_DEFINITION, RCI_ON_CHARGE, OHM_LAW, SCND_KIRKCHOFF, SUST_DEFINITION, SUST_DEFINITION2, VR_ON_CHARGE, VC_ON_CHARGE, SUST_DEFINITION3, RCI_ON_DISCHARGE, VR_ON_DISCHARGE, VC_ON_DISCHARGE, RC_ENERGY } from './TheoryFormulas';
 
 
 
@@ -15,7 +15,7 @@ export default class RCTheory extends Component {
     render() {
         return (
 
-            <div id="scrool_section">
+            <div id="rc-theory" className="scrool_section">
                 <br />
                 <h1 id="introduccion-rc" style={{ "textAlign": "center" }}>Simulación de un circuito RC</h1>
                 <h2 >Introducción</h2>
@@ -238,18 +238,76 @@ export default class RCTheory extends Component {
                         <ListGroup.Item>
                             <MathJax.Provider>
                                 <MathJax.Node formula={VC_ON_DISCHARGE} />
-                            </MathJax.Provider> 
+                            </MathJax.Provider>
                         </ListGroup.Item>
 
                     </ListGroup>
                     <br />
                     <br />
-                    En la descarga del condensador, tanto la intensidad de corriente como la diferencia de potencial en los bornes del condensador, tienen signo negativo. Esto indica que el sentido de 
+                    En la descarga del condensador, tanto la intensidad de corriente como la diferencia de potencial en los bornes del condensador, tienen signo negativo. Esto indica que el sentido de
                     la corriente es al contrario.
                 </div>
                 <br />
                 <br />
                 <h2 id="energia-del-condensador">Energía almacenada</h2>
+                Por último, podemos estudiar la energía almacenada en el condensador. Esta, es energía potencial electroestática y por lo tanto, se encuentra relacionada tanto con el voltaje de la fuente como
+                con la carga del condensador. Usamos para ello el concepto de potencia.
+                <br />
+                <br />
+                <div id="potencia-definition">
+                    <Accordion defaultActiveKey="rc-potencia" alwaysOpen>
+                        <Accordion.Item eventKey='rc-potencia'>
+                            <Accordion.Header>
+                                Potencia
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                Definimos potencia, como la cantidad de trabajo que se realiza por unidad de tiempo. Por definición, sabemos que
+                                <MathJax.Provider><MathJax.Node inline formula="\hspace{0.1cm} q(t) = C \cdot V_C(t)" /></MathJax.Provider>, luego podemos escribir que
+                                <MathJax.Provider><MathJax.Node formula="I(t) = C \frac{\partial V_C(t)}{\partial t}" /></MathJax.Provider>
+                                Si hablamos en términos de energía la potencia a lo largo del tiempo se escribe como
+                                <MathJax.Provider><MathJax.Node inline formula="p(t) = \frac{\partial E(t)}{\partial t}" /></MathJax.Provider>, y siendo la potencia consumida por el condensador
+                                <MathJax.Provider><MathJax.Node inline formula="p(t) = V_C(t) \cdot I(t) = V_C(t) \cdot C \cdot \frac{\partial V_C(t)}{\partial t}" /></MathJax.Provider>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    </Accordion>
+                </div>
+                <br />
+                <br />
+                Luego, si despejamos la energía en la definición de potencia tenemos que
+                <MathJax.Provider><MathJax.Node inline formula="\hspace{0.1cm} \partial E(t) = p(t) \partial t" /></MathJax.Provider>.
+                A continuación, sustituimos en la expresion de potencia obtenida para el condensador, tal que
+                <MathJax.Provider><MathJax.Node inline formula="\hspace{0.1cm} \partial E(t) = V_C(t) \cdot C \partial V_C(t)" /></MathJax.Provider>
+                <br />
+                <strong>NOTA: </strong> Al partir de un condensador descargado, la energía en su instante inicial es nula. Resolvemos la ecuación diferencial anterior, integrando a ambos lados.
+                <br />
+                <br />
+                <Accordion>
+                    <Accordion.Item eventKey='rc-energy'>
+                        <Accordion.Header>
+                            Energía en un condensador (Resolución de la ecuación diferencial)
+                        </Accordion.Header>
+                        <Accordion.Body>
+                            <MathJax.Provider><MathJax.Node formula="\partial E(t) = V_C(t) \cdot C \partial V_C(t)" /></MathJax.Provider>
+                            <MathJax.Provider><MathJax.Node formula="\int_{0}^{E(t)} \partial E(t) = \int_{0}^{V_C(t)} V_C(t) \cdot C \partial V_C(t)" /></MathJax.Provider>
+                            <MathJax.Provider><MathJax.Node formula="E(t) = C \int_{0}^{V_C(t)} V_C(t) \partial V_C(t) = C \left[ \frac{V_C(t)^2}{2} \right]_{0}^{V_C(t)}" /></MathJax.Provider>
+                            <MathJax.Provider><MathJax.Node formula={RC_ENERGY} /></MathJax.Provider>
+                        </Accordion.Body>
+                    </Accordion.Item>
+                </Accordion>
+                <br />
+                <br />
+                Una vez resuelta, obtenemos que la energía del condensador en un instante de tiempo equivale a
+                <MathJax.Provider><MathJax.Node formula={RC_ENERGY} /></MathJax.Provider>, dónde <MathJax.Provider><MathJax.Node inline formula="\hspace{0.1cm} V_C(t)" /></MathJax.Provider> corresponderá
+                a alguna de las expresiones calculadas anteriormente, dependiendo de si el condensador se encuentra en estado de carga o descarga.
+                <br />
+                <br />
+                Además, la energía máxima que puede llegar a almacenar el condensador viene dada por la expresión:
+                <ListGroup>
+                    <ListGroup.Item disabled>Energía máxima</ListGroup.Item>
+                    <ListGroup.Item>
+                        <MathJax.Provider><MathJax.Node formula="E_{max} = \lim_{t \to \infty} E(t) = \lim_{t \to \infty} \frac{1}{2}CV_C(t)^2 = \frac{1}{2}C \varepsilon^2" /></MathJax.Provider>
+                    </ListGroup.Item>
+                </ListGroup>
 
             </div>
         )

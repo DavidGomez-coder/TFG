@@ -17,3 +17,5 @@ export const VC_ON_CHARGE       = "V_C(t) = \\varepsilon \\cdot \\left( 1 - \\ma
 export const RCI_ON_DISCHARGE   = "I(t) = \\frac{-q_0}{RC} \\cdot \\mathcal{\\huge e}^{\\frac{-t}{RC}}";
 export const VR_ON_DISCHARGE    = "V_R(t) = \\frac{-q_0}{C} \\cdot \\mathcal{\\huge e}^{\\frac{-t}{RC}}";
 export const VC_ON_DISCHARGE    = "V_C(t) = \\frac{q_0}{C} \\cdot \\mathcal{\\huge e}^{\\frac{-t}{RC}}";
+
+export const RC_ENERGY          = "E(t) = \\frac{1}{2}CV_C(t)^2";
