@@ -26,6 +26,9 @@ export const RC_ENERGY          = "E(t) = \\frac{1}{2}CV_C(t)^2";
 //RL
 export const VL_DEFINITION      = "V_L(t) = L \\cdot \\frac{\\partial I(t)}{\\partial t}";
 export const DIFF_EQ_IND_CHARGE = "\\varepsilon = L \\cdot \\frac{\\partial I(t)}{\\partial t} + R\\cdot I(t)";
+export const RLI_ON_CHARGE      = "I(t) = \\frac{\\varepsilon}{R} \\left( 1- \\mathcal{\\huge e}^{\\frac{-Rt}{L}} \\right)";
+export const RLVR_ON_CHARGE     = "V_R(t) = \\varepsilon \\cdot \\left( 1- \\mathcal{\\huge e}^{\\frac{-Rt}{L}} \\right)";
+export const RLVL_ON_CHARGE     = "V_L(t) = R \\varepsilon \\cdot \\left( 1- \\mathcal{\\huge e}^{\\frac{-Rt}{L}} \\right)";
 
 //FUNCTS
 export function WRITE_FORMULA(f, i){

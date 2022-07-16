@@ -3,8 +3,8 @@ import './Theory.css'
 
 import rl_circuit from "../assets/img/rl-circuit.png";
 import MathJax from "react-mathjax";
-import { DIFF_EQ_IND_CHARGE, VL_DEFINITION, WRITE_FORMULA } from "./TheoryFormulas";
-import { Accordion } from "react-bootstrap";
+import { DIFF_EQ_IND_CHARGE, RLI_ON_CHARGE, RLVL_ON_CHARGE, RLVR_ON_CHARGE, VL_DEFINITION, WRITE_FORMULA } from "./TheoryFormulas";
+import { Accordion, ListGroup } from "react-bootstrap";
 
 export default class RLTheory extends Component {
     constructor(props){
@@ -31,8 +31,8 @@ export default class RLTheory extends Component {
                 <br />
                 <h2 id="carga-del-inductor">Carga de un inductor</h2>
                 Volvemos a aplicar el balance de energías de los componentes del circuito (segunda ley de Kirchhoff) de la única malla de este.
-                {WRITE_FORMULA("\\varepsilon = V_R(t) + V_L(t)", false)}
-                , dónde {WRITE_FORMULA("\\varepsilon", true)}  es el valor de la fuente, {WRITE_FORMULA("V_R(t)", true)}  la diferencia de potencial
+                {WRITE_FORMULA("\varepsilon = V_R(t) + V_L(t)", false)}
+                , dónde {WRITE_FORMULA("\varepsilon", true)}  es el valor de la fuente, {WRITE_FORMULA("V_R(t)", true)}  la diferencia de potencial
                 entre los bornes de la resistencia y {WRITE_FORMULA("V_L(t)", true)} la diferencia de potencial en el inductor, que por definición, esta diferencia de potencial en los bornes 
                 del inductor a lo largo del tiempo puede obtenerse utilizando la siguiente expresión: 
                 
@@ -48,18 +48,42 @@ export default class RLTheory extends Component {
                         <Accordion.Header><strong>Resolución ec. diferencial para la carga de un inductor</strong></Accordion.Header>
                         <Accordion.Body>
                             Despejamos, a cada lado de la ecuación separando cada una de las variables.
-                            {WRITE_FORMULA("L \\cdot \\frac{\\partial I(t)}{\\partial t} = \\varepsilon - R \\cdot I(t)", false)}
-                            {WRITE_FORMULA("\\frac{L}{R}\\frac{\\partial I(t)}{\\partial t} = \\frac{\\varepsilon -  R \\cdot I(t)}{R} = \\frac{\\varepsilon}{R} - I(t)", false)}
+                            {WRITE_FORMULA("L \cdot \frac{\partial I(t)}{\partial t} = \varepsilon - R \cdot I(t)", false)}
+                            {WRITE_FORMULA("\frac{L}{R}\frac{\partial I(t)}{\partial t} = \frac{\varepsilon -  R \cdot I(t)}{R} = \frac{\varepsilon}{R} - I(t)", false)}
                             Quedando
-                            {WRITE_FORMULA("\\frac{\\partial I(t)}{\\frac{\\varepsilon}{R} - I(t)} = \\frac{R}{L} \\partial t", false)}
+                            {WRITE_FORMULA("\frac{\partial I(t)}{\frac{\varepsilon}{R} - I(t)} = \frac{R}{L} \partial t", false)}
                             Integramos a ambos lados. Suponiendo, que el instante inicial cuando se aplica una diferencia de potencial al circuito, no había corriente previa, la intensidad de corriente es nula {WRITE_FORMULA("I(0) = 0",true)}:
-                            {WRITE_FORMULA("\\int_{0}^{I(t)} \\frac{\\partial I(t)}{\\frac{\\varepsilon}{R} - I(t)} = \\int_{0}^{t} \\frac{R}{L} \\partial t", false)}
+                            {WRITE_FORMULA("\int_{0}^{I(t)} \frac{\partial I(t)}{\frac{\varepsilon}{R} - I(t)} = \int_{0}^{t} \frac{R}{L} \partial t", false)}
                             Resolvemos las integrales a ambos lados
-                            {WRITE_FORMULA("\\left[ -\\ln \\left( \\frac{\\varepsilon}{R} - I(t) \\right)\\right]_{0}^{I(t)} = \\frac{R}{L} \\left[ t \\right]_{0}^{t}", false)}
+                            {WRITE_FORMULA("\left[ -\ln \left( \frac{\varepsilon}{R} - I(t) \right)\right]_{0}^{I(t)} = \frac{R}{L} \left[ t \right]_{0}^{t}", false)}
+                            {WRITE_FORMULA("-\ln {\left( \frac{\varepsilon}{R} - I(t) \right)} + \ln{\frac{\varepsilon}{R}} = \frac{R}{L}t", false)}
+                            {WRITE_FORMULA("\mathcal{\huge e}^{-\ln {\left(\frac{\varepsilon}{R} - I(t)\right)} + \ln{\frac{\varepsilon}{R}}} = \mathcal{\huge e}^{\frac{R}{L}t}", false)}
+                            {WRITE_FORMULA("\mathcal{\huge e}^{-\ln {\left(\frac{\varepsilon}{R} - I(t)\right)}} \cdot \mathcal{\huge e}^{\ln{\frac{\varepsilon}{R}}} = \mathcal{\huge e}^{\frac{R}{L}t}",false)}
+                            {WRITE_FORMULA("\frac{\varepsilon / R}{\frac{\varepsilon}{R} - I(t)} = \mathcal{\huge e}^{\frac{Rt}{L}}", false)}
+                            Despejamos {WRITE_FORMULA("\hspace{0.1cm} I(t)" ,true)} y tenemos
+                            {WRITE_FORMULA(RLI_ON_CHARGE,false)}
                         </Accordion.Body>
                     </Accordion.Item>   
                 </Accordion>
-
+                <br />
+                <br />
+                Una vez resuelta la ecuación diferencial, obtenemos el valor de la intensidad del circuito a lo largo del tiempo mientras el inductor se en cuentra en estado de almacenamiento de energía. Además, a partir de esta expresión
+                podemos deducir las siguientes:
+                <br />
+                <br />
+                <ListGroup>
+                    <ListGroup.Item disabled>Intensidad de corriente</ListGroup.Item>
+                    <ListGroup.Item>{WRITE_FORMULA(RLI_ON_CHARGE, false)}</ListGroup.Item>
+                    <ListGroup.Item disabled>Diferencia de potencial en la resistencia</ListGroup.Item>
+                    <ListGroup.Item>{WRITE_FORMULA(RLVR_ON_CHARGE ,false)}</ListGroup.Item>
+                    <ListGroup.Item disabled>Diferencia de potencial en el inductor</ListGroup.Item>
+                    <ListGroup.Item>{WRITE_FORMULA(RLVL_ON_CHARGE, false)}</ListGroup.Item>
+                </ListGroup>
+                <br />
+                <br />
+                <h2 id="descarga-del-inductor">Descarga del inductor</h2>
+                El siguiente estado a estudiar, es la disipación de energía (descarga) del inductor. Para que esto se produzca, no se debe de estar suministrando energía los componentes
+                del circuito, es decir {WRITE_FORMULA("\hspace{0.1cm} \varepsilon = 0", true)}. Inicialmente, consideraremos que la intensidad del circuito en dicho instante es máxima.
                 <br />
                 <br />
             </div>
