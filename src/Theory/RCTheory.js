@@ -30,6 +30,9 @@ export default class RCTheory extends Component {
                 que nos ayudarán a entender este fenómeno.
                 <br />
                 <br />
+                {/* ***************************************************************** */}
+                {/*                 CONCEPTOS BÁSICOS                                 */}
+                {/* ***************************************************************** */}
                 <div id="concepts"></div>
                 <Accordion defaultActiveKey={['k-0', 'k-1', 'k-2']} alwaysOpen>
                     <Accordion.Item eventKey='k-0'>
@@ -58,6 +61,9 @@ export default class RCTheory extends Component {
                     </Accordion.Item>
                 </Accordion>
                 <br />
+                {/* ***************************************************************** */}
+                {/*                 CARGA DEL CONDENSADOR                             */}
+                {/* ***************************************************************** */}
                 <h2 id="carga-del-condensador">Carga del condensador</h2>
                 Para comprender el funcionamiento del circuito, lo analizaremos en término de energías de sus componenentes. Para ello, haremos uso de la <i>Ley de Kirchhoff</i> presentada anteriormente, aplicando
                 dicha ley sobre la malla de nuestro circuito.
@@ -143,10 +149,13 @@ export default class RCTheory extends Component {
                 </div>
                 <br />
                 <br />
+                {/* ***************************************************************** */}
+                {/*                 DESCARGA DEL INDUCTOR                             */}
+                {/* ***************************************************************** */}
                 <h2 id="descarga-del-condensador">Descarga del condensador</h2>
                 El siguiente estado a estudiar, es la descarga del condensador. Para que esto se produzca, no se debe de estar suministrando energía a los componentes del circuito, es decir, el valor de la fuente debe de ser
                 {WRITE_FORMULA("\\hspace{0.1cm} \\varepsilon = 0", true)}. Consideraremos para la descarga, que en el instante inicial la carga almacenada en el condensador es la máxima
-                ({WRITE_FORMULA("\\hspace{0.1cm} q(0) = C \\cdot \\varepsilon", true)}), que denotaremos como {WRITE_FORMULA("\\hspace{0.1cm} q_0",true)}.
+                {WRITE_FORMULA("\\hspace{0.1cm} q(0) = C \\cdot \\varepsilon", true)}, que denotaremos como {WRITE_FORMULA("\\hspace{0.1cm} q_0",true)}.
                 <br />
                 <br />
                 Usaremos la segunda ley de Kirchhoff
@@ -210,6 +219,9 @@ export default class RCTheory extends Component {
                 </div>
                 <br />
                 <br />
+                {/* ***************************************************************** */}
+                {/*                 ENERGÍA DEL CONDENSADOR                           */}
+                {/* ***************************************************************** */}
                 <h2 id="energia-del-condensador">Energía almacenada</h2>
                 Por último, podemos estudiar la energía almacenada en el condensador. Esta, es energía potencial electroestática y por lo tanto, se encuentra relacionada tanto con el voltaje de la fuente como
                 con la carga del condensador. Usamos para ello el concepto de potencia.
@@ -219,7 +231,7 @@ export default class RCTheory extends Component {
                     <Accordion defaultActiveKey="rc-potencia" alwaysOpen>
                         <Accordion.Item eventKey='rc-potencia'>
                             <Accordion.Header>
-                                Potencia
+                                <strong>Potencia</strong>
                             </Accordion.Header>
                             <Accordion.Body>
                                 Definimos potencia, como la cantidad de trabajo que se realiza por unidad de tiempo. Por definición, sabemos que

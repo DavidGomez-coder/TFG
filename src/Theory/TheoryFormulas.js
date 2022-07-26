@@ -1,5 +1,5 @@
 /**
- * Módulo de las expresiones matemáticas en latex para usar junto a la librería mathjax
+ * Módulo de las expresiones matemáticas  en latex más usadas, para usar junto a la librería mathjax
  * @author David Gómez Pérez <dgpv2000@gmail.com>
  */
 
@@ -29,6 +29,18 @@ export const DIFF_EQ_IND_CHARGE = "\\varepsilon = L \\cdot \\frac{\\partial I(t)
 export const RLI_ON_CHARGE      = "I(t) = \\frac{\\varepsilon}{R} \\left( 1- \\mathcal{\\huge e}^{\\frac{-Rt}{L}} \\right)";
 export const RLVR_ON_CHARGE     = "V_R(t) = \\varepsilon \\cdot \\left( 1- \\mathcal{\\huge e}^{\\frac{-Rt}{L}} \\right)";
 export const RLVL_ON_CHARGE     = "V_L(t) = R \\varepsilon \\cdot \\left( 1- \\mathcal{\\huge e}^{\\frac{-Rt}{L}} \\right)";
+export const RL_IMAX            = "I_{max} = \\lim_{t \\to \\infty} I(t) = \\lim_{t \\to \\infty} \\frac{\\varepsilon}{R} \\left( 1- \\mathcal{\\huge e}^{\\frac{-Rt}{L}} \\right) = \\frac{\\varepsilon}{R}  "
+
+export const RLI_ON_DISCHARGE  = "I(t) = I_0 \\cdot \\mathcal{\\huge e}^{\\frac{-Rt}{L}}";
+export const RLVR_ON_DISCHARGE = "V_R(t) = R \\cdot I_0 \\cdot \\mathcal{\\huge e}^{\\frac{-Rt}{L}}";
+export const RLVL_ON_DISCHARGE = "V_L(t) = -R \\cdot I_0 \\cdot \\mathcal{\\huge e}^{\\frac{-Rt}{L}}";
+export const RL_ENERGY = "E(t) = \\frac{1}{2}L I(t)^2";
+export const RL_FEM = "fem(t) = -V_L(t) = -R  \\cdot \\varepsilon \\cdot \\mathcal{\\huge e}^{\\frac{-Rt}{L}}";
+
+export const BIOT_SAVART = "B(t) = \\mu_0 \\cdot \\frac{N^2}{l} \\cdot I(t)";
+export const PHI = "\\phi(t) = L \\cdot I(t)";
+export const PHI_MAX  = "\\phi_{max} = L \\cdot \\frac{\\varepsilon}{R}";
+
 
 //FUNCTS
 export function WRITE_FORMULA(f, i){
