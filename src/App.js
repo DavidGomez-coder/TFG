@@ -5,6 +5,7 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Component } from 'react';
 import Home from './Home/Home';
 import Theory from './Theory/Theory';
+import SimpleRL from './Circuits/SimpleRL';
 
 
 class ExternalView extends Component {
@@ -43,7 +44,7 @@ class ExternalView extends Component {
           {
             this.state.wndow === "about" ? <Home/> : 
             this.state.wndow === "rc-sim" ? <SimpleRC /> :
-            this.state.wndow === "rl-sim" ? "" :
+            this.state.wndow === "rl-sim" ? <SimpleRL /> :
             this.state.wndow === "teoria" ? <Theory /> : undefined
           }
         </Container>
