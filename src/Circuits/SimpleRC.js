@@ -88,6 +88,10 @@ export default class SimpleRC extends Component {
         this.updateRunning = this.updateRunning.bind(this);
     }
 
+    /**
+     * Método encargado de actualizar la condición de parada de la simulación
+     * @param {*} nCondition 
+     */
     updateSelectedCondition(nCondition) {
         this.setState(prevState => {
             return {
@@ -97,6 +101,10 @@ export default class SimpleRC extends Component {
         });
     }
 
+    /**
+     * Método encargado de actualizar el valor de la condición de parada de la simulación
+     * @param {*} nConditionValue 
+     */
     updateConditionValue(nConditionValue) {
         this.setState(prevState => {
             return {
@@ -212,6 +220,11 @@ export default class SimpleRC extends Component {
         clearInterval(this.state.intervalId);
     }
 
+    /**
+     * Función que muestra la animación correspondiente, dependiendo del porcentaje de carga del condensador así como 
+     * del estado del circuito
+     * @returns img_src : undefined
+     */
     getCurrentAnimation() {
 
         switch (this.state.capacitorCharging) {
@@ -257,6 +270,7 @@ export default class SimpleRC extends Component {
         }
     }
 
+
     updateCharging() {
         this.setState(prevState => {
             return {
@@ -276,15 +290,22 @@ export default class SimpleRC extends Component {
         })
     }
 
+    /**
+     * Método que indica si ha sido cambiada alguna condición de parada del circuito
+     * @param {*} cState 
+     */
     updateConditionState(cState) {
         this.setState(prevState => {
             return {
                 ...prevState,
                 condition_complete: cState
             }
-        })
+        });
     }
 
+    /**
+     * Método utilizado para alternar entre "pause" y "resume" del circuito.
+     */
     updateRunning() {
         if (!this.state.condition_complete) {
             this.setState(prevState => {
@@ -297,6 +318,10 @@ export default class SimpleRC extends Component {
         }
     }
 
+    /**
+     * Método usado para actualizar los valores máximos que pueden obtener cada uno de los parámetros a 
+     * estudiar.
+     */
     updateMaxValues() {
         this.setState(prevState => {
             return {
@@ -310,6 +335,9 @@ export default class SimpleRC extends Component {
         });
     }
 
+    /**
+     * RELOAD
+     */
     resetDataArray() {
         this.setState(prevState => {
             return {
@@ -328,6 +356,10 @@ export default class SimpleRC extends Component {
         });
     }
 
+    /**
+     * Cambiar precisión de la simulación
+     * @param {*} multiplier 
+     */
     updateSimulationStepMultiplier(multiplier) {
         this.setState(prevState => {
             return {
@@ -376,6 +408,7 @@ export default class SimpleRC extends Component {
 
     }
 
+    /** CAPACITOR CONTROLLER */
     updateCapacitorMultiplier(multiplier) {
         this.setState(prevState => {
             return {
@@ -402,6 +435,7 @@ export default class SimpleRC extends Component {
     }
 
 
+    /** CELL CONTROLLER */
     updateCellValue(value) {
         this.setState(prevState => {
             return {
@@ -429,7 +463,6 @@ export default class SimpleRC extends Component {
 
 
     render() {
-
         return (
 
             <div style={{"paddingLeft" : "1%", "paddingRight" : "1%"}}>
