@@ -81,39 +81,15 @@ export default class SimpleRC extends Component {
             running: true,
             //time interval Id
             intervalId: 0,
-            rcIntervalId: 0,
+            //reset on component change
+            reset_on_component_change: false
         }
 
         this.updateCharging = this.updateCharging.bind(this);
         this.updateRunning = this.updateRunning.bind(this);
     }
 
-    /**
-     * Método encargado de actualizar la condición de parada de la simulación
-     * @param {*} nCondition 
-     */
-    updateSelectedCondition(nCondition) {
-        this.setState(prevState => {
-            return {
-                ...prevState,
-                selected_stop_condition: nCondition
-            }
-        });
-    }
 
-    /**
-     * Método encargado de actualizar el valor de la condición de parada de la simulación
-     * @param {*} nConditionValue 
-     */
-    updateConditionValue(nConditionValue) {
-        this.setState(prevState => {
-            return {
-                ...prevState,
-                value_stop_condition: nConditionValue
-            }
-
-        })
-    }
 
     /**
      * Método utilizado para la actualización de los datos a lo 
@@ -191,11 +167,11 @@ export default class SimpleRC extends Component {
 
 
 
-                if (this.state.capacitorCharging && this.state.q_percent == 100) {
+                if (this.state.capacitorCharging && this.state.q_percent == 100 && this.state.q_0 == this.state.q_max) {
                     this.updateRunning();
                 }
 
-                if (!this.state.capacitorCharging && this.state.q_percent == 0) {
+                if (!this.state.capacitorCharging && this.state.q_percent == 0 && this.state.q_0 == 0) {
                     this.updateRunning();
                 }
             }
@@ -336,6 +312,42 @@ export default class SimpleRC extends Component {
     }
 
     /**
+     * Método encargado de actualizar la condición de parada de la simulación
+     * @param {*} nCondition 
+     */
+    updateSelectedCondition(nCondition) {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                selected_stop_condition: nCondition
+            }
+        });
+    }
+
+    /**
+     * Método encargado de actualizar el valor de la condición de parada de la simulación
+     * @param {*} nConditionValue 
+     */
+    updateConditionValue(nConditionValue) {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                value_stop_condition: nConditionValue
+            }
+
+        })
+    }
+
+    updateResetData() {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                reset_on_component_change: !prevState.reset_on_component_change
+            }
+        })
+    }
+
+    /**
      * RELOAD
      */
     resetDataArray() {
@@ -349,7 +361,7 @@ export default class SimpleRC extends Component {
                 e_data: [],
                 data_length: 0,
                 t_i: 0,
-                running: false,
+                running: true,
                 q_percent: this.state.capacitorCharging ? 0 : 100,
                 condition_complete: false
             }
@@ -367,7 +379,8 @@ export default class SimpleRC extends Component {
                 simulation_step_multiplier: multiplier
             }
         });
-        this.resetDataArray();
+        if (this.state.reset_on_component_change)
+            this.resetDataArray();
         this.updateMaxValues();
     }
 
@@ -381,7 +394,8 @@ export default class SimpleRC extends Component {
             }
         })
 
-        this.resetDataArray();
+        if (this.state.reset_on_component_change)
+            this.resetDataArray();
         this.updateMaxValues();
 
     }
@@ -394,7 +408,8 @@ export default class SimpleRC extends Component {
                 R: prevState.R_v * valueOfMultiplier(multiplier)
             }
         })
-        this.resetDataArray();
+        if (this.state.reset_on_component_change)
+            this.resetDataArray();
         this.updateMaxValues();
 
     }
@@ -403,7 +418,8 @@ export default class SimpleRC extends Component {
         this.setState({
             R_color_bands: calculateColorBands(parseFloat(value), multiplier)
         });
-        this.resetDataArray();
+        if (this.state.reset_on_component_change)
+            this.resetDataArray();
         this.updateMaxValues();
 
     }
@@ -418,7 +434,8 @@ export default class SimpleRC extends Component {
             }
         })
 
-        this.resetDataArray();
+        if (this.state.reset_on_component_change)
+            this.resetDataArray();
         this.updateMaxValues();
     }
 
@@ -430,7 +447,8 @@ export default class SimpleRC extends Component {
                 C: parseFloat(value) * prevState.C_m
             }
         })
-        this.resetDataArray();
+        if (this.state.reset_on_component_change)
+            this.resetDataArray();
         this.updateMaxValues();
     }
 
@@ -444,7 +462,9 @@ export default class SimpleRC extends Component {
                 V: parseFloat(value) * prevState.C_m
             }
         })
-        this.resetDataArray();
+
+        if (this.state.reset_on_component_change)
+            this.resetDataArray();
         this.updateMaxValues();
     }
 
@@ -456,7 +476,8 @@ export default class SimpleRC extends Component {
                 V: prevState.V_v * getCellMultiplier(multiplier)
             }
         })
-        this.resetDataArray();
+        if (this.state.reset_on_component_change)
+            this.resetDataArray();
         this.updateMaxValues();
 
     }
@@ -465,7 +486,7 @@ export default class SimpleRC extends Component {
     render() {
         return (
 
-            <div style={{"paddingLeft" : "1%", "paddingRight" : "1%"}}>
+            <div style={{ "paddingLeft": "1%", "paddingRight": "1%" }}>
                 {/* UP ROW */}
                 <Row>
                     {/* DATA CHARTS */}
@@ -720,38 +741,42 @@ export default class SimpleRC extends Component {
                                 <Row>
                                     <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
                                         <strong>Precisión:</strong>
-                                        <Form.Select onChange={(ev) => { this.updateSimulationStepMultiplier(parseFloat(ev.target.value)) }}>
-                                            <option defaultValue={true} value="1">Normal</option>
-                                            <option value="100">Demasiado baja</option>
-                                            <option value="10">Muy baja</option>
-                                            <option value="5">Baja</option>
-                                            <option value="0.05">Alta</option>
-                                            <option value="0.001">Muy alta</option>
-                                            <option value="0.000001">Demasiado alta</option>
-                                        </Form.Select>
+                                        <Form>
+                                            <Form.Select onChange={(ev) => { this.updateSimulationStepMultiplier(parseFloat(ev.target.value)) }}>
+                                                <option defaultValue={true} value="1">Normal</option>
+                                                <option value="100">Demasiado baja</option>
+                                                <option value="10">Muy baja</option>
+                                                <option value="5">Baja</option>
+                                                <option value="0.05">Alta</option>
+                                                <option value="0.001">Muy alta</option>
+                                                <option value="0.000001">Demasiado alta</option>
+                                            </Form.Select>
+                                        </Form>
+
                                     </Col>
                                     <Col xs={2} sm={2} md={2} lg={2} xl={2} xxl={2}>
                                     </Col>
                                     <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
-
+                                        
                                     </Col>
                                 </Row>
                                 <br></br>
                                 <Row>
                                     <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
-                                            <div className="d-grid gap-2">
-                                                <Button variant={this.state.running ? "danger" : "outline-warning"} onClick={this.updateRunning} size="xs" >{this.state.running ? "STOP" : "RESUME"}</Button>
-                                            </div>
+                                        {/* RUN/STOP BUTTON */}
+                                        <div className="d-grid gap-2">
+                                            <Button variant={this.state.running ? "danger" : "outline-warning"} onClick={this.updateRunning} size="xs" >{this.state.running ? "STOP" : "RESUME"}</Button>
+                                        </div>
                                     </Col>
 
                                     <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
-       
-                                            <div className="d-grid gap-2">
-                                                <Button variant={"outline-info"} onClick={(ev) => {
-                                                    this.resetDataArray();
-                                                    this.updateMaxValues();
-                                                }} size="xs" >RELOAD</Button>
-                                            </div>
+                                        {/* RELOAD BUTTON */}
+                                        <div className="d-grid gap-2">
+                                            <Button variant={"outline-info"} onClick={(ev) => {
+                                                this.resetDataArray();
+                                                this.updateMaxValues();
+                                            }} size="xs" >RELOAD</Button>
+                                        </div>
 
                                     </Col>
                                 </Row>
@@ -793,8 +818,6 @@ export default class SimpleRC extends Component {
 
                                     </Col>
                                     <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
-
-
                                         <div className={this.state.running ? "charge" : (this.state.q_percent == 0 ? "charge_discharge_complete" : "charge_charge_complete")} style={{ "background": this.state.capacitorCharging ? "#569c02" : "#c94f1e" }}>
                                             <p className="percent_charge">{this.state.q_percent}%</p>
                                         </div>
