@@ -46,6 +46,7 @@ export default class SimpleRC extends Component {
         this.state = {
             //time controller
             t_i: 0,
+            t_a: 0, 
             //stop conditions
             selected_stop_condition: WITHOUT_RESTRICTIONS,
             value_stop_condition: undefined,
@@ -117,6 +118,7 @@ export default class SimpleRC extends Component {
                     oldVcData.shift();
                 }
                 let t_i = this.state.t_i;
+                let t_a = this.state.t_a;
 
                 //new values
                 let instant_values = this.state.capacitorCharging ? getChargeInstant(t_i, this.state.q_max, this.state.V, this.state.C, this.state.R) :
@@ -147,13 +149,14 @@ export default class SimpleRC extends Component {
 
                         return {
                             ...prevState,
-                            q_data: [...oldQData, { "t": t_i, "Q(t)": instant_values.Q }],
-                            i_data: [...oldIData, { "t": t_i, "I(t)": instant_values.I }],
-                            vr_data: [...oldVrData, { "t": t_i, "Vr(t)": instant_values.Vr }],
-                            vc_data: [...oldVcData, { "t": t_i, "Vc(t)": instant_values.Vc }],
-                            e_data: [...oldEData, { "t": t_i, "E(t)": instant_values.E }],
+                            q_data: [...oldQData, { "t": t_a, "Q(t)": instant_values.Q }],
+                            i_data: [...oldIData, { "t": t_a, "I(t)": instant_values.I }],
+                            vr_data: [...oldVrData, { "t": t_a, "Vr(t)": instant_values.Vr }],
+                            vc_data: [...oldVcData, { "t": t_a, "Vc(t)": instant_values.Vc }],
+                            e_data: [...oldEData, { "t": t_a, "E(t)": instant_values.E }],
                             //time update
                             t_i: t_i + ((SIMULATION_STEP * prevState.simulation_step_multiplier) / 1000),
+                            t_a: t_a + ((SIMULATION_STEP * prevState.simulation_step_multiplier) / 1000),
 
                             //current capacitor charge update
                             q_0: instant_values.Q,
@@ -259,7 +262,7 @@ export default class SimpleRC extends Component {
                 vc_data: [],
                 e_data: [],
                 data_length: 0,
-                running: false,
+                running: true,
                 q_percent: !prevState.capacitorCharging ? 0 : 100
 
             }
@@ -361,9 +364,19 @@ export default class SimpleRC extends Component {
                 e_data: [],
                 data_length: 0,
                 t_i: 0,
+                t_a: 0,
                 running: true,
                 q_percent: this.state.capacitorCharging ? 0 : 100,
                 condition_complete: false
+            }
+        });
+    }
+
+    resetAbsoluteTime() {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                t_a: 0
             }
         });
     }
@@ -376,7 +389,8 @@ export default class SimpleRC extends Component {
         this.setState(prevState => {
             return {
                 ...prevState,
-                simulation_step_multiplier: multiplier
+                simulation_step_multiplier: multiplier,
+                t_i: 0,
             }
         });
         if (this.state.reset_on_component_change)
@@ -390,7 +404,8 @@ export default class SimpleRC extends Component {
             return {
                 ...prevState,
                 R_v: parseFloat(value),
-                R: parseFloat(value) * prevState.R_m
+                R: parseFloat(value) * prevState.R_m,
+                t_i: 0,
             }
         })
 
@@ -405,7 +420,8 @@ export default class SimpleRC extends Component {
             return {
                 ...prevState,
                 R_m: valueOfMultiplier(multiplier),
-                R: prevState.R_v * valueOfMultiplier(multiplier)
+                R: prevState.R_v * valueOfMultiplier(multiplier),
+                t_i: 0,
             }
         })
         if (this.state.reset_on_component_change)
@@ -430,7 +446,8 @@ export default class SimpleRC extends Component {
             return {
                 ...prevState,
                 C_m: getCapacitorMult(multiplier),
-                C: prevState.C_v * getCapacitorMult(multiplier)
+                C: prevState.C_v * getCapacitorMult(multiplier),
+                t_i: 0,
             }
         })
 
@@ -444,7 +461,8 @@ export default class SimpleRC extends Component {
             return {
                 ...prevState,
                 C_v: parseFloat(value),
-                C: parseFloat(value) * prevState.C_m
+                C: parseFloat(value) * prevState.C_m,
+                t_i: 0,
             }
         })
         if (this.state.reset_on_component_change)
@@ -459,7 +477,8 @@ export default class SimpleRC extends Component {
             return {
                 ...prevState,
                 V_v: parseFloat(value),
-                V: parseFloat(value) * prevState.C_m
+                V: parseFloat(value) * prevState.C_m,
+                t_i: 0,
             }
         })
 
@@ -473,7 +492,8 @@ export default class SimpleRC extends Component {
             return {
                 ...prevState,
                 V_m: getCellMultiplier(multiplier),
-                V: prevState.V_v * getCellMultiplier(multiplier)
+                V: prevState.V_v * getCellMultiplier(multiplier),
+                t_i: 0,
             }
         })
         if (this.state.reset_on_component_change)
@@ -775,10 +795,12 @@ export default class SimpleRC extends Component {
                                             <Button variant={"outline-info"} onClick={(ev) => {
                                                 this.resetDataArray();
                                                 this.updateMaxValues();
+                                                this.resetAbsoluteTime();
                                             }} size="xs" >RELOAD</Button>
                                         </div>
 
                                     </Col>
+
                                 </Row>
 
 

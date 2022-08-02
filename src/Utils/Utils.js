@@ -7,6 +7,9 @@ export const RC_PERC = 63.2;
 export const WITHOUT_RESTRICTIONS = 'WR';
 export const PERCENT_Q = "PERCENT_Q";
 export const EXACT_TIME = "EXACT_TIME";
+export const PERCENT_I = "PERCENT_I";
+
+
 
 //boostrap icons
 export const QUESTION_ICON = <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-question-circle" viewBox="0 0 16 16">

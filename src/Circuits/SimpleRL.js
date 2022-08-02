@@ -3,7 +3,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 
 
 import { getChargeInstant, getDischargeInstant } from "../Utils/RLFormulas";
-import { MAX_DATA, SIMULATION_EXEC, SIMULATION_STEP, WITHOUT_RESTRICTIONS } from "../Utils/Utils";
+import { EXACT_TIME, MAX_DATA, PERCENT_I, SIMULATION_EXEC, SIMULATION_STEP, WITHOUT_RESTRICTIONS } from "../Utils/Utils";
 import { getInductorMult } from "./Inductor/InductorData";
 import { calculateColorBands, valueOfMultiplier } from "./Resistor/Resistor";
 
@@ -14,11 +14,12 @@ import { getCellMultiplier } from "./Cell/Cell";
 
 export default class SimpleRl extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             //time controller
             t_i: 0,
+            t_a: 0,
             //stop conditions
             selected_stop_condition: WITHOUT_RESTRICTIONS,
             value_stop_condition: undefined,
@@ -42,7 +43,7 @@ export default class SimpleRl extends Component {
             R_color_bands: [],
             L_v: 10,
             L_m: 1,
-            V_v: 5, 
+            V_v: 5,
             V_m: 1,
             //itensidad maxima
             i_max: 10 / 5,
@@ -56,26 +57,26 @@ export default class SimpleRl extends Component {
             intervalId: 0,
             //reset on component change
             reset_on_component_change: false
-            
+
         }
 
         this.updateCharging = this.updateCharging.bind(this);
         this.updateRunning = this.updateRunning.bind(this);
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.updateColorBands(this.state.R_v, this.state.R_m);
         const newInterval = setInterval(() => {
             this.updateMaxValues();
-            if (this.state.running){
-                let oldIData   = this.state.i_data;
-                let oldEData   = this.state.e_data;
-                let oldVrData  = this.state.vr_data;
-                let oldVlData  = this.state.vl_data;
+            if (this.state.running) {
+                let oldIData = this.state.i_data;
+                let oldEData = this.state.e_data;
+                let oldVrData = this.state.vr_data;
+                let oldVlData = this.state.vl_data;
                 let oldPhiData = this.state.phi_data;
 
                 //shift data
-                if (this.state.data_length >= MAX_DATA){
+                if (this.state.data_length >= MAX_DATA) {
                     oldIData.shift();
                     oldEData.shift();
                     oldVrData.shift();
@@ -83,24 +84,41 @@ export default class SimpleRl extends Component {
                     oldPhiData.shift();
                 }
                 let t_i = this.state.t_i;
+                let t_a = this.state.t_a;
 
                 //new values
                 let instant_values = this.state.inductorCharging ? getChargeInstant(t_i, this.state.i_max, this.state.V, this.state.L, this.state.R) :
-                                     getDischargeInstant(t_i, this.state.i_max, this.state.V, this.state.L, this.state.L);
+                    getDischargeInstant(t_i, this.state.i_max, this.state.V, this.state.L, this.state.R);
                 //condiciones más restrictivas
-                // TODO
+                if (this.state.value_stop_condition !== undefined) {
+                    if ((this.state.selected_stop_condition === PERCENT_I && this.state.inductorCharging && this.state.value_stop_condition >= 100) ||
+                        (this.state.selected_stop_condition === PERCENT_I && !this.state.inductorCharging && this.state.value_stop_condition <= 0)) {
+                        this.updateConditionValue(100);
+                        this.updateConditionState(true);
 
-                if (!this.state.condition_complete){
+                    } else if ((this.state.selected_stop_condition === PERCENT_I && this.state.inductorCharging && this.state.value_stop_condition <= this.state.i_percent) ||
+                        (this.state.selected_stop_condition === PERCENT_I && !this.state.inductorCharging && this.state.value_stop_condition >= this.state.i_percent)) {
+                        this.updateRunning();
+                        this.updateConditionState(true);
+                    
+                    } else if (this.state.selected_stop_condition === EXACT_TIME && this.state.value_stop_condition <= t_i){
+                        this.updateRunning();
+                        this.updateConditionState();
+                    }
+                }
+
+                if (!this.state.condition_complete) {
                     this.setState(prevState => {
                         return {
                             ...prevState,
-                            i_data:  [...oldIData, {"t": t_i, "I(t)" : instant_values.I}],
-                            vr_data: [...oldVrData, {"t": t_i, "Vr(t)" : instant_values.Vr}],
-                            vl_data: [...oldVlData, {"t": t_i, "Vl(t)" : instant_values.Vl}],
-                            e_data: [...oldEData, {"t": t_i, "E(t)" : instant_values.E}],
-                            phi_data: [...oldPhiData, {"t": t_i, "PHI(t)" : instant_values.PHI}],
+                            i_data: [...oldIData, { "t": t_a, "I(t)": instant_values.I }],
+                            vr_data: [...oldVrData, { "t": t_a, "Vr(t)": instant_values.Vr }],
+                            vl_data: [...oldVlData, { "t": t_a, "Vl(t)": instant_values.Vl }],
+                            e_data: [...oldEData, { "t": t_a, "E(t)": instant_values.E }],
+                            phi_data: [...oldPhiData, { "t": t_a, "PHI(t)": instant_values.PHI }],
                             //time update
-                            t_i : t_i + ((SIMULATION_STEP * prevState.simulation_step_multiplier) / 1000),
+                            t_i: t_i + ((SIMULATION_STEP * prevState.simulation_step_multiplier) / 1000),
+                            t_a: t_a + ((SIMULATION_STEP * prevState.simulation_step_multiplier) / 1000),
                             //current i max update
                             i_0: instant_values.I,
                             i_percent: Number.parseFloat((instant_values.I / prevState.i_max) * 100).toFixed(2),
@@ -111,11 +129,11 @@ export default class SimpleRl extends Component {
                 }
 
                 //auto stop simulation
-                if (this.state.inductorCharging && this.state.i_percent == 100 && this.state.i_0 == this.state.i_max){
+                if (this.state.inductorCharging && this.state.i_percent == 100 && this.state.i_0 == this.state.i_max) {
                     this.updateRunning();
                 }
 
-                if (!this.state.inductorCharging && this.state.i_percent == 0 && this.state.i_0 == 0){
+                if (!this.state.inductorCharging && this.state.i_percent == 0 && this.state.i_0 == 0) {
                     this.updateRunning();
                 }
             }
@@ -130,15 +148,15 @@ export default class SimpleRl extends Component {
         });
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         clearInterval(this.state.intervalId);
     }
 
-    getCurrentAnimation(){
+    getCurrentAnimation() {
         //TODO
     }
 
-    updateCharging(){
+    updateCharging() {
         this.setState(prevState => {
             return {
                 ...prevState,
@@ -150,13 +168,13 @@ export default class SimpleRl extends Component {
                 e_data: [],
                 phi_data: [],
                 data_length: 0,
-                running: false,
+                running: true,
                 i_percent: !prevState.inductorCharging ? 0 : 100
             }
         })
     }
 
-    updateConditionState(cState){
+    updateConditionState(cState) {
         this.setState(prevState => {
             return {
                 ...prevState,
@@ -165,8 +183,8 @@ export default class SimpleRl extends Component {
         });
     }
 
-    updateRunning(){
-        if (!this.state.condition_complete){
+    updateRunning() {
+        if (!this.state.condition_complete) {
             this.setState(prevState => {
                 return {
                     ...prevState,
@@ -177,20 +195,20 @@ export default class SimpleRl extends Component {
         }
     }
 
-    updateMaxValues(){
+    updateMaxValues() {
         this.setState(prevState => {
             return {
                 ...prevState,
                 i_max: prevState.V / prevState.R,
                 vr_max: prevState.V,
                 vl_max: prevState.R * prevState.V,
-                e_max: (1/2) * prevState.L * (prevState.V / prevState.R),
+                e_max: (1 / 2) * prevState.L * Math.pow(prevState.V / prevState.R, 2),
                 phi_max: prevState.L * (prevState.V / prevState.R)
             }
         });
     }
-    
-    updateSelectedCondition(nCondition){
+
+    updateSelectedCondition(nCondition) {
         this.setState(prevState => {
             return {
                 ...prevState,
@@ -199,7 +217,7 @@ export default class SimpleRl extends Component {
         })
     }
 
-    updateConditionValue(nConditionValue){
+    updateConditionValue(nConditionValue) {
         this.setState(prevState => {
             return {
                 ...prevState,
@@ -211,7 +229,7 @@ export default class SimpleRl extends Component {
     /**
      * RELOAD
      */
-    resetDataArray(){
+    resetDataArray() {
         this.setState(prevState => {
             return {
                 ...prevState,
@@ -222,6 +240,7 @@ export default class SimpleRl extends Component {
                 phi_data: [],
                 data_length: 0,
                 t_i: 0,
+                t_a: 0,
                 running: true,
                 i_percent: this.state.inductorCharging ? 0 : 100,
                 condition_complete: false
@@ -229,13 +248,14 @@ export default class SimpleRl extends Component {
         });
     }
 
-    updateSimulationStepMultiplier(multiplier){
+    updateSimulationStepMultiplier(multiplier) {
         this.setState(prevState => {
             return {
                 ...prevState,
                 simulation_step_multiplier: multiplier
             }
         });
+
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
@@ -244,36 +264,41 @@ export default class SimpleRl extends Component {
     /**
      * RESISTOR CONTROLLER
      */
-    updateResistorValue(value){
+    updateResistorValue(value) {
         this.setState(prevState => {
             return {
                 ...prevState,
                 R_v: parseFloat(value),
-                R: parseFloat(value) * prevState.R_m
+                R: parseFloat(value) * prevState.R_m,
+                t_i: 0,
             }
         });
+
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
     }
 
-    updateResistorMultiplier(multiplier){
+    updateResistorMultiplier(multiplier) {
         this.setState(prevState => {
             return {
                 ...prevState,
                 R_m: valueOfMultiplier(multiplier),
-                R: prevState.R_v * valueOfMultiplier(multiplier)
+                R: prevState.R_v * valueOfMultiplier(multiplier),
+                t_i: 0,
             }
         });
+
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
     }
 
-    updateColorBands (value, multiplier) {
+    updateColorBands(value, multiplier) {
         this.setState({
             R_color_bands: calculateColorBands(parseFloat(value), multiplier)
         });
+
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
@@ -284,27 +309,31 @@ export default class SimpleRl extends Component {
     /**
      * INDUCTOR CONTROLLER
      */
-    updateInductorMultiplier (multiplier){
+    updateInductorMultiplier(multiplier) {
         this.setState(prevState => {
             return {
-                ...prevState, 
+                ...prevState,
                 L_m: getInductorMult(multiplier),
-                L: prevState.L_v * getInductorMult(multiplier)
+                L: prevState.L_v * getInductorMult(multiplier),
+                t_i: 0,
             }
         });
+
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
     }
 
-    updateInductorValue (value){
-        this.setState (prevState => {
+    updateInductorValue(value) {
+        this.setState(prevState => {
             return {
                 ...prevState,
                 L_v: parseFloat(value),
-                L: parseFloat(value) * prevState.L_v
+                L: parseFloat(value) * prevState.L_m,
+                t_i: 0,
             }
         });
+
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
@@ -316,9 +345,11 @@ export default class SimpleRl extends Component {
             return {
                 ...prevState,
                 V_v: parseFloat(value),
-                V: parseFloat(value) * prevState.C_m
+                V: parseFloat(value) * prevState.V_m,
+                t_i: 0,
             }
-        })
+        });
+
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
@@ -328,11 +359,13 @@ export default class SimpleRl extends Component {
         this.setState(prevState => {
             return {
                 ...prevState,
-                
+
                 V_m: getCellMultiplier(multiplier),
-                V: prevState.V_v * getCellMultiplier(multiplier)
+                V: prevState.V_v * getCellMultiplier(multiplier),
+                t_i: 0,
             }
-        })
+        });
+
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
@@ -343,7 +376,7 @@ export default class SimpleRl extends Component {
     render() {
         return (
 
-            <div style={{"paddingLeft" : "1%", "paddingRight" : "1%"}}>
+            <div style={{ "paddingLeft": "1%", "paddingRight": "1%" }}>
                 {/* UP ROW */}
                 <Row>
                     {/* DATA CHARTS */}
@@ -574,13 +607,23 @@ export default class SimpleRl extends Component {
                                             this.updateConditionState(false);
                                         }} disabled={this.state.running}>
                                             <option defaultValue={true} value={WITHOUT_RESTRICTIONS}>Ninguna</option>
-                                            
+                                            <option value={PERCENT_I}>Porcentaje de intensidad</option>
+                                            <option value={EXACT_TIME}>Tiempo de simulación (s)</option>
                                         </Form.Select>
 
                                     </Col>
 
                                     <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
-                                        
+                                        <FormControl type="number" disabled={this.state.selected_stop_condition === WITHOUT_RESTRICTIONS || this.state.running}
+                                            min={
+                                                this.state.inductorCharging ? (this.state.selected_stop_condition === PERCENT_I ? (Number.parseFloat(this.state.i_percent)) : (this.state.selected_stop_condition === EXACT_TIME ? this.state.t_i : "")) : 0}
+                                            max={this.state.inductorCharging ? (this.state.selected_stop_condition === PERCENT_I ? 100 : (this.state.selected_stop_condition === EXACT_TIME ? "" : "")) : (Number.parseFloat(this.state.i_percent))
+                                            }
+                                            onChange={(ev) => {
+                                                this.updateConditionState(false);
+                                                let nVal = this.state.selected_stop_condition === PERCENT_I ? Number.parseFloat(ev.target.value) : (this.state.selected_stop_condition === EXACT_TIME ? (Number.parseFloat(ev.target.value) * 1000) : undefined);
+                                                this.updateConditionValue(Number.parseFloat(ev.target.value));
+                                            }}></FormControl>
                                     </Col>
                                 </Row>
                                 <br></br>
@@ -607,19 +650,19 @@ export default class SimpleRl extends Component {
                                 <br></br>
                                 <Row>
                                     <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
-                                            <div className="d-grid gap-2">
-                                                <Button variant={this.state.running ? "danger" : "outline-warning"} onClick={this.updateRunning} size="xs" >{this.state.running ? "STOP" : "RESUME"}</Button>
-                                            </div>
+                                        <div className="d-grid gap-2">
+                                            <Button variant={this.state.running ? "danger" : "outline-warning"} onClick={this.updateRunning} size="xs" >{this.state.running ? "STOP" : "RESUME"}</Button>
+                                        </div>
                                     </Col>
 
                                     <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
-       
-                                            <div className="d-grid gap-2">
-                                                <Button variant={"outline-info"} onClick={(ev) => {
-                                                    this.resetDataArray();
-                                                    this.updateMaxValues();
-                                                }} size="xs" >RELOAD</Button>
-                                            </div>
+
+                                        <div className="d-grid gap-2">
+                                            <Button variant={"outline-info"} onClick={(ev) => {
+                                                this.resetDataArray();
+                                                this.updateMaxValues();
+                                            }} size="xs" >RELOAD</Button>
+                                        </div>
 
                                     </Col>
                                 </Row>
@@ -663,7 +706,7 @@ export default class SimpleRl extends Component {
                                     <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
 
 
-                                        
+
 
                                     </Col>
                                 </Row>
@@ -687,7 +730,7 @@ export default class SimpleRl extends Component {
                                     <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                                         <select className="form-select component-value" aria-label="Default select example" onChange={(ev) => {
                                             this.updateResistorMultiplier(ev.target.value)
-                                            this.updateColorBands(this.state.R_v, this.state.R_m)
+                                            //this.updateColorBands(this.state.R_v, this.state.R_m)
                                         }} disabled={this.state.showMultipliers === false}>
                                             <option defaultValue={true} value="x1">{Number.parseFloat(this.state.R_v).toFixed(2)} Ω </option>
                                             <option value="x0.1">{Number.parseFloat(this.state.R_v * 0.1).toFixed(2)} Ω</option>
@@ -727,7 +770,7 @@ export default class SimpleRl extends Component {
                             </Col>
                             <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                                 <select className="form-select component-value" aria-label="Default select example" onChange={(ev) => {
-                                    
+
                                     this.updateCellMultiplier(ev.target.value)
                                 }} disabled={this.state.showMultipliers === false}>
                                     <option value="V">{this.state.V_v} V</option>
