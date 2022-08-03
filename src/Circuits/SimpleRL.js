@@ -2,14 +2,34 @@ import React, { Component } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
 
 
-import { getChargeInstant, getDischargeInstant } from "../Utils/RLFormulas";
+
 import { EXACT_TIME, I_VALUE, MAX_DATA, PERCENT_I, SIMULATION_EXEC, SIMULATION_STEP, WITHOUT_RESTRICTIONS } from "../Utils/Utils";
+
+// functions
+import { getChargeInstant, getDischargeInstant } from "../Utils/RLFormulas";
 import { getInductorMult } from "./Inductor/InductorData";
 import { calculateColorBands, valueOfMultiplier } from "./Resistor/Resistor";
+import { getCellMultiplier } from "./Cell/Cell";
 
 import { QUESTION_ICON } from "../Utils/Utils";
 import { Row, Col, Container, Alert, Button, OverlayTrigger, Form, Tooltip as ToolTipReact, FormControl } from "react-bootstrap";
-import { getCellMultiplier } from "./Cell/Cell";
+
+// inductor on charge animations
+import rl_charge_0_63 from "../assets/animations/rl-charge/rl_charge_0_63.gif";
+import rl_charge_63_80 from "../assets/animations/rl-charge/rl_charge_63_80.gif";
+import rl_charge_80_90 from "../assets/animations/rl-charge/rl_charge_80_90.gif";
+import rl_charge_90_99 from "../assets/animations/rl-charge/rl_charge_90_99.gif";
+import rl_charge_100 from "../assets/animations/rl-charge/rl_charge_100.png";
+import rl_charge_background from "../assets/animations/rl-charge/rl_charge_background.png";
+
+// inductor on discharge animations
+import rl_discharge_0_63 from "../assets/animations/rl-discharge/rl_discharge_0_63.gif";
+import rl_discharge_63_80 from "../assets/animations/rl-discharge/rl_discharge_63_80.gif";
+import rl_discharge_80_90 from "../assets/animations/rl-discharge/rl_discharge_80_90.gif";
+import rl_discharge_90_99 from "../assets/animations/rl-discharge/rl_discharge_90_99.gif";
+import rl_discharge_100 from "../assets/animations/rl-discharge/rl_discharge_100.png";
+import rl_discharge_background from "../assets/animations/rl-discharge/rl_discharge_background.png";
+
 
 
 export default class SimpleRl extends Component {
@@ -112,7 +132,7 @@ export default class SimpleRl extends Component {
                     } else if (this.state.selected_stop_condition === I_VALUE && this.state.i_0 >= this.state.value_stop_condition) {
                         this.updateRunning();
                         this.updateConditionState(true);
-                        
+
                     } else {
                         this.updateConditionState(false);
                     }
@@ -183,7 +203,51 @@ export default class SimpleRl extends Component {
     }
 
     getCurrentAnimation() {
-        //TODO
+        switch (this.state.inductorCharging) {
+
+            case true:
+                if (!this.state.running) {
+                    return rl_charge_background;
+                }
+
+                if (this.state.i_percent == 100) {
+                    return rl_charge_100;
+                }
+
+                if (this.state.i_percent <= 63.2) {
+                    return rl_charge_0_63;
+                } else if (this.state.i_percent > 63.2 && this.state.i_percent <= 80) {
+                    return rl_charge_63_80;
+                } else if (this.state.i_percent > 80 && this.state.i_percent <= 90) {
+                    return rl_charge_80_90;
+                } else if (this.state.i_percent > 90 && this.state.i_percent < 100) {
+                    return rl_charge_90_99;
+                }
+
+                return rl_charge_background;
+                break;
+            default:
+
+                if (!this.state.running) {
+                    return rl_discharge_background;
+                }
+                if (this.state.i_percent == 100 || !this.state.running) {
+                    return rl_discharge_100;
+                }
+
+                if (this.state.i_percent <= 10) {
+                    return rl_discharge_90_99;
+                } else if (this.state.i_percent > 10 && this.state.i_percent <= 20) {
+                    return rl_discharge_80_90;
+                } else if (this.state.i_percent > 20 && this.state.i_percent <= 37.7) {
+                    return rl_discharge_63_80;
+                } else if (this.state.i_percent > 37.7 && this.state.i_percent < 100) {
+                    return rl_discharge_0_63;
+                }
+                return rl_discharge_background;
+                
+                break;
+        }
     }
 
     updateCharging() {

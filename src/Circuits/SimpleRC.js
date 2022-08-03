@@ -11,13 +11,14 @@ import './ToogleSwitch/ToogleSwitch.css'
 
 
 import { EXACT_TIME, MAX_DATA, PERCENT_Q, QUESTION_ICON, Q_VALUE, SIMULATION_EXEC, SIMULATION_STEP, WITHOUT_RESTRICTIONS } from "../Utils/Utils";
-import { getChargeInstant, getDischargeInstant } from "../Utils/RCFormulas";
+
 import { Row, Col, Container, Alert, Button, OverlayTrigger, Form, Tooltip as ToolTipReact, FormControl } from "react-bootstrap";
 
 
 
 
-// resistor functions
+// functions
+import { getChargeInstant, getDischargeInstant } from "../Utils/RCFormulas";
 import { calculateColorBands, valueOfMultiplier } from "./Resistor/Resistor";
 import { getCapacitorMult } from "./Capacitor/CapacitorData";
 import { getCellMultiplier } from "./Cell/Cell";
@@ -230,7 +231,6 @@ export default class SimpleRC extends Component {
      * @returns img_src : undefined
      */
     getCurrentAnimation() {
-
         switch (this.state.capacitorCharging) {
 
             case true:
