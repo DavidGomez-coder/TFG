@@ -10,7 +10,7 @@ import './Cell/CellCSS.css'
 import './ToogleSwitch/ToogleSwitch.css'
 
 
-import { EXACT_TIME, MAX_DATA, PERCENT_Q, QUESTION_ICON, SIMULATION_EXEC, SIMULATION_STEP, WITHOUT_RESTRICTIONS } from "../Utils/Utils";
+import { EXACT_TIME, MAX_DATA, PERCENT_Q, QUESTION_ICON, Q_VALUE, SIMULATION_EXEC, SIMULATION_STEP, WITHOUT_RESTRICTIONS } from "../Utils/Utils";
 import { getChargeInstant, getDischargeInstant } from "../Utils/RCFormulas";
 import { Row, Col, Container, Alert, Button, OverlayTrigger, Form, Tooltip as ToolTipReact, FormControl } from "react-bootstrap";
 
@@ -46,7 +46,7 @@ export default class SimpleRC extends Component {
         this.state = {
             //time controller
             t_i: 0,
-            t_a: 0, 
+            t_a: 0,
             //stop conditions
             selected_stop_condition: WITHOUT_RESTRICTIONS,
             value_stop_condition: undefined,
@@ -83,11 +83,15 @@ export default class SimpleRC extends Component {
             //time interval Id
             intervalId: 0,
             //reset on component change
-            reset_on_component_change: false
+            reset_on_component_change: false,
+            //referenced lines (changes between data values)
+            referenced_lines: [],
+            show_reference_lines: false
         }
 
         this.updateCharging = this.updateCharging.bind(this);
         this.updateRunning = this.updateRunning.bind(this);
+        this.updateReferenceLine = this.updateReferenceLine.bind(this);
     }
 
 
@@ -136,6 +140,9 @@ export default class SimpleRC extends Component {
                         this.updateRunning();
                         this.updateConditionState(true);
                     } else if (this.state.selected_stop_condition === EXACT_TIME && this.state.value_stop_condition <= t_i) {
+                        this.updateRunning();
+                        this.updateConditionState(true);
+                    } else if (this.state.selected_stop_condition === Q_VALUE && this.state.q_0 >= this.state.value_stop_condition) {
                         this.updateRunning();
                         this.updateConditionState(true);
                     } else {
@@ -197,6 +204,24 @@ export default class SimpleRC extends Component {
      */
     componentWillUnmount() {
         clearInterval(this.state.intervalId);
+    }
+
+    addReferenceLine(t) {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                referenced_lines: [...prevState.referenced_lines, t]
+            }
+        })
+    }
+
+    updateReferenceLine() {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                show_reference_lines: !prevState.show_reference_lines
+            }
+        });
     }
 
     /**
@@ -345,10 +370,12 @@ export default class SimpleRC extends Component {
         this.setState(prevState => {
             return {
                 ...prevState,
-                reset_on_component_change: !prevState.reset_on_component_change
+                reset_on_component_change: !prevState.reset_on_component_change,
+
             }
         })
     }
+
 
     /**
      * RELOAD
@@ -367,7 +394,8 @@ export default class SimpleRC extends Component {
                 t_a: 0,
                 running: true,
                 q_percent: this.state.capacitorCharging ? 0 : 100,
-                condition_complete: false
+                condition_complete: false,
+                referenced_lines: []
             }
         });
     }
@@ -376,7 +404,8 @@ export default class SimpleRC extends Component {
         this.setState(prevState => {
             return {
                 ...prevState,
-                t_a: 0
+                t_a: 0,
+                referenced_lines: []
             }
         });
     }
@@ -412,7 +441,7 @@ export default class SimpleRC extends Component {
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
-
+        this.addReferenceLine(this.state.t_a);
     }
 
     updateResistorMultiplier(multiplier) {
@@ -427,6 +456,7 @@ export default class SimpleRC extends Component {
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
+        this.addReferenceLine(this.state.t_a);
 
     }
 
@@ -437,6 +467,7 @@ export default class SimpleRC extends Component {
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
+        this.addReferenceLine(this.state.t_a);
 
     }
 
@@ -454,6 +485,7 @@ export default class SimpleRC extends Component {
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
+        this.addReferenceLine(this.state.t_a);
     }
 
     updateCapacitorValue(value) {
@@ -468,6 +500,7 @@ export default class SimpleRC extends Component {
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
+        this.addReferenceLine(this.state.t_a);
     }
 
 
@@ -485,6 +518,7 @@ export default class SimpleRC extends Component {
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
+        this.addReferenceLine(this.state.t_a);
     }
 
     updateCellMultiplier(multiplier) {
@@ -499,6 +533,7 @@ export default class SimpleRC extends Component {
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
+        this.addReferenceLine(this.state.t_a);
 
     }
 
@@ -544,6 +579,15 @@ export default class SimpleRC extends Component {
                                                 <Tooltip />
                                                 <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                 <Line type="monotone" dataKey="Q(t)" stroke="orange" strokeWidth={3} dot={false} isAnimationActive={false} />
+
+                                                {
+                                                    this.state.show_reference_lines ?
+                                                        this.state.referenced_lines.map((r_line) => {
+                                                            return (
+                                                                <ReferenceLine key={`q_${this.state.t_a}_${Math.random() * 10 + this.state.t_a}`} x={r_line} stroke="black" strokeWidth={1} strokeDasharray="3 3" />
+                                                            )
+                                                        }) : "reference_line not showed"
+                                                }
                                             </LineChart>
                                         </ResponsiveContainer>
                                     </div>
@@ -585,6 +629,14 @@ export default class SimpleRC extends Component {
                                                 <Tooltip />
                                                 <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                 <Line type="monotone" dataKey="I(t)" stroke="blue" strokeWidth={3} dot={false} isAnimationActive={false} />
+                                                {
+                                                    this.state.show_reference_lines ?
+                                                        this.state.referenced_lines.map((r_line) => {
+                                                            return (
+                                                                <ReferenceLine key={`i_${this.state.t_a}_${Math.random() * 10 + this.state.t_a}`} x={r_line} stroke="black" strokeWidth={1} strokeDasharray="3 3" />
+                                                            )
+                                                        }) : "reference_line not showed"
+                                                }
                                             </LineChart>
                                         </ResponsiveContainer>
                                     </div>
@@ -627,6 +679,14 @@ export default class SimpleRC extends Component {
                                                 <Tooltip />
                                                 <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                 <Line type="monotone" dataKey="Vc(t)" stroke="green" strokeWidth={3} dot={false} isAnimationActive={false} />
+                                                {
+                                                    this.state.show_reference_lines ?
+                                                        this.state.referenced_lines.map((r_line) => {
+                                                            return (
+                                                                <ReferenceLine key={`vc_${this.state.t_a}_${Math.random() * 10 + this.state.t_a}`} x={r_line} stroke="black" strokeWidth={1} strokeDasharray="3 3" />
+                                                            )
+                                                        }) : "reference_line not showed"
+                                                }
                                             </LineChart>
                                         </ResponsiveContainer>
                                     </div>
@@ -665,6 +725,14 @@ export default class SimpleRC extends Component {
                                                 <Tooltip />
                                                 <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                 <Line type="monotone" dataKey="Vr(t)" stroke="#eb3474" strokeWidth={3} dot={false} isAnimationActive={false} />
+                                                {
+                                                    this.state.show_reference_lines ?
+                                                        this.state.referenced_lines.map((r_line) => {
+                                                            return (
+                                                                <ReferenceLine key={`vr_${this.state.t_a}_${Math.random() * 10 + this.state.t_a}`} x={r_line} stroke="black" strokeWidth={1} strokeDasharray="3 3" />
+                                                            )
+                                                        }) : "reference_line not showed"
+                                                }
                                             </LineChart>
                                         </ResponsiveContainer>
                                     </div>
@@ -706,6 +774,14 @@ export default class SimpleRC extends Component {
                                                 <Tooltip />
                                                 <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                 <Line type="monotone" dataKey="E(t)" stroke="red" strokeWidth={3} dot={false} isAnimationActive={false} />
+                                                {
+                                                    this.state.show_reference_lines ?
+                                                        this.state.referenced_lines.map((r_line) => {
+                                                            return (
+                                                                <ReferenceLine key={`e_${this.state.t_a}_${Math.random() * 10 + this.state.t_a}`} x={r_line} stroke="black" strokeWidth={1} strokeDasharray="3 3" />
+                                                            )
+                                                        }) : "reference_line not showed"
+                                                }
                                             </LineChart>
                                         </ResponsiveContainer>
                                     </div>
@@ -737,7 +813,8 @@ export default class SimpleRC extends Component {
                                             this.updateConditionState(false);
                                         }} disabled={this.state.running}>
                                             <option defaultValue={true} value={WITHOUT_RESTRICTIONS}>Ninguna</option>
-                                            <option value={PERCENT_Q}>Porcentaje de carga</option>
+                                            <option value={PERCENT_Q}>Carga del condensador (%)</option>
+                                            <option value={Q_VALUE}>Carga del condensador (C)</option>
                                             <option value={EXACT_TIME}>Tiempo de simulación (s)</option>
                                         </Form.Select>
 
@@ -747,12 +824,17 @@ export default class SimpleRC extends Component {
                                         <FormControl type="number" disabled={this.state.selected_stop_condition === WITHOUT_RESTRICTIONS || this.state.running}
                                             min={
                                                 this.state.capacitorCharging ? (this.state.selected_stop_condition === PERCENT_Q ? (Number.parseFloat(this.state.q_percent)) : (this.state.selected_stop_condition === EXACT_TIME ? this.state.t_i : "")) : 0}
-                                            max={this.state.capacitorCharging ? (this.state.selected_stop_condition === PERCENT_Q ? 100 : (this.state.selected_stop_condition === EXACT_TIME ? "" : "")) : (Number.parseFloat(this.state.q_percent))
+                                            max={
+                                                this.state.capacitorCharging ? (this.state.selected_stop_condition === PERCENT_Q ? 100 : (this.state.selected_stop_condition === EXACT_TIME ? "" : "")) : (Number.parseFloat(this.state.q_percent))
                                             }
                                             onChange={(ev) => {
                                                 this.updateConditionState(false);
-                                                let nVal = this.state.selected_stop_condition === PERCENT_Q ? Number.parseFloat(ev.target.value) : (this.state.selected_stop_condition === EXACT_TIME ? (Number.parseFloat(ev.target.value) * 1000) : undefined);
-                                                this.updateConditionValue(Number.parseFloat(ev.target.value));
+                                                let nVal = this.state.selected_stop_condition === PERCENT_Q ? Number.parseFloat(ev.target.value) :
+                                                    this.state.selected_stop_condition === EXACT_TIME ? Number.parseFloat(ev.target.value) :
+                                                        this.state.selected_stop_condition === Q_VALUE ? Number.parseFloat(ev.target.value) : undefined;
+
+                                                this.updateConditionValue(nVal);
+
                                             }}></FormControl>
                                     </Col>
                                 </Row>
@@ -775,9 +857,16 @@ export default class SimpleRC extends Component {
 
                                     </Col>
                                     <Col xs={2} sm={2} md={2} lg={2} xl={2} xxl={2}>
+                                        <Form.Check
+                                            inline
+                                            type="checkbox"
+                                            onChange={this.updateReferenceLine}
+                                            name="update_show_reference_line"
+                                            label="Marcadores"
+                                        />
                                     </Col>
                                     <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
-                                        
+
                                     </Col>
                                 </Row>
                                 <br></br>

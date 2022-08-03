@@ -3,7 +3,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 
 
 import { getChargeInstant, getDischargeInstant } from "../Utils/RLFormulas";
-import { EXACT_TIME, MAX_DATA, PERCENT_I, SIMULATION_EXEC, SIMULATION_STEP, WITHOUT_RESTRICTIONS } from "../Utils/Utils";
+import { EXACT_TIME, I_VALUE, MAX_DATA, PERCENT_I, SIMULATION_EXEC, SIMULATION_STEP, WITHOUT_RESTRICTIONS } from "../Utils/Utils";
 import { getInductorMult } from "./Inductor/InductorData";
 import { calculateColorBands, valueOfMultiplier } from "./Resistor/Resistor";
 
@@ -56,12 +56,16 @@ export default class SimpleRl extends Component {
             //time interval id
             intervalId: 0,
             //reset on component change
-            reset_on_component_change: false
+            reset_on_component_change: false,
+            //referenced lines (changes between data values)
+            referenced_lines: [],
+            show_reference_lines: false
 
         }
 
         this.updateCharging = this.updateCharging.bind(this);
         this.updateRunning = this.updateRunning.bind(this);
+        this.updateReferenceLine = this.updateReferenceLine.bind(this);
     }
 
     componentDidMount() {
@@ -100,10 +104,17 @@ export default class SimpleRl extends Component {
                         (this.state.selected_stop_condition === PERCENT_I && !this.state.inductorCharging && this.state.value_stop_condition >= this.state.i_percent)) {
                         this.updateRunning();
                         this.updateConditionState(true);
-                    
-                    } else if (this.state.selected_stop_condition === EXACT_TIME && this.state.value_stop_condition <= t_i){
+
+                    } else if (this.state.selected_stop_condition === EXACT_TIME && this.state.value_stop_condition <= t_i) {
                         this.updateRunning();
-                        this.updateConditionState();
+                        this.updateConditionState(true);
+
+                    } else if (this.state.selected_stop_condition === I_VALUE && this.state.i_0 >= this.state.value_stop_condition) {
+                        this.updateRunning();
+                        this.updateConditionState(true);
+                        
+                    } else {
+                        this.updateConditionState(false);
                     }
                 }
 
@@ -150,6 +161,25 @@ export default class SimpleRl extends Component {
 
     componentWillUnmount() {
         clearInterval(this.state.intervalId);
+    }
+
+
+    addReferenceLine(t) {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                referenced_lines: [...prevState.referenced_lines, t]
+            }
+        })
+    }
+
+    updateReferenceLine() {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                show_reference_lines: !prevState.show_reference_lines
+            }
+        });
     }
 
     getCurrentAnimation() {
@@ -243,7 +273,18 @@ export default class SimpleRl extends Component {
                 t_a: 0,
                 running: true,
                 i_percent: this.state.inductorCharging ? 0 : 100,
-                condition_complete: false
+                condition_complete: false,
+                referenced_lines: []
+            }
+        });
+    }
+
+    resetAbsoluteTime() {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                t_a: 0,
+                referenced_lines: []
             }
         });
     }
@@ -277,6 +318,7 @@ export default class SimpleRl extends Component {
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
+        this.addReferenceLine(this.state.t_a);
     }
 
     updateResistorMultiplier(multiplier) {
@@ -292,6 +334,7 @@ export default class SimpleRl extends Component {
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
+        this.addReferenceLine(this.state.t_a);
     }
 
     updateColorBands(value, multiplier) {
@@ -302,6 +345,7 @@ export default class SimpleRl extends Component {
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
+        this.addReferenceLine(this.state.t_a);
     }
 
 
@@ -322,6 +366,7 @@ export default class SimpleRl extends Component {
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
+        this.addReferenceLine(this.state.t_a);
     }
 
     updateInductorValue(value) {
@@ -337,6 +382,7 @@ export default class SimpleRl extends Component {
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
+        this.addReferenceLine(this.state.t_a);
     }
 
     /** CELL CONTROLLER */
@@ -353,6 +399,7 @@ export default class SimpleRl extends Component {
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
+        this.addReferenceLine(this.state.t_a);
     }
 
     updateCellMultiplier(multiplier) {
@@ -369,6 +416,7 @@ export default class SimpleRl extends Component {
         if (this.state.reset_on_component_change)
             this.resetDataArray();
         this.updateMaxValues();
+        this.addReferenceLine(this.state.t_a);
 
     }
 
@@ -414,6 +462,14 @@ export default class SimpleRl extends Component {
                                                 <Tooltip />
                                                 <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                 <Line type="monotone" dataKey="I(t)" stroke="orange" strokeWidth={3} dot={false} isAnimationActive={false} />
+                                                {
+                                                    this.state.show_reference_lines ?
+                                                        this.state.referenced_lines.map((r_line) => {
+                                                            return (
+                                                                <ReferenceLine key={`i_${this.state.t_a}_${Math.random() * 10 + this.state.t_a}`} x={r_line} stroke="black" strokeWidth={1} strokeDasharray="3 3" />
+                                                            )
+                                                        }) : "reference_line not showed"
+                                                }
                                             </LineChart>
                                         </ResponsiveContainer>
                                     </div>
@@ -455,6 +511,14 @@ export default class SimpleRl extends Component {
                                                 <Tooltip />
                                                 <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                 <Line type="monotone" dataKey="Vl(t)" stroke="blue" strokeWidth={3} dot={false} isAnimationActive={false} />
+                                                {
+                                                    this.state.show_reference_lines ?
+                                                        this.state.referenced_lines.map((r_line) => {
+                                                            return (
+                                                                <ReferenceLine key={`vl_${this.state.t_a}_${Math.random() * 10 + this.state.t_a}`} x={r_line} stroke="black" strokeWidth={1} strokeDasharray="3 3" />
+                                                            )
+                                                        }) : "reference_line not showed"
+                                                }
                                             </LineChart>
                                         </ResponsiveContainer>
                                     </div>
@@ -497,6 +561,14 @@ export default class SimpleRl extends Component {
                                                 <Tooltip />
                                                 <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                 <Line type="monotone" dataKey="Vr(t)" stroke="green" strokeWidth={3} dot={false} isAnimationActive={false} />
+                                                {
+                                                    this.state.show_reference_lines ?
+                                                        this.state.referenced_lines.map((r_line) => {
+                                                            return (
+                                                                <ReferenceLine key={`vr_${this.state.t_a}_${Math.random() * 10 + this.state.t_a}`} x={r_line} stroke="black" strokeWidth={1} strokeDasharray="3 3" />
+                                                            )
+                                                        }) : "reference_line not showed"
+                                                }
                                             </LineChart>
                                         </ResponsiveContainer>
                                     </div>
@@ -535,6 +607,14 @@ export default class SimpleRl extends Component {
                                                 <Tooltip />
                                                 <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                 <Line type="monotone" dataKey="E(t)" stroke="#eb3474" strokeWidth={3} dot={false} isAnimationActive={false} />
+                                                {
+                                                    this.state.show_reference_lines ?
+                                                        this.state.referenced_lines.map((r_line) => {
+                                                            return (
+                                                                <ReferenceLine key={`e_${this.state.t_a}_${Math.random() * 10 + this.state.t_a}`} x={r_line} stroke="black" strokeWidth={1} strokeDasharray="3 3" />
+                                                            )
+                                                        }) : "reference_line not showed"
+                                                }
                                             </LineChart>
                                         </ResponsiveContainer>
                                     </div>
@@ -576,6 +656,14 @@ export default class SimpleRl extends Component {
                                                 <Tooltip />
                                                 <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                 <Line type="monotone" dataKey="PHI(t)" stroke="red" strokeWidth={3} dot={false} isAnimationActive={false} />
+                                                {
+                                                    this.state.show_reference_lines ?
+                                                        this.state.referenced_lines.map((r_line) => {
+                                                            return (
+                                                                <ReferenceLine key={`phi_${this.state.t_a}_${Math.random() * 10 + this.state.t_a}`} x={r_line} stroke="black" strokeWidth={1} strokeDasharray="3 3" />
+                                                            )
+                                                        }) : "reference_line not showed"
+                                                }
                                             </LineChart>
                                         </ResponsiveContainer>
                                     </div>
@@ -607,7 +695,8 @@ export default class SimpleRl extends Component {
                                             this.updateConditionState(false);
                                         }} disabled={this.state.running}>
                                             <option defaultValue={true} value={WITHOUT_RESTRICTIONS}>Ninguna</option>
-                                            <option value={PERCENT_I}>Porcentaje de intensidad</option>
+                                            <option value={PERCENT_I}>Intensidad de corriente (%)</option>
+                                            <option value={I_VALUE}>Intensidad de corriente (A)</option>
                                             <option value={EXACT_TIME}>Tiempo de simulación (s)</option>
                                         </Form.Select>
 
@@ -621,8 +710,11 @@ export default class SimpleRl extends Component {
                                             }
                                             onChange={(ev) => {
                                                 this.updateConditionState(false);
-                                                let nVal = this.state.selected_stop_condition === PERCENT_I ? Number.parseFloat(ev.target.value) : (this.state.selected_stop_condition === EXACT_TIME ? (Number.parseFloat(ev.target.value) * 1000) : undefined);
-                                                this.updateConditionValue(Number.parseFloat(ev.target.value));
+                                                let nVal = this.state.selected_stop_condition === PERCENT_I ? Number.parseFloat(ev.target.value) :
+                                                    this.state.selected_stop_condition === EXACT_TIME ? Number.parseFloat(ev.target.value) :
+                                                        this.state.selected_stop_condition === I_VALUE ? Number.parseFloat(ev.target.value) :
+                                                            undefined;
+                                                this.updateConditionValue(nVal);
                                             }}></FormControl>
                                     </Col>
                                 </Row>
@@ -642,6 +734,13 @@ export default class SimpleRl extends Component {
                                         </Form.Select>
                                     </Col>
                                     <Col xs={2} sm={2} md={2} lg={2} xl={2} xxl={2}>
+                                        <Form.Check
+                                            inline
+                                            type="checkbox"
+                                            onChange={this.updateReferenceLine}
+                                            name="update_show_reference_line"
+                                            label="Marcadores"
+                                        />
                                     </Col>
                                     <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
 
@@ -661,6 +760,7 @@ export default class SimpleRl extends Component {
                                             <Button variant={"outline-info"} onClick={(ev) => {
                                                 this.resetDataArray();
                                                 this.updateMaxValues();
+                                                this.resetAbsoluteTime();
                                             }} size="xs" >RELOAD</Button>
                                         </div>
 

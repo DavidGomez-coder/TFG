@@ -5,10 +5,12 @@ export const RC_PERC = 63.2;
 
 //condiciones de parada
 export const WITHOUT_RESTRICTIONS = 'WR';
+export const Q_VALUE = "Q_VALUE";
 export const PERCENT_Q = "PERCENT_Q";
 export const EXACT_TIME = "EXACT_TIME";
-export const PERCENT_I = "PERCENT_I";
 
+export const PERCENT_I = "PERCENT_I";
+export const I_VALUE   = "I_VALUE";
 
 
 //boostrap icons
