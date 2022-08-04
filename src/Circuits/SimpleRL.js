@@ -30,6 +30,7 @@ import rl_discharge_90_99 from "../assets/animations/rl-discharge/rl_discharge_9
 import rl_discharge_100 from "../assets/animations/rl-discharge/rl_discharge_100.png";
 import rl_discharge_background from "../assets/animations/rl-discharge/rl_discharge_background.png";
 
+import "./Inductor/InductorCSS.css";
 
 
 export default class SimpleRl extends Component {
@@ -113,6 +114,7 @@ export default class SimpleRl extends Component {
                 //new values
                 let instant_values = this.state.inductorCharging ? getChargeInstant(t_i, this.state.i_max, this.state.V, this.state.L, this.state.R) :
                     getDischargeInstant(t_i, this.state.i_max, this.state.V, this.state.L, this.state.R);
+                    
                 //condiciones más restrictivas
                 if (this.state.value_stop_condition !== undefined) {
                     if ((this.state.selected_stop_condition === PERCENT_I && this.state.inductorCharging && this.state.value_stop_condition >= 100) ||
@@ -160,12 +162,14 @@ export default class SimpleRl extends Component {
                 }
 
                 //auto stop simulation
-                if (this.state.inductorCharging && this.state.i_percent == 100 && this.state.i_0 == this.state.i_max) {
+                if (this.state.inductorCharging && this.state.i_percent == 100) {
                     this.updateRunning();
+                    this.updateConditionState(true);
                 }
 
-                if (!this.state.inductorCharging && this.state.i_percent == 0 && this.state.i_0 == 0) {
+                if (!this.state.inductorCharging && this.state.i_percent <= 0.00) {
                     this.updateRunning();
+                    this.updateConditionState(true);
                 }
             }
         }, SIMULATION_EXEC);
@@ -225,7 +229,7 @@ export default class SimpleRl extends Component {
                 }
 
                 return rl_charge_background;
-                break;
+                //break;
             default:
 
                 if (!this.state.running) {
@@ -246,7 +250,7 @@ export default class SimpleRl extends Component {
                 }
                 return rl_discharge_background;
                 
-                break;
+                //break;
         }
     }
 
@@ -263,7 +267,8 @@ export default class SimpleRl extends Component {
                 phi_data: [],
                 data_length: 0,
                 running: true,
-                i_percent: !prevState.inductorCharging ? 0 : 100
+                i_percent: !prevState.inductorCharging ? 0 : 100,
+                condition_complete: false,
             }
         })
     }
@@ -813,13 +818,16 @@ export default class SimpleRl extends Component {
                                 <br></br>
                                 <Row>
                                     <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
-                                        <div className="d-grid gap-2">
-                                            <Button variant={this.state.running ? "danger" : "outline-warning"} onClick={this.updateRunning} size="xs" >{this.state.running ? "STOP" : "RESUME"}</Button>
+                                    {/* RUN/STOP BUTTON */}
+                                    <div className="d-grid gap-2">
+                                            <Button disabled={this.state.condition_complete} variant={this.state.running ? "danger" : 
+                                                                                                                           (!this.state.condition_complete ? "outline-warning" : "secondary")} 
+                                                    onClick={this.updateRunning} size="xs" >{this.state.running ? "STOP" : "RESUME"}</Button>
                                         </div>
                                     </Col>
 
                                     <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
-
+                                        {/* RELOAD BUTTON */}
                                         <div className="d-grid gap-2">
                                             <Button variant={"outline-info"} onClick={(ev) => {
                                                 this.resetDataArray();
@@ -868,9 +876,7 @@ export default class SimpleRl extends Component {
 
                                     </Col>
                                     <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
-
-
-
+                                        
 
                                     </Col>
                                 </Row>

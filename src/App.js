@@ -3,7 +3,6 @@ import './App.css';
 import SimpleRC from './Circuits/SimpleRC';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Component } from 'react';
-import Home from './Home/Home';
 import Theory from './Theory/Theory';
 import SimpleRL from './Circuits/SimpleRL';
 
@@ -32,7 +31,6 @@ class ExternalView extends Component {
               Física Interactiva
             </Navbar.Brand>
             <Nav className='me-auto'>
-              <Nav.Link href="#about"  onClick={(ev) => {this.updateWindow("about")}}>About</Nav.Link>
               <Nav.Link href="#teoria" onClick={(ev) => {this.updateWindow("teoria");     window.location.reload(false);} }>Teoría</Nav.Link>
               <Nav.Link href="#rc-sim" onClick={(ev) => {this.updateWindow("rc-sim")}}>Simulación RC</Nav.Link>
               <Nav.Link href="#rl-sim" onClick={(ev) => {this.updateWindow("rl-sim")}}>Simulación RL</Nav.Link>
@@ -42,7 +40,6 @@ class ExternalView extends Component {
 
         <Container fluid="xs sm md lg xl xxl">
           {
-            this.state.wndow === "about" ? <Home/> : 
             this.state.wndow === "rc-sim" ? <SimpleRC /> :
             this.state.wndow === "rl-sim" ? <SimpleRL /> :
             this.state.wndow === "teoria" ? <Theory /> : undefined

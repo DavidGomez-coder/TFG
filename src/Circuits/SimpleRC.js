@@ -178,12 +178,14 @@ export default class SimpleRC extends Component {
 
 
 
-                if (this.state.capacitorCharging && this.state.q_percent == 100 && this.state.q_0 == this.state.q_max) {
+                if (this.state.capacitorCharging && this.state.q_percent == 100) {
                     this.updateRunning();
+                    this.updateConditionState(true);
                 }
 
-                if (!this.state.capacitorCharging && this.state.q_percent == 0 && this.state.q_0 == 0) {
+                if (!this.state.capacitorCharging && this.state.q_percent <= 0.001) {
                     this.updateRunning();
+                    this.updateConditionState(true);
                 }
             }
 
@@ -288,6 +290,7 @@ export default class SimpleRC extends Component {
                 e_data: [],
                 data_length: 0,
                 running: true,
+                condition_complete: false,
                 q_percent: !prevState.capacitorCharging ? 0 : 100
 
             }
@@ -874,7 +877,9 @@ export default class SimpleRC extends Component {
                                     <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
                                         {/* RUN/STOP BUTTON */}
                                         <div className="d-grid gap-2">
-                                            <Button variant={this.state.running ? "danger" : "outline-warning"} onClick={this.updateRunning} size="xs" >{this.state.running ? "STOP" : "RESUME"}</Button>
+                                            <Button disabled={this.state.condition_complete} variant={this.state.running ? "danger" : 
+                                                                                                                           (!this.state.condition_complete ? "outline-warning" : "secondary")} 
+                                                    onClick={this.updateRunning} size="xs" >{this.state.running ? "STOP" : "RESUME"}</Button>
                                         </div>
                                     </Col>
 
@@ -930,6 +935,7 @@ export default class SimpleRC extends Component {
                                     </Col>
                                     <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                                         <div className={this.state.running ? "charge" : (this.state.q_percent == 0 ? "charge_discharge_complete" : "charge_charge_complete")} style={{ "background": this.state.capacitorCharging ? "#569c02" : "#c94f1e" }}>
+                                            <small className="label_percent_charge">q(t)</small>
                                             <p className="percent_charge">{this.state.q_percent}%</p>
                                         </div>
 

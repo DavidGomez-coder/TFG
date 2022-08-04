@@ -78,8 +78,15 @@
 
 .percent_charge {
     top: 25%;
-    left: 25%;
+    left: 10%;
     transform: rotate(180deg);
     font-size: 200%;
+    position: absolute;
+}
+
+.label_percent_charge {
+    top: 75%;
+    left: 10%;
+    transform: rotate(180deg);
     position: absolute;
 }
