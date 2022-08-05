@@ -877,9 +877,9 @@ export default class SimpleRC extends Component {
                                     <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
                                         {/* RUN/STOP BUTTON */}
                                         <div className="d-grid gap-2">
-                                            <Button disabled={this.state.condition_complete} variant={this.state.running ? "danger" : 
-                                                                                                                           (!this.state.condition_complete ? "outline-warning" : "secondary")} 
-                                                    onClick={this.updateRunning} size="xs" >{this.state.running ? "STOP" : "RESUME"}</Button>
+                                            <Button disabled={this.state.condition_complete} variant={this.state.running ? "danger" :
+                                                (!this.state.condition_complete ? "outline-warning" : "secondary")}
+                                                onClick={this.updateRunning} size="xs" >{this.state.running ? "STOP" : "RESUME"}</Button>
                                         </div>
                                     </Col>
 
@@ -1018,21 +1018,14 @@ export default class SimpleRC extends Component {
 
                     {/* Switch controller */}
                     <Col xs={3} sm={3} md={3} lg={3} xl={3} xxl={3}>
-                        <OverlayTrigger
-                            key="top"
-                            placement="top"
-                            overlay={
-                                <ToolTipReact id={`tooltip-top-2`}>
-                                    Pulsa sobre el interruptor para <strong>{this.state.capacitorCharging ? "descargar" : "cargar"}</strong> el condensador
-                                </ToolTipReact>
-                            }>
-                            <label className="switch">
-                                < input type="checkbox" onClick={(ev) => {
-                                    this.updateCharging()
-                                }} />
-                                <span className="slider"></span>
-                            </label>
-                        </OverlayTrigger>
+
+                        <label className="switch">
+                            < input type="checkbox" onClick={(ev) => {
+                                this.updateCharging()
+                            }} />
+                            <span className="slider"></span>
+                        </label>
+
                     </Col>
                 </Row>
             </div>

@@ -114,7 +114,7 @@ export default class SimpleRl extends Component {
                 //new values
                 let instant_values = this.state.inductorCharging ? getChargeInstant(t_i, this.state.i_max, this.state.V, this.state.L, this.state.R) :
                     getDischargeInstant(t_i, this.state.i_max, this.state.V, this.state.L, this.state.R);
-                    
+
                 //condiciones más restrictivas
                 if (this.state.value_stop_condition !== undefined) {
                     if ((this.state.selected_stop_condition === PERCENT_I && this.state.inductorCharging && this.state.value_stop_condition >= 100) ||
@@ -165,11 +165,23 @@ export default class SimpleRl extends Component {
                 if (this.state.inductorCharging && this.state.i_percent == 100) {
                     this.updateRunning();
                     this.updateConditionState(true);
+                    this.setState((prevState) => {
+                        return {
+                            ...prevState,
+                            i_0 : prevState.i_max
+                        }
+                    });
                 }
 
                 if (!this.state.inductorCharging && this.state.i_percent <= 0.00) {
                     this.updateRunning();
                     this.updateConditionState(true);
+                    this.setState((prevState) => {
+                        return {
+                            ...prevState,
+                            i_0 : 0
+                        }
+                    });
                 }
             }
         }, SIMULATION_EXEC);
@@ -229,7 +241,7 @@ export default class SimpleRl extends Component {
                 }
 
                 return rl_charge_background;
-                //break;
+            //break;
             default:
 
                 if (!this.state.running) {
@@ -249,8 +261,8 @@ export default class SimpleRl extends Component {
                     return rl_discharge_0_63;
                 }
                 return rl_discharge_background;
-                
-                //break;
+
+            //break;
         }
     }
 
@@ -818,11 +830,11 @@ export default class SimpleRl extends Component {
                                 <br></br>
                                 <Row>
                                     <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
-                                    {/* RUN/STOP BUTTON */}
-                                    <div className="d-grid gap-2">
-                                            <Button disabled={this.state.condition_complete} variant={this.state.running ? "danger" : 
-                                                                                                                           (!this.state.condition_complete ? "outline-warning" : "secondary")} 
-                                                    onClick={this.updateRunning} size="xs" >{this.state.running ? "STOP" : "RESUME"}</Button>
+                                        {/* RUN/STOP BUTTON */}
+                                        <div className="d-grid gap-2">
+                                            <Button disabled={this.state.condition_complete} variant={this.state.running ? "danger" :
+                                                (!this.state.condition_complete ? "outline-warning" : "secondary")}
+                                                onClick={this.updateRunning} size="xs" >{this.state.running ? "STOP" : "RESUME"}</Button>
                                         </div>
                                     </Col>
 
@@ -876,7 +888,40 @@ export default class SimpleRl extends Component {
 
                                     </Col>
                                     <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
-                                        
+                                        <div className="wire-box">
+                                            {
+                                                (() => {
+                                                    if (this.state.i_percent > 0) {
+                                                        return (
+                                                            <div className="arrow-box">
+                                                                <div class="arrow">
+                                                                    <span></span>
+                                                                    <span></span>
+                                                                    <span></span>
+                                                                    <span></span>
+                                                                    <span></span>
+                                                                    <span></span>                                                                   
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    }
+                                                })()
+                                            }
+
+                                            <div className="label_current">i(t) = {Number.parseFloat(this.state.i_0).toFixed(4)} A</div>
+                                            <br />
+                                            <div className="hr-1"></div>
+                                            <div className="hr-2"></div>
+                                            <div className="hr-1"></div>
+                                            <div className="hr-2"></div>
+                                            <div className="hr-1"></div>
+                                            <div className="hr-2"></div>
+                                            <div className="hr-1"></div>
+                                            <div className="hr-2"></div>
+                                            <div className="hr-1"></div>
+                                            <div className="hr-2"></div>
+                                            <div className="hr-1"></div>
+                                        </div>
 
                                     </Col>
                                 </Row>
@@ -958,21 +1003,13 @@ export default class SimpleRl extends Component {
 
                     {/* Switch controller */}
                     <Col xs={3} sm={3} md={3} lg={3} xl={3} xxl={3}>
-                        <OverlayTrigger
-                            key="top"
-                            placement="top"
-                            overlay={
-                                <ToolTipReact id={`tooltip-top-2`}>
-                                    Pulsa sobre el interruptor para <strong>{this.state.inductorCharging ? "descargar" : "cargar"}</strong> el condensador
-                                </ToolTipReact>
-                            }>
-                            <label className="switch">
-                                < input type="checkbox" onClick={(ev) => {
-                                    this.updateCharging()
-                                }} />
-                                <span className="slider"></span>
-                            </label>
-                        </OverlayTrigger>
+                        <label className="switch">
+                            < input type="checkbox" onClick={(ev) => {
+                                this.updateCharging()
+                            }} />
+                            <span className="slider"></span>
+                        </label>
+
                     </Col>
                 </Row>
             </div>
