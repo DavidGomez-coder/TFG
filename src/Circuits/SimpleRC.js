@@ -87,7 +87,8 @@ export default class SimpleRC extends Component {
             reset_on_component_change: false,
             //referenced lines (changes between data values)
             referenced_lines: [],
-            show_reference_lines: false
+            show_reference_lines: false,
+            width: document.documentElement.clientWidth
         }
 
         this.updateCharging = this.updateCharging.bind(this);
@@ -95,7 +96,11 @@ export default class SimpleRC extends Component {
         this.updateReferenceLine = this.updateReferenceLine.bind(this);
     }
 
-
+    updateDimensions() {
+        this.setState({
+            width: document.documentElement.clientWidth
+        })
+    }
 
     /**
      * Método utilizado para la actualización de los datos a lo 
@@ -103,6 +108,11 @@ export default class SimpleRC extends Component {
      * de setInterval, y obtener datos y mostrarlos cada cierto tiempo
      */
     componentDidMount() {
+        //update dimensions
+        this.updateDimensions();
+        window.addEventListener("resize", this.updateDimensions.bind(this));
+
+        //controller
         this.updateColorBands(this.state.R_v, this.state.R_m)
         const newInterval = setInterval(() => {
 
@@ -207,6 +217,7 @@ export default class SimpleRC extends Component {
      */
     componentWillUnmount() {
         clearInterval(this.state.intervalId);
+        window.removeEventListener("resize", this.updateDimensions.bind(this));
     }
 
     addReferenceLine(t) {
@@ -935,8 +946,16 @@ export default class SimpleRC extends Component {
                                     </Col>
                                     <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                                         <div className={this.state.running ? "charge" : (this.state.q_percent == 0 ? "charge_discharge_complete" : "charge_charge_complete")} style={{ "background": this.state.capacitorCharging ? "#569c02" : "#c94f1e" }}>
-                                            <small className="label_percent_charge">q(t)</small>
-                                            <p className="percent_charge">{this.state.q_percent}%</p>
+                                            {
+                                                (() => {
+                                                    if (this.state.width >= 1100) {
+                                                        return (
+                                                            <p className="percent_charge">{this.state.q_percent}%</p>
+                                                        )
+                                                    }
+                                                })()
+                                            }
+
                                         </div>
 
                                     </Col>

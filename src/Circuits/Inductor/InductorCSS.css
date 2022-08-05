@@ -1,6 +1,6 @@
 .wire-box {
    /* border: 1px solid black;*/
-    width: 60%;
+    width: 70%;
     height: 7.25rem;
     top: 10%;
     margin: auto;
@@ -8,19 +8,28 @@
 }
 
 .label_current {
-    
-    right: 1%;
-    position: absolute;
+    top: 8%;
+    left: 28%;
+    position: relative;
+}
+
+.lines-content-box {
+    position: relative;
+    border-radius: 0.5rem;
+    height: 6.25rem;
+    width: 100%;
 }
 
 .hr-1{
+    position: relative;
     display: block;
-    height: 0;
+    height: 0.1rem;
     border-top: 3px solid rgb(184, 115, 51);
     border-bottom: 3px solid rgb(83, 50, 0);
     background-color: orange;
 }
 .hr-2{
+    position: relative;
     display: block;
     height: 0;
     border-top: 3px solid rgb(184, 115, 51);
@@ -31,9 +40,10 @@
 /* CURRENT ARROW */
 
 .arrow-box {
+    z-index: 100;
     width: 40%;
     left: 27%;
-    top: 2.5%;
+    top: -20%;
     height: 6.25rem;
     transform: rotate(-90deg);
     position: absolute;

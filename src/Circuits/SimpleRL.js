@@ -80,7 +80,8 @@ export default class SimpleRl extends Component {
             reset_on_component_change: false,
             //referenced lines (changes between data values)
             referenced_lines: [],
-            show_reference_lines: false
+            show_reference_lines: false,
+            width: document.documentElement.clientWidth
 
         }
 
@@ -89,7 +90,18 @@ export default class SimpleRl extends Component {
         this.updateReferenceLine = this.updateReferenceLine.bind(this);
     }
 
+    updateDimensions() {
+        this.setState({
+            width : document.documentElement.clientWidth
+        })
+    }
+
     componentDidMount() {
+        //update dimensions
+        this.updateDimensions();
+        window.addEventListener("resize", this.updateDimensions.bind(this));
+
+        //controller
         this.updateColorBands(this.state.R_v, this.state.R_m);
         const newInterval = setInterval(() => {
             this.updateMaxValues();
@@ -168,7 +180,7 @@ export default class SimpleRl extends Component {
                     this.setState((prevState) => {
                         return {
                             ...prevState,
-                            i_0 : prevState.i_max
+                            i_0: prevState.i_max
                         }
                     });
                 }
@@ -179,7 +191,7 @@ export default class SimpleRl extends Component {
                     this.setState((prevState) => {
                         return {
                             ...prevState,
-                            i_0 : 0
+                            i_0: 0
                         }
                     });
                 }
@@ -197,6 +209,7 @@ export default class SimpleRl extends Component {
 
     componentWillUnmount() {
         clearInterval(this.state.intervalId);
+        window.removeEventListener("resize", this.updateDimensions.bind(this));
     }
 
 
@@ -889,7 +902,29 @@ export default class SimpleRl extends Component {
                                     </Col>
                                     <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                                         <div className="wire-box">
-                                            {
+                                            <div className="lines-content-box">
+                                                <div className="hr-1"></div>
+                                                <div className="hr-2"></div>
+                                                <div className="hr-1"></div>
+                                                <div className="hr-2"></div>
+                                                <div className="hr-1"></div>
+                                                <div className="hr-2"></div>
+                                                <div className="hr-1"></div>
+                                                <div className="hr-2"></div>
+                                                <div className="hr-1"></div>
+                                                <div className="hr-2"></div>
+                                        <div className="hr-1"></div> 
+                                        {
+                                            (() => {
+                                                if (this.state.width >= 750) {
+                                                    return (
+                                                        <div className="label_current">i(t) = {Number.parseFloat(this.state.i_0).toFixed(3)} A</div>
+                                                    )
+                                                }
+                                            })()
+                                        }
+                                        
+                                        {
                                                 (() => {
                                                     if (this.state.i_percent > 0) {
                                                         return (
@@ -900,27 +935,15 @@ export default class SimpleRl extends Component {
                                                                     <span></span>
                                                                     <span></span>
                                                                     <span></span>
-                                                                    <span></span>                                                                   
+                                                                    <span></span>
                                                                 </div>
                                                             </div>
                                                         )
                                                     }
                                                 })()
                                             }
+                                            </div>
 
-                                            <div className="label_current">i(t) = {Number.parseFloat(this.state.i_0).toFixed(4)} A</div>
-                                            <br />
-                                            <div className="hr-1"></div>
-                                            <div className="hr-2"></div>
-                                            <div className="hr-1"></div>
-                                            <div className="hr-2"></div>
-                                            <div className="hr-1"></div>
-                                            <div className="hr-2"></div>
-                                            <div className="hr-1"></div>
-                                            <div className="hr-2"></div>
-                                            <div className="hr-1"></div>
-                                            <div className="hr-2"></div>
-                                            <div className="hr-1"></div>
                                         </div>
 
                                     </Col>
@@ -935,7 +958,7 @@ export default class SimpleRl extends Component {
                             <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                                 <Row>
                                     <Col sm={12} md={12} lg={12} xl={12} xxl={12}>
-                                        <input type="range" className="form-range" min="0" max="99" step="0.1"
+                                        <input type="range" className="form-range" min="0.1" max="99" step="0.1"
                                             onChange={(ev) => {
                                                 this.updateResistorValue(ev.target.value);
                                                 this.updateColorBands(this.state.R_v, this.state.R_m);
