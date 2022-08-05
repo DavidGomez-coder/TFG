@@ -916,9 +916,9 @@ export default class SimpleRl extends Component {
                                         <div className="hr-1"></div> 
                                         {
                                             (() => {
-                                                if (this.state.width >= 750) {
+                                                if (this.state.width >= 1100) {
                                                     return (
-                                                        <div className="label_current">i(t) = {Number.parseFloat(this.state.i_0).toFixed(3)} A</div>
+                                                        <div className="label_current">{Number.parseFloat(this.state.i_0).toFixed(3)} A</div>
                                                     )
                                                 }
                                             })()

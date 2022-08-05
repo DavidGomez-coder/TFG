@@ -8,9 +8,12 @@
 }
 
 .label_current {
-    top: 8%;
-    left: 28%;
+    top: -50%;
+    right: -30%;
     position: relative;
+    color: whitesmoke;
+    font-size: larger;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .lines-content-box {
@@ -42,8 +45,8 @@
 .arrow-box {
     z-index: 100;
     width: 40%;
-    left: 27%;
-    top: -20%;
+    right: 50%;
+    top: -25%;
     height: 6.25rem;
     transform: rotate(-90deg);
     position: absolute;
