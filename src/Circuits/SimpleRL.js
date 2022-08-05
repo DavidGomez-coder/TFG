@@ -894,7 +894,7 @@ export default class SimpleRl extends Component {
                                                     if (this.state.i_percent > 0) {
                                                         return (
                                                             <div className="arrow-box">
-                                                                <div class="arrow">
+                                                                <div className="arrow">
                                                                     <span></span>
                                                                     <span></span>
                                                                     <span></span>
