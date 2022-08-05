@@ -29,6 +29,8 @@
     height: 0.1rem;
     border-top: 3px solid rgb(184, 115, 51);
     border-bottom: 3px solid rgb(83, 50, 0);
+    border-right: 10px solid rgba(184, 115, 51, 0.5);
+    border-left: 10px solid rgba(184, 115, 51, 0.5);
     background-color: orange;
 }
 .hr-2{
@@ -37,6 +39,8 @@
     height: 0;
     border-top: 3px solid rgb(184, 115, 51);
     border-bottom: 3px solid rgb(147, 96, 49);
+    border-right: 10px solid rgba(184, 115, 51, 0.5);
+    border-left: 10px solid rgba(184, 115, 51, 0.5);
     background-color: orangered;
 }
 
