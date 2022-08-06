@@ -285,6 +285,7 @@ export default class SimpleRl extends Component {
                 ...prevState,
                 inductorCharging: !prevState.inductorCharging,
                 t_i: 0,
+                t_a: 0,
                 i_data: [],
                 vl_data: [],
                 vr_data: [],
@@ -961,14 +962,14 @@ export default class SimpleRl extends Component {
                                         <input type="range" className="form-range" min="0.1" max="99" step="0.1"
                                             onChange={(ev) => {
                                                 this.updateResistorValue(ev.target.value);
-                                                this.updateColorBands(this.state.R_v, this.state.R_m);
+                                                this.updateColorBands(Number.parseFloat(ev.target.value), this.state.R_m);
                                             }}
                                         />
                                     </Col>
                                     <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                                         <select className="form-select component-value" aria-label="Default select example" onChange={(ev) => {
-                                            this.updateResistorMultiplier(ev.target.value)
-                                            //this.updateColorBands(this.state.R_v, this.state.R_m)
+                                            this.updateResistorMultiplier(ev.target.value);
+                                            this.updateColorBands(this.state.R_v, valueOfMultiplier(ev.target.value));
                                         }} disabled={this.state.showMultipliers === false}>
                                             <option defaultValue={true} value="x1">{Number.parseFloat(this.state.R_v).toFixed(2)} Ω </option>
                                             <option value="x0.1">{Number.parseFloat(this.state.R_v * 0.1).toFixed(2)} Ω</option>
