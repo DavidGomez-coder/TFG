@@ -8,6 +8,14 @@
     border-radius: 10px;
       
   }
+
+  .resistor-box:hover {
+    -webkit-transform:scale(1.05);
+    -moz-transform:scale(1.05);
+    -ms-transform:scale(1.05);
+    -o-transform:scale(1.05);
+    transform:scale(1.05);
+}
   
   .resistor-band-1 {
     background-color: black;

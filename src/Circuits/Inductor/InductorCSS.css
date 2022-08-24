@@ -7,6 +7,14 @@
     position: relative;
 }
 
+.wire-box:hover {
+    -webkit-transform:scale(1.05);
+    -moz-transform:scale(1.05);
+    -ms-transform:scale(1.05);
+    -o-transform:scale(1.05);
+    transform:scale(1.05);
+}
+
 .label_current {
     top: -50%;
     right: -30%;

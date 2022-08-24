@@ -8,6 +8,7 @@ import './Resistor/ResistorCSS.css'
 import './Capacitor/CapacitorCSS.css'
 import './Cell/CellCSS.css'
 import './ToogleSwitch/ToogleSwitch.css'
+import Offcanvas from 'react-bootstrap/Offcanvas';
 
 
 import { EXACT_TIME, MAX_DATA, PERCENT_Q, QUESTION_ICON, Q_VALUE, SIMULATION_EXEC, SIMULATION_STEP, WITHOUT_RESTRICTIONS } from "../Utils/Utils";
@@ -38,6 +39,43 @@ import rc_discharge_80_90 from "../assets/animations/rc-discharge/rc_discharge_8
 import rc_discharge_90_99 from "../assets/animations/rc-discharge/rc_discharge_90_99.gif";
 import rc_discharge_100 from "../assets/animations/rc-discharge/rc_discharge_100.png";
 import rc_discharge_background from "../assets/animations/rc-discharge/rc_discharge_background.png";
+
+
+
+//OTRAS
+import balance_energetico from "../assets/formula/balance_energetico.PNG";
+import definicion_potencia_2 from "../assets/formula/definicion_potencia_2.png";
+import definicion_potencia_3 from "../assets/formula/definicion_potencia_3.png";
+import capacidad_condensador_1 from "../assets/formula/capacidad_condensador_1.png";
+import capacidad_condensador_2 from "../assets/formula/capacidad_condensador_2.png";
+import intensidad_capacidad_condensador from "../assets/formula/intensidad_capacidad_condensador.png";
+import eq_diff_energia from "../assets/formula/eq_diff_energia.png";
+import eq_energia_condensador from "../assets/formula/eq_energia_condensador.png";
+import eq_diff_balance from "../assets/formula/eq_diff_balance.png";
+import carga_condensador_en_carga from "../assets/formula/carga_condensador_en_carga.png";
+import carga_condensador_en_descarga from "../assets/formula/carga_condensador_en_descarga.png";
+import definicion_intensidad_corriente from "../assets/formula/definicion_intensidad_corriente.png";
+import intensidad_condensador_en_carga from "../assets/formula/intensidad_condensador_en_carga.png";
+import intensidad_condensador_en_descarga from "../assets/formula/intensidad_condensador_en_descarga.png"; 
+
+import ley_ohm_1 from "../assets/formula/ley_ohm_1.png";
+import ley_ohm_2 from "../assets/formula/ley_ohm_2.png";
+import varepsilon from "../assets/formula/varepsilon.png";
+import vr_carga_condensador from "../assets/formula/vr_carga_condensador.png";
+import vr_descarga_condensador from "../assets/formula/vr_descarga_condensador.png";
+import vc_carga_condensador from "../assets/formula/vc_carga_condensador.png";
+import vc_descarga_condensador from "../assets/formula/vc_descarga_condensador.png";
+
+
+// OFF- CANVAS
+const ENERGY_CANVAS = 1;
+const CHARGE_CANVAS = 2;
+const CURRENT_I_CANVAS = 3;
+const LEY_OHM_CANVAS = 4;
+const CAPACIDAD_CONDUCTOR_CANVAS = 5;
+const FEM_CANVAS = 6;
+const VR_CANVAS = 7;
+const VC_CANVAS = 8;
 
 
 export default class SimpleRC extends Component {
@@ -80,7 +118,7 @@ export default class SimpleRC extends Component {
             capacitorCharging: true,
             data_length: 0,
             //simulation state
-            running: true,
+            running: false,
             //time interval Id
             intervalId: 0,
             //reset on component change
@@ -88,12 +126,16 @@ export default class SimpleRC extends Component {
             //referenced lines (changes between data values)
             referenced_lines: [],
             show_reference_lines: false,
-            width: document.documentElement.clientWidth
+            width: document.documentElement.clientWidth,
+            //show of canvas
+            showCanvas: false,
+            currentCanvas: ENERGY_CANVAS
         }
 
         this.updateCharging = this.updateCharging.bind(this);
         this.updateRunning = this.updateRunning.bind(this);
         this.updateReferenceLine = this.updateReferenceLine.bind(this);
+
     }
 
     updateDimensions() {
@@ -552,22 +594,45 @@ export default class SimpleRC extends Component {
 
     }
 
+    turnOnCanvas (canvas){
+        if (this.state.running)
+            this.updateRunning();
+
+        this.setState((prevState) => {
+            return {
+                ...prevState,
+                showCanvas: true,
+                currentCanvas: canvas
+            }
+        });
+        
+    }
+
+    turnOffCanvas(){
+        this.setState((prevState) => {
+            return {
+                ...prevState,
+                showCanvas: false
+            }
+        });
+    }
+
 
     render() {
         return (
 
             <div style={{ "paddingLeft": "1%", "paddingRight": "1%" }}>
                 {/* UP ROW */}
-                <Row>
+                <Row style={{"marginTop" : "1%"}}>
                     {/* DATA CHARTS */}
                     <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6} >
                         <Row className="d-flex p-15">
-                            <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
+                            <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6} onClick={(ev) => {this.turnOnCanvas(CHARGE_CANVAS)}}>
                                 <div style={{
                                     paddingBottom: '50%', /* 16:9 */
                                     position: 'relative',
                                     height: 0
-                                }} >
+                                }} className="chart-hover">
                                     <div style={{
                                         position: 'absolute',
                                         top: '0',
@@ -611,12 +676,12 @@ export default class SimpleRC extends Component {
 
                             </Col>
 
-                            <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
+                            <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6} onClick={(ev) => {this.turnOnCanvas(CURRENT_I_CANVAS)}}>
                                 <div style={{
                                     paddingBottom: '50%', /* 16:9 */
                                     position: 'relative',
                                     height: 0
-                                }} >
+                                }} className="chart-hover">
                                     <div style={{
                                         position: 'absolute',
                                         top: '0',
@@ -662,12 +727,12 @@ export default class SimpleRC extends Component {
                         </Row>
 
                         <Row>
-                            <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
+                            <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6} onClick={(ev) => {this.turnOnCanvas(VC_CANVAS)}}>
                                 <div style={{
                                     paddingBottom: '50%', /* 16:9 */
                                     position: 'relative',
                                     height: 0
-                                }} >
+                                }} className="chart-hover">
                                     <div style={{
                                         position: 'absolute',
                                         top: '0',
@@ -708,12 +773,12 @@ export default class SimpleRC extends Component {
                                 </div>
                             </Col>
 
-                            <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
+                            <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6} onClick={(ev) => {this.turnOnCanvas(VR_CANVAS)}}>
                                 <div style={{
                                     paddingBottom: '50%', /* 16:9 */
                                     position: 'relative',
                                     height: 0
-                                }} >
+                                }} className="chart-hover">
                                     <div style={{
                                         position: 'absolute',
                                         top: '0',
@@ -723,6 +788,7 @@ export default class SimpleRC extends Component {
                                     }}>
                                         <ResponsiveContainer width="100%" height="98%">
                                             <LineChart
+                                            
                                                 width={400}
                                                 height={250}
                                                 data={this.state.vr_data}
@@ -757,20 +823,20 @@ export default class SimpleRC extends Component {
                         </Row>
 
                         <Row>
-                            <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
+                            <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6} onClick={(ev) => {this.turnOnCanvas(ENERGY_CANVAS)}}>
                                 <div style={{
                                     paddingBottom: '50%', /* 16:9 */
                                     position: 'relative',
                                     height: 0
-                                }} >
+                                }} className="chart-hover">
                                     <div style={{
                                         position: 'absolute',
                                         top: '0',
                                         left: '0',
                                         width: '100%',
                                         height: '100%'
-                                    }}>
-                                        <ResponsiveContainer width="100%" height="98%">
+                                    }} onClick={this.setEnergyCanvas}>
+                                        <ResponsiveContainer width="100%" height="98%" >
                                             <LineChart
                                                 width={400}
                                                 height={250}
@@ -787,7 +853,7 @@ export default class SimpleRC extends Component {
                                                 <YAxis type="number" />
 
                                                 <Tooltip />
-                                                <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
+                                                <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }}  />
                                                 <Line type="monotone" dataKey="E(t)" stroke="red" strokeWidth={3} dot={false} isAnimationActive={false} />
                                                 {
                                                     this.state.show_reference_lines ?
@@ -805,9 +871,6 @@ export default class SimpleRC extends Component {
 
                             {/* BUTTONS CONTROLLER */}
                             <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
-
-
-
                                 <Row>
                                     <strong style={{ "textAlign": "left" }}>
                                         <OverlayTrigger
@@ -915,6 +978,7 @@ export default class SimpleRC extends Component {
                     </Col>
 
                     {/* CIRCUIT ANIMATION */}
+                    
                     <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
                         <img src={this.getCurrentAnimation()} className="w-100"></img>
                     </Col>
@@ -946,18 +1010,22 @@ export default class SimpleRC extends Component {
 
                                     </Col>
                                     <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
-                                        <div className={this.state.running ? "charge" : (this.state.q_percent == 0 ? "charge_discharge_complete" : "charge_charge_complete")} style={{ "background": this.state.capacitorCharging ? "#569c02" : "#c94f1e" }}>
-                                            {
-                                                (() => {
-                                                    if (this.state.width >= 1100) {
-                                                        return (
-                                                            <p className="percent_charge">{this.state.q_percent}%</p>
-                                                        )
-                                                    }
-                                                })()
-                                            }
+                                        <div className="charge-box">
+                                            <div className={this.state.running ? "charge" : (this.state.q_percent == 0 ? "charge_discharge_complete" : "charge_charge_complete")} style={{ "background": this.state.capacitorCharging ? "#569c02" : "#c94f1e" }}
+                                                onClick={(ev) => {this.turnOnCanvas(CAPACIDAD_CONDUCTOR_CANVAS)}}>
+                                                {
+                                                    (() => {
+                                                        if (this.state.width >= 1100) {
+                                                            return (
+                                                                <p className="percent_charge">{this.state.q_percent}%</p>
+                                                            )
+                                                        }
+                                                    })()
+                                                }
 
+                                            </div>
                                         </div>
+                                        
 
                                     </Col>
                                 </Row>
@@ -992,8 +1060,8 @@ export default class SimpleRC extends Component {
                                     </Col>
                                     <Container>
                                         <Row>
-                                            <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
-                                                <div className='resistor-box'>
+                                            <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12} >
+                                                <div className='resistor-box' onClick={(ev) => {this.turnOnCanvas(LEY_OHM_CANVAS)}}>
                                                     <div className='resistor-band-1' style={{ "background": this.state.R_color_bands[0] }}></div>
                                                     <div className='resistor-band-2' style={{ "background": this.state.R_color_bands[1] }}></div>
                                                     <div className='resistor-band-3' style={{ "background": this.state.R_color_bands[2] }}></div>
@@ -1027,7 +1095,7 @@ export default class SimpleRC extends Component {
                                     <option value="microV">{this.state.V_v} microV</option>
                                     <option value="miliV">{this.state.V_v} miliV</option>
                                 </select>
-                                <div className='cell-box'>
+                                <div className='cell-box' onClick={(ev) => {this.turnOnCanvas(FEM_CANVAS)}}>
                                     <div className='cell-box-shadow'>
                                     </div>
                                 </div>
@@ -1047,8 +1115,277 @@ export default class SimpleRC extends Component {
                         </label>
 
                     </Col>
+
+                    {/* INFO CANVAS */}
+                    <Offcanvas show={this.state.showCanvas} onHide={(ev) => {this.turnOffCanvas()}} backdrop="static" placement="end" >
+                                 <Offcanvas.Header closeButton>
+                                    <Offcanvas.Title>
+                                        <h1>Circuito RC</h1>
+                                    </Offcanvas.Title> 
+                                </Offcanvas.Header>
+                                <Offcanvas.Body>
+                                {
+                                    (() => {
+                                        if (this.state.currentCanvas === CHARGE_CANVAS) {
+                                               /* TEORIA CARGA CONDENSADOR */
+                                                return (
+                                                    <>
+                                                        <h4>Carga del condensador</h4>
+                                                        <br />
+                                                        Para hallar una expresión que modele la carga del condensador realizaremos un <strong>balance energético</strong> de los componentes del circuito, es decir,
+                                                        la diferencia de potencial suministrada por la pila debe de ser equivalente a la consumida por los componentes pasivos (la resistencia y el condensador).
+                                                        <br /><br />
+                                                        <div style={{"textAlign" : "center"}}>
+                                                            <img src={balance_energetico} style={{"width" : "50%"}}></img>
+                                                        </div>
+                                                        <br />
+                                                        Así que por definición de <strong>capacidad de un condensador</strong>, de <strong>intensidad de corriente</strong> y la <strong>Ley de Ohm</strong>
+                                                        ,sustituimos en la expresión resultante de realizar el balance energético y nos queda la siguiente ecuación diferencial a resolver:
+                                                        <br /><br />
+                                                        <div style={{"textAlign" : "center"}}>
+                                                            <img src={eq_diff_balance} style={{"width" : "50%"}}></img>
+                                                        </div>
+                                                        <br />
+                                                        Para resolverla, supondremos los siguientes casos iniciales dependiendo del estado en el que nos encontremos:
+                                                        <br />
+                                                        <ul>
+                                                            <li>Durante la <strong>carga</strong> del condensador, supondremos inicialmente que este está vacío (carga en el instante cero es nula).
+                                                                <br /><br />
+                                                                <div style={{"textAlign" : "center"}}>
+                                                                    <img src={carga_condensador_en_carga} style={{"width" : "50%"}}></img>
+                                                                </div>
+                                                                <br />
+                                                            </li>
+                                                            <li>Por otro lado, en el caso de <strong>descarga</strong>, comenzaremos con una carga máxima. Es decir, puesto que esta depende del valor de la fuente y de la capcidad del condensador, 
+                                                            dicha <i>carga máxima</i> será la multiplicación de ambas.
+                                                                <br /><br />
+                                                                    <div style={{"textAlign" : "center"}}>
+                                                                        <img src={carga_condensador_en_descarga} style={{"width" : "40%"}}></img>
+                                                                    </div>
+                                                                <br />
+                                                            </li>
+                                                        </ul>
+                                                    </>
+                                                    
+                                                )
+                                                
+                                        }else if (this.state.currentCanvas === ENERGY_CANVAS){
+                                             /* TEORIA ENERGÍA ALMACENADA */
+                                            return (
+                                                <>
+                                                <h4>Energía almacenada</h4>
+                                                <br />
+                                                Para hallar la energía que almacena un condensador, tenemos que aplicar el concepto de <strong>potencia en un conductor</strong>. Definimos
+                                                como potencia al trabajo realizado por el <i>campo eléctrico</i> aplicado sobre un conductor para trasladar una carga entre dos puntos del mismo, entre 
+                                                los cuales existe una diferencia de potencial. Considerando esta cantidad de energía por unidad de tiempo:
+                                                <br /> <br />
+                                                <div style={{"textAlign" : "center"}}>
+                                                    <img src={definicion_potencia_2} style={{"width" : "40%"}}></img>
+                                                </div>
+                                                <br />
+                                                Otra forma de escribir esta expresión en función del tiempo es:
+                                                <br /> <br />
+                                                <div style={{"textAlign" : "center"}}>
+                                                    <img src={definicion_potencia_3} style={{"width" : "40%"}}></img>
+                                                </div>
+                                                <br />
+                                                Por las definiciones de <strong>capacidad de un condensador</strong> y de <strong>intensidad de corriente</strong>,
+                                                se nos queda planteada entonces la siguiente ecuación diferencial
+                                                <br /> <br />
+                                                <div style={{"textAlign" : "center"}}>
+                                                    <img src={eq_diff_energia} style={{"width" : "70%"}}></img>
+                                                </div>
+                                                <br />
+                                                , la cuál si resolvemos, obtenemos que la energía almacenada en el condensador a lo largo del tiempo
+                                                sigue la expresión
+                                                <br /> <br />
+                                                <div style={{"textAlign" : "center"}}>
+                                                    <img src={eq_energia_condensador} style={{"width" : "50%"}}></img>
+                                                </div>
+                                                <br /> <br />
+                                                </>        
+                                            )
+
+                                        }else if (this.state.currentCanvas === CURRENT_I_CANVAS){
+                                            /* TEORIA INTENSIDAD DE CORRIENTE*/
+                                            return (
+                                                <>
+                                                    <h4>Intensidad de corriente</h4>
+                                                    <br />
+                                                    Definimos <strong>intensidad de corriente</strong> como la cantidad de carga eléctrica que circula
+                                                    por unidad de tiempo a través de un conductor.
+                                                    <br /> <br/>
+                                                    <div style={{"textAlign" : "center"}}>
+                                                        <img src={definicion_intensidad_corriente} style={{"width" : "35%"}}></img>
+                                                    </div>
+                                                    <br />
+                                                    Aplicando la expresión de carga del condensador dependiendo de si su estado está en almacenamiento o disipación
+                                                    de energía, obtenemos que: <br/>
+                                                    <ul>
+                                                        <li>Durante la <strong>carga</strong> del condensador, la expresión que modela el comportamiento de la intensidad de corriente es
+                                                            <br /> <br/>
+                                                            <div style={{"textAlign" : "center"}}>
+                                                                <img src={intensidad_condensador_en_carga} style={{"width" : "35%"}}></img>
+                                                            </div>
+                                                            <br/>
+                                                        </li>
+                                                        <li>
+                                                            Mientras que durante su <strong>descarga</strong>
+                                                            <br /> <br/>
+                                                            <div style={{"textAlign" : "center"}}>
+                                                                <img src={intensidad_condensador_en_descarga} style={{"width" : "35%"}}></img>
+                                                            </div>
+                                                            <br/>   
+                                                        </li>
+                                                    </ul>
+                                                </>
+                                            )
+
+                                        }else if (this.state.currentCanvas === LEY_OHM_CANVAS){
+                                             /* TEORIA LEY DE OHM */
+                                            return (
+                                                <>
+                                                    <h4>Ley de Ohm</h4>
+                                                    La circulación de corriente eléctrica se debe principalmente a la presencia de un <i>campo eléctrico</i> en un conductor. Este, ocasiona una <i>densidad de corriente</i> cuyo
+                                                    valor depende de las propiedades del conductor. A esta relación existente entre <i>densidad de corriente</i> y <i>campo eléctrico</i> se conoce como <strong>Ley de Ohm</strong> y 
+                                                    define una constante llamada <strong>conductividad eléctrica</strong>.
+                                                    <br /> <br/>
+                                                    <div style={{"textAlign" : "center"}}>
+                                                        <img src={ley_ohm_1} style={{"width" : "30%"}}></img>
+                                                    </div>
+                                                    <br/>
+                                                    Generalmente esta conductividad no depende del campo eléctrico generado. Sin embargo, la <i>Ley de Ohm</i> no es una ley que podamos encontrar en la naturaleza, sino que se trata 
+                                                    de una descripción experimental de una propiedad que presentan la mayoría de los materiales metálicos y algunos otros (también llamados <i>conductores lineales</i>).
+                                                    <br></br>
+                                                    Si un material posee una conductividad constante a lo largo del tiempo y la sección de este conductor es uniforme, entonces es posible obtener una expresión
+                                                    simplificada a esta ley, que relaciona la <i>intensidad de corriente</i> y la <i>diferencia de potencial</i> entre dos puntos del conductor. A esta relación se le conoce 
+                                                    como <i>resistencia eléctrica del conductor</i>.
+                                                    <br /> <br/>
+                                                    <div style={{"textAlign" : "center"}}>
+                                                        <img src={ley_ohm_2} style={{"width" : "30%"}}></img>
+                                                    </div>
+                                                    <br/>
+                                                </>
+                                            )
+                                        }else if (this.state.currentCanvas === FEM_CANVAS) {
+                                             /* TEORIA RESISTENCIA ELECTRICA*/
+                                            return (
+                                                <>
+                                                    <h4>Fuerza electromotriz (F.E.M)</h4>
+                                                    <br/>
+                                                    Por el <i>efecto Joule</i>, los vectores de carga que se encuentran circulando a través del 
+                                                    material conductor transforman toda su energía cinética en calor debido a que estas partículas chocan 
+                                                    con sus paredes, parando así en algún momento del tiempo la circulación de corriente. Por otro lado, si lo que 
+                                                    queremos es mantener esta corriente, entonces debemos de utilizar una <i>fuente de fuerza electromotriz</i>.
+                                                    <br />
+                                                    <br />
+                                                    Este tipo de generadores, pueden transformar cualquier tipo de energía en energía eléctrica. Por ejemplo en una pila convencional, 
+                                                    las reacciones químicas que ocurren en los electrodos positivo y negativo, hace que en el electrodo positivo absorbe electrones mientras que, en 
+                                                    el negativo se liberan, dando resultado así una corriente.
+                                                    <br />
+                                                    <br />
+                                                    Puesto que utilizamos una fuente que genera una <i>corriente eléctrica continua</i>, denotaremos al valor de esta fuerza electromotriz al valor en voltios de 
+                                                    la pila.
+                                                    <br /> <br/>
+                                                    <div style={{"textAlign" : "center"}}>
+                                                        <img src={varepsilon} style={{"width" : "5%"}}></img>
+                                                    </div>
+                                                    <br/>
+
+                                                </>
+                                            )
+                                        }else if (this.state.currentCanvas === CAPACIDAD_CONDUCTOR_CANVAS) {
+                                             /* TEORIA CAPACIDAD CONDUCTOR */
+                                            return (
+                                                <>
+                                                    <h4>Capacidad de un condensador</h4>
+                                                    <br />
+                                                    Actualmente, sabemos que existen tres tipos materiales dependiendo de capacidad que tienen
+                                                    para la transimisión de energía eléctrica <br/>
+                                                    <ul>
+                                                        <li><strong>Conductores</strong>. Algunos de sus electrones son libres, por lo tienen libertad para 
+                                                        desplazarse por el material</li>
+                                                        <li><strong>Aislantes</strong>. Al contrario que los conductores, todos los electrones de los átomos que conforman este 
+                                                        tipo de materiales no pueden desplazarse, ya que se encuentran fuertemente unidos a ellos.</li>
+                                                        <li><strong>Semiconductores</strong>. Es una mezcla entre los dos grupos anteriores. La movilidad de sus electrones depende de la cantidad 
+                                                        de átomos añadidos.</li>
+                                                    </ul>
+                                                    <br />
+                                                    Imaginemos entonces dos materiales conductores (como por ejemplo aluminio) sin carga eléctrica y aislados entre ellos y del exterior. Si conseguimos pasar 
+                                                    una carga desde una de las placas hasta la otra, una de estas armaduras queda cargada positivamente y, puesto que estas placas se encuentran aisladas entre sí, 
+                                                    conseguimos un <i>equilibrio electroestático</i> ocasionando una diferencia de potencial entre ambas placas. A esto se le conoce como condensador.
+                                                    <br />
+                                                    Entonces, la capacidad de un condensador, depende linealmente de la diferencia de potencial entre las placas y de la carga de una de ellas, tal y como se muestra 
+                                                    en la siguiente expresión:
+                                                    <br /> <br/>
+                                                    <div style={{"textAlign" : "center"}}>
+                                                        <img src={capacidad_condensador_2} style={{"width" : "50%"}}></img>
+                                                    </div>
+                                                    <br/>
+                                                    Otra manera de escribir esta expresión en función de la carga del condensador a lo largo del tiempo, (puesto que la capacidad es constante) tenemos que:
+                                                    <br /> <br/>
+                                                    <div style={{"textAlign" : "center"}}>
+                                                        <img src={capacidad_condensador_1} style={{"width" : "40%"}}></img>
+                                                    </div>
+                                                    <br/>
+                                                </>
+                                            )
+                                        }else if (this.state.currentCanvas === VR_CANVAS){
+                                            return (
+                                                <>
+                                                    <h4>Diferencia de potencial en la resistencia</h4>
+                                                    <br></br>
+                                                    Utilizando la <i>Ley de Ohm</i>, podemos obtener cuál es la diferencia de potencial en los bornes 
+                                                    de la resistencia. Este dato, junto a la ddp en el condensador, puede llegar a ser de utilidad para comprobar que, 
+                                                    efectivamente, se cumple la propiedad de conservación de energía en el circuito
+                                                    <br /> <br/>
+                                                    <div style={{"textAlign" : "center"}}>
+                                                        <img src={vr_carga_condensador} style={{"width" : "40%"}}></img>
+                                                    </div>
+                                                    <br /> <br/>
+                                                    <div style={{"textAlign" : "center"}}>
+                                                        <img src={vr_descarga_condensador} style={{"width" : "40%"}}></img>
+                                                    </div>
+                                                    <br/>
+                                                    , durante la <strong>carga</strong> y <strong>descarga</strong> del condensador respectivamente.
+                                                </>
+                                            )
+                                        }else if (this.state.currentCanvas === VC_CANVAS){
+                                            return (
+                                                <>
+                                                    <h4>Diferencia de potencial en el condensador</h4>
+                                                    <br></br>
+                                                    Para obtener la diferencia de potencial que existe entre los bornes del condensador, basta con aplicar la definición de <strong>capacidad del condensador</strong>. Este
+                                                    parámetro al igual que la ddp en la resistencia, es de utilidad para comprobar que realmente se cumple la conservación de energía en el circuito. Dependiendo de si el condensador 
+                                                    se encuentra en estado de <strong>carga</strong> o <strong>descarga</strong> obtenemos las siguientes expresiones respectivamente:
+                                                    <br /> <br/>
+                                                    <div style={{"textAlign" : "center"}}>
+                                                        <img src={vc_carga_condensador} style={{"width" : "40%"}}></img>
+                                                    </div>
+                                                    <br /> <br/>
+                                                    <div style={{"textAlign" : "center"}}>
+                                                        <img src={vc_descarga_condensador} style={{"width" : "40%"}}></img>
+                                                    </div>
+                                                    <br/>
+
+                                                </>
+                                            )
+                                        }
+                                        else {
+      
+                                            return (
+                                                <h2>ERROR</h2>
+                                            )
+                                        }
+                                    })()
+                                }
+                                </Offcanvas.Body>        
+                    </Offcanvas>
                 </Row>
             </div>
         )
     }
+
+
+
 }

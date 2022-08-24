@@ -17,3 +17,11 @@
     border-radius: 10px;
     opacity: 56%;
 }
+
+.cell-box:hover {
+    -webkit-transform:scale(1.05);
+    -moz-transform:scale(1.05);
+    -ms-transform:scale(1.05);
+    -o-transform:scale(1.05);
+    transform:scale(1.05);
+}

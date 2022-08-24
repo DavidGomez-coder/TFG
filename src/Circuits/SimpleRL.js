@@ -31,6 +31,7 @@ import rl_discharge_100 from "../assets/animations/rl-discharge/rl_discharge_100
 import rl_discharge_background from "../assets/animations/rl-discharge/rl_discharge_background.png";
 
 import "./Inductor/InductorCSS.css";
+import "./SimpleRC.css"
 
 
 export default class SimpleRl extends Component {
@@ -523,7 +524,7 @@ export default class SimpleRl extends Component {
                 {/* UP ROW */}
                 <Row>
                     {/* DATA CHARTS */}
-                    <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6} >
+                    <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
                         <Row className="d-flex p-15">
                             <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
                                 <div style={{
@@ -537,7 +538,7 @@ export default class SimpleRl extends Component {
                                         left: '0',
                                         width: '100%',
                                         height: '100%'
-                                    }}>
+                                    }} className="chart-hover">
                                         <ResponsiveContainer width="100%" height="98%">
                                             <LineChart
                                                 width={400}
@@ -682,7 +683,7 @@ export default class SimpleRl extends Component {
                                         left: '0',
                                         width: '100%',
                                         height: '100%'
-                                    }}>
+                                    }} >
                                         <ResponsiveContainer width="100%" height="98%">
                                             <LineChart
                                                 width={400}

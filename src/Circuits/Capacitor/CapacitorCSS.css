@@ -8,6 +8,19 @@
     transform: rotate(180deg);
 }
 
+.charge-box {
+    top: 10%;
+    position: relative;
+}
+
+.charge-box:hover{
+    -webkit-transform:scale(1.05);
+    -moz-transform:scale(1.05);
+    -ms-transform:scale(1.05);
+    -o-transform:scale(1.05);
+    transform:scale(1.05);
+}
+
 .charge_discharge_complete {
     top: 10%;
     position: relative;
@@ -40,6 +53,8 @@
     transform: rotate(180deg);
     background: gray;
 }
+
+
 
 .charge::before {
     content: "";
