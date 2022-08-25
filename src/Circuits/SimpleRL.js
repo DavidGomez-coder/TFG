@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
-
+import Offcanvas from 'react-bootstrap/Offcanvas';
 
 
 import { EXACT_TIME, I_VALUE, MAX_DATA, PERCENT_I, SIMULATION_EXEC, SIMULATION_STEP, WITHOUT_RESTRICTIONS } from "../Utils/Utils";
@@ -31,7 +31,23 @@ import rl_discharge_100 from "../assets/animations/rl-discharge/rl_discharge_100
 import rl_discharge_background from "../assets/animations/rl-discharge/rl_discharge_background.png";
 
 import "./Inductor/InductorCSS.css";
-import "./SimpleRC.css"
+import "./SimpleRL.css"
+
+// otras
+import ley_ohm_1 from "../assets/formula/ley_ohm_1.png";
+import ley_ohm_2 from "../assets/formula/ley_ohm_2.png";
+import varepsilon from "../assets/formula/varepsilon.png";
+
+
+// OFF- CANVAS
+const I_CURRENT_CANVAS = 1;
+const VL_CANVAS = 2;
+const VR_CANVAS = 3;
+const ENERGY_CANVAS = 4;
+const PHI_CANVAS = 5;
+const LEY_OHM_CANVAS = 6; //resistance
+const FEM_CANVAS = 7; //cell
+const AUTOINDUCCION_CANVAS = 8;
 
 
 export default class SimpleRl extends Component {
@@ -74,7 +90,7 @@ export default class SimpleRl extends Component {
             inductorCharging: true,
             data_length: 0,
             //simulation state
-            running: true,
+            running: false,
             //time interval id
             intervalId: 0,
             //reset on component change
@@ -516,22 +532,48 @@ export default class SimpleRl extends Component {
 
     }
 
+    turnOnCanvas (canvas){
+        if (this.state.running)
+            this.updateRunning();
+
+        this.setState((prevState) => {
+            return {
+                ...prevState,
+                showCanvas: true,
+                currentCanvas: canvas
+            }
+        });
+        
+    }
+
+    turnOffCanvas(){
+        this.setState((prevState) => {
+            return {
+                ...prevState,
+                showCanvas: false
+            }
+        });
+    }
+
 
     render() {
         return (
 
             <div style={{ "paddingLeft": "1%", "paddingRight": "1%" }}>
                 {/* UP ROW */}
-                <Row>
+                <Row style={{"marginTop" : "1%"}}>
                     {/* DATA CHARTS */}
+
                     <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
+                        
                         <Row className="d-flex p-15">
+                            {/* I */}
                             <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
                                 <div style={{
                                     paddingBottom: '50%', /* 16:9 */
                                     position: 'relative',
                                     height: 0
-                                }} >
+                                }} onClick={(ev) => {this.turnOnCanvas(I_CURRENT_CANVAS)}} className="chart-hover">
                                     <div style={{
                                         position: 'absolute',
                                         top: '0',
@@ -573,13 +615,13 @@ export default class SimpleRl extends Component {
 
 
                             </Col>
-
+                            {/* VL */}
                             <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
                                 <div style={{
                                     paddingBottom: '50%', /* 16:9 */
                                     position: 'relative',
                                     height: 0
-                                }} >
+                                }} onClick={(ev) => {this.turnOnCanvas(VL_CANVAS)}} className="chart-hover">
                                     <div style={{
                                         position: 'absolute',
                                         top: '0',
@@ -625,12 +667,13 @@ export default class SimpleRl extends Component {
                         </Row>
 
                         <Row>
+                            {/* VR*/}
                             <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
                                 <div style={{
                                     paddingBottom: '50%', /* 16:9 */
                                     position: 'relative',
                                     height: 0
-                                }} >
+                                }} onClick={(ev) => {this.turnOnCanvas(VR_CANVAS)}} className="chart-hover">
                                     <div style={{
                                         position: 'absolute',
                                         top: '0',
@@ -670,13 +713,14 @@ export default class SimpleRl extends Component {
                                     </div>
                                 </div>
                             </Col>
-
+                            
+                            {/* ENERGY */}
                             <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
                                 <div style={{
                                     paddingBottom: '50%', /* 16:9 */
                                     position: 'relative',
                                     height: 0
-                                }} >
+                                }} onClick={(ev) => {this.turnOnCanvas(ENERGY_CANVAS)}} className="chart-hover">
                                     <div style={{
                                         position: 'absolute',
                                         top: '0',
@@ -718,14 +762,14 @@ export default class SimpleRl extends Component {
                             </Col>
 
                         </Row>
-
+                        { /* PHI */}
                         <Row>
                             <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
                                 <div style={{
                                     paddingBottom: '50%', /* 16:9 */
                                     position: 'relative',
                                     height: 0
-                                }} >
+                                }} onClick={(ev) => {this.turnOnCanvas(PHI_CANVAS)}} className="chart-hover">
                                     <div style={{
                                         position: 'absolute',
                                         top: '0',
@@ -903,7 +947,7 @@ export default class SimpleRl extends Component {
 
                                     </Col>
                                     <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
-                                        <div className="wire-box">
+                                        <div className="wire-box" onClick={(ev) => {this.turnOnCanvas(AUTOINDUCCION_CANVAS)}}>
                                             <div className="lines-content-box">
                                                 <div className="hr-1"></div>
                                                 <div className="hr-2"></div>
@@ -982,7 +1026,7 @@ export default class SimpleRl extends Component {
                                     <Container>
                                         <Row>
                                             <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
-                                                <div className='resistor-box'>
+                                                <div className='resistor-box' onClick={(ev) => {this.turnOnCanvas(LEY_OHM_CANVAS)}}>
                                                     <div className='resistor-band-1' style={{ "background": this.state.R_color_bands[0] }}></div>
                                                     <div className='resistor-band-2' style={{ "background": this.state.R_color_bands[1] }}></div>
                                                     <div className='resistor-band-3' style={{ "background": this.state.R_color_bands[2] }}></div>
@@ -1017,7 +1061,7 @@ export default class SimpleRl extends Component {
                                     <option value="microV">{this.state.V_v} microV</option>
                                     <option value="miliV">{this.state.V_v} miliV</option>
                                 </select>
-                                <div className='cell-box'>
+                                <div className='cell-box' onClick={(ev) => {this.turnOnCanvas(FEM_CANVAS)}}>
                                     <div className='cell-box-shadow'>
                                     </div>
                                 </div>
@@ -1036,6 +1080,128 @@ export default class SimpleRl extends Component {
                         </label>
 
                     </Col>
+                    {/* INFO CANVAS */}
+                    <Offcanvas show={this.state.showCanvas} onHide={(ev) => {this.turnOffCanvas()}} backdrop="static" placement="end" >
+                                 <Offcanvas.Header closeButton>
+                                    <Offcanvas.Title>
+                                        <h1>Circuito RL</h1>
+                                    </Offcanvas.Title> 
+                                </Offcanvas.Header>
+                                <Offcanvas.Body>
+                                {
+                                    (() => {
+                                        if (this.state.currentCanvas === AUTOINDUCCION_CANVAS) {
+                                               /* TEORIA CARGA CONDENSADOR */
+                                                return (
+                                                    <>
+                                                        <h4>Fenómeno de autoinducción</h4>
+                                                    </>
+                                                )
+                                                
+                                        }else if (this.state.currentCanvas === ENERGY_CANVAS){
+                                             /* TEORIA ENERGÍA ALMACENADA */
+                                            return (
+                                                <>
+                                                <h4>Energía almacenada</h4>
+                                               
+                                                </>        
+                                            )
+
+                                        }else if (this.state.currentCanvas === I_CURRENT_CANVAS){
+                                            /* TEORIA INTENSIDAD DE CORRIENTE*/
+                                            return (
+                                                <>
+                                                    <h4>Intensidad de corriente</h4>
+                                                    
+                                                </>
+                                            )
+
+                                        }else if (this.state.currentCanvas === LEY_OHM_CANVAS){
+                                             /* TEORIA LEY DE OHM */
+                                             return (
+                                                <>
+                                                    <h4>Ley de Ohm</h4>
+                                                    La circulación de corriente eléctrica se debe principalmente a la presencia de un <i>campo eléctrico</i> en un conductor. Este, ocasiona una <i>densidad de corriente</i> cuyo
+                                                    valor depende de las propiedades del conductor. A esta relación existente entre <i>densidad de corriente</i> y <i>campo eléctrico</i> se conoce como <strong>Ley de Ohm</strong> y 
+                                                    define una constante llamada <strong>conductividad eléctrica</strong>.
+                                                    <br /> <br/>
+                                                    <div style={{"textAlign" : "center"}}>
+                                                        <img src={ley_ohm_1} style={{"width" : "30%"}}></img>
+                                                    </div>
+                                                    <br/>
+                                                    Generalmente esta conductividad no depende del campo eléctrico generado. Sin embargo, la <i>Ley de Ohm</i> no es una ley que podamos encontrar en la naturaleza, sino que se trata 
+                                                    de una descripción experimental de una propiedad que presentan la mayoría de los materiales metálicos y algunos otros (también llamados <i>conductores lineales</i>).
+                                                    <br></br>
+                                                    Si un material posee una conductividad constante a lo largo del tiempo y la sección de este conductor es uniforme, entonces es posible obtener una expresión
+                                                    simplificada a esta ley, que relaciona la <i>intensidad de corriente</i> y la <i>diferencia de potencial</i> entre dos puntos del conductor. A esta relación se le conoce 
+                                                    como <i>resistencia eléctrica del conductor</i>.
+                                                    <br /> <br/>
+                                                    <div style={{"textAlign" : "center"}}>
+                                                        <img src={ley_ohm_2} style={{"width" : "30%"}}></img>
+                                                    </div>
+                                                    <br/>
+                                                </>
+                                            )
+                                        }else if (this.state.currentCanvas === FEM_CANVAS) {
+                                             /* TEORIA FEM*/
+                                             return (
+                                                <>
+                                                    <h4>Fuerza electromotriz (F.E.M)</h4>
+                                                    <br/>
+                                                    Por el <i>efecto Joule</i>, los vectores de carga que se encuentran circulando a través del 
+                                                    material conductor transforman toda su energía cinética en calor debido a que estas partículas chocan 
+                                                    con sus paredes, parando así en algún momento del tiempo la circulación de corriente. Por otro lado, si lo que 
+                                                    queremos es mantener esta corriente, entonces debemos de utilizar una <i>fuente de fuerza electromotriz</i>.
+                                                    <br />
+                                                    <br />
+                                                    Este tipo de generadores, pueden transformar cualquier tipo de energía en energía eléctrica. Por ejemplo en una pila convencional, 
+                                                    las reacciones químicas que ocurren en los electrodos positivo y negativo, hace que en el electrodo positivo absorbe electrones mientras que, en 
+                                                    el negativo se liberan, dando resultado así una corriente.
+                                                    <br />
+                                                    <br />
+                                                    Puesto que utilizamos una fuente que genera una <i>corriente eléctrica continua</i>, denotaremos al valor de esta fuerza electromotriz al valor en voltios de 
+                                                    la pila.
+                                                    <br /> <br/>
+                                                    <div style={{"textAlign" : "center"}}>
+                                                        <img src={varepsilon} style={{"width" : "5%"}}></img>
+                                                    </div>
+                                                    <br/>
+
+                                                </>
+                                            )
+                                        }else if (this.state.currentCanvas === PHI_CANVAS) {
+                                             /* TEORIA CAPACIDAD CONDUCTOR */
+                                            return (
+                                                <>
+                                                    <h4>Flujo magnético</h4>
+                                                   
+                                                </>
+                                            )
+                                        }else if (this.state.currentCanvas === VR_CANVAS){
+                                            return (
+                                                <>
+                                                    <h4>Diferencia de potencial en la resistencia</h4>
+                                                    
+                                                </>
+                                            )
+                                        }else if (this.state.currentCanvas === VL_CANVAS){
+                                            return (
+                                                <>
+                                                    <h4>Diferencia de potencial en el inductor</h4>
+
+                                                </>
+                                            )
+                                        }
+                                        else {
+      
+                                            return (
+                                                <h2>ERROR</h2>
+                                            )
+                                        }
+                                    })()
+                                }
+                                </Offcanvas.Body>        
+                    </Offcanvas>
                 </Row>
             </div>
         )

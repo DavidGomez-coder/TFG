@@ -1268,7 +1268,7 @@ export default class SimpleRC extends Component {
                                                 </>
                                             )
                                         }else if (this.state.currentCanvas === FEM_CANVAS) {
-                                             /* TEORIA RESISTENCIA ELECTRICA*/
+                                             /* TEORIA FEM*/
                                             return (
                                                 <>
                                                     <h4>Fuerza electromotriz (F.E.M)</h4>
@@ -1331,6 +1331,7 @@ export default class SimpleRC extends Component {
                                                 </>
                                             )
                                         }else if (this.state.currentCanvas === VR_CANVAS){
+                                            /* DDP RESISTENCIA */
                                             return (
                                                 <>
                                                     <h4>Diferencia de potencial en la resistencia</h4>
@@ -1351,6 +1352,7 @@ export default class SimpleRC extends Component {
                                                 </>
                                             )
                                         }else if (this.state.currentCanvas === VC_CANVAS){
+                                            /* DDP CONDENSADOR */
                                             return (
                                                 <>
                                                     <h4>Diferencia de potencial en el condensador</h4>
