@@ -917,7 +917,7 @@ export default class SimpleRl extends Component {
 
                     {/* CIRCUIT ANIMATION */}
                     <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
-                        <img src={this.getCurrentAnimation()} className="w-100"></img>
+                        <img alt="current_animation" src={this.getCurrentAnimation()} className="w-100"></img>
                     </Col>
                 </Row>
                 {/* CONTROLLERS ROW */}
@@ -1126,7 +1126,7 @@ export default class SimpleRl extends Component {
                                                     define una constante llamada <strong>conductividad eléctrica</strong>.
                                                     <br /> <br/>
                                                     <div style={{"textAlign" : "center"}}>
-                                                        <img src={ley_ohm_1} style={{"width" : "30%"}}></img>
+                                                        <img alt="ley_ohm_1" src={ley_ohm_1} style={{"width" : "30%"}}></img>
                                                     </div>
                                                     <br/>
                                                     Generalmente esta conductividad no depende del campo eléctrico generado. Sin embargo, la <i>Ley de Ohm</i> no es una ley que podamos encontrar en la naturaleza, sino que se trata 
@@ -1137,7 +1137,7 @@ export default class SimpleRl extends Component {
                                                     como <i>resistencia eléctrica del conductor</i>.
                                                     <br /> <br/>
                                                     <div style={{"textAlign" : "center"}}>
-                                                        <img src={ley_ohm_2} style={{"width" : "30%"}}></img>
+                                                        <img alt="ley_ohm_2" src={ley_ohm_2} style={{"width" : "30%"}}></img>
                                                     </div>
                                                     <br/>
                                                 </>
@@ -1163,7 +1163,7 @@ export default class SimpleRl extends Component {
                                                     la pila.
                                                     <br /> <br/>
                                                     <div style={{"textAlign" : "center"}}>
-                                                        <img src={varepsilon} style={{"width" : "5%"}}></img>
+                                                        <img alt="varepsilon" src={varepsilon} style={{"width" : "5%"}}></img>
                                                     </div>
                                                     <br/>
 

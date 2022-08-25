@@ -980,7 +980,7 @@ export default class SimpleRC extends Component {
                     {/* CIRCUIT ANIMATION */}
                     
                     <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
-                        <img src={this.getCurrentAnimation()} className="w-100"></img>
+                        <img alt="circuit_animatino" src={this.getCurrentAnimation()} className="w-100"></img>
                     </Col>
                 </Row>
                 {/* CONTROLLERS ROW */}
@@ -1136,14 +1136,14 @@ export default class SimpleRC extends Component {
                                                         la diferencia de potencial suministrada por la pila debe de ser equivalente a la consumida por los componentes pasivos (la resistencia y el condensador).
                                                         <br /><br />
                                                         <div style={{"textAlign" : "center"}}>
-                                                            <img src={balance_energetico} style={{"width" : "50%"}}></img>
+                                                            <img alt="balance_energetico" src={balance_energetico} style={{"width" : "50%"}}></img>
                                                         </div>
                                                         <br />
                                                         Así que por definición de <strong>capacidad de un condensador</strong>, de <strong>intensidad de corriente</strong> y la <strong>Ley de Ohm</strong>
                                                         ,sustituimos en la expresión resultante de realizar el balance energético y nos queda la siguiente ecuación diferencial a resolver:
                                                         <br /><br />
                                                         <div style={{"textAlign" : "center"}}>
-                                                            <img src={eq_diff_balance} style={{"width" : "50%"}}></img>
+                                                            <img alt="eq_diff_balance" src={eq_diff_balance} style={{"width" : "50%"}}></img>
                                                         </div>
                                                         <br />
                                                         Para resolverla, supondremos los siguientes casos iniciales dependiendo del estado en el que nos encontremos:
@@ -1152,7 +1152,7 @@ export default class SimpleRC extends Component {
                                                             <li>Durante la <strong>carga</strong> del condensador, supondremos inicialmente que este está vacío (carga en el instante cero es nula).
                                                                 <br /><br />
                                                                 <div style={{"textAlign" : "center"}}>
-                                                                    <img src={carga_condensador_en_carga} style={{"width" : "50%"}}></img>
+                                                                    <img alt="carga_condensador_en_carga" src={carga_condensador_en_carga} style={{"width" : "50%"}}></img>
                                                                 </div>
                                                                 <br />
                                                             </li>
@@ -1160,7 +1160,7 @@ export default class SimpleRC extends Component {
                                                             dicha <i>carga máxima</i> será la multiplicación de ambas.
                                                                 <br /><br />
                                                                     <div style={{"textAlign" : "center"}}>
-                                                                        <img src={carga_condensador_en_descarga} style={{"width" : "40%"}}></img>
+                                                                        <img alt="carga_condensador_en_descarga" src={carga_condensador_en_descarga} style={{"width" : "40%"}}></img>
                                                                     </div>
                                                                 <br />
                                                             </li>
@@ -1180,27 +1180,27 @@ export default class SimpleRC extends Component {
                                                 los cuales existe una diferencia de potencial. Considerando esta cantidad de energía por unidad de tiempo:
                                                 <br /> <br />
                                                 <div style={{"textAlign" : "center"}}>
-                                                    <img src={definicion_potencia_2} style={{"width" : "40%"}}></img>
+                                                    <img alt="definicion_potencia_2" src={definicion_potencia_2} style={{"width" : "40%"}}></img>
                                                 </div>
                                                 <br />
                                                 Otra forma de escribir esta expresión en función del tiempo es:
                                                 <br /> <br />
                                                 <div style={{"textAlign" : "center"}}>
-                                                    <img src={definicion_potencia_3} style={{"width" : "40%"}}></img>
+                                                    <img alt="definicion_potencia_3" src={definicion_potencia_3} style={{"width" : "40%"}}></img>
                                                 </div>
                                                 <br />
                                                 Por las definiciones de <strong>capacidad de un condensador</strong> y de <strong>intensidad de corriente</strong>,
                                                 se nos queda planteada entonces la siguiente ecuación diferencial
                                                 <br /> <br />
                                                 <div style={{"textAlign" : "center"}}>
-                                                    <img src={eq_diff_energia} style={{"width" : "70%"}}></img>
+                                                    <img alt="eq_diff_energia" src={eq_diff_energia} style={{"width" : "70%"}}></img>
                                                 </div>
                                                 <br />
                                                 , la cuál si resolvemos, obtenemos que la energía almacenada en el condensador a lo largo del tiempo
                                                 sigue la expresión
                                                 <br /> <br />
                                                 <div style={{"textAlign" : "center"}}>
-                                                    <img src={eq_energia_condensador} style={{"width" : "50%"}}></img>
+                                                    <img alt="eq_energia_condensador" src={eq_energia_condensador} style={{"width" : "50%"}}></img>
                                                 </div>
                                                 <br /> <br />
                                                 </>        
@@ -1216,7 +1216,7 @@ export default class SimpleRC extends Component {
                                                     por unidad de tiempo a través de un conductor.
                                                     <br /> <br/>
                                                     <div style={{"textAlign" : "center"}}>
-                                                        <img src={definicion_intensidad_corriente} style={{"width" : "35%"}}></img>
+                                                        <img alt="definicion_intensidad_corriente" src={definicion_intensidad_corriente} style={{"width" : "35%"}}></img>
                                                     </div>
                                                     <br />
                                                     Aplicando la expresión de carga del condensador dependiendo de si su estado está en almacenamiento o disipación
@@ -1225,7 +1225,7 @@ export default class SimpleRC extends Component {
                                                         <li>Durante la <strong>carga</strong> del condensador, la expresión que modela el comportamiento de la intensidad de corriente es
                                                             <br /> <br/>
                                                             <div style={{"textAlign" : "center"}}>
-                                                                <img src={intensidad_condensador_en_carga} style={{"width" : "35%"}}></img>
+                                                                <img alt="intensidad_condensador_en_carga" src={intensidad_condensador_en_carga} style={{"width" : "35%"}}></img>
                                                             </div>
                                                             <br/>
                                                         </li>
@@ -1233,7 +1233,7 @@ export default class SimpleRC extends Component {
                                                             Mientras que durante su <strong>descarga</strong>
                                                             <br /> <br/>
                                                             <div style={{"textAlign" : "center"}}>
-                                                                <img src={intensidad_condensador_en_descarga} style={{"width" : "35%"}}></img>
+                                                                <img alt="intensidad_condensador_en_descarga" src={intensidad_condensador_en_descarga} style={{"width" : "35%"}}></img>
                                                             </div>
                                                             <br/>   
                                                         </li>
@@ -1251,7 +1251,7 @@ export default class SimpleRC extends Component {
                                                     define una constante llamada <strong>conductividad eléctrica</strong>.
                                                     <br /> <br/>
                                                     <div style={{"textAlign" : "center"}}>
-                                                        <img src={ley_ohm_1} style={{"width" : "30%"}}></img>
+                                                        <img alt="ley_ohm_1" src={ley_ohm_1} style={{"width" : "30%"}}></img>
                                                     </div>
                                                     <br/>
                                                     Generalmente esta conductividad no depende del campo eléctrico generado. Sin embargo, la <i>Ley de Ohm</i> no es una ley que podamos encontrar en la naturaleza, sino que se trata 
@@ -1262,7 +1262,7 @@ export default class SimpleRC extends Component {
                                                     como <i>resistencia eléctrica del conductor</i>.
                                                     <br /> <br/>
                                                     <div style={{"textAlign" : "center"}}>
-                                                        <img src={ley_ohm_2} style={{"width" : "30%"}}></img>
+                                                        <img alt="ley_ohm_2" src={ley_ohm_2} style={{"width" : "30%"}}></img>
                                                     </div>
                                                     <br/>
                                                 </>
@@ -1288,7 +1288,7 @@ export default class SimpleRC extends Component {
                                                     la pila.
                                                     <br /> <br/>
                                                     <div style={{"textAlign" : "center"}}>
-                                                        <img src={varepsilon} style={{"width" : "5%"}}></img>
+                                                        <img alt="varepsilon_img" src={varepsilon} style={{"width" : "5%"}}></img>
                                                     </div>
                                                     <br/>
 
@@ -1319,13 +1319,13 @@ export default class SimpleRC extends Component {
                                                     en la siguiente expresión:
                                                     <br /> <br/>
                                                     <div style={{"textAlign" : "center"}}>
-                                                        <img src={capacidad_condensador_2} style={{"width" : "50%"}}></img>
+                                                        <img alt="capacidad_condensador_2" src={capacidad_condensador_2} style={{"width" : "50%"}}></img>
                                                     </div>
                                                     <br/>
                                                     Otra manera de escribir esta expresión en función de la carga del condensador a lo largo del tiempo, (puesto que la capacidad es constante) tenemos que:
                                                     <br /> <br/>
                                                     <div style={{"textAlign" : "center"}}>
-                                                        <img src={capacidad_condensador_1} style={{"width" : "40%"}}></img>
+                                                        <img alt="capacidad_condensador_1" src={capacidad_condensador_1} style={{"width" : "40%"}}></img>
                                                     </div>
                                                     <br/>
                                                 </>
@@ -1341,11 +1341,11 @@ export default class SimpleRC extends Component {
                                                     efectivamente, se cumple la propiedad de conservación de energía en el circuito
                                                     <br /> <br/>
                                                     <div style={{"textAlign" : "center"}}>
-                                                        <img src={vr_carga_condensador} style={{"width" : "40%"}}></img>
+                                                        <img alt="vr_carga_condensador" src={vr_carga_condensador} style={{"width" : "40%"}}></img>
                                                     </div>
                                                     <br /> <br/>
                                                     <div style={{"textAlign" : "center"}}>
-                                                        <img src={vr_descarga_condensador} style={{"width" : "40%"}}></img>
+                                                        <img alt= "vr_descarga_condensador" src={vr_descarga_condensador} style={{"width" : "40%"}}></img>
                                                     </div>
                                                     <br/>
                                                     , durante la <strong>carga</strong> y <strong>descarga</strong> del condensador respectivamente.
@@ -1362,19 +1362,19 @@ export default class SimpleRC extends Component {
                                                     se encuentra en estado de <strong>carga</strong> o <strong>descarga</strong> obtenemos las siguientes expresiones respectivamente:
                                                     <br /> <br/>
                                                     <div style={{"textAlign" : "center"}}>
-                                                        <img src={vc_carga_condensador} style={{"width" : "40%"}}></img>
+                                                        <img alt="vc_carga_condensador" src={vc_carga_condensador} style={{"width" : "40%"}}></img>
                                                     </div>
                                                     <br /> <br/>
                                                     <div style={{"textAlign" : "center"}}>
-                                                        <img src={vc_descarga_condensador} style={{"width" : "40%"}}></img>
+                                                        <img alt="vc_descarga_condensador" src={vc_descarga_condensador} style={{"width" : "40%"}}></img>
                                                     </div>
+
                                                     <br/>
 
                                                 </>
                                             )
                                         }
                                         else {
-      
                                             return (
                                                 <h2>ERROR</h2>
                                             )
