@@ -22,7 +22,7 @@ export function getChargeInstant(t, i_0, V, L, R) {
     return {
         "I" : i_t,
         "Vr": i_t * R,
-        "Vl": R*V*(1- Math.pow(Math.E, (-R * t)/L)),
+        "Vl": V*(Math.pow(Math.E, (-R * t)/L)),
         "E" : getE(L, i_t),
         "PHI": L * i_t
     }
@@ -33,7 +33,7 @@ export function getDischargeInstant (t, i_0, V, L, R){
     return {
         "I" : i_t,
         "Vr" : i_t * R,
-        "Vl" : -R * i_0 * Math.pow(Math.E, (-R * t)/L),
+        "Vl" : -V * (Math.pow(Math.E, (-R * t)/L)),
         "E" : getE(L, i_t),
         "PHI": L * i_t
     }
