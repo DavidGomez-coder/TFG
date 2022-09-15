@@ -632,7 +632,7 @@ export default class SimpleRC extends Component {
                                     paddingBottom: '50%', /* 16:9 */
                                     position: 'relative',
                                     height: 0
-                                }} className="chart-hover">
+                                }} >
                                     <div style={{
                                         position: 'absolute',
                                         top: '0',
@@ -681,7 +681,7 @@ export default class SimpleRC extends Component {
                                     paddingBottom: '50%', /* 16:9 */
                                     position: 'relative',
                                     height: 0
-                                }} className="chart-hover">
+                                }}>
                                     <div style={{
                                         position: 'absolute',
                                         top: '0',
@@ -732,7 +732,7 @@ export default class SimpleRC extends Component {
                                     paddingBottom: '50%', /* 16:9 */
                                     position: 'relative',
                                     height: 0
-                                }} className="chart-hover">
+                                }}>
                                     <div style={{
                                         position: 'absolute',
                                         top: '0',
@@ -778,7 +778,7 @@ export default class SimpleRC extends Component {
                                     paddingBottom: '50%', /* 16:9 */
                                     position: 'relative',
                                     height: 0
-                                }} className="chart-hover">
+                                }}>
                                     <div style={{
                                         position: 'absolute',
                                         top: '0',
@@ -828,7 +828,7 @@ export default class SimpleRC extends Component {
                                     paddingBottom: '50%', /* 16:9 */
                                     position: 'relative',
                                     height: 0
-                                }} className="chart-hover">
+                                }}>
                                     <div style={{
                                         position: 'absolute',
                                         top: '0',
