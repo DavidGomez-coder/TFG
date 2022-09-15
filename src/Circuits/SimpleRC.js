@@ -619,7 +619,7 @@ export default class SimpleRC extends Component {
 
 
     render() {
-        return (
+        return this.state.width >= 1280 ? (
 
             <div style={{ "paddingLeft": "1%", "paddingRight": "1%" }}>
                 {/* UP ROW */}
@@ -1385,6 +1385,20 @@ export default class SimpleRC extends Component {
                     </Offcanvas>
                 </Row>
             </div>
+        ) :  (
+            <div style={{'margin' : '1%'}}>
+                <Alert variant="danger">
+                <Alert.Heading>La simulación del circuito RC no puede mostrarse</Alert.Heading>
+                <p>Actualmente esta aplicación no se encuentra adaptada a todos los dispositivos. Para aquellos con un ancho de pantalla menor a  
+                    <strong> 1280px</strong> o con dimensiones inferiores a <strong>10''</strong> los componentes no son mostrados adecuadamente. 
+                    El ancho de su pantalla actual es de <strong>{this.state.width} px</strong>.</p>
+                    <hr />
+                    <p className="mb-0">
+                        Pruebe con otro dispositivo.
+                    </p>
+            </Alert>
+            </div>
+            
         )
     }
 
