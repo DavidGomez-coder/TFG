@@ -177,7 +177,7 @@ export default class SimpleRl extends Component {
                             vr_data: [...oldVrData, { "t": t_a, "Vr(t)": instant_values.Vr }],
                             vl_data: [...oldVlData, { "t": t_a, "Vl(t)": instant_values.Vl }],
                             e_data: [...oldEData, { "t": t_a, "E(t)": instant_values.E }],
-                            phi_data: [...oldPhiData, { "t": t_a, "PHI(t)": instant_values.PHI }],
+                            phi_data: [...oldPhiData, { "t": t_a, "Φ(t)": instant_values.PHI }],
                             //time update
                             t_i: t_i + ((SIMULATION_STEP * prevState.simulation_step_multiplier) / 1000),
                             t_a: t_a + ((SIMULATION_STEP * prevState.simulation_step_multiplier) / 1000),
@@ -266,7 +266,7 @@ export default class SimpleRl extends Component {
                     return rl_charge_63_80;
                 } else if (this.state.i_percent > 80 && this.state.i_percent <= 90) {
                     return rl_charge_80_90;
-                } else if (this.state.i_percent > 90 && this.state.i_percent < 100) {
+                } else if (this.state.i_percent > 90 && this.state.i_percent <= 100) {
                     return rl_charge_90_99;
                 }
 
@@ -573,14 +573,14 @@ export default class SimpleRl extends Component {
                                                 paddingBottom: '50%', /* 16:9 */
                                                 position: 'relative',
                                                 height: 0
-                                            }} onClick={(ev) => {this.turnOnCanvas(I_CURRENT_CANVAS)}} className="chart-hover">
+                                            }} onClick={(ev) => {this.turnOnCanvas(I_CURRENT_CANVAS)}}>
                                                 <div style={{
                                                     position: 'absolute',
                                                     top: '0',
                                                     left: '0',
                                                     width: '100%',
                                                     height: '100%'
-                                                }} className="chart-hover">
+                                                }}>
                                                     <ResponsiveContainer width="100%" height="98%">
                                                         <LineChart
                                                             width={400}
@@ -594,10 +594,13 @@ export default class SimpleRl extends Component {
                                                             }}
                                                         >
                                                             <CartesianGrid strokeDasharray="3 3" />
-                                                            <XAxis dataKey="t" tick={false} />
-                                                            <YAxis type="number" tick={true} />
+                                                            <XAxis dataKey="t" tick={false} label={{'value': 'Tiempo (s)', 'position' : 'insideRight'}}/>
+                                                            <YAxis type="number" tick={false} label={{'value' : 'Amperios', 'angle' : '-90'}}/>
             
-                                                            <Tooltip />
+                                                            <Tooltip formatter={(value, name, props) =>{ 
+                                                                        return [`${Number.parseFloat(value).toExponential(3)}`,'I(t)' ]
+                                                                    }}
+                                                         cursor={false}/>
                                                             <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                             <Line type="monotone" dataKey="I(t)" stroke="orange" strokeWidth={3} dot={false} isAnimationActive={false} />
                                                             {
@@ -615,13 +618,14 @@ export default class SimpleRl extends Component {
             
             
                                         </Col>
+
                                         {/* VL */}
                                         <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
                                             <div style={{
                                                 paddingBottom: '50%', /* 16:9 */
                                                 position: 'relative',
                                                 height: 0
-                                            }} onClick={(ev) => {this.turnOnCanvas(VL_CANVAS)}} className="chart-hover">
+                                            }} onClick={(ev) => {this.turnOnCanvas(VL_CANVAS)}}>
                                                 <div style={{
                                                     position: 'absolute',
                                                     top: '0',
@@ -643,10 +647,13 @@ export default class SimpleRl extends Component {
             
                                                         >
                                                             <CartesianGrid strokeDasharray="3 3" />
-                                                            <XAxis dataKey="t" tick={false} />
-                                                            <YAxis type="number" />
+                                                            <XAxis dataKey="t" tick={false} label={{'value': 'Tiempo (s)', 'position' : 'insideRight'}}/>
+                                                            <YAxis type="number" tick={false} label={{'value' : 'Voltios', 'angle' : '-90'}}/>
             
-                                                            <Tooltip />
+                                                            <Tooltip formatter={(value, name, props) =>{ 
+                                                                        return [`${Number.parseFloat(value).toExponential(3)}`,'Vl(t)' ]
+                                                                    }}
+                                                         cursor={false}/>
                                                             <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                             <Line type="monotone" dataKey="Vl(t)" stroke="blue" strokeWidth={3} dot={false} isAnimationActive={false} />
                                                             {
@@ -673,7 +680,7 @@ export default class SimpleRl extends Component {
                                                 paddingBottom: '50%', /* 16:9 */
                                                 position: 'relative',
                                                 height: 0
-                                            }} onClick={(ev) => {this.turnOnCanvas(VR_CANVAS)}} className="chart-hover">
+                                            }} onClick={(ev) => {this.turnOnCanvas(VR_CANVAS)}}>
                                                 <div style={{
                                                     position: 'absolute',
                                                     top: '0',
@@ -694,10 +701,13 @@ export default class SimpleRl extends Component {
                                                             }}
                                                         >
                                                             <CartesianGrid strokeDasharray="3 3" />
-                                                            <XAxis dataKey="t" tick={false} />
-                                                            <YAxis type="number" />
+                                                            <XAxis dataKey="t" tick={false} label={{'value': 'Tiempo (s)', 'position' : 'insideRight'}}/>
+                                                            <YAxis type="number" tick={false} label={{'value' : 'Voltios', 'angle' : '-90'}}/>
             
-                                                            <Tooltip />
+                                                            <Tooltip formatter={(value, name, props) =>{ 
+                                                                        return [`${Number.parseFloat(value).toExponential(3)}`,'Vr(t)' ]
+                                                                    }}
+                                                         cursor={false}/>
                                                             <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                             <Line type="monotone" dataKey="Vr(t)" stroke="green" strokeWidth={3} dot={false} isAnimationActive={false} />
                                                             {
@@ -720,7 +730,7 @@ export default class SimpleRl extends Component {
                                                 paddingBottom: '50%', /* 16:9 */
                                                 position: 'relative',
                                                 height: 0
-                                            }} onClick={(ev) => {this.turnOnCanvas(ENERGY_CANVAS)}} className="chart-hover">
+                                            }} onClick={(ev) => {this.turnOnCanvas(ENERGY_CANVAS)}}>
                                                 <div style={{
                                                     position: 'absolute',
                                                     top: '0',
@@ -741,10 +751,13 @@ export default class SimpleRl extends Component {
                                                             }}
                                                         >
                                                             <CartesianGrid strokeDasharray="3 3" />
-                                                            <XAxis dataKey="t" tick={false} />
-                                                            <YAxis type="number" />
+                                                            <XAxis dataKey="t" tick={false} label={{'value': 'Tiempo (s)', 'position' : 'insideRight'}}/>
+                                                            <YAxis type="number" tick={false} label={{'value' : 'Julios', 'angle' : '-90'}}/>
             
-                                                            <Tooltip />
+                                                            <Tooltip formatter={(value, name, props) =>{ 
+                                                                        return [`${Number.parseFloat(value).toExponential(3)}`,'E(t)' ]
+                                                                    }}
+                                                         cursor={false}/>
                                                             <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                             <Line type="monotone" dataKey="E(t)" stroke="#eb3474" strokeWidth={3} dot={false} isAnimationActive={false} />
                                                             {
@@ -769,7 +782,7 @@ export default class SimpleRl extends Component {
                                                 paddingBottom: '50%', /* 16:9 */
                                                 position: 'relative',
                                                 height: 0
-                                            }} onClick={(ev) => {this.turnOnCanvas(PHI_CANVAS)}} className="chart-hover">
+                                            }} onClick={(ev) => {this.turnOnCanvas(PHI_CANVAS)}}>
                                                 <div style={{
                                                     position: 'absolute',
                                                     top: '0',
@@ -790,12 +803,15 @@ export default class SimpleRl extends Component {
                                                             }}
                                                         >
                                                             <CartesianGrid strokeDasharray="3 3" />
-                                                            <XAxis dataKey="t" tick={false} />
-                                                            <YAxis type="number" />
+                                                            <XAxis dataKey="t" tick={false} label={{'value': 'Tiempo (s)', 'position' : 'insideRight'}}/>
+                                                            <YAxis type="number" tick={false} label={{'value' : 'Weber', 'angle' : '-90'}}/>
             
-                                                            <Tooltip />
+                                                            <Tooltip formatter={(value, name, props) =>{ 
+                                                                        return [`${Number.parseFloat(value).toExponential(3)}`,'Φ(t)' ]
+                                                                    }}
+                                                         cursor={false}/>
                                                             <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
-                                                            <Line type="monotone" dataKey="PHI(t)" stroke="red" strokeWidth={3} dot={false} isAnimationActive={false} />
+                                                            <Line type="monotone" dataKey="Φ(t)" stroke="red" strokeWidth={3} dot={false} isAnimationActive={false} />
                                                             {
                                                                 this.state.show_reference_lines ?
                                                                     this.state.referenced_lines.map((r_line) => {
@@ -922,6 +938,7 @@ export default class SimpleRl extends Component {
                             </Row>
                             {/* CONTROLLERS ROW */}
                             <Row className="justify-content-md-center">
+
                                 {/* INDUCTOR controller */}
                                 <Col xs={3} sm={3} md={3} lg={3} xl={3} xxl={3}>
                                     <Row>
@@ -972,7 +989,7 @@ export default class SimpleRl extends Component {
                                                     
                                                     {
                                                             (() => {
-                                                                if (this.state.i_percent > 0) {
+                                                                if (this.state.i_percent > 0 && this.state.running) {
                                                                     return (
                                                                         <div className="arrow-box">
                                                                             <div className="arrow">
@@ -1080,6 +1097,7 @@ export default class SimpleRl extends Component {
                                     </label>
             
                                 </Col>
+
                                 {/* INFO CANVAS */}
                                 <Offcanvas show={this.state.showCanvas} onHide={(ev) => {this.turnOffCanvas()}} backdrop="static" placement="end" >
                                              <Offcanvas.Header closeButton>
