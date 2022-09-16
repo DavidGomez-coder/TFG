@@ -31,13 +31,14 @@ import rl_discharge_100 from "../assets/animations/rl-discharge/rl_discharge_100
 import rl_discharge_background from "../assets/animations/rl-discharge/rl_discharge_background.png";
 
 import "./Inductor/InductorCSS.css";
-import "./SimpleRL.css"
+import "./SimpleRL.css";
 
 // otras
 import ley_ohm_1 from "../assets/formula/ley_ohm_1.png";
 import ley_ohm_2 from "../assets/formula/ley_ohm_2.png";
 import varepsilon from "../assets/formula/varepsilon.png";
-
+import faraday_lenz from "../assets/formula/faraday_lenz.png";
+import coeficiente_autoinduccion from "../assets/formula/coeficiente_autoinduccion.png";
 
 // OFF- CANVAS
 const I_CURRENT_CANVAS = 1;
@@ -249,51 +250,42 @@ export default class SimpleRl extends Component {
     }
 
     getCurrentAnimation() {
-        switch (this.state.inductorCharging) {
 
+        switch(this.state.inductorCharging) {
             case true:
-                if (!this.state.running) {
+
+                if (!this.state.running)
                     return rl_charge_background;
-                }
-
-                if (this.state.i_percent == 100) {
-                    return rl_charge_100;
-                }
-
-                if (this.state.i_percent <= 63.2) {
-                    return rl_charge_0_63;
-                } else if (this.state.i_percent > 63.2 && this.state.i_percent <= 80) {
-                    return rl_charge_63_80;
-                } else if (this.state.i_percent > 80 && this.state.i_percent <= 90) {
-                    return rl_charge_80_90;
-                } else if (this.state.i_percent > 90 && this.state.i_percent <= 100) {
+                
+                if (this.state.i_percent <= 63.2)
                     return rl_charge_90_99;
-                }
+                else if (this.state.i_percent > 63.2 && this.state.i_percent <= 80)
+                    return rl_charge_80_90;
+                else if (this.state.i_percent > 80 && this.state.i_percent <= 90)
+                    return rl_charge_63_80;
+                else if (this.state.i_percent > 90 && this.state.i_percent <= 100)
+                    return rl_charge_0_63;
+
 
                 return rl_charge_background;
-            //break;
-            default:
 
-                if (!this.state.running) {
+                case false:
+                    if (!this.state.running)
+                        return rl_discharge_background;
+                    
+                    if (this.state.i_percent <= 10) 
+                        return rl_discharge_90_99;
+                    else if (this.state.i_percent > 10 && this.state.i_percent <= 20) 
+                        return rl_discharge_80_90;
+                    else if (this.state.i_percent > 20 && this.state.i_percent <= 37.7) 
+                        return rl_discharge_63_80;
+                    else if (this.state.i_percent > 37.7 && this.state.i_percent < 100) 
+                        return rl_discharge_0_63;
+                    
                     return rl_discharge_background;
-                }
-                if (this.state.i_percent == 100 || !this.state.running) {
-                    return rl_discharge_100;
-                }
-
-                if (this.state.i_percent <= 10) {
-                    return rl_discharge_90_99;
-                } else if (this.state.i_percent > 10 && this.state.i_percent <= 20) {
-                    return rl_discharge_80_90;
-                } else if (this.state.i_percent > 20 && this.state.i_percent <= 37.7) {
-                    return rl_discharge_63_80;
-                } else if (this.state.i_percent > 37.7 && this.state.i_percent < 100) {
-                    return rl_discharge_0_63;
-                }
-                return rl_discharge_background;
-
-            //break;
         }
+        
+        //return undefined;
     }
 
     updateCharging() {
@@ -1109,10 +1101,34 @@ export default class SimpleRl extends Component {
                                             {
                                                 (() => {
                                                     if (this.state.currentCanvas === AUTOINDUCCION_CANVAS) {
-                                                           /* TEORIA CARGA CONDENSADOR */
+                                                           /* TEORIA FENÓMENO DE AUTOINDUCCION */
                                                             return (
                                                                 <>
                                                                     <h4>Fenómeno de autoinducción</h4>
+                                                                    En la naturaleza, podemos encontrar regiones del espacio las cuáles son alteradas por <i>perturbaciones</i>. Estas, por ejemplo, 
+                                                                    pueden ocurrir cuando una partícula en movimiento, la cirulación de corriente eléctrica o un imán, se encuentran en presencia de objetos 
+                                                                    con una naturaleza similar. A la irregularidad presentada por estas situaciones, se le conoce como <i>campo magnético</i>.
+                                                                    <br /> 
+                                                                    <br />
+                                                                    Para aplicar este fenómeno, haremos uso de una <b>bobina</b>. Se trata de un dispositivo que consta de un material conductor enrollado alrededor de un núcleo, 
+                                                                    normalmente de aire o de algún material ferroso que, al ser atravesado por una corriente eléctrica, crea un campo magnético.
+                                                                    <br />
+                                                                    <br />
+                                                                    Si hacemos variar esta intensidad de corriente, también aumentamos o disminuimos el campo magnético creado por el inductor que, al mismo tiempo, produce una variación 
+                                                                    en el flujo magnético de la bobina, produciendo así una <i>F.E.M autoinducida</i>. Según la <i>Ley de Faraday-Lenz</i>, la F.E.M inducida es directamente proporcional 
+                                                                    a la variación del flujo magnético.
+                                                                    <br /> <br />
+                                                                    <div style={{"textAlign" : "center"}}>
+                                                                        <img alt="faraday_lenz" src={faraday_lenz} style={{"width" : "50%"}}></img>
+                                                                    </div>
+                                                                    <br />
+                                                                    A este parámetro que relaciona el flujo magnético con la F.E.M autoinducida, se le conoce como <i>coeficiente de autoinduccion</i>, 
+                                                                    el cuál depende del medio y de la geometría de la bobina. Su unidad en el Sistema Internacional es el <i>Henrio</i>.
+                                                                    <br /> <br />
+                                                                    <div style={{"textAlign" : "center"}}>
+                                                                        <img alt="coeficiente_autoinduccion" src={coeficiente_autoinduccion} style={{"width" : "30%"}}></img>
+                                                                    </div>
+                                                                    <br />
                                                                 </>
                                                             )
                                                             

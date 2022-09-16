@@ -41,8 +41,8 @@ class ExternalView extends Component {
         <Container fluid="xs sm md lg xl xxl">
           {
             this.state.wndow === "rc-sim" ? <SimpleRC /> :
-            this.state.wndow === "rl-sim" ? <SimpleRL /> :
-            this.state.wndow === "teoria" ? <Theory /> : undefined
+            this.state.wndow === "rl-sim" ? <SimpleRL /> : undefined
+            /*this.state.wndow === "teoria" ? <Theory /> : undefined */
           }
         </Container>
       </div>
