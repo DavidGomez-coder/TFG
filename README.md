@@ -10,7 +10,7 @@ Como se ha comentado en la sección anterior, en esta aplicación se desarrolla 
 Además, se incluye un apartado de teoría, en el que se explica de manera simple estos fenómenos. En ellos, se hace un análisis matemático de la situación, obteniendo así las expresiones correspondientes que lo modelan y que además, son utilizadas para obtener los resultados de dichas simulaciones.
 
 
-# ¿Cómo instalar e iniciar la aplicación?
+# ¿Cómo instalar e iniciar la aplicación en local?
 Para poder instalar la aplicación localmente, es necesario disponer de <strong>NodeJS</strong>, un entorno en tiempo de ejecución de <i>JavaScript</i>, permitiendo la creación de aplicaciones, módulos o librerías haciendo uso de este lenguaje, teniendo este como primer objetivo ser ejecutado en el navegador. 
 
 (Para descargar la última versión de NodeJS ir a https://nodejs.org/en/download/)
@@ -19,8 +19,45 @@ Una vez la instalación está completa y hallamos descargado el código fuente e
 
 <strong>`npm install --force`</strong> : Instalación de todas las dependencias. La opción <i>--force</i> es usada para poder instalar librerías con conflictos (en caso de que los hubiese), ya que dependiendo del sistema operativo utilizado puede salir este error o no. 
 
-Una vez hecho esto, la aplicación se encuentra lista para ser lanzada, escribiendo sobre el mismo directorio el comando <strong> `npm start` </strong> y, acto seguido, se abrirá una ventana de nuestro navegador con la aplicación (por defecto en http://localhost:3000).
+Una vez hecho esto, la aplicación se encuentra lista para ser lanzada, escribiendo sobre el mismo directorio el comando <strong> `npm start` </strong> y, acto seguido, se abrirá una ventana de nuestro navegador con la aplicación (por defecto en http://localhost:3000)*.
 
+
+<strong>*</strong> El codigo fuente esta configurado para desplegarse en github-pages, así que por defecto el proyecto se abrirá en http://localhost:3000/TFG. Basta con quitar la ruta <i>TFG</i> de la URL en el navegador y la aplicación se muestra correctamete.
+
+# Como realizar el despliegue en github-pages
+Para realizar el despliegue en github-pages, realizaremos los siguientes pasos. 
+
+En primer lugar será instalar la dependencia <i>gh-pages</i>, la cuál nos permitirá crear un <strong>build </strong> de nuestra aplicación. Este <strong>build </strong> lo desplegaremos en una rama diferente, para así tener en una el código fuente y en otra, los archivos necesarios para poder desplegar la aplicación. Instalamos entonces esta dependencia con la siguiente instrucción.
+
+```$ npm install gh-pages --save-dev ```
+
+Una finalizada la instalación, abrimos el fichero `package.json` y añadimos una propiedad `homepage` con el siguiente formato: `https://{username}.github.io/{repo-name}`
+
+<div style="text-align: center">
+    <img alt="homepage_added" src="./docs/imgs/homepage.PNG"/>
+</div>
+
+<br />
+
+A continuación, añadimos los scripts `predeploy` y `deploy` para hacer el despliegue en el fichero `package.json`.
+
+
+<br/>
+<div style="text-align: center">
+    <img alt="deploy_scripts" src="./docs/imgs/deploy_scripts.PNG"/>
+</div>
+
+<br />
+
+Para terminar, despleguamos ejecutando el siguiente script <br />
+```$ npm run deploy``` <br />
+, el cuál llamará internamente a los anteriores scripts añadidos.
+
+Con todo esto, tendremos el proyecto dividido en dos ramas diferentes.
+    
+    - Por un lado la rama <strong>main</strong>
+
+<br /><br />
 Ⓒ2022 David Gómez Pérez
 
 
