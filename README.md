@@ -21,6 +21,8 @@ Una vez la instalación está completa y hallamos descargado el código fuente e
 
 Una vez hecho esto, la aplicación se encuentra lista para ser lanzada, escribiendo sobre el mismo directorio el comando <strong> `npm start` </strong> y, acto seguido, se abrirá una ventana de nuestro navegador con la aplicación (por defecto en http://localhost:3000).
 
+Ⓒ2022 David Gómez Pérez
+
 
 
 
