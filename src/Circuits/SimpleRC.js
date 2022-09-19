@@ -1135,7 +1135,7 @@ export default class SimpleRC extends Component {
                     </Col>
 
                     {/* INFO CANVAS */}
-                    <Offcanvas show={this.state.showCanvas} onHide={(ev) => {this.turnOffCanvas()}} backdrop="static" placement="end" >
+                    <Offcanvas show={this.state.showCanvas} onHide={(ev) => {this.turnOffCanvas()}}  placement="end" >
                                  <Offcanvas.Header closeButton>
                                     <Offcanvas.Title>
                                         <h1>Circuito RC</h1>
