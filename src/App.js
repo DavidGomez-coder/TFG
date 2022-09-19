@@ -35,6 +35,9 @@ class ExternalView extends Component {
               <Nav.Link href="#rc-sim" onClick={(ev) => { this.updateWindow("rc-sim"); }}>Simulación RC</Nav.Link>
               <Nav.Link href="#rl-sim" onClick={(ev) => { this.updateWindow("rl-sim"); }}>Simulación RL</Nav.Link>
             </Nav>
+            <Nav>
+              <Nav.Link>Ⓒ2022 David Gómez Pérez</Nav.Link>
+            </Nav>
           </Container>
         </Navbar>
 
