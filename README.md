@@ -49,13 +49,31 @@ A continuación, añadimos los scripts `predeploy` y `deploy` para hacer el desp
 
 <br />
 
-Para terminar, despleguamos ejecutando el siguiente script <br />
-```$ npm run deploy``` <br />
-, el cuál llamará internamente a los anteriores scripts añadidos.
+Para terminar, despleguamos ejecutando el siguiente script ```$ npm run deploy``` , el cuál llamará internamente a los anteriores scripts añadidos.
 
 Con todo esto, tendremos el proyecto dividido en dos ramas diferentes.
     
-    - Por un lado la rama <strong>main</strong>
+    - Por un lado la rama main que contendrá el código fuente del proyecto.
+    - Rama gh-pages, con el build del proyecto
+
+Para poder acceder desde internet, nos moveremos al apartado <strong>settings</strong> 
+
+<div style="text-align: center">
+    <img alt="settings" src="./docs/imgs/settings.PNG"/>
+</div>
+
+<br />
+y en la pestaña <strong>Pages</strong> habilitamos la siguiente configuración. 
+
+<br/>
+
+<div style="text-align: center">
+    <img alt="pages-conf" src="./docs/imgs/pages-conf.PNG"/>
+</div>
+
+<br />
+Guardamos los cambios y la aplicación sería accesible con el siguiente enlace
+https://davidgomez-coder.github.io/TFG/ 
 
 <br /><br />
 Ⓒ2022 David Gómez Pérez
