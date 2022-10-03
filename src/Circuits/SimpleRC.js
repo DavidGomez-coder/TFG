@@ -314,7 +314,7 @@ export default class SimpleRC extends Component {
                     return rc_discharge_background;
                 }
                 if (this.state.q_percent == 100 || !this.state.running) {
-                    return rc_discharge_100;
+                    return rc_discharge_0_63;
                 }
 
                 if (this.state.q_percent <= 10) {
@@ -656,10 +656,10 @@ export default class SimpleRC extends Component {
                                             >
                                                 <CartesianGrid strokeDasharray="3 3" />
                                                 <XAxis dataKey="t" tick={false} label={{'value': 'Tiempo (s)', 'position' : 'insideRight'}}/>
-                                                <YAxis type="number" tick={false} label={{'value' : 'Culombios', 'angle' : '-90'}}/>
+                                                <YAxis type="number" tick={false} label={{'value' : 'Q (culombios)', 'angle' : '-90'}}/>
 
                                                 <Tooltip formatter={(value, name, props) =>{ 
-                                                                        return [`${Number.parseFloat(value).toExponential(3)}`,'q(t)' ]
+                                                                        return [`${Number.parseFloat(value).toExponential(3)} C`,'q(t)' ]
                                                                     }}
                                                          cursor={false}/>
                                                 <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
@@ -709,11 +709,11 @@ export default class SimpleRC extends Component {
                                             >
                                                 <CartesianGrid strokeDasharray="3 3" />
                                                 <XAxis dataKey="t" tick={false} label={{'value': 'Tiempo (s)', 'position' : 'insideRight'}}/>
-                                                <YAxis type="number" tick={false} label={{'value' : 'Amperios', 'angle' : '-90'}}/>
+                                                <YAxis type="number" tick={false} label={this.state.capacitorCharging ? {'value' : 'I (amperios)', 'angle' : '-90'} : {'value' : '- I (amperios)', 'angle' : '-90'}}/>
                                                 
 
                                                 <Tooltip formatter={(value, name, props) =>{ 
-                                                                        return [`${Number.parseFloat(value).toExponential(3)}`,'I(t)' ]
+                                                                        return [`${Number.parseFloat(value).toExponential(3)} A`,'I(t)' ]
                                                                     }}
                                                          cursor={false}/>
                                                 <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
@@ -763,10 +763,10 @@ export default class SimpleRC extends Component {
                                             >
                                                 <CartesianGrid strokeDasharray="3 3" />
                                                 <XAxis dataKey="t" tick={false} label={{'value': 'Tiempo (s)', 'position' : 'insideRight'}}/>
-                                                <YAxis type="number" tick={false} label={{'value' : 'Voltios', 'angle' : '-90'}}/>
+                                                <YAxis type="number" tick={false} label={{'value' : 'Vc (voltios)', 'angle' : '-90'}}/>
 
                                                 <Tooltip formatter={(value, name, props) =>{ 
-                                                                        return [`${Number.parseFloat(value).toExponential(3)}`,'Vc(t)' ]
+                                                                        return [`${Number.parseFloat(value).toExponential(3)} V`,'Vc(t)' ]
                                                                     }}
                                                          cursor={false}/>
                                                 <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
@@ -813,10 +813,10 @@ export default class SimpleRC extends Component {
                                             >
                                                 <CartesianGrid strokeDasharray="3 3" />
                                                 <XAxis dataKey="t" tick={false} label={{'value': 'Tiempo (s)', 'position' : 'insideRight'}}/>
-                                                <YAxis type="number" tick={false} label={{'value' : 'Voltios', 'angle' : '-90'}}/>
+                                                <YAxis type="number" tick={false} label={this.state.capacitorCharging ? {'value' : 'Vr (voltios)', 'angle' : '-90'} : {'value' : '- Vr (voltios)', 'angle' : '-90'}}/>
 
                                                 <Tooltip formatter={(value, name, props) =>{ 
-                                                                        return [`${Number.parseFloat(value).toExponential(3)}`,'Vr(t)' ]
+                                                                        return [`${Number.parseFloat(value).toExponential(3)} V`,'Vr(t)' ]
                                                                     }}
                                                          cursor={false}/>
                                                 <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
@@ -865,10 +865,10 @@ export default class SimpleRC extends Component {
                                             >
                                                 <CartesianGrid strokeDasharray="3 3" />
                                                 <XAxis dataKey="t" tick={false} label={{'value': 'Tiempo (s)', 'position' : 'insideRight'}}/>
-                                                <YAxis type="number" tick={false} label={{'value' : 'Julios', 'angle' : '-90'}}/>
+                                                <YAxis type="number" tick={false} label={{'value' : 'E (julios)', 'angle' : '-90'}}/>
 
                                                 <Tooltip formatter={(value, name, props) =>{ 
-                                                                        return [`${Number.parseFloat(value).toExponential(3)}`,'E(t)' ]
+                                                                        return [`${Number.parseFloat(value).toExponential(3)} J`,'E(t)' ]
                                                                     }}
                                                          cursor={false}/>
                                                 <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }}  />
@@ -896,7 +896,7 @@ export default class SimpleRC extends Component {
                                             placement="top"
                                             overlay={
                                                 <ToolTipReact id={`tooltip-top-3`}>
-                                                    Los resultados obtenidos dependerán de la <strong>precisión</strong> utilizada.
+                                                    Los resultados obtenidos dependerán de la <strong>escala de tiempo</strong> utilizada.
                                                 </ToolTipReact>
                                             }>
 
@@ -937,17 +937,17 @@ export default class SimpleRC extends Component {
                                 <br></br>
                                 <br></br>
                                 <Row>
-                                    <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
-                                        <strong>Precisión:</strong>
+                                    <Col xs={7} sm={7} md={7} lg={7} xl={7} xxl={7}>
+                                        <strong>Escala de tiempo</strong>
                                         <Form>
                                             <Form.Select onChange={(ev) => { this.updateSimulationStepMultiplier(parseFloat(ev.target.value)) }}>
-                                                <option defaultValue={true} value="1">Normal</option>
-                                                <option value="100">Demasiado baja</option>
-                                                <option value="10">Muy baja</option>
-                                                <option value="5">Baja</option>
-                                                <option value="0.05">Alta</option>
-                                                <option value="0.001">Muy alta</option>
-                                                <option value="0.000001">Demasiado alta</option>
+                                                <option defaultValue={true} value="1">s (segundos)</option>
+                                                <option value="360">h (horas)</option>
+                                                <option value="60">min (minutos)</option>
+                                                <option value="0.001">ms (milisegundos)</option>
+                                                <option value="0.000001">μs (microsegundos)</option>
+                                                <option value="0.000000001">ns (nanosegundos)</option>
+                                                <option value="0.000000000001">ps (picosegundos)</option>
                                             </Form.Select>
                                         </Form>
 
@@ -1057,7 +1057,7 @@ export default class SimpleRC extends Component {
                             <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                                 <Row>
                                     <Col sm={12} md={12} lg={12} xl={12} xxl={12}>
-                                        <input type="range" className="form-range" min="0" max="99" step="0.1"
+                                        <input type="range" className="form-range" min="0.01" max="9" step="0.01"
                                             onChange={(ev) => {
                                                 this.updateResistorValue(ev.target.value);
                                                 this.updateColorBands(Number.parseFloat(ev.target.value), this.state.R_m);
@@ -1073,6 +1073,10 @@ export default class SimpleRC extends Component {
                                             <option value="x0.1">{Number.parseFloat(this.state.R_v * 0.1).toFixed(2)} Ω</option>
                                             <option value="x10">{Number.parseFloat(this.state.R_v * 10).toFixed(2)} Ω</option>
                                             <option value="x100">{Number.parseFloat(this.state.R_v * 100).toFixed(2)} Ω</option>
+                                            <option value="x1K">{Number.parseFloat(this.state.R_v).toFixed(2)} KΩ</option>
+                                            <option value="x10K">{Number.parseFloat(this.state.R_v * 10).toFixed(2)} KΩ</option>
+                                            <option value="x100K">{Number.parseFloat(this.state.R_v * 100).toFixed(2)} KΩ</option>
+                                            <option value="x1M">  {Number.parseFloat(this.state.R_v ).toFixed(2)} MΩ</option>
                                         </select>
 
                                     </Col>
