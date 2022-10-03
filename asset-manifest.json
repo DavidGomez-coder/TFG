@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/TFG/static/css/main.2fa1c562.css",
+    "main.js": "/TFG/static/js/main.b369b50e.js",
+    "static/js/787.37294fed.chunk.js": "/TFG/static/js/787.37294fed.chunk.js",
+    "static/media/rl_charge_100.png": "/TFG/static/media/rl_charge_100.722ae71aac1bff812a62.png",
+    "static/media/rl_discharge_100.png": "/TFG/static/media/rl_discharge_100.2d455e1bcb2f69e7658d.png",
+    "static/media/rc_discharge_100.png": "/TFG/static/media/rc_discharge_100.847007b6f41f724e9d83.png",
+    "static/media/rc_charge_100.png": "/TFG/static/media/rc_charge_100.407b919e26828665c32f.png",
+    "static/media/rl_charge_0_63.gif": "/TFG/static/media/rl_charge_0_63.b818a3a28a5cf3913bfd.gif",
+    "static/media/rl_charge_63_80.gif": "/TFG/static/media/rl_charge_63_80.d9cfd16dc60c3865c334.gif",
+    "static/media/rl_charge_80_90.gif": "/TFG/static/media/rl_charge_80_90.e5d3ac30ec86c2c3aa59.gif",
+    "static/media/rl_charge_90_99.gif": "/TFG/static/media/rl_charge_90_99.cd792568fa13daafea09.gif",
+    "static/media/rl_discharge_0_63.gif": "/TFG/static/media/rl_discharge_0_63.779082ef612731e2ce1a.gif",
+    "static/media/rl_discharge_63_80.gif": "/TFG/static/media/rl_discharge_63_80.7cb9326c7de2a421eaeb.gif",
+    "static/media/rl_discharge_80_90.gif": "/TFG/static/media/rl_discharge_80_90.656bd456149377b3ad9d.gif",
+    "static/media/rl_discharge_90_99.gif": "/TFG/static/media/rl_discharge_90_99.a6414050f23ff31b8aea.gif",
+    "static/media/rc_discharge_0_63.gif": "/TFG/static/media/rc_discharge_0_63.ee0902f849184c1847d8.gif",
+    "static/media/rc_discharge_63_80.gif": "/TFG/static/media/rc_discharge_63_80.4d070678128bdf8d291d.gif",
+    "static/media/rc_discharge_80_90.gif": "/TFG/static/media/rc_discharge_80_90.55f494b9d1e452fdb555.gif",
+    "static/media/rc_discharge_90_99.gif": "/TFG/static/media/rc_discharge_90_99.62b90345bcc89ad6f46c.gif",
+    "static/media/rc_charge_0_63.gif": "/TFG/static/media/rc_charge_0_63.435e205ab0ed3036b788.gif",
+    "static/media/rc_charge_63_80.gif": "/TFG/static/media/rc_charge_63_80.97cb9d74963f7a5b14ce.gif",
+    "static/media/rc_charge_80_90.gif": "/TFG/static/media/rc_charge_80_90.cf89e8b8dd3e05cabf88.gif",
+    "static/media/rc_charge_90_99.gif": "/TFG/static/media/rc_charge_90_99.dfcc3e148129f565e309.gif",
+    "static/media/rl_discharge_background.png": "/TFG/static/media/rl_discharge_background.db3b3a658d98dc096e18.png",
+    "static/media/rl_charge_background.png": "/TFG/static/media/rl_charge_background.f2daf3f521f64d674e01.png",
+    "static/media/rc_discharge_background.png": "/TFG/static/media/rc_discharge_background.383e0447db79c89d36eb.png",
+    "static/media/rc_charge_background.png": "/TFG/static/media/rc_charge_background.86bbf2dfb4ee8f68503e.png",
+    "static/media/rc-circuit.png": "/TFG/static/media/rc-circuit.d8ba09abbbd11faa71d2.png",
+    "static/media/rl-circuit.png": "/TFG/static/media/rl-circuit.b0daa81580f7c72cfd4e.png",
+    "static/media/logo.svg": "/TFG/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "static/media/balance_energetico.PNG": "/TFG/static/media/balance_energetico.6dd37d358de1b0721d0b.PNG",
+    "index.html": "/TFG/index.html",
+    "main.2fa1c562.css.map": "/TFG/static/css/main.2fa1c562.css.map",
+    "main.b369b50e.js.map": "/TFG/static/js/main.b369b50e.js.map",
+    "787.37294fed.chunk.js.map": "/TFG/static/js/787.37294fed.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2fa1c562.css",
+    "static/js/main.b369b50e.js"
+  ]
+}
