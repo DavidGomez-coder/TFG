@@ -55,6 +55,7 @@ Con todo esto, tendremos el proyecto dividido en dos ramas diferentes.
     
     - Por un lado la rama main que contendrá el código fuente del proyecto.
     - Rama gh-pages, con el build del proyecto
+    - Para limpiar la rama gh-pages y hacer un nuevo build, en deploy se debe de utilizar 'gh-pages-clean gh-pages -d build'
 
 Para poder acceder desde internet, nos moveremos al apartado <strong>settings</strong> 
 
