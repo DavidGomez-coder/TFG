@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/TFG/static/css/main.2fa1c562.css",
-    "main.js": "/TFG/static/js/main.b369b50e.js",
+    "main.js": "/TFG/static/js/main.14bd676d.js",
     "static/js/787.37294fed.chunk.js": "/TFG/static/js/787.37294fed.chunk.js",
     "static/media/rl_charge_100.png": "/TFG/static/media/rl_charge_100.722ae71aac1bff812a62.png",
     "static/media/rl_discharge_100.png": "/TFG/static/media/rl_discharge_100.2d455e1bcb2f69e7658d.png",
@@ -33,11 +33,11 @@
     "static/media/balance_energetico.PNG": "/TFG/static/media/balance_energetico.6dd37d358de1b0721d0b.PNG",
     "index.html": "/TFG/index.html",
     "main.2fa1c562.css.map": "/TFG/static/css/main.2fa1c562.css.map",
-    "main.b369b50e.js.map": "/TFG/static/js/main.b369b50e.js.map",
+    "main.14bd676d.js.map": "/TFG/static/js/main.14bd676d.js.map",
     "787.37294fed.chunk.js.map": "/TFG/static/js/787.37294fed.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2fa1c562.css",
-    "static/js/main.b369b50e.js"
+    "static/js/main.14bd676d.js"
   ]
 }
