@@ -990,7 +990,7 @@ export default class SimpleRl extends Component {
                                                         (() => {
                                                             if (this.state.width >= 1100) {
                                                                 return (
-                                                                    <div className="label_current">{Number.parseFloat(this.state.i_0).toFixed(3)} A</div>
+                                                                    <div className="label_current">{Number.parseFloat(this.state.i_0).toExponential(3)} A</div>
                                                                 )
                                                             }
                                                         })()
