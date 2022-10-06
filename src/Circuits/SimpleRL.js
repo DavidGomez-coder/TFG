@@ -1127,7 +1127,7 @@ export default class SimpleRl extends Component {
                                                                 <>
                                                                     <h4>Fenómeno de autoinducción</h4>
                                                                     En la naturaleza, podemos encontrar regiones del espacio las cuáles son alteradas por <i>perturbaciones</i>. Estas, por ejemplo, 
-                                                                    pueden ocurrir cuando una partícula en movimiento, la cirulación de corriente eléctrica o un imán, se encuentran en presencia de objetos 
+                                                                    pueden ocurrir cuando una partícula en movimiento, la circulación de corriente eléctrica o un imán, se encuentran en presencia de objetos 
                                                                     con una naturaleza similar. A la irregularidad presentada por estas situaciones, se le conoce como <i>campo magnético</i>.
                                                                     <br /> 
                                                                     <br />
