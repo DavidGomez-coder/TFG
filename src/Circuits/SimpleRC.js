@@ -1199,13 +1199,13 @@ export default class SimpleRC extends Component {
                                                 <br />
                                                 Para hallar la energía que almacena un condensador, tenemos que aplicar el concepto de <strong>potencia en un conductor</strong>. Definimos
                                                 como potencia al trabajo realizado por el <i>campo eléctrico</i> aplicado sobre un conductor para trasladar una carga entre dos puntos del mismo, entre 
-                                                los cuales existe una diferencia de potencial. Considerando esta cantidad de energía por unidad de tiempo:
+                                                los cuales existe una diferencia de potencial. 
                                                 <br /> <br />
                                                 <div style={{"textAlign" : "center"}}>
                                                     <img alt="definicion_potencia_2" src={definicion_potencia_2} style={{"width" : "40%"}}></img>
                                                 </div>
                                                 <br />
-                                                Otra forma de escribir esta expresión en función del tiempo es:
+                                                , la cuál podemos formalizar de la siguiente manera:
                                                 <br /> <br />
                                                 <div style={{"textAlign" : "center"}}>
                                                     <img alt="definicion_potencia_3" src={definicion_potencia_3} style={{"width" : "40%"}}></img>
@@ -1215,11 +1215,11 @@ export default class SimpleRC extends Component {
                                                 se nos queda planteada entonces la siguiente ecuación diferencial
                                                 <br /> <br />
                                                 <div style={{"textAlign" : "center"}}>
-                                                    <img alt="eq_diff_energia" src={eq_diff_energia} style={{"width" : "70%"}}></img>
+                                                    <img alt="eq_diff_energia" src={eq_diff_energia} style={{"width" : "55%"}}></img>
                                                 </div>
                                                 <br />
                                                 , la cuál si resolvemos, obtenemos que la energía almacenada en el condensador a lo largo del tiempo
-                                                sigue la expresión
+                                                sigue la siguiente expresión
                                                 <br /> <br />
                                                 <div style={{"textAlign" : "center"}}>
                                                     <img alt="eq_energia_condensador" src={eq_energia_condensador} style={{"width" : "50%"}}></img>
@@ -1238,7 +1238,7 @@ export default class SimpleRC extends Component {
                                                     por unidad de tiempo a través de un conductor.
                                                     <br /> <br/>
                                                     <div style={{"textAlign" : "center"}}>
-                                                        <img alt="definicion_intensidad_corriente" src={definicion_intensidad_corriente} style={{"width" : "35%"}}></img>
+                                                        <img alt="definicion_intensidad_corriente" src={definicion_intensidad_corriente} style={{"width" : "30%"}}></img>
                                                     </div>
                                                     <br />
                                                     Aplicando la expresión de carga del condensador dependiendo de si su estado está en almacenamiento o disipación
@@ -1247,7 +1247,7 @@ export default class SimpleRC extends Component {
                                                         <li>Durante la <strong>carga</strong> del condensador, la expresión que modela el comportamiento de la intensidad de corriente es
                                                             <br /> <br/>
                                                             <div style={{"textAlign" : "center"}}>
-                                                                <img alt="intensidad_condensador_en_carga" src={intensidad_condensador_en_carga} style={{"width" : "35%"}}></img>
+                                                                <img alt="intensidad_condensador_en_carga" src={intensidad_condensador_en_carga} style={{"width" : "40%"}}></img>
                                                             </div>
                                                             <br/>
                                                         </li>
@@ -1255,7 +1255,7 @@ export default class SimpleRC extends Component {
                                                             Mientras que durante su <strong>descarga</strong>
                                                             <br /> <br/>
                                                             <div style={{"textAlign" : "center"}}>
-                                                                <img alt="intensidad_condensador_en_descarga" src={intensidad_condensador_en_descarga} style={{"width" : "35%"}}></img>
+                                                                <img alt="intensidad_condensador_en_descarga" src={intensidad_condensador_en_descarga} style={{"width" : "40%"}}></img>
                                                             </div>
                                                             <br/>   
                                                         </li>
@@ -1269,22 +1269,22 @@ export default class SimpleRC extends Component {
                                                 <>
                                                     <h4>Ley de Ohm</h4>
                                                     La circulación de corriente eléctrica se debe principalmente a la presencia de un <i>campo eléctrico</i> en un conductor. Este, ocasiona una <i>densidad de corriente</i> cuyo
-                                                    valor depende de las propiedades del conductor. A esta relación existente entre <i>densidad de corriente</i> y <i>campo eléctrico</i> se conoce como <strong>Ley de Ohm</strong> y 
-                                                    define una constante llamada <strong>conductividad eléctrica</strong>.
+                                                    valor depende de las propiedades del conductor. Esta relación entre <i>densidad de corriente</i> y <i>campo eléctrico</i> se conoce como <strong>Ley de Ohm</strong> y 
+                                                    ambas establecen una relación directamente proporcional mediante una constante a la que llamaremos <strong>conductividad eléctrica</strong>.
                                                     <br /> <br/>
                                                     <div style={{"textAlign" : "center"}}>
-                                                        <img alt="ley_ohm_1" src={ley_ohm_1} style={{"width" : "30%"}}></img>
+                                                        <img alt="ley_ohm_1" src={ley_ohm_1} style={{"width" : "20%"}}></img>
                                                     </div>
                                                     <br/>
                                                     Generalmente esta conductividad no depende del campo eléctrico generado. Sin embargo, la <i>Ley de Ohm</i> no es una ley que podamos encontrar en la naturaleza, sino que se trata 
                                                     de una descripción experimental de una propiedad que presentan la mayoría de los materiales metálicos y algunos otros (también llamados <i>conductores lineales</i>).
-                                                    <br></br>
+                                                    <br></br> <br></br>
                                                     Si un material posee una conductividad constante a lo largo del tiempo y la sección de este conductor es uniforme, entonces es posible obtener una expresión
                                                     simplificada a esta ley, que relaciona la <i>intensidad de corriente</i> y la <i>diferencia de potencial</i> entre dos puntos del conductor. A esta relación se le conoce 
-                                                    como <i>resistencia eléctrica del conductor</i>.
+                                                    como <i>resistencia eléctrica del conductor</i>. Podemos expresar entonces la Ley de Ohm de la siguiente manera: 
                                                     <br /> <br/>
                                                     <div style={{"textAlign" : "center"}}>
-                                                        <img alt="ley_ohm_2" src={ley_ohm_2} style={{"width" : "30%"}}></img>
+                                                        <img alt="ley_ohm_2" src={ley_ohm_2} style={{"width" : "20%"}}></img>
                                                     </div>
                                                     <br/>
                                                 </>
@@ -1302,7 +1302,7 @@ export default class SimpleRC extends Component {
                                                     <br />
                                                     <br />
                                                     Este tipo de generadores, pueden transformar cualquier tipo de energía en energía eléctrica. Por ejemplo en una pila convencional, 
-                                                    las reacciones químicas que ocurren en los electrodos positivo y negativo, hace que en el electrodo positivo absorbe electrones mientras que, en 
+                                                    las reacciones químicas que ocurren en los electrodos positivo y negativo, hace que en el electrodo positivo absorba electrones mientras que, en 
                                                     el negativo se liberan, dando resultado así una corriente.
                                                     <br />
                                                     <br />
@@ -1322,8 +1322,8 @@ export default class SimpleRC extends Component {
                                                 <>
                                                     <h4>Capacidad de un condensador</h4>
                                                     <br />
-                                                    Actualmente, sabemos que existen tres tipos materiales dependiendo de capacidad que tienen
-                                                    para la transimisión de energía eléctrica <br/>
+                                                    Actualmente, sabemos que existen tres tipos materiales dependiendo de la capacidad que tienen
+                                                    para la transimisión de energía eléctrica. <br/><br /> 
                                                     <ul>
                                                         <li><strong>Conductores</strong>. Algunos de sus electrones son libres, por lo tienen libertad para 
                                                         desplazarse por el material</li>
@@ -1333,12 +1333,13 @@ export default class SimpleRC extends Component {
                                                         de átomos añadidos.</li>
                                                     </ul>
                                                     <br />
-                                                    Imaginemos entonces dos materiales conductores (como por ejemplo aluminio) sin carga eléctrica y aislados entre ellos y del exterior. Si conseguimos pasar 
-                                                    una carga desde una de las placas hasta la otra, una de estas armaduras queda cargada positivamente y, puesto que estas placas se encuentran aisladas entre sí, 
-                                                    conseguimos un <i>equilibrio electroestático</i> ocasionando una diferencia de potencial entre ambas placas. A esto se le conoce como condensador.
-                                                    <br />
-                                                    Entonces, la capacidad de un condensador, depende linealmente de la diferencia de potencial entre las placas y de la carga de una de ellas, tal y como se muestra 
-                                                    en la siguiente expresión:
+                                                    
+                                                    Si tomamos una placa de este tipo y la consideramos como una única carga, definimos entonces la capacidad de un conductor como la relación que existe entre dicha carga y 
+                                                    el potencial eléctrico que esta es capaz de conseguir de forma aislada. 
+                                                            
+                                                    <br /> <br />
+                                                    Si juntamos dos de estas placas separadas por un material aislante al que llamaremos <i>dieléctrico</i>, obtenemos lo que se conoce como un condensador. De igual manera, 
+                                                    la capacidad de estos dispositivos se definen como la carga de una de las placas entre la diferencia de potencial que existe entre ellas.
                                                     <br /> <br/>
                                                     <div style={{"textAlign" : "center"}}>
                                                         <img alt="capacidad_condensador_2" src={capacidad_condensador_2} style={{"width" : "50%"}}></img>
@@ -1347,7 +1348,7 @@ export default class SimpleRC extends Component {
                                                     Otra manera de escribir esta expresión en función de la carga del condensador a lo largo del tiempo, (puesto que la capacidad es constante) tenemos que:
                                                     <br /> <br/>
                                                     <div style={{"textAlign" : "center"}}>
-                                                        <img alt="capacidad_condensador_1" src={capacidad_condensador_1} style={{"width" : "40%"}}></img>
+                                                        <img alt="capacidad_condensador_1" src={capacidad_condensador_1} style={{"width" : "35%"}}></img>
                                                     </div>
                                                     <br/>
                                                 </>
@@ -1360,7 +1361,8 @@ export default class SimpleRC extends Component {
                                                     <br></br>
                                                     Utilizando la <i>Ley de Ohm</i>, podemos obtener cuál es la diferencia de potencial en los bornes 
                                                     de la resistencia. Este dato, junto a la ddp en el condensador, puede llegar a ser de utilidad para comprobar que, 
-                                                    efectivamente, se cumple la propiedad de conservación de energía en el circuito
+                                                    efectivamente, se cumple la propiedad de conservación de energía en el circuito. Las expresiones que modelan esta magnitud física 
+                                                    son: 
                                                     <br /> <br/>
                                                     <div style={{"textAlign" : "center"}}>
                                                         <img alt="vr_carga_condensador" src={vr_carga_condensador} style={{"width" : "40%"}}></img>

@@ -1126,7 +1126,7 @@ export default class SimpleRl extends Component {
                                                             return (
                                                                 <>
                                                                     <h4>Fenómeno de autoinducción</h4>
-                                                                    En la naturaleza, podemos encontrar regiones del espacio las cuáles son alteradas por <i>perturbaciones</i>. Estas, por ejemplo, 
+                                                                    En la naturaleza, podemos encontrar regiones del espacio las cuáles se encuentran alteradas por <i>perturbaciones</i>. Estas, por ejemplo, 
                                                                     pueden ocurrir cuando una partícula en movimiento, la circulación de corriente eléctrica o un imán, se encuentran en presencia de objetos 
                                                                     con una naturaleza similar. A la irregularidad presentada por estas situaciones, se le conoce como <i>campo magnético</i>.
                                                                     <br /> 
@@ -1162,27 +1162,27 @@ export default class SimpleRl extends Component {
                                                             este dispositivo
                                                             <br /> <br/>
                                                                 <div style={{"textAlign" : "center"}}>
-                                                                    <img alt="potencia_consumida_inductor" src={potencia_consumida_inductor} style={{"width" : "60%"}}></img>
+                                                                    <img alt="potencia_consumida_inductor" src={potencia_consumida_inductor} style={{"width" : "40%"}}></img>
                                                                 </div>
                                                                 <br />
                                                             Y por definición, la energía almacenada es la potencia por unidad de tiempo
                                                             <br /> <br/>
                                                                 <div style={{"textAlign" : "center"}}>
-                                                                    <img alt="energia_consumida" src={energia_consumida} style={{"width" : "60%"}}></img>
+                                                                    <img alt="energia_consumida" src={energia_consumida} style={{"width" : "40%"}}></img>
                                                                 </div>
                                                                 <br />
-                                                            Dónde obtenemos la siguiente ecuación diferencial 
+                                                            Dónde obtenemos la siguiente ecuación diferencial a resolver
                                                             <br /> <br/>
                                                                 <div style={{"textAlign" : "center"}}>
-                                                                    <img alt="energia_ec_diff" src={energia_ec_diff} style={{"width" : "60%"}}></img>
+                                                                    <img alt="energia_ec_diff" src={energia_ec_diff} style={{"width" : "45%"}}></img>
                                                                 </div>
                                                                 <br />
                                                             Partiendo de un circuito en el que la corriente eléctrica que circula es nula y dónde la energía almacenada 
-                                                            por el inductor también los es (inicialmente supondremos un estado de equilibrio), la expresión que modela la energía 
+                                                            por el inductor también lo es (inicialmente supondremos un estado de equilibrio), la expresión que modela la energía 
                                                             almacenada es:
                                                             <br /> <br/>
                                                                 <div style={{"textAlign" : "center"}}>
-                                                                    <img alt="energia_almacenada_rl" src={energia_almacenada_rl} style={{"width" : "60%"}}></img>
+                                                                    <img alt="energia_almacenada_rl" src={energia_almacenada_rl} style={{"width" : "50%"}}></img>
                                                                 </div>
                                                                 <br />
                                                             </>        
@@ -1247,22 +1247,22 @@ export default class SimpleRl extends Component {
                                                             <>
                                                                 <h4>Ley de Ohm</h4>
                                                                 La circulación de corriente eléctrica se debe principalmente a la presencia de un <i>campo eléctrico</i> en un conductor. Este, ocasiona una <i>densidad de corriente</i> cuyo
-                                                                valor depende de las propiedades del conductor. A esta relación existente entre <i>densidad de corriente</i> y <i>campo eléctrico</i> se conoce como <strong>Ley de Ohm</strong> y 
-                                                                define una constante llamada <strong>conductividad eléctrica</strong>.
+                                                                valor depende de las propiedades del conductor. Esta relación entre <i>densidad de corriente</i> y <i>campo eléctrico</i> se conoce como <strong>Ley de Ohm</strong> y 
+                                                                ambas establecen una relación directamente proporcional mediante una constante a la que llamaremos <strong>conductividad eléctrica</strong>.
                                                                 <br /> <br/>
                                                                 <div style={{"textAlign" : "center"}}>
-                                                                    <img alt="ley_ohm_1" src={ley_ohm_1} style={{"width" : "30%"}}></img>
+                                                                    <img alt="ley_ohm_1" src={ley_ohm_1} style={{"width" : "20%"}}></img>
                                                                 </div>
                                                                 <br/>
                                                                 Generalmente esta conductividad no depende del campo eléctrico generado. Sin embargo, la <i>Ley de Ohm</i> no es una ley que podamos encontrar en la naturaleza, sino que se trata 
                                                                 de una descripción experimental de una propiedad que presentan la mayoría de los materiales metálicos y algunos otros (también llamados <i>conductores lineales</i>).
-                                                                <br></br>
+                                                                <br></br> <br></br>
                                                                 Si un material posee una conductividad constante a lo largo del tiempo y la sección de este conductor es uniforme, entonces es posible obtener una expresión
                                                                 simplificada a esta ley, que relaciona la <i>intensidad de corriente</i> y la <i>diferencia de potencial</i> entre dos puntos del conductor. A esta relación se le conoce 
-                                                                como <i>resistencia eléctrica del conductor</i>.
+                                                                como <i>resistencia eléctrica del conductor</i>. Podemos expresar entonces la Ley de Ohm de la siguiente manera: 
                                                                 <br /> <br/>
                                                                 <div style={{"textAlign" : "center"}}>
-                                                                    <img alt="ley_ohm_2" src={ley_ohm_2} style={{"width" : "30%"}}></img>
+                                                                    <img alt="ley_ohm_2" src={ley_ohm_2} style={{"width" : "20%"}}></img>
                                                                 </div>
                                                                 <br/>
                                                             </>
@@ -1280,7 +1280,7 @@ export default class SimpleRl extends Component {
                                                                 <br />
                                                                 <br />
                                                                 Este tipo de generadores, pueden transformar cualquier tipo de energía en energía eléctrica. Por ejemplo en una pila convencional, 
-                                                                las reacciones químicas que ocurren en los electrodos positivo y negativo, hace que en el electrodo positivo absorbe electrones mientras que, en 
+                                                                las reacciones químicas que ocurren en los electrodos positivo y negativo, hace que en el electrodo positivo absorba electrones mientras que, en 
                                                                 el negativo se liberan, dando resultado así una corriente.
                                                                 <br />
                                                                 <br />
@@ -1288,7 +1288,7 @@ export default class SimpleRl extends Component {
                                                                 la pila.
                                                                 <br /> <br/>
                                                                 <div style={{"textAlign" : "center"}}>
-                                                                    <img alt="varepsilon" src={varepsilon} style={{"width" : "5%"}}></img>
+                                                                    <img alt="varepsilon_img" src={varepsilon} style={{"width" : "5%"}}></img>
                                                                 </div>
                                                                 <br/>
             
@@ -1304,15 +1304,15 @@ export default class SimpleRl extends Component {
                                                                Según esta definición, su expresión es:
                                                                <br /> <br/>
                                                                 <div style={{"textAlign" : "center"}}>
-                                                                    <img alt="def_flujo_magnetico" src={def_flujo_magnetico} style={{"width" : "40%"}}></img>
+                                                                    <img alt="def_flujo_magnetico" src={def_flujo_magnetico} style={{"width" : "25%"}}></img>
                                                                 </div>
                                                                 <br/>
                                                                 , aunque la expresión que modela este parámetro en función del tiempo puede obtenerse utilizando la <strong>ley de Lenz</strong>, 
-                                                                sabiendo que esta es directamente proporcional con la intensidad de corriente y que, a esta constante, se le conoce como 
-                                                                el <strong>coeficiente de autoinducción</strong>.
+                                                                sabiendo que esta es directamente proporcional con la intensidad de corriente y que, a esta constante, es 
+                                                                el <strong>coeficiente de autoinducción</strong> del inductor.
                                                                 <br /> <br/>
                                                                 <div style={{"textAlign" : "center"}}>
-                                                                    <img alt="flujo_magnetico" src={flujo_magnetico} style={{"width" : "40%"}}></img>
+                                                                    <img alt="flujo_magnetico" src={flujo_magnetico} style={{"width" : "30%"}}></img>
                                                                 </div>
                                                                 <br/>
                                                             </>
@@ -1331,7 +1331,7 @@ export default class SimpleRl extends Component {
                                                                 </div>
                                                                 <br />
                                                                 <div style={{"textAlign" : "center"}}>
-                                                                    <img alt="ddp_resistencia_rl_2" src={ddp_resistencia_rl_2} style={{"width" : "45%"}}></img>
+                                                                    <img alt="ddp_resistencia_rl_2" src={ddp_resistencia_rl_2} style={{"width" : "40%"}}></img>
                                                                 </div>
                                                                 <br />.
                                                                 para los estados de <strong>almacenamiento</strong> y <strong>disipación</strong> de energía respectivamente.
@@ -1346,18 +1346,18 @@ export default class SimpleRl extends Component {
                                                                 de la energía se cumple. Utilizando la definición de fuerza electromotriz dada por la <strong>Ley de Lenz</strong>, 
                                                                 <br /> <br/>
                                                                 <div style={{"textAlign" : "center"}}>
-                                                                    <img alt="ddp_inductor" src={ddp_inductor} style={{"width" : "45%"}}></img>
+                                                                    <img alt="ddp_inductor" src={ddp_inductor} style={{"width" : "40%"}}></img>
                                                                 </div>
                                                                 <br />
                                                                 Aplicando las diferentes expresiones obtenidas de la intensidad de corriente, concluimos que la diferencia de potencial en el inductor durante  
                                                                 el <strong>almacenamiento</strong> y <strong> disipación</strong> de energía son, respectivamente:
                                                                 <br /> <br/>
                                                                 <div style={{"textAlign" : "center"}}>
-                                                                    <img alt="ddp_inductor_1" src={ddp_inductor_1} style={{"width" : "45%"}}></img>
+                                                                    <img alt="ddp_inductor_1" src={ddp_inductor_1} style={{"width" : "40%"}}></img>
                                                                 </div>
                                                                 <br />
                                                                 <div style={{"textAlign" : "center"}}>
-                                                                    <img alt="ddp_inductor_2" src={ddp_inductor_2} style={{"width" : "45%"}}></img>
+                                                                    <img alt="ddp_inductor_2" src={ddp_inductor_2} style={{"width" : "40%"}}></img>
                                                                 </div>
                                                                 <br />
                                                             </>
