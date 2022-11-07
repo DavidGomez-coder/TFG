@@ -1,6 +1,7 @@
 # Física Interactiva
 
-"Física Interactiva" es un proyecto de Fin de Grado utilizado para que el alumnado que curse las asignaturas de física de los grados de ingeniería, puedan apoyarse para entender mejor los fenómenos físicos estudiados en dichas asignaturas. 
+"Física Interactiva" es un proyecto de Fin de Grado del Grado en Ingeniería Informática impartido por la Universidad de Málaga, con el objetivo de que el alumnado que curse alguna de las asignaturas de física de cualquiera de los grados puedan entender mejor los fenómenos físicos estudiados.
+
 
 En concreto, en esta aplicación elaborada en <i>ReactJS</i> se propone una solución a las simulaciones de los circuitos RC y RL en corriente continua y estado transitorio, fenómenos estudiados en la asignatura <i>Fundamentos Físicos de la Informática</i> de los grados de <i>Ingeniería Informática, Software y Computadores</i> de la Universidad de Málaga.
 
