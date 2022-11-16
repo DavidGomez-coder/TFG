@@ -7,7 +7,9 @@
 
 # testing
 /coverage
-/simulation-tests\sims\__pycache__
+/simulation-tests/sims/__pycache__/*
+/simulation-tests/circuito-RC.png
+/simulation-tests/circuito-RL.png
 
 # production
 /build
