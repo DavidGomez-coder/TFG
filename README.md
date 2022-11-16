@@ -1,21 +1,11 @@
-<style>
-    img {
-        border: 1px solid white;
-    }
 
-    img:hover {
-        transform: scale(1.5);
-        -webkit-transform: scale(1.5);
-    }
-</style>
-
-# <p style="color:#1fa8d1">Física Interactiva</p>
+# Física Interactiva
 "Física Interactiva" es un proyecto de fin de grado de la titulación en Ingeniería Informática de la Universidad de Málaga, cuyo principal objetivo es servir como material complementario en las asignaturas de física impartidas en cualquiera de los grados de la rama de ingeniería, arquitectura o matemáticas.
 
 Concretamente, se propone una solución a las simulaciones de los circuitos RC y RL en corriente continua y estado transitorio, fenómenos físicos estudiados en la asignatura <i>Fundamentos Físicos de la Informática</i>. Ya que el propósito es servir como ayuda, se estudiarán los circuitos RC y RL de primer orden, y en sus respectivas simulaciones, se permitirá al alumno modificar cada uno de estos componentes, visualizar la evolución de algunas magnitudes físicas de cada fenómeno así como un apartado teórico que permitirá, entre otras cosas, establecer una base sólida de lo que ocurre en estos circuitos simulados.
 
 
-## <p style="color:#1fa8d1">Guía de instalación</p>
+## Guía de instalación
 Para poder instalar la aplicación localmente, es necesario disponer de <strong>NodeJS</strong>, un entorno en tiempo de ejecución de <i>JavaScript</i>, permitiendo la creación de aplicaciones, módulos o librerías haciendo uso de este lenguaje, teniendo este como primer objetivo ser ejecutado en el navegador. 
 
 (Para descargar la última versión de NodeJS ir a https://nodejs.org/en/download/)
@@ -29,7 +19,7 @@ Una vez hecho esto, la aplicación se encuentra lista para ser lanzada, escribie
 
 <strong>*</strong> El codigo fuente esta configurado para desplegarse en github-pages, así que por defecto el proyecto se abrirá en http://localhost:3000/TFG. Basta con quitar la ruta <i>TFG</i> de la URL en el navegador y la aplicación se muestra correctamete.
 
-## <p style="color:#1fa8d1">Despliegue en Github-pages</p>
+## Despliegue en Github-pages
 Para realizar el despliegue en github-pages, realizaremos los siguientes pasos. 
 
 En primer lugar será instalar la dependencia <i>gh-pages</i>, la cuál nos permitirá crear un <strong>build </strong> de nuestra aplicación. Este <strong>build </strong> lo desplegaremos en una rama diferente, para así tener en una el código fuente y en otra, los archivos necesarios para poder desplegar la aplicación. Instalamos entonces esta dependencia con la siguiente instrucción.
