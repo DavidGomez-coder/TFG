@@ -30,9 +30,6 @@ CAPACITOR = float(args.capacitor) if args.capacitor is not None else  5* math.po
 VOLTAGE   = float(args.voltage)  if args.voltage is not None else 5
 RESISTOR  = float(args.resistor) if args.resistor is not None else  3
 INDUCTOR  = float(args.inductor) if args.inductor is not None else 10
-Q_MAX = CAPACITOR*VOLTAGE
-
-
 
 
 # ==================================================================================== #
