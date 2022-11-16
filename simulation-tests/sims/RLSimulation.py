@@ -10,7 +10,7 @@ class RLSimulation:
         self.formula = RLFormulas(INDUCTOR, RESISTOR, VOLTAGE)
         self.figure.delaxes(self.axis[2,1])
     
-        self.figure.suptitle(f"Carga y descarga de un inductor \n para R={RESISTOR}Ω, ε={VOLTAGE}V y L={INDUCTOR}H", fontsize=10, fontweight="bold")
+        self.figure.suptitle(f"Carga y descarga de un inductor \n para R={RESISTOR}Ω, ε={VOLTAGE}V y L={INDUCTOR}H \n (escala de tiempo: {INC}s)", fontsize=10, fontweight="bold")
 
     def show(self):
         i_on_charge_v    = np.vectorize(self.formula.I_ON_CHARGE)
