@@ -11,13 +11,13 @@ import argparse
 #                               PARSER                                                 #
 # ==================================================================================== #
 parser = argparse.ArgumentParser(prog='Simulation Tests')
-parser.add_argument('-t', '--time')
-parser.add_argument('-st', '--simulationType')
+parser.add_argument('-t',   '--time')
+parser.add_argument('-st',  '--simulationType')
 parser.add_argument('-inc', '--incrementValue')
-parser.add_argument('-c', '--capacitor')
-parser.add_argument('-r', '--resistor')
-parser.add_argument('-v', '--voltage')
-parser.add_argument('-i', '--inductor')
+parser.add_argument('-c',   '--capacitor')
+parser.add_argument('-r',   '--resistor')
+parser.add_argument('-v',   '--voltage')
+parser.add_argument('-i',   '--inductor')
 
 args = parser.parse_args()
 
