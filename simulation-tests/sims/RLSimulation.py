@@ -62,7 +62,8 @@ class RLSimulation:
 
 
         
-
+        plt.gcf().text(0.53, 0.25, "· Estado de almacenamiento de energía", fontsize=10, fontweight="bold", color="#1f77b4")
+        plt.gcf().text(0.53, 0.2, "· Estado de disipación de energía", fontsize=10, fontweight="bold", color="#ff7f0e")
         self.figure.tight_layout()
         plt.savefig('circuito-RL.png', dpi=600)
         plt.show()
