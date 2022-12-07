@@ -18,6 +18,8 @@ parser.add_argument('-c',   '--capacitor')
 parser.add_argument('-r',   '--resistor')
 parser.add_argument('-v',   '--voltage')
 parser.add_argument('-i',   '--inductor')
+parser.add_argument('-condV','--conditionValue')    # condición de parada. Carga del condensador para RC (Culombios), intensidad de corriente para RL (Amperios)
+parser.add_argument('-condP', '--conditionPercent') # condición de parada. Porcentaje de carga del condensador para RC, intensidad de corriente para RL
 
 args = parser.parse_args()
 
@@ -31,6 +33,18 @@ VOLTAGE   = float(args.voltage)  if args.voltage is not None else 5
 RESISTOR  = float(args.resistor) if args.resistor is not None else  3
 INDUCTOR  = float(args.inductor) if args.inductor is not None else 10
 
+CONDITION_VALUE = float(args.conditionValue) if args.conditionValue is not None else None
+CONDITION_PERCE = float(args.conditionPercent) if args.conditionPercent is not None else None
+
+# condition builder
+CONDITION = -1
+
+if (CONDITION_VALUE is not None and CONDITION_PERCE is not None):
+    print("[ERROR] : Solo se debe de dar una condición de parada -condV o -condP")
+    exit(-1)
+if CONDITION_VALUE is not None:
+    CONDITION = CONDITION_VALUE
+
 
 # ==================================================================================== #
 #                               MAIN                                                   #
@@ -38,12 +52,17 @@ INDUCTOR  = float(args.inductor) if args.inductor is not None else 10
 if args.simulationType == 'RC':
     print("Generando resultados simulación RC ....")
     TIME = float(args.time) if args.time is not None else (5*RESISTOR*CAPACITOR)
-    rcsim = RCSimulation(CAPACITOR, RESISTOR, VOLTAGE, TIME, INC)
+    # condition percent
+    if CONDITION_PERCE is not None:
+        CONDITION = (CAPACITOR * VOLTAGE) * (CONDITION_PERCE/100)
+    rcsim = RCSimulation(CAPACITOR, RESISTOR, VOLTAGE, TIME, INC, CONDITION)
     rcsim.show()
 elif args.simulationType == 'RL':
     TIME = float(args.time) if args.time is not None else (5*(INDUCTOR/RESISTOR))
+    if CONDITION_PERCE is not None:
+        CONDITION = (VOLTAGE / RESISTOR) * (CONDITION_PERCE/100)
     print("Generando resultados simulación RL ....")
-    rlsim = RLSimulation(INDUCTOR, RESISTOR, VOLTAGE, TIME, INC)
+    rlsim = RLSimulation(INDUCTOR, RESISTOR, VOLTAGE, TIME, INC, CONDITION)
     rlsim.show()
 
 else:

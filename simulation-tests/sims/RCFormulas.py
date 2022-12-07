@@ -42,3 +42,9 @@ class RCFormulas:
 
     def E_ON_DISCHARGE(self, x):
         return float((1/2)*self.CAPACITOR*math.pow(self.VC_ON_DISCHARGE(x), 2))
+
+    def T_ON_CHARGE_Q(self, q):
+        return float(self.RESISTOR * self.CAPACITOR * (-math.log(self.Q_MAX - q) + math.log(self.Q_MAX)))
+
+    def T_ON_DISCHARGE_Q(self, q):
+        return float(-self.RESISTOR * self.CAPACITOR * (math.log(q) - math.log(self.Q_MAX)))

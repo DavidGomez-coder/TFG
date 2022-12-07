@@ -36,3 +36,9 @@ class RLFormulas:
 
     def PHI_ON_DISCHARGE(self, x):
         return self.INDUCTOR * self.I_ON_DISCHARGE(x)
+
+    def T_ON_CHARGE_Q(self, i):
+        return float((self.INDUCTOR/self.RESISTOR) * (-math.log(self.I_MAX - i) + math.log(self.I_MAX)))
+
+    def T_ON_DISCHARGE_Q(self, i):
+        return float((-self.INDUCTOR/self.RESISTOR) * (math.log(i) - math.log(self.I_MAX)))
