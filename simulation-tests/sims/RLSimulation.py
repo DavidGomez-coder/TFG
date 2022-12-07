@@ -6,7 +6,7 @@ from .RLFormulas import RLFormulas
 class RLSimulation:
     def __init__(self, INDUCTOR, RESISTOR, VOLTAGE, TIME, INC) -> None:
         self.figure, self.axis = plt.subplots(3, 2, figsize=(7, 9))
-        self.x = np.arange(0, TIME, INC)
+        self.x = np.arange(0, TIME + INC, INC)
         self.formula = RLFormulas(INDUCTOR, RESISTOR, VOLTAGE)
         self.figure.delaxes(self.axis[2,1])
     
@@ -65,5 +65,5 @@ class RLSimulation:
         plt.gcf().text(0.53, 0.25, "· Estado de almacenamiento de energía", fontsize=10, fontweight="bold", color="#1f77b4")
         plt.gcf().text(0.53, 0.2, "· Estado de disipación de energía", fontsize=10, fontweight="bold", color="#ff7f0e")
         self.figure.tight_layout()
-        plt.savefig('circuito-RL.png', dpi=600)
+        plt.savefig('../circuito-RL.png', dpi=600)
         plt.show()
