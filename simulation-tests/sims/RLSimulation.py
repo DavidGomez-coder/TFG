@@ -18,8 +18,8 @@ class RLSimulation:
                 self.time_dis  = self.formula.T_ON_DISCHARGE_Q(CONDITION)
 
         self.figure, self.axis = plt.subplots(3, 2, figsize=(7, 9))
-        self.x_charge = np.arange(0, self.time_char, INC)
-        self.x_discharge = np.arange(0, self.time_dis, INC)
+        self.x_charge = np.arange(0, self.time_char + INC, INC)
+        self.x_discharge = np.arange(0, self.time_dis + INC, INC)
 
         self.figure.suptitle(f"Carga y descarga de un inductor \n para R={RESISTOR}Ω, ε={VOLTAGE}V y L={INDUCTOR}H \n (escala de tiempo: {INC}s)", fontsize=10, fontweight="bold")
 
