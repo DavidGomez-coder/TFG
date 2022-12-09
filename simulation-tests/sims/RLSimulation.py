@@ -9,6 +9,7 @@ class RLSimulation:
         self.formula = RLFormulas(INDUCTOR, RESISTOR, VOLTAGE)
         self.time_char = TIME
         self.time_dis  = TIME
+        self.I = CONDITION
         if CONDITION > -1:
             if CONDITION < 0 or CONDITION > (VOLTAGE / RESISTOR):
                 print(f"[ERROR] : Para estos parámetros, la intensidad de corriente debe de estar entre 0 y {VOLTAGE / RESISTOR} amperios")
@@ -17,9 +18,9 @@ class RLSimulation:
                 self.time_char = self.formula.T_ON_CHARGE_Q(CONDITION)
                 self.time_dis  = self.formula.T_ON_DISCHARGE_Q(CONDITION)
 
-        self.figure, self.axis = plt.subplots(3, 2, figsize=(7, 9))
-        self.x_charge = np.arange(0, self.time_char + INC, INC)
-        self.x_discharge = np.arange(0, self.time_dis + INC, INC)
+        self.figure, self.axis = plt.subplots(3, 2, figsize=(10, 9))
+        self.x_charge = np.arange(0, self.time_char, INC)
+        self.x_discharge = np.arange(0, self.time_dis, INC)
 
         self.figure.suptitle(f"Carga y descarga de un inductor \n para R={RESISTOR}Ω, ε={VOLTAGE}V y L={INDUCTOR}H \n (escala de tiempo: {INC}s)", fontsize=10, fontweight="bold")
 
@@ -84,8 +85,10 @@ class RLSimulation:
 
         self.figure.delaxes(self.axis[2,1])
         
-        plt.gcf().text(0.53, 0.25, "· Estado de almacenamiento de energía", fontsize=10, fontweight="bold", color="#1f77b4")
-        plt.gcf().text(0.53, 0.2, "· Estado de disipación de energía", fontsize=10, fontweight="bold", color="#ff7f0e")
+
+        plt.gcf().text(0.53, 0.25, f"· Intensidad de corriente máx.: {round(self.I if self.I > -1 else self.formula.I_MAX,2)}A ({round((self.I if self.I > -1 else self.formula.I_MAX)*100/self.formula.I_MAX,2)}%)", fontsize=10, fontweight="bold")
+        plt.gcf().text(0.53, 0.2, f"· Estado de almacenamiento de energía ({round(self.time_char,5)}s)", fontsize=10, fontweight="bold", color="#1f77b4")
+        plt.gcf().text(0.53, 0.15, f"· Estado de disipación de energía ({round(self.time_dis,5)}s)", fontsize=10, fontweight="bold", color="#ff7f0e")
         self.figure.tight_layout()
         plt.savefig('../circuito-RL.png', dpi=600)
         plt.show()

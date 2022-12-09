@@ -10,6 +10,7 @@ class RCSimulation:
         self.formula = RCFormulas(CAPACITOR, RESISTOR, VOLTAGE)
         self.time_char = TIME
         self.time_dis  = TIME
+        self.Q = CONDITION
         if CONDITION > -1:
             if CONDITION < 0 or CONDITION > (CAPACITOR * VOLTAGE):
                 print(f"[ERROR] : Para estos parámetros, la carga del condensador debe de estar entre 0 y {CAPACITOR*VOLTAGE} culombios")
@@ -18,9 +19,9 @@ class RCSimulation:
                 self.time_char = self.formula.T_ON_CHARGE_Q(CONDITION)
                 self.time_dis  = self.formula.T_ON_DISCHARGE_Q(CONDITION)
         
-        self.figure, self.axis = plt.subplots(3, 2, figsize=(7, 9)) 
-        self.x_charge = np.arange(0, self.time_char + INC, INC)
-        self.x_discharge = np.arange(0, self.time_dis + INC, INC)
+        self.figure, self.axis = plt.subplots(3, 2, figsize=(10, 9)) 
+        self.x_charge = np.arange(0, self.time_char, INC)
+        self.x_discharge = np.arange(0, self.time_dis, INC)
         self.figure.suptitle(f"Carga y descarga de un inductor \n para R={RESISTOR}Ω, ε={VOLTAGE}V y C={CAPACITOR}F \n (escala de tiempo: {INC}s)", fontsize=10, fontweight="bold")
 
     def show(self):
@@ -82,9 +83,10 @@ class RCSimulation:
 
 
         self.figure.delaxes(self.axis[2,1])
-
-        plt.gcf().text(0.53, 0.25, "· Estado de almacenamiento de energía", fontsize=10, fontweight="bold", color="#1f77b4")
-        plt.gcf().text(0.53, 0.2, "· Estado de disipación de energía", fontsize=10, fontweight="bold", color="#ff7f0e")
+        
+        plt.gcf().text(0.53, 0.25, f"· Carga máx. almacenada: {round(self.Q if self.Q > -1 else self.formula.Q_MAX, 2)}C ({round((self.Q if self.Q > -1 else self.formula.Q_MAX)*100/self.formula.Q_MAX,2)}%)", fontsize=10, fontweight="bold")
+        plt.gcf().text(0.53, 0.2, f"· Estado de almacenamiento de energía ({round(self.time_char,5)}s)", fontsize=10, fontweight="bold", color="#1f77b4")
+        plt.gcf().text(0.53, 0.15, f"· Estado de disipación de energía ({round(self.time_dis,5)}s)", fontsize=10, fontweight="bold", color="#ff7f0e")
         self.figure.tight_layout()
         
 
