@@ -18,8 +18,8 @@ parser.add_argument('-c',   '--capacitor')
 parser.add_argument('-r',   '--resistor')
 parser.add_argument('-v',   '--voltage')
 parser.add_argument('-i',   '--inductor')
-parser.add_argument('-condV','--conditionValue')    # condición de parada. Carga del condensador para RC (Culombios), intensidad de corriente para RL (Amperios)
-parser.add_argument('-condP', '--conditionPercent') # condición de parada. Porcentaje de carga del condensador para RC, intensidad de corriente para RL
+parser.add_argument('-condV','--conditionVal')    # condición de parada. Carga del condensador para RC (Culombios), intensidad de corriente para RL (Amperios)
+parser.add_argument('-condP', '--conditionPer')  # condición de parada. Porcentaje de carga del condensador para RC, intensidad de corriente para RL
 
 args = parser.parse_args()
 

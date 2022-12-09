@@ -18,7 +18,7 @@ Para ejecutar y ver los resultados, basta con ejecutar el siguiente comando (den
 | --resistor | -r | Valor en Ohmios de la resistencia. Por defecto su valor es de 3Ω | :red_circle: | 
 | --voltage | -v | Valor en Voltios de la fuente de alimentación. Por defecto su valor es de 5V. | :red_circle: | 
 | --inductor | -i | Valor en Henrios de la inductancia de la bobina. Solo es utilizado cuando el tipo del circuito a simular es RL. Por defecto, su valor es de 10H. | :red_circle: | 
-|--conditionValue | -condV | Establece la condición de parada de la simulación. Si el circuito a simular es el RC, este valor hará referencia a la carga del condensador. En caso del circuito RL, a la intensidad de corriente.* | :red_circle: | 
-| --conditionPercent | -condP | Establece la condición de parada de la simulación. Si el circuito a simular es el RC, este valor hará referencia al porcentaje de carga del condensador (0-100). En caso del circuito RL, a la intensidad de corriente.* | :red_circle: |
+|--conditionVal | -condV | Establece la condición de parada de la simulación. Si el circuito a simular es el RC, este valor hará referencia a la carga del condensador. En caso del circuito RL, a la intensidad de corriente.* | :red_circle: | 
+| --conditionPer | -condP | Establece la condición de parada de la simulación. Si el circuito a simular es el RC, este valor hará referencia al porcentaje de carga del condensador (0-100). En caso del circuito RL, a la intensidad de corriente.* | :red_circle: |
 
 <strong>*</strong><i>En caso de que el valor de la carga o intensidad supere su valor máximo permitido (o en caso de indicar el porcentaje, este sea menor que cero o mayor que cien), se mostrára un mensaje de error indicando la carga o intensidad de corriente máximas permitidas para el circuito a simular.</i>
