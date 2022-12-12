@@ -220,11 +220,11 @@ export default class SimpleRC extends Component {
 
                         return {
                             ...prevState,
-                            q_data: [...oldQData, { "t": t_a, "Q(t)": instant_values.Q }],
-                            i_data: [...oldIData, { "t": t_a, "I(t)": instant_values.I }],
-                            vr_data: [...oldVrData, { "t": t_a, "Vr(t)": instant_values.Vr }],
-                            vc_data: [...oldVcData, { "t": t_a, "Vc(t)": instant_values.Vc }],
-                            e_data: [...oldEData, { "t": t_a, "E(t)": instant_values.E }],
+                            q_data: [...oldQData, { "t": Number.parseFloat(t_a).toExponential(4), "Q(t)": instant_values.Q }],
+                            i_data: [...oldIData, { "t": Number.parseFloat(t_a).toExponential(4), "I(t)": instant_values.I }],
+                            vr_data: [...oldVrData, { "t": Number.parseFloat(t_a).toExponential(4), "Vr(t)": instant_values.Vr }],
+                            vc_data: [...oldVcData, { "t": Number.parseFloat(t_a).toExponential(4), "Vc(t)": instant_values.Vc }],
+                            e_data: [...oldEData, { "t": Number.parseFloat(t_a).toExponential(4), "E(t)": instant_values.E }],
                             //time update
                             t_i: t_i + ((SIMULATION_STEP * prevState.simulation_step_multiplier) / 1000),
                             t_a: t_a + ((SIMULATION_STEP * prevState.simulation_step_multiplier) / 1000),

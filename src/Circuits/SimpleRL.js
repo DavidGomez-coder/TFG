@@ -214,11 +214,11 @@ export default class SimpleRl extends Component {
                     this.setState(prevState => {
                         return {
                             ...prevState,
-                            i_data: [...oldIData, { "t": t_a, "I(t)": instant_values.I }],
-                            vr_data: [...oldVrData, { "t": t_a, "Vr(t)": instant_values.Vr }],
-                            vl_data: [...oldVlData, { "t": t_a, "Vl(t)": instant_values.Vl }],
-                            e_data: [...oldEData, { "t": t_a, "E(t)": instant_values.E }],
-                            phi_data: [...oldPhiData, { "t": t_a, "Φ(t)": instant_values.PHI }],
+                            i_data: [...oldIData, { "t": Number.parseFloat(t_a).toExponential(4), "I(t)": instant_values.I }],
+                            vr_data: [...oldVrData, { "t": Number.parseFloat(t_a).toExponential(4), "Vr(t)": instant_values.Vr }],
+                            vl_data: [...oldVlData, { "t": Number.parseFloat(t_a).toExponential(4), "Vl(t)": instant_values.Vl }],
+                            e_data: [...oldEData, { "t": Number.parseFloat(t_a).toExponential(4), "E(t)": instant_values.E }],
+                            phi_data: [...oldPhiData, { "t": Number.parseFloat(t_a).toExponential(4), "Φ(t)": instant_values.PHI }],
                             //time update
                             t_i: t_i + ((SIMULATION_STEP * prevState.simulation_step_multiplier) / 1000),
                             t_a: t_a + ((SIMULATION_STEP * prevState.simulation_step_multiplier) / 1000),
