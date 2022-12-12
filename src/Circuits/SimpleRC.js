@@ -185,7 +185,7 @@ export default class SimpleRC extends Component {
                 //condiciones más restrictivas
                 if (this.state.value_stop_condition !== undefined) {
                     if ((this.state.selected_stop_condition === PERCENT_Q && this.state.capacitorCharging && this.state.value_stop_condition >= 100) ||
-                        this.state.selected_stop_condition === PERCENT_Q && !this.state.capacitorCharging && this.state.value_stop_condition <= 0) {
+                        (this.state.selected_stop_condition === PERCENT_Q && !this.state.capacitorCharging && this.state.value_stop_condition <= 0)) {
                         this.updateConditionValue(100);
                         this.updateConditionState(true);
 
@@ -202,6 +202,16 @@ export default class SimpleRC extends Component {
                     } else {
                         this.updateConditionState(false);
                     }
+                }
+
+                if (this.state.capacitorCharging && this.state.q_percent == 100) {
+                    this.updateRunning();
+                    this.updateConditionState(true);
+                }
+
+                if (!this.state.capacitorCharging && this.state.q_percent <= 0.001) {
+                    this.updateRunning();
+                    this.updateConditionState(true);
                 }
 
 
@@ -231,15 +241,7 @@ export default class SimpleRC extends Component {
 
 
 
-                if (this.state.capacitorCharging && this.state.q_percent == 100) {
-                    this.updateRunning();
-                    this.updateConditionState(true);
-                }
-
-                if (!this.state.capacitorCharging && this.state.q_percent <= 0.001) {
-                    this.updateRunning();
-                    this.updateConditionState(true);
-                }
+                
             }
 
 

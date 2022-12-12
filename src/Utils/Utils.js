@@ -1,6 +1,6 @@
-export const MAX_DATA = 500;
-export const SIMULATION_EXEC = 150; //ms
-export const SIMULATION_STEP = 500; //ms
+export const MAX_DATA = 10000;
+export const SIMULATION_EXEC = 100; //ms
+export const SIMULATION_STEP = 100; //ms
 export const RC_PERC = 63.2;
 
 //condiciones de parada

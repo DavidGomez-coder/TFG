@@ -187,27 +187,6 @@ export default class SimpleRl extends Component {
                     }
                 }
 
-                if (!this.state.condition_complete) {
-                    this.setState(prevState => {
-                        return {
-                            ...prevState,
-                            i_data: [...oldIData, { "t": t_a, "I(t)": instant_values.I }],
-                            vr_data: [...oldVrData, { "t": t_a, "Vr(t)": instant_values.Vr }],
-                            vl_data: [...oldVlData, { "t": t_a, "Vl(t)": instant_values.Vl }],
-                            e_data: [...oldEData, { "t": t_a, "E(t)": instant_values.E }],
-                            phi_data: [...oldPhiData, { "t": t_a, "Φ(t)": instant_values.PHI }],
-                            //time update
-                            t_i: t_i + ((SIMULATION_STEP * prevState.simulation_step_multiplier) / 1000),
-                            t_a: t_a + ((SIMULATION_STEP * prevState.simulation_step_multiplier) / 1000),
-                            //current i max update
-                            i_0: instant_values.I,
-                            i_percent: Number.parseFloat((instant_values.I / prevState.i_max) * 100).toFixed(2),
-                            //data length update
-                            data_length: prevState.data_length + 1
-                        }
-                    });
-                }
-
                 //auto stop simulation
                 if (this.state.inductorCharging && this.state.i_percent == 100) {
                     this.updateRunning();
@@ -230,6 +209,29 @@ export default class SimpleRl extends Component {
                         }
                     });
                 }
+
+                if (!this.state.condition_complete) {
+                    this.setState(prevState => {
+                        return {
+                            ...prevState,
+                            i_data: [...oldIData, { "t": t_a, "I(t)": instant_values.I }],
+                            vr_data: [...oldVrData, { "t": t_a, "Vr(t)": instant_values.Vr }],
+                            vl_data: [...oldVlData, { "t": t_a, "Vl(t)": instant_values.Vl }],
+                            e_data: [...oldEData, { "t": t_a, "E(t)": instant_values.E }],
+                            phi_data: [...oldPhiData, { "t": t_a, "Φ(t)": instant_values.PHI }],
+                            //time update
+                            t_i: t_i + ((SIMULATION_STEP * prevState.simulation_step_multiplier) / 1000),
+                            t_a: t_a + ((SIMULATION_STEP * prevState.simulation_step_multiplier) / 1000),
+                            //current i max update
+                            i_0: instant_values.I,
+                            i_percent: Number.parseFloat((instant_values.I / prevState.i_max) * 100).toFixed(2),
+                            //data length update
+                            data_length: prevState.data_length + 1
+                        }
+                    });
+                }
+
+                
             }
         }, SIMULATION_EXEC);
 
