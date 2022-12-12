@@ -33,8 +33,8 @@ VOLTAGE   = float(args.voltage)  if args.voltage is not None else 5
 RESISTOR  = float(args.resistor) if args.resistor is not None else  3
 INDUCTOR  = float(args.inductor) if args.inductor is not None else 10
 
-CONDITION_VALUE = float(args.conditionValue) if args.conditionValue is not None else None
-CONDITION_PERCE = float(args.conditionPercent) if args.conditionPercent is not None else None
+CONDITION_VALUE = float(args.conditionVal) if args.conditionVal is not None else None
+CONDITION_PERCE = float(args.conditionPer) if args.conditionPer is not None else None
 
 # condition builder
 CONDITION = -1
@@ -51,6 +51,7 @@ if CONDITION_VALUE is not None:
 # ==================================================================================== #
 if args.simulationType == 'RC':
     print("Generando resultados simulación RC ....")
+    # simulation time
     TIME = float(args.time) if args.time is not None else (5*RESISTOR*CAPACITOR)
     # condition percent
     if CONDITION_PERCE is not None:
