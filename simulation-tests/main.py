@@ -54,8 +54,9 @@ if args.simulationType == 'RC':
     # simulation time
     TIME = float(args.time) if args.time is not None else (5*RESISTOR*CAPACITOR)
     # condition percent
+    print(CONDITION_PERCE)
     if CONDITION_PERCE is not None:
-        CONDITION = (CAPACITOR * VOLTAGE) * (CONDITION_PERCE/100)
+        CONDITION = (CAPACITOR * VOLTAGE * CONDITION_PERCE) / 100 
     rcsim = RCSimulation(CAPACITOR, RESISTOR, VOLTAGE, TIME, INC, CONDITION)
     rcsim.show()
 elif args.simulationType == 'RL':
