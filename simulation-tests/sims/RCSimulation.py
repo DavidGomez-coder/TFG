@@ -22,7 +22,7 @@ class RCSimulation:
         self.figure, self.axis = plt.subplots(3, 2, figsize=(10, 9)) 
         self.x_charge = np.arange(0, self.time_char, INC)
         self.x_discharge = np.arange(0, self.time_dis, INC)
-        self.figure.suptitle(f"Carga y descarga de un inductor \n para R={RESISTOR}Ω, ε={VOLTAGE}V y C={CAPACITOR}F \n (escala de tiempo: {INC}s)", fontsize=10, fontweight="bold")
+        self.figure.suptitle(f"Carga y descarga de un condensador \n para R={RESISTOR}Ω, ε={VOLTAGE}V y C={CAPACITOR}F \n (escala de tiempo: {INC}s)", fontsize=10, fontweight="bold")
 
     def show(self):
         q_on_charge_v    = np.vectorize(self.formula.Q_ON_CHARGE)
