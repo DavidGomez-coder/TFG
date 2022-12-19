@@ -85,8 +85,9 @@ class RLSimulation:
 
         self.figure.delaxes(self.axis[2,1])
         
-
-        plt.gcf().text(0.53, 0.25, f"· Intensidad de corriente final: {round(self.I if self.I > -1 else self.formula.I_MAX,2)}A ({round((self.I if self.I > -1 else self.formula.I_MAX)*100/self.formula.I_MAX,2)}%)", fontsize=10, fontweight="bold")
+        I_IN = self.formula.I_MAX if self.I == -1 else round(self.I, 2)
+        I_PERCENT = round(I_IN*self.formula.I_MAX / 100, 2)
+        plt.gcf().text(0.53, 0.25, f"· Intensidad de corriente final: {I_IN}A ({I_PERCENT}%)", fontsize=10, fontweight="bold")
         plt.gcf().text(0.53, 0.2, f"· Estado de almacenamiento de energía ({round(self.time_char,5)}s)", fontsize=10, fontweight="bold", color="#1f77b4")
         plt.gcf().text(0.53, 0.15, f"· Estado de disipación de energía ({round(self.time_dis,5)}s)", fontsize=10, fontweight="bold", color="#ff7f0e")
         self.figure.tight_layout()
