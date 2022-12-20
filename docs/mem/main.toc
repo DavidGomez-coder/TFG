@@ -26,39 +26,39 @@
 \contentsline {subsubsection}{\numberline {4.2.1}Caso de prueba 1: carga y descarga de un condensador}{62}{subsubsection.4.2.1}%
 \contentsline {subsubsection}{\numberline {4.2.2}Caso de prueba 2: carga y descarga de un condensador (con restricciones)}{64}{subsubsection.4.2.2}%
 \contentsline {subsubsection}{\numberline {4.2.3}Caso de prueba 3: carga y descarga de un inductor}{66}{subsubsection.4.2.3}%
-\contentsline {subsubsection}{\numberline {4.2.4}Caso de prueba 4: carga y descarga de un inductor (con restricciones)}{66}{subsubsection.4.2.4}%
-\contentsline {section}{\numberline {5}Conclusions and Futures Lines of Research}{69}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Conclusions}{69}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Future lines of Research}{69}{subsection.5.2}%
-\contentsline {section}{\numberline {6}Conclusiones y Líneas Futuras}{71}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Conclusiones}{71}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Líneas Futuras}{71}{subsection.6.2}%
-\contentsline {section}{Apéndice \numberline {A}Manual de instalación}{75}{appendix.alph1.Alph1}%
-\contentsline {section}{Apéndice \numberline {B}Manual de usuario}{77}{appendix.alph2.Alph2}%
-\contentsline {section}{Apéndice \numberline {C}Requisitos y casos de uso}{79}{appendix.alph3.Alph3}%
-\contentsline {subsection}{\numberline {C.1}Requisitos}{79}{subsection.alph3.Alph3.1}%
-\contentsline {subsection}{\numberline {C.2}Casos de uso}{81}{subsection.alph3.Alph3.2}%
-\contentsline {section}{Apéndice \numberline {D}Modelado de los circuitos RC y RL}{83}{appendix.alph4.Alph4}%
-\contentsline {section}{Apéndice \numberline {E}Resolución matemática del circuito RC}{85}{appendix.alph5.Alph5}%
-\contentsline {subsection}{\numberline {E.1}Estado de almacenamiento de energía}{85}{subsection.alph5.Alph5.1}%
-\contentsline {subsubsection}{\numberline {E.1.1}Carga del condensador}{85}{subsubsection.alph5.Alph5.1.1}%
-\contentsline {subsubsection}{\numberline {E.1.2}Intensidad de corriente}{86}{subsubsection.alph5.Alph5.1.2}%
-\contentsline {subsubsection}{\numberline {E.1.3}DDP Resistencia}{86}{subsubsection.alph5.Alph5.1.3}%
-\contentsline {subsubsection}{\numberline {E.1.4}DDP Condensador}{87}{subsubsection.alph5.Alph5.1.4}%
-\contentsline {subsection}{\numberline {E.2}Estado de disipación de energía}{87}{subsection.alph5.Alph5.2}%
-\contentsline {subsubsection}{\numberline {E.2.1}Carga del condensador}{87}{subsubsection.alph5.Alph5.2.1}%
-\contentsline {subsubsection}{\numberline {E.2.2}Intensidad de corriente}{88}{subsubsection.alph5.Alph5.2.2}%
-\contentsline {subsubsection}{\numberline {E.2.3}Diferencia de potencial en la resistencia}{89}{subsubsection.alph5.Alph5.2.3}%
-\contentsline {subsubsection}{\numberline {E.2.4}Diferencia de potencial en el condensador}{89}{subsubsection.alph5.Alph5.2.4}%
-\contentsline {subsection}{\numberline {E.3}Energía almacenada en un condensador}{89}{subsection.alph5.Alph5.3}%
-\contentsline {section}{Apéndice \numberline {F}Resolución matemática del circuito RL}{91}{appendix.alph6.Alph6}%
-\contentsline {subsection}{\numberline {F.1}Estado de almacenamiento de energía}{91}{subsection.alph6.Alph6.1}%
-\contentsline {subsubsection}{\numberline {F.1.1}Intensidad de corriente}{91}{subsubsection.alph6.Alph6.1.1}%
-\contentsline {subsubsection}{\numberline {F.1.2}Diferencia de potencial en la resistencia}{92}{subsubsection.alph6.Alph6.1.2}%
-\contentsline {subsubsection}{\numberline {F.1.3}Diferencia de potencial en la bobina}{92}{subsubsection.alph6.Alph6.1.3}%
-\contentsline {subsection}{\numberline {F.2}Estado de disipación de energía}{93}{subsection.alph6.Alph6.2}%
-\contentsline {subsubsection}{\numberline {F.2.1}Intensidad de corriente}{93}{subsubsection.alph6.Alph6.2.1}%
-\contentsline {subsubsection}{\numberline {F.2.2}Diferencia de potencial en la resistencia}{93}{subsubsection.alph6.Alph6.2.2}%
-\contentsline {subsubsection}{\numberline {F.2.3}Diferencia de potencial en la bobina}{94}{subsubsection.alph6.Alph6.2.3}%
-\contentsline {subsection}{\numberline {F.3}Energía almacenada}{94}{subsection.alph6.Alph6.3}%
-\contentsline {subsection}{\numberline {F.4}Flujo magnético}{95}{subsection.alph6.Alph6.4}%
+\contentsline {subsubsection}{\numberline {4.2.4}Caso de prueba 4: carga y descarga de un inductor (con restricciones)}{68}{subsubsection.4.2.4}%
+\contentsline {section}{\numberline {5}Conclusions and Futures Lines of Research}{71}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Conclusions}{71}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Future lines of Research}{71}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Conclusiones y Líneas Futuras}{73}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Conclusiones}{73}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Líneas Futuras}{73}{subsection.6.2}%
+\contentsline {section}{Apéndice \numberline {A}Manual de instalación}{77}{appendix.alph1.Alph1}%
+\contentsline {section}{Apéndice \numberline {B}Manual de usuario}{79}{appendix.alph2.Alph2}%
+\contentsline {section}{Apéndice \numberline {C}Requisitos y casos de uso}{81}{appendix.alph3.Alph3}%
+\contentsline {subsection}{\numberline {C.1}Requisitos}{81}{subsection.alph3.Alph3.1}%
+\contentsline {subsection}{\numberline {C.2}Casos de uso}{83}{subsection.alph3.Alph3.2}%
+\contentsline {section}{Apéndice \numberline {D}Modelado de los circuitos RC y RL}{85}{appendix.alph4.Alph4}%
+\contentsline {section}{Apéndice \numberline {E}Resolución matemática del circuito RC}{87}{appendix.alph5.Alph5}%
+\contentsline {subsection}{\numberline {E.1}Estado de almacenamiento de energía}{87}{subsection.alph5.Alph5.1}%
+\contentsline {subsubsection}{\numberline {E.1.1}Carga del condensador}{87}{subsubsection.alph5.Alph5.1.1}%
+\contentsline {subsubsection}{\numberline {E.1.2}Intensidad de corriente}{88}{subsubsection.alph5.Alph5.1.2}%
+\contentsline {subsubsection}{\numberline {E.1.3}DDP Resistencia}{88}{subsubsection.alph5.Alph5.1.3}%
+\contentsline {subsubsection}{\numberline {E.1.4}DDP Condensador}{89}{subsubsection.alph5.Alph5.1.4}%
+\contentsline {subsection}{\numberline {E.2}Estado de disipación de energía}{89}{subsection.alph5.Alph5.2}%
+\contentsline {subsubsection}{\numberline {E.2.1}Carga del condensador}{89}{subsubsection.alph5.Alph5.2.1}%
+\contentsline {subsubsection}{\numberline {E.2.2}Intensidad de corriente}{90}{subsubsection.alph5.Alph5.2.2}%
+\contentsline {subsubsection}{\numberline {E.2.3}Diferencia de potencial en la resistencia}{91}{subsubsection.alph5.Alph5.2.3}%
+\contentsline {subsubsection}{\numberline {E.2.4}Diferencia de potencial en el condensador}{91}{subsubsection.alph5.Alph5.2.4}%
+\contentsline {subsection}{\numberline {E.3}Energía almacenada en un condensador}{91}{subsection.alph5.Alph5.3}%
+\contentsline {section}{Apéndice \numberline {F}Resolución matemática del circuito RL}{93}{appendix.alph6.Alph6}%
+\contentsline {subsection}{\numberline {F.1}Estado de almacenamiento de energía}{93}{subsection.alph6.Alph6.1}%
+\contentsline {subsubsection}{\numberline {F.1.1}Intensidad de corriente}{93}{subsubsection.alph6.Alph6.1.1}%
+\contentsline {subsubsection}{\numberline {F.1.2}Diferencia de potencial en la resistencia}{94}{subsubsection.alph6.Alph6.1.2}%
+\contentsline {subsubsection}{\numberline {F.1.3}Diferencia de potencial en la bobina}{94}{subsubsection.alph6.Alph6.1.3}%
+\contentsline {subsection}{\numberline {F.2}Estado de disipación de energía}{95}{subsection.alph6.Alph6.2}%
+\contentsline {subsubsection}{\numberline {F.2.1}Intensidad de corriente}{95}{subsubsection.alph6.Alph6.2.1}%
+\contentsline {subsubsection}{\numberline {F.2.2}Diferencia de potencial en la resistencia}{95}{subsubsection.alph6.Alph6.2.2}%
+\contentsline {subsubsection}{\numberline {F.2.3}Diferencia de potencial en la bobina}{96}{subsubsection.alph6.Alph6.2.3}%
+\contentsline {subsection}{\numberline {F.3}Energía almacenada}{96}{subsection.alph6.Alph6.3}%
+\contentsline {subsection}{\numberline {F.4}Flujo magnético}{97}{subsection.alph6.Alph6.4}%

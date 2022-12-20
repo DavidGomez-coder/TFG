@@ -238,7 +238,7 @@ Según los resultados de la aplicación, el valor de la carga cuando la simulaci
 \end{figure}
 
 \subsubsection{Caso de prueba 3: carga y descarga de un inductor}
-Pasamos entonces al tercer caso de prueba, donde simularemos un circuito RL con los parámetros indicados anteriormente, con una escala de tiempo en \textit{milisegundos}. Mediante la aplicación, obtenemos los resultados que se muestran en las figuras \ref{fig::cp3-app} y \ref{fig::cp3.1-app}.
+Pasamos entonces al tercer caso de prueba, donde simularemos un circuito RL con los parámetros indicados anteriormente con una escala de tiempo en \textit{milisegundos}. Mediante la aplicación, obtenemos los resultados que se muestran en las figuras \ref{fig::cp3-app} y \ref{fig::cp3.1-app}.
 
 \begin{figure}[!h]
     \centering
@@ -254,6 +254,9 @@ Pasamos entonces al tercer caso de prueba, donde simularemos un circuito RL con 
     \label{fig::cp3.1-app}
 \end{figure}
 
+
+El estado de equilibrio se alcanza a los $1.67$ segundos de la simulación, en los que se llegan a tener una intensidad de corriente máxima de unos $1.33A$. Además, si realizamos dicha simulación utilizando el \textit{script} de \textit{python} elaborado los resultados no difieren en mucho (figura \ref{fig::cp3-py}).\\
+
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.8\textwidth]{images/cp3-py.png}
@@ -263,11 +266,36 @@ Pasamos entonces al tercer caso de prueba, donde simularemos un circuito RL con 
 
 
 
-
 \subsubsection{Caso de prueba 4: carga y descarga de un inductor (con restricciones)}
 
+Por último, comprobaremos que la simulación de un circuito RL funciona adecuadamente cuando sometemeos al circuito a una restricción por valor, es decir, para que la intensidad de corriente máxima no supere los $0.6A$, volviendo a utilizar la escala de tiempo de los \textit{milisegundos}. Los resultados obtenidos por la aplicación son los que se muestran en las figuras \ref{fig::cp4-app} y \ref{fig::cp4.1-app}. \\
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/cp4-1.png}
+    \caption{Caso de prueba 4 resultados de la aplicación. Estado de carga.}
+    \label{fig::cp4-app}
+\end{figure}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/cp4-1.1.png}
+    \caption{Caso de prueba 4: resultados de la aplicación. Estado de descarga.}
+    \label{fig::cp4.1-app}
+\end{figure}
 
 
+
+Como se puede observar, los $0.6A$ se alcanzan (y se sobrepasa un poco) tras simular durante $0.2$ segundos en estado de carga y $0.3$ segundos en descarga; mientras que en los resultados generados por el \textit{script} (figura \ref{fig::cp4-py}), este valor se alcanza tras $0.19s$ y $0.26s$ en estado de almacenamiento y disipación de energía respectivamente. Igualmente, la causa de que los resultados difieran entre sí apenas unas centésimas es por la escala de tiempo utilizada.\\ 
+
+
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/cp4-py.png}
+    \caption{Caso de prueba 4: resultados del script. }
+    \label{fig::cp4-py}
+\end{figure}
 
 
 

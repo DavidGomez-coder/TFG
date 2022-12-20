@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  20 DEC 2022 11:32
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  20 DEC 2022 12:42
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -2463,23 +2463,49 @@ File: images/cp3-1.1.PNG Graphic file (type bmp)
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 258--259
+
+ []
+
+[66]
 File: images/cp3-py.png Graphic file (type bmp)
 <images/cp3-py.png>
 
+
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-) [66] [67] [68] (./sections/conclusion.tex
 
-Package blindtext Warning: spanish not defined, using English instead.
-(blindtext)                 on input line 7.
+Underfull \hbox (badness 10000) in paragraph at lines 271--272
+
+ []
 
 
-Package blindtext Warning: spanish not defined, using English instead.
-(blindtext)                 on input line 10.
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-) [69
+ [67]
+File: images/cp4-1.png Graphic file (type bmp)
+<images/cp4-1.png>
 
-] [70] (./sections/conclusiones.tex
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+File: images/cp4-1.1.png Graphic file (type bmp)
+<images/cp4-1.1.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 289--290
+
+ []
+
+File: images/cp4-py.png Graphic file (type bmp)
+<images/cp4-py.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+) [68] [69] [70] (./sections/conclusion.tex
 
 Package blindtext Warning: spanish not defined, using English instead.
 (blindtext)                 on input line 7.
@@ -2490,7 +2516,18 @@ Package blindtext Warning: spanish not defined, using English instead.
 
 ) [71
 
-] [72
+] [72] (./sections/conclusiones.tex
+
+Package blindtext Warning: spanish not defined, using English instead.
+(blindtext)                 on input line 7.
+
+
+Package blindtext Warning: spanish not defined, using English instead.
+(blindtext)                 on input line 10.
+
+) [73
+
+] [74
 
 ]
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/sc' will be
@@ -2512,30 +2549,30 @@ Overfull \hbox (18.78261pt too wide) in paragraph at lines 80--80
 []\TU/LinLibertine(0)/m/n/12 Wikipedia la enciclopedia libre. \TU/LinLibertine(0)/m/it/12 Simulación por computadora\TU/LinLibertine(0)/m/n/12 . \TU/LinLibertine(0)/m/sc/12 url\TU/LinLibertine(0)/m/n/12 : [][]$[][][][][] [] [] [] [][] [] [][][][][][][][][] []
  []
 
-[73]
+[75]
 Overfull \hbox (30.89859pt too wide) in paragraph at lines 80--80
 []\TU/LinLibertine(0)/m/n/12 openstax. \TU/LinLibertine(0)/m/it/12 Circuitos RC\TU/LinLibertine(0)/m/n/12 . \TU/LinLibertine(0)/m/sc/12 url\TU/LinLibertine(0)/m/n/12 : [][]$[][][][][] [] [] [] [][][][][][][][] [] [][][] [] [][][][][] [] [] [] [][] [] [][][][][][] [][] [][][][][][][][][][][][][] [][]
  []
 
-[74] (./sections/manual_instalacion.tex (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+[76] (./sections/manual_instalacion.tex (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
-)) [75
+)) [77
 
-] [76
+] [78
 
-] (./sections/manual_usuario.tex) [77] [78
+] (./sections/manual_usuario.tex) [79] [80
 
 ] (./sections/requisitos_casos_uso.tex
 Underfull \hbox (badness 10000) in paragraph at lines 6--7
 
  []
 
-[79] [80] [81]
+[81] [82] [83]
 File: images/casos_de_uso.PNG Graphic file (type bmp)
 <images/casos_de_uso.PNG>
-) [82] (./sections/resumen_ecuaciones.tex
+) [84] (./sections/resumen_ecuaciones.tex
 Overfull \hbox (50.692pt too wide) in alignment at lines 8--11
  [] [] [] [] [] [] 
  []
@@ -2545,16 +2582,16 @@ Overfull \hbox (50.692pt too wide) in alignment at lines 11--31
  [] [] [] [] [] [] 
  []
 
-) [83
+) [85
 
-] [84
+] [86
 
 ] (./sections/resolucionEcuaciones.tex
 Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
-[85]
+[87]
 Requested font "cmmi12" at 14.4pt
  -> /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
 Requested font "cmsy10" at 14.4pt
@@ -2563,23 +2600,23 @@ Requested font "cmex10" at 14.4pt
  -> /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 Requested font "cmr12" at 14.4pt
  -> /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
- [86] [87] [88] [89]) [90] (./sections/resolucionEcuaciones2.tex [91
+ [88] [89] [90] [91]) [92] (./sections/resolucionEcuaciones2.tex [93
 
-] [92] [93] [94])
+] [94] [95] [96])
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
- [95]
+ [97]
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
- [96] (./main.aux
+ [98] (./main.aux
 LaTeX Info: Redefining \sptext on input line 26.
 LaTeX Info: Redefining \. on input line 26.
 LaTeX Info: Redefining \% on input line 26.
@@ -2596,12 +2633,12 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 59618 strings out of 476191
- 1368576 string characters out of 5812071
- 2266296 words of memory out of 5000000
- 79414 multiletter control sequences out of 15000+600000
+ 59645 strings out of 476191
+ 1369111 string characters out of 5812071
+ 2266567 words of memory out of 5000000
+ 79438 multiletter control sequences out of 15000+600000
  478807 words of font info for 111 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  103i,17n,138p,1406b,5386s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.pdf (97 pages).
+Output written on main.pdf (99 pages).

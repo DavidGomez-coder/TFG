@@ -1814,6 +1814,15 @@ INPUT images/cp3-1.1.png
 INPUT ./images/cp3-py.png
 INPUT ./images/cp3-py.png
 INPUT images/cp3-py.png
+INPUT ./images/cp4-1.png
+INPUT ./images/cp4-1.png
+INPUT images/cp4-1.png
+INPUT ./images/cp4-1.1.png
+INPUT ./images/cp4-1.1.png
+INPUT images/cp4-1.1.png
+INPUT ./images/cp4-py.png
+INPUT ./images/cp4-py.png
+INPUT images/cp4-py.png
 INPUT ./sections/conclusion.tex
 INPUT ./sections/conclusion.tex
 INPUT ./sections/conclusion.tex
