@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  20 DEC 2022 13:25
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  20 DEC 2022 20:55
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1706,15 +1706,14 @@ Package biblatex Info: Automatic encoding selection.
 \openout3 = `manual_instalacion.bcf'.
 
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'manual_instalacion.bbl' not found.
-
-No file manual_instalacion.bbl.
+Package biblatex Info: ... file 'manual_instalacion.bbl' found.
+ (sections/manual_instalacion.bbl)
 Package biblatex Info: Reference section=0 on input line 3.
 Package biblatex Info: Reference segment=0 on input line 3.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: longtable package is loaded.
-(/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
+ (/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
 Package: ltcaption 2020/05/30 v1.4b longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
@@ -1791,27 +1790,71 @@ File: lstlang1.sty 2020/03/24 1.8d listings language file
 Requested font "[Iosevka].ttf/OT:script=latn;language=dflt;" at 12.0pt
  -> ./Iosevka.ttf
 
+Underfull \hbox (badness 10000) in paragraph at lines 32--33
 
-Package blindtext Warning: spanish not defined, using English instead.
-(blindtext)                 on input line 33.
+ []
 
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/b/it' will be
-(Font)              scaled to size 14.4pt on input line 34.
-Requested font "[LinLibertine_RBI.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 14.4pt
- -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_RBI.otf
+File: images/interfaz-usuario.png Graphic file (type bmp)
+<images/interfaz-usuario.png>
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--43
+
+ []
+
 [1
 
 ]
+File: images/circuito-simulado.png Graphic file (type bmp)
+<images/circuito-simulado.png>
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--52
+
+ []
+
+File: images/resultados.png Graphic file (type bmp)
+<images/resultados.png>
+
+Underfull \hbox (badness 10000) in paragraph at lines 60--61
+
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 62--63
+
+ []
+
+File: images/condiciones-escala.png Graphic file (type bmp)
+<images/condiciones-escala.png>
+File: images/botones.png Graphic file (type bmp)
+<images/botones.png>
+
+Underfull \hbox (badness 10000) in paragraph at lines 83--84
+
+ []
+
+File: images/controladores.png Graphic file (type bmp)
+<images/controladores.png>
+[3]
+Underfull \vbox (badness 1448) has occurred while \output is active []
+
+ [4]
+File: images/teorico.png Graphic file (type bmp)
+<images/teorico.png>
+LaTeX Font Info:    Font shape `TU/LinLibertine(0)/b/it' will be
+(Font)              scaled to size 14.4pt on input line 110.
+Requested font "[LinLibertine_RBI.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 14.4pt
+ -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_RBI.otf
+ [5]
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/b/n' will be
-(Font)              scaled to size 12.0pt on input line 51.
+(Font)              scaled to size 12.0pt on input line 128.
 Requested font "[LinLibertine_RB.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 12.0pt
  -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_RB.otf
 
-Overfull \hbox (19.66484pt too wide) in alignment at lines 49--78
+Overfull \hbox (19.66484pt too wide) in alignment at lines 125--155
  [] [] [] 
  []
 
-[2] [3] (sections/manual_instalacion.aux
+[6] [7] (sections/manual_instalacion.aux
 LaTeX Info: Redefining \sptext on input line 26.
 LaTeX Info: Redefining \. on input line 26.
 LaTeX Info: Redefining \% on input line 26.
@@ -1826,12 +1869,12 @@ Package logreq Info: Writing requests to 'manual_instalacion.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 57856 strings out of 476191
- 1323599 string characters out of 5812071
- 2154607 words of memory out of 5000000
- 77776 multiletter control sequences out of 15000+600000
+ 57936 strings out of 476191
+ 1325611 string characters out of 5812071
+ 2155145 words of memory out of 5000000
+ 77842 multiletter control sequences out of 15000+600000
  477500 words of font info for 100 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 123i,9n,155p,1188b,3934s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 123i,10n,155p,1188b,3934s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on sections/manual_instalacion.pdf (3 pages).
+Output written on sections/manual_instalacion.pdf (7 pages).

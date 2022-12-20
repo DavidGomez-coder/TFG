@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  20 DEC 2022 13:25
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  20 DEC 2022 20:55
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -2562,9 +2562,9 @@ File: lstlang1.sty 2020/03/24 1.8d listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
+Underfull \hbox (badness 10000) in paragraph at lines 32--33
 
-Package blindtext Warning: spanish not defined, using English instead.
-(blindtext)                 on input line 33.
+ []
 
 
 Underfull \vbox (badness 1178) has occurred while \output is active []
@@ -2572,21 +2572,66 @@ Underfull \vbox (badness 1178) has occurred while \output is active []
  [77
 
 ]
-Overfull \hbox (19.66484pt too wide) in alignment at lines 49--78
+File: images/interfaz-usuario.png Graphic file (type bmp)
+<images/interfaz-usuario.png>
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--43
+
+ []
+
+File: images/circuito-simulado.png Graphic file (type bmp)
+<images/circuito-simulado.png>
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--52
+
+ []
+
+File: images/resultados.png Graphic file (type bmp)
+<images/resultados.png>
+
+Underfull \hbox (badness 10000) in paragraph at lines 60--61
+
+ []
+
+[78]
+Underfull \hbox (badness 10000) in paragraph at lines 62--63
+
+ []
+
+File: images/condiciones-escala.png Graphic file (type bmp)
+<images/condiciones-escala.png>
+File: images/botones.png Graphic file (type bmp)
+<images/botones.png>
+
+Underfull \hbox (badness 10000) in paragraph at lines 83--84
+
+ []
+
+
+Underfull \vbox (badness 2103) has occurred while \output is active []
+
+ [79]
+File: images/controladores.png Graphic file (type bmp)
+<images/controladores.png>
+ [80]
+File: images/teorico.png Graphic file (type bmp)
+<images/teorico.png>
+ [81]
+Overfull \hbox (19.66484pt too wide) in alignment at lines 125--155
  [] [] [] 
  []
 
-[78]) [79] [80
+[82]) [83] [84
 
 ] (./sections/requisitos_casos_uso.tex
 Underfull \hbox (badness 10000) in paragraph at lines 6--7
 
  []
 
-[81] [82] [83]
+[85] [86] [87]
 File: images/casos_de_uso.PNG Graphic file (type bmp)
 <images/casos_de_uso.PNG>
-) [84] (./sections/resumen_ecuaciones.tex
+) [88] (./sections/resumen_ecuaciones.tex
 Overfull \hbox (50.692pt too wide) in alignment at lines 8--11
  [] [] [] [] [] [] 
  []
@@ -2596,16 +2641,16 @@ Overfull \hbox (50.692pt too wide) in alignment at lines 11--31
  [] [] [] [] [] [] 
  []
 
-) [85
+) [89
 
-] [86
+] [90
 
 ] (./sections/resolucionEcuaciones.tex
 Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
-[87]
+[91]
 Requested font "cmmi12" at 14.4pt
  -> /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
 Requested font "cmsy10" at 14.4pt
@@ -2614,23 +2659,23 @@ Requested font "cmex10" at 14.4pt
  -> /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 Requested font "cmr12" at 14.4pt
  -> /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
- [88] [89] [90] [91]) [92] (./sections/resolucionEcuaciones2.tex [93
+ [92] [93] [94] [95]) [96] (./sections/resolucionEcuaciones2.tex [97
 
-] [94] [95] [96])
+] [98] [99] [100])
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
- [97]
+ [101]
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
- [98] (./main.aux
+ [102] (./main.aux
 LaTeX Info: Redefining \sptext on input line 26.
 LaTeX Info: Redefining \. on input line 26.
 LaTeX Info: Redefining \% on input line 26.
@@ -2647,12 +2692,12 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 59652 strings out of 476191
- 1369142 string characters out of 5812071
- 2266710 words of memory out of 5000000
- 79447 multiletter control sequences out of 15000+600000
+ 59718 strings out of 476191
+ 1370913 string characters out of 5812071
+ 2267346 words of memory out of 5000000
+ 79506 multiletter control sequences out of 15000+600000
  478815 words of font info for 112 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  103i,17n,138p,1406b,5386s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.pdf (99 pages).
+Output written on main.pdf (103 pages).
