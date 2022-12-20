@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  20 DEC 2022 12:42
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  20 DEC 2022 13:25
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -2554,15 +2554,29 @@ Overfull \hbox (30.89859pt too wide) in paragraph at lines 80--80
 []\TU/LinLibertine(0)/m/n/12 openstax. \TU/LinLibertine(0)/m/it/12 Circuitos RC\TU/LinLibertine(0)/m/n/12 . \TU/LinLibertine(0)/m/sc/12 url\TU/LinLibertine(0)/m/n/12 : [][]$[][][][][] [] [] [] [][][][][][][][] [] [][][] [] [][][][][] [] [] [] [][] [] [][][][][][] [][] [][][][][][][][][][][][][] [][]
  []
 
-[76] (./sections/manual_instalacion.tex (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+[76] (./sections/manual_instalacion.tex
+Requested font "[Iosevka].ttf/OT:script=latn;language=dflt;" at 10.0pt
+ -> ./Iosevka.ttf
+ (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
-)) [77
+)
 
-] [78
+Package blindtext Warning: spanish not defined, using English instead.
+(blindtext)                 on input line 33.
 
-] (./sections/manual_usuario.tex) [79] [80
+
+Underfull \vbox (badness 1178) has occurred while \output is active []
+
+ [77
+
+]
+Overfull \hbox (19.66484pt too wide) in alignment at lines 49--78
+ [] [] [] 
+ []
+
+[78]) [79] [80
 
 ] (./sections/requisitos_casos_uso.tex
 Underfull \hbox (badness 10000) in paragraph at lines 6--7
@@ -2625,7 +2639,7 @@ LaTeX Info: Redefining \% on input line 26.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: DD15041A1E213339B5BC3B437B456E90;13903.
+(rerunfilecheck)             Checksum: 5DE0F6B64D1E56E11B2CBF0F7ADDAD44;14727.
 runsystem(rm main.pyg)...executed.
 
 Package logreq Info: Writing requests to 'main.run.xml'.
@@ -2633,11 +2647,11 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 59645 strings out of 476191
- 1369111 string characters out of 5812071
- 2266567 words of memory out of 5000000
- 79438 multiletter control sequences out of 15000+600000
- 478807 words of font info for 111 fonts, out of 8000000 for 9000
+ 59652 strings out of 476191
+ 1369142 string characters out of 5812071
+ 2266710 words of memory out of 5000000
+ 79447 multiletter control sequences out of 15000+600000
+ 478815 words of font info for 112 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  103i,17n,138p,1406b,5386s stack positions out of 5000i,500n,10000p,200000b,80000s
 

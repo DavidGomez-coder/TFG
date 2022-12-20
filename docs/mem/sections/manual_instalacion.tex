@@ -2,27 +2,82 @@
 
 \begin{document}
 
-En primer lugar, debemos de asegurarnos de tener instalado NodeJS (\url{ https://nodejs.org/en/download/}). Una vez la instalación está completa, procedemos a descargar el código fuente del proyecto de git (este repositorio se encuentra en privado, por lo que se necesitará ser colaborador en el mismo u obtenerlo de otra forma).
+
+\subsection{Manual de instalación del proyecto}
+En primer lugar, debemos de asegurarnos de tener instalado NodeJS\footnote{\url{ https://nodejs.org/en/download/}} en la máquina en la que vaya a ser ejecutado el proyecto, ya sea un ordenador personal o en un servidor con exposición directa a internet.
+
+Una vez la instalación del entorno de ejecución esté lista, procedemos a descargar el código fuente del proyecto. En este caso, este se encuentra guardado en un repositorio \textit{git} privado, por lo que se necesitará permisos de colaborador para poder acceder a él. 
 
 \begin{lstlisting}[language=bash]
   $ git clone https://github.com/DavidGomez-coder/TFG.git
 \end{lstlisting}
 
-A continuación, debemos de abrir una consola de comandos en el directorio raíz del proyecto e instalar todas las dependencias utilizando el siguiente comando:
+A continuación, debemos de abrir una consola de comandos y situarnos en el directorio raíz del proyecto, para instalar así todas las dependencias necesarias. 
 
 \begin{lstlisting}[language=bash]
   $ npm install
 \end{lstlisting}
 
-Una vez finalizado el proceso iniciamos la aplicación
+Cuando este proceso finalice iniciamos el proceso de la aplicación ejecutando el siguiente comando:
 
 \begin{lstlisting}[language=bash]
   $ npm start
 \end{lstlisting}
 
-, la cuál se abrirá en una nueva pestaña de nuestro navegador web por defecto en la dirección \url{http://localhost:3000/TFG}.
+, tras el cuál se abrirá en una nueva pestaña del navegador web por defecto en la dirección \url{http://localhost:3000/TFG}; o si estamos utilizando un entorno de servidor, este se podrá acceder sustituyendo \textit{localhost} por la dirección IP de la máquina en cuestión.
 
 
+
+\subsection{Manual de usuario de la aplicación}
+\blindtext
+
+\subsection{Manual de usuario del script \textit{python} utilizado para las pruebas}
+Para utilizar el \textit{script} debemos de  abrir el directorio \textit{simulation-tests} situado en la carpeta raíz del proyecto. El primer paso a realizar es instalar las dependencias guardadas en el fichero \textit{requirements.txt}:
+
+\begin{lstlisting}[language=bash]
+  $ pip install -r requirements.txt
+\end{lstlisting}
+
+A continuación, podemos utilizar el script de la siguiente manera:
+
+\begin{lstlisting}[language=bash]
+  $ python3 main.py [arguments]
+\end{lstlisting}
+
+, dónde los argumentos son los que siguen:
+
+\begin{longtable}{|| p{0.2\linewidth} | p{0.2\linewidth} |  p{0.55\linewidth} ||}
+  \hline
+  \textbf{COMANDO} & \textbf{ABREV.} & \textbf{DESCRIPCIÓN} \\ \hline
+  --time & -t & Establece la duración de la simulación.  \\ \hline
+
+  --simulationType & -st & Tipo de simulación. Puede tomar los valores ``RC'' o ``RL''. Su definición es obligatoria. \\ \hline
+
+  --incrementValue & -inc & Escala de tiempo para el cálculo de los resultados. Por defecto su valor es de 0.001 segundos. \\ \hline
+
+  --capacitor & -c & Valor en Faradios de la capacidad del condensador. Solo es utilizado cuando el tipo del circuito a simular es RC. Por defecto su valor es de 0.005F. \\ \hline
+
+  --inductor & -i & Valor en Henrios de la inductancia de la bobina. Solo es utilizado cuando el tipo del circuito a simular es RL. Por defecto su valor es de 10H. \\ \hline
+
+  --resistor & -r & Valor en Ohmios de la resistencia. Por defecto su valor es de $3\Omega$. \\ \hline
+
+  --voltage & -v & Valor en Voltios de la fuente de alimentación. Por defecto su valor es de 5V. \\ \hline
+
+  --conditionVal & -condV & Establece la condición de parada de la simulación. Si el circuito a simular es del tipo RC, este valor hará referencia a la carga del condensador. En caso del circuito RL a la intensidad de corriente. \textbf{*} \\ \hline
+
+  --conditionPer & -condP & Establece la condición de parada de la simulación. Si el circuito a simular es del tipo RC, este valor hará referencia al porcentaje de carga del condensador (0-100). En caso del circuito RL, a la intensidad de corriente del mismo. \textbf{*} \\ \hline
+
+
+
+
+    
+  \caption{Argumentos válidos del \textit{script} de python.}
+  \label{tab::argumentos-script}
+  
+
+\end{longtable}
+
+\textbf{*}En caso de que el valor de la carga o intensidad supere su valor máximo permitido (o en caso de indicar el porcentaje, este sea menor que cero o mayor que cien), se mostrará un mensaje de error indicando la carga o intensidad de corriente máximas permitidas para el circuito a simular.
 
 
 \end{document}

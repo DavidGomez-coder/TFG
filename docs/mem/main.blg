@@ -1,18 +1,18 @@
 [0] Config.pm:307> INFO - This is Biber 2.17
 [0] Config.pm:310> INFO - Logfile is 'main.blg'
-[50] biber:340> INFO - === mar dic 20, 2022, 12:42:19
-[58] Biber.pm:418> INFO - Reading 'main.bcf'
-[102] Biber.pm:972> INFO - Found 25 citekeys in bib section 0
-[110] Biber.pm:4383> INFO - Processing section 0
-[116] Biber.pm:4574> INFO - Looking for bibtex file 'bibliography.bib' for section 0
-[117] bibtex.pm:1713> INFO - LaTeX decoding ...
-[132] bibtex.pm:1518> INFO - Found BibTeX data source 'bibliography.bib'
-[215] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
-[215] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[215] Biber.pm:4203> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'es-ES'
-[232] bbl.pm:654> INFO - Writing 'main.bbl' with encoding 'UTF-8'
-[238] bbl.pm:757> INFO - Output to main.bbl
-[238] Biber.pm:130> WARN - Duplicate entry key: 'cssdef' in file 'bibliography.bib', skipping ...
-[238] Biber.pm:130> WARN - BibTeX subsystem: warning: comma(s) at end of name (removing)
-[238] Biber.pm:130> WARN - BibTeX subsystem: warning: comma(s) at end of name (removing)
-[238] Biber.pm:132> INFO - WARNINGS: 3
+[47] biber:340> INFO - === mar dic 20, 2022, 13:10:35
+[56] Biber.pm:418> INFO - Reading 'main.bcf'
+[100] Biber.pm:972> INFO - Found 25 citekeys in bib section 0
+[109] Biber.pm:4383> INFO - Processing section 0
+[118] Biber.pm:4574> INFO - Looking for bibtex file 'bibliography.bib' for section 0
+[119] bibtex.pm:1713> INFO - LaTeX decoding ...
+[131] bibtex.pm:1518> INFO - Found BibTeX data source 'bibliography.bib'
+[214] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[214] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
+[214] Biber.pm:4203> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'es-ES'
+[228] bbl.pm:654> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[234] bbl.pm:757> INFO - Output to main.bbl
+[234] Biber.pm:130> WARN - Duplicate entry key: 'cssdef' in file 'bibliography.bib', skipping ...
+[234] Biber.pm:130> WARN - BibTeX subsystem: warning: comma(s) at end of name (removing)
+[234] Biber.pm:130> WARN - BibTeX subsystem: warning: comma(s) at end of name (removing)
+[234] Biber.pm:132> INFO - WARNINGS: 3

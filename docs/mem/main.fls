@@ -1852,13 +1852,6 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-INPUT ./sections/manual_usuario.tex
-INPUT ./sections/manual_usuario.tex
-INPUT ./sections/manual_usuario.tex
-INPUT sections/manual_usuario.tex
-INPUT ./sections/manual_usuario.tex
-INPUT ./sections/manual_usuario.tex
-INPUT sections/manual_usuario.tex
 INPUT ./sections/requisitos_casos_uso.tex
 INPUT ./sections/requisitos_casos_uso.tex
 INPUT ./sections/requisitos_casos_uso.tex
