@@ -178,7 +178,8 @@ export default class SimpleRl extends Component {
                         this.updateRunning();
                         this.updateConditionState(true);
 
-                    } else if (this.state.selected_stop_condition === I_VALUE && this.state.i_0 >= this.state.value_stop_condition) {
+                    } else if ((this.state.inductorCharging && this.state.selected_stop_condition === I_VALUE && this.state.i_0 >= this.state.value_stop_condition) || 
+                               (!this.state.inductorCharging && this.state.selected_stop_condition === I_VALUE && this.state.i_0 <= this.state.value_stop_condition)) {
                         this.updateRunning();
                         this.updateConditionState(true);
 

@@ -1,0 +1,194 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+En este primer apéndice sobre la resolución de ecuaciones diferenciales, se presentan los pasos a seguir para obtener las expresiones que modelan el circuito RC. \\
+
+\subsection{Estado de almacenamiento de energía}
+\subsubsection{Carga del condensador}
+\label{part::carga_condensador_1}
+Partimos de la ecuación planteada a la hora de hacer el balance energético (\ref{eqq::balance_energetico_rc_1}). Utilizando las definiciones de capacidad del condensador y la \textit{ley de Ohm}; y posteriormente, la definición de \textit{intensidad de corriente}, derivamos a la siguiente expresión:
+
+$$\varepsilon = \frac{q(t)}{C} + R\cdot I(t) = \frac{q(t)}{C} + R \frac{\partial q(t)}{\partial t}$$
+
+Para resolver esta ecuación diferencial ordinaria, utilizaremos el método de separación de variables, así que la reescribimos de la siguiente forma:
+
+$$\frac{\partial q(t)}{C\varepsilon - q(t)} = \frac{\partial t}{RC}$$
+
+Partiendo de las condiciones iniciales, donde la carga del condensador es cero 
+$$q(0) = 0$$, integramos entonces en ambos lados bajo estas condiciones
+
+$$\int_{0}^{q(t)} \frac{\partial q(t)}{C\varepsilon - q(t)}  =  \int_{0}^{t} \frac{\partial t}{RC} $$
+
+$$\Bigl[ -\ln{\left( C\varepsilon - q(t) \right)} \Bigr]_{0}^{q(t)} = \frac{1}{RC}\Bigl[  t\Bigr]_0^{t}$$
+
+$$ -\ln{\left( C\varepsilon - q(t)\right)} + \ln C\varepsilon = t/{RC}$$
+
+Despejamos $q(t)$:
+{\large
+$$ e^{-\ln{\left( C\varepsilon - q(t)\right)} + \ln{\left( C\varepsilon \right)}} = e^{\frac{t}{RC}}$$ }
+
+$$\frac{1}{C\varepsilon - q(t)}C\varepsilon = e^{\frac{t}{RC}}$$
+
+$$e^{\frac{t}{RC}} C  \varepsilon = C\varepsilon - q(t)$$
+
+Obteniendo finalmente
+
+\begin{equation}
+    q(t) = C\varepsilon \left( 1 - e^{\frac{-t}{RC}} \right)
+    \label{eqq:q(t)_carga_rc}
+\end{equation}
+
+Además, es posible hallar que la carga máxima del condensador vendrá determinada por 
+
+$$q_{max} = \lim_{t \to \infty} q(t) = C \cdot \varepsilon$$
+
+\subsubsection{Intensidad de corriente}
+\label{part::carga_condensador_2}
+Utilizando entonces la definición de \textit{intensidad de corriente}
+$$I(t) = \frac{\partial q(t)}{ \partial t}$$, si derivamos la expresión de carga del condensador obtenemos que
+
+\begin{equation}
+    I(t) = \frac{\varepsilon}{R} e^{\frac{-t}{RC}}
+\end{equation}
+
+\subsubsection{DDP Resistencia}
+\label{part::carga_condensador_3}
+Para obtener la diferencia de potencial entre los bornes de la resistencia, hacemos uso de la \textit{ley de Ohm}
+
+$$V_R(t) = R \cdot I(t)$$
+
+, que usando la expresión resultante en \ref{part::carga_condensador_2} obtenemos
+
+\begin{equation}
+    V_R(t) = R \cdot e^{\frac{-t}{RC}}
+\end{equation}
+
+\subsubsection{DDP Condensador}
+\label{part::carga_condensador_4}
+Por otro lado, la diferencia de potencial entre los terminales del condensador hacemos uso de la definición de capacidad del mismo 
+$$V_C(t) = \frac{q(t)}{C}$$
+
+, así que usando la expresión obtenida en \ref{part::carga_condensador_1} obtenemos
+
+\begin{equation}
+    V_C(t) = \varepsilon \left( 1- e^{\frac{-t}{RC}}\right)
+\end{equation}
+
+
+
+\subsection{Estado de disipación de energía}
+
+\subsubsection{Carga del condensador}
+
+\label{part::descarga_condensador_1}
+Partimos de la ecuación planteada a la hora de hacer el balance energético (\ref{eqq::balance_energetico_rc_2}). Utilizando las definiciones de capacidad de condensador y la \textit{ley de Ohm}; y posteriormente, la definición de \textit{intensidad de corriente}, obtenemos que:
+
+$$0 = \frac{q(t)}{C} + R\frac{\partial q(t)}{\partial t}$$
+
+Para resolver esta ecuación diferencial, utilizaremos el método de separación de variables, así que la reescribimos de la siguiente manera:
+
+$$\frac{-\partial t}{RC} = \frac{\partial q(t)}{q(t)}$$
+
+Si partimos de un condensador completamente cargado, donde la carga en el instante inicial se corresponde a 
+
+$$q(0) = q_{max} = C \cdot \varepsilon$$,
+
+integramos entonces en ambos lados,
+
+$$\int_{C\varepsilon}^{q(t)} \frac{\partial q(t)}{q(t)}  = \int_{0}^{t} \frac{-\partial t}{RC} $$
+
+Resolvemos en ambos lados:
+
+$$\Bigl[ -\ln{q(t)} \Bigr]_{C\cdot \varepsilon}^{q(t)} = \frac{-1}{RC}\Bigl[  t\Bigr]_0^{t}$$
+
+$$\ln{q(t)} - \ln{C\varepsilon} = \frac{-t}{RC}$$
+
+{\large
+$$ e^{\ln{q(t)} - \ln{C\varepsilon}} = e^{\frac{-t}{RC}}$$ }
+
+$$q(t)\frac{1}{C\varepsilon} = e^{\frac{-t}{RC}} $$
+
+Despejamos $q(t)$:
+
+\begin{equation}
+    q(t) = C \varepsilon e^{\frac{-t}{RC}}
+    \label{eqq::q(t)_descarga_rc}
+\end{equation}
+
+
+\subsubsection{Intensidad de corriente}
+\label{part::descarga_condensador_2}
+Utilizando la definición de \textit{intensidad de corriente}
+
+$$I(t) = \frac{\partial q(t)}{\partial t}$$
+
+y la expresión correspondiente a la carga del condensador en estado de dispación de energía (\ref{eqq::q(t)_descarga_rc}), obtenemos:
+
+\begin{equation}
+    I(t) = -\frac{\varepsilon}{R} e^{\frac{-t}{RC}} 
+\end{equation}
+
+
+
+\subsubsection{Diferencia de potencial en la resistencia}
+\label{part::descarga_condensador_3}
+Para obtener la diferencia de potencial entre los bornes de la resistencia, usamos la \textit{ley de Ohm}
+
+$$V_R(t) = R \cdot I(t)$$
+, que usando la expresión resultante en \ref{part::descarga_condensador_2} obtenemos:
+
+\begin{equation}
+    V_R(t) = -\varepsilon \cdot e^{\frac{-t}{RC}}
+\end{equation}
+
+
+\subsubsection{Diferencia de potencial en el condensador}
+\label{part::descarga_condensador_4}
+Para calcular la diferencia de potencial en los terminales del condensador, usamos la definición de capacidad en un conductor
+$$V_C(t) = \frac{q(t)}{C}$$
+, así que usando la expresión obtenida en \ref{part::descarga_condensador_1} obtenemos:
+
+\begin{equation}
+    V_C(t) = \varepsilon  e^{\frac{-t}{RC}}
+\end{equation}
+
+
+
+\subsection{Energía almacenada en un condensador}
+\label{part::energia_condensador}
+Si partimos de un condensador completamente descargado, entonces la energía en ese momento también es cero.
+
+$$E(0) = 0$$
+
+Por definición, sabemos que la carga en el condensador es
+
+$$q(t) = C \cdot V_C(t)$$, 
+
+y que la intensidad de corriente que lo atraviesa viene dada entonces por la siguiente expresión
+
+$$I(t) = C \frac{\partial V_C(t)}{\partial t}$$
+
+Usando las definiciones de energía y potencia consumidas por el condensador
+
+$$\partial E(t) = p(t)  \partial t = V_C(t) I(t) \partial t $$
+
+obtenemos que la energía almacenada en es la solución de la siguiente ecuación diferencial de primer orden:
+
+$$\partial E(t) = C \cdot V_C(t) \partial V_C(t)$$
+
+Resolvemos integrando usando las condiciones iniciales previas
+
+$$\int_{0}^{E(t)} \partial E(t) = C \int_{0}^{V_C(t)} V_C(t) \partial V_C(t) $$
+
+$$E(t) = C \left[ \frac{V_C(t)^2}{2} \right]_{0}^{V_C(t)}$$
+
+Luego, la energía almacenada en el condensador viene dada por:
+
+\begin{equation}
+    E(t) = \frac{1}{2}CV_C(t)^2
+\end{equation}
+
+, dónde $V_C(t)$ es la diferencia de potencial en el condensador.
+
+
+\end{document}

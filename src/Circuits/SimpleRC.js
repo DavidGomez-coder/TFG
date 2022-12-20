@@ -196,7 +196,8 @@ export default class SimpleRC extends Component {
                     } else if (this.state.selected_stop_condition === EXACT_TIME && this.state.value_stop_condition <= t_i) {
                         this.updateRunning();
                         this.updateConditionState(true);
-                    } else if (this.state.selected_stop_condition === Q_VALUE && this.state.q_0 >= this.state.value_stop_condition) {
+                    } else if ((this.state.capacitorCharging && this.state.selected_stop_condition === Q_VALUE && this.state.q_0 >= this.state.value_stop_condition) || 
+                              (!this.state.capacitorCharging && this.state.selected_stop_condition === Q_VALUE && this.state.q_0 <= this.state.value_stop_condition)) {
                         this.updateRunning();
                         this.updateConditionState(true);
                     } else {

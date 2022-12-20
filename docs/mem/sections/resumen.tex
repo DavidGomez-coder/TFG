@@ -1,0 +1,43 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+%% begin abstract format
+\makeatletter
+\renewenvironment{abstract}{%
+    \if@twocolumn
+      \section*{Resumen \\}%
+    \else %% <- here I've removed \small
+    \begin{flushright}
+        {\filleft\Huge\bfseries\fontsize{48pt}{12}\selectfont Resumen\vspace{\z@}}%  %% <- here I've added the format
+        \end{flushright}
+      \quotation
+    \fi}
+    {\if@twocolumn\else\endquotation\fi}
+\makeatother
+%% end abstract format
+%% begin abstract format
+\makeatletter
+\renewenvironment{abstract}{%
+    \if@twocolumn
+      \section*{Resumen \\}%
+    \else %% <- here I've removed \small
+    \begin{flushright}
+        {\filleft\Huge\bfseries\fontsize{48pt}{12}\selectfont Resumen\vspace{\z@}}%  %% <- here I've added the format
+        \end{flushright}
+      \quotation
+    \fi}
+    {\if@twocolumn\else\endquotation\fi}
+\makeatother
+%% end abstract format
+\begin{abstract}
+La mayor parte de los alumnos que cursan alguna asignatura de física en ramas técnicas como en ingeniería o arquitectura, suelen encontrar cierta complejidad al intentar comprender los temas estudiados. Esto no se debe a la dificultad matemática de los problemas que se plantean, sino más bien en interpretar la evolución de los fenómenos físicos que se estudian. 
+
+Así que para tratar de solucionar este problema y facilitar su estudio, se plantea el desarrollo de una aplicación web que sea capaz de mostrar la evolución de diferentes magnitudes físicas de los circuitos RC y RL en corriente continua y estado transitorio acompañada de una explicación teórica sobre las mismas.\\
+
+
+\bfseries{\large{Palabras clave:}} simulación, circuito RC, circuito RL, corriente continua, estado transitorio
+
+\end{abstract}
+\end{document}
+
+

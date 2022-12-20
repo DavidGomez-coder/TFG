@@ -88,7 +88,7 @@ class RLSimulation:
         I_IN = self.formula.I_MAX if self.I == -1 else round(self.I, 2)
         I_PERCENT = round((I_IN * 100) / self.formula.I_MAX, 2)
         
-        plt.gcf().text(0.53, 0.25, f"· Intensidad de corriente final: {I_IN}A ({I_PERCENT}%)", fontsize=10, fontweight="bold")
+        plt.gcf().text(0.53, 0.25, f"· Intensidad de corriente final: {round(I_IN,2)}A ({I_PERCENT}%)", fontsize=10, fontweight="bold")
         plt.gcf().text(0.53, 0.2, f"· Estado de almacenamiento de energía ({round(self.time_char,5)}s)", fontsize=10, fontweight="bold", color="#1f77b4")
         plt.gcf().text(0.53, 0.15, f"· Estado de disipación de energía ({round(self.time_dis,5)}s)", fontsize=10, fontweight="bold", color="#ff7f0e")
         self.figure.tight_layout()

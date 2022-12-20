@@ -1,0 +1,29 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+%% begin abstract format
+\makeatletter
+\renewenvironment{abstract}{%
+    \if@twocolumn
+      \section*{Abstract \\}%
+    \else %% <- here I've removed \small
+    \begin{flushright}
+        {\filleft\Huge\bfseries\fontsize{48pt}{12}\selectfont Abstract\vspace{\z@}}%  %% <- here I've added the format
+        \end{flushright}
+      \quotation
+    \fi}
+    {\if@twocolumn\else\endquotation\fi}
+\makeatother
+%% end abstract format
+\begin{abstract}
+
+Most of the students who takes physics lectures at college related with engineering or architecture, often find some complexity in trying to understand the topics they're studying. Math difficulty isn't the main problem; however, the interpretation of the physical phenomena that are being studied could be a real challenge for them.
+
+To solve this problem a solution could be the production of a simulation software that allows us to observe the evolution of each physical magnitude, specifically of RC and RL circuits in direct current and transient state, with some theory explanation at its side. \\
+
+
+
+\bfseries{\large{Keywords:}} simulation, RC circuit, RL circuit, direct current, transient state
+
+\end{abstract}
+\end{document}

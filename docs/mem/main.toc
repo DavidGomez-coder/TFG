@@ -1,0 +1,64 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introducción}{9}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Motivación}{9}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Objetivos y metodología}{10}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Estructura del documento}{13}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Tecnologías usadas}{14}{subsection.1.4}%
+\contentsline {section}{\numberline {2}Circuitos RC y RL}{17}{section.2}%
+\contentsline {subsection}{\numberline {2.1}El condensador y el circuito RC}{19}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}El inductor y el circuito RL}{26}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Estudio de las tecnologías}{33}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Tipos de aplicaciones según la compatibilidad}{33}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}La web y su evolución}{35}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Estructura de una aplicación web}{38}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Tecnologías \textit {front-end}}{42}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}HTML}{43}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}CSS y Bootstrap}{45}{subsubsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.3}JavaScript}{47}{subsubsection.3.4.3}%
+\contentsline {subsubsection}{\numberline {3.4.4}ReactJS}{48}{subsubsection.3.4.4}%
+\contentsline {section}{\numberline {4}Implementación y pruebas}{55}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Simulación de los circuitos RC y RL}{55}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Etapas del proceso}{55}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Generación de datos}{56}{subsubsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.3}Tiempo absoluto y tiempo relativo de la simulación}{59}{subsubsection.4.1.3}%
+\contentsline {subsubsection}{\numberline {4.1.4}Condiciones de parada y escala de tiempo}{60}{subsubsection.4.1.4}%
+\contentsline {subsection}{\numberline {4.2}Comparación de resultados}{61}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Caso de prueba 1: carga y descarga de un condensador}{62}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Caso de prueba 2: carga y descarga de un condensador (con restricciones)}{64}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Caso de prueba 3: carga y descarga de un inductor}{66}{subsubsection.4.2.3}%
+\contentsline {subsubsection}{\numberline {4.2.4}Caso de prueba 4: carga y descarga de un inductor (con restricciones)}{66}{subsubsection.4.2.4}%
+\contentsline {section}{\numberline {5}Conclusions and Futures Lines of Research}{69}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Conclusions}{69}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Future lines of Research}{69}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Conclusiones y Líneas Futuras}{71}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Conclusiones}{71}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Líneas Futuras}{71}{subsection.6.2}%
+\contentsline {section}{Apéndice \numberline {A}Manual de instalación}{75}{appendix.alph1.Alph1}%
+\contentsline {section}{Apéndice \numberline {B}Manual de usuario}{77}{appendix.alph2.Alph2}%
+\contentsline {section}{Apéndice \numberline {C}Requisitos y casos de uso}{79}{appendix.alph3.Alph3}%
+\contentsline {subsection}{\numberline {C.1}Requisitos}{79}{subsection.alph3.Alph3.1}%
+\contentsline {subsection}{\numberline {C.2}Casos de uso}{81}{subsection.alph3.Alph3.2}%
+\contentsline {section}{Apéndice \numberline {D}Modelado de los circuitos RC y RL}{83}{appendix.alph4.Alph4}%
+\contentsline {section}{Apéndice \numberline {E}Resolución matemática del circuito RC}{85}{appendix.alph5.Alph5}%
+\contentsline {subsection}{\numberline {E.1}Estado de almacenamiento de energía}{85}{subsection.alph5.Alph5.1}%
+\contentsline {subsubsection}{\numberline {E.1.1}Carga del condensador}{85}{subsubsection.alph5.Alph5.1.1}%
+\contentsline {subsubsection}{\numberline {E.1.2}Intensidad de corriente}{86}{subsubsection.alph5.Alph5.1.2}%
+\contentsline {subsubsection}{\numberline {E.1.3}DDP Resistencia}{86}{subsubsection.alph5.Alph5.1.3}%
+\contentsline {subsubsection}{\numberline {E.1.4}DDP Condensador}{87}{subsubsection.alph5.Alph5.1.4}%
+\contentsline {subsection}{\numberline {E.2}Estado de disipación de energía}{87}{subsection.alph5.Alph5.2}%
+\contentsline {subsubsection}{\numberline {E.2.1}Carga del condensador}{87}{subsubsection.alph5.Alph5.2.1}%
+\contentsline {subsubsection}{\numberline {E.2.2}Intensidad de corriente}{88}{subsubsection.alph5.Alph5.2.2}%
+\contentsline {subsubsection}{\numberline {E.2.3}Diferencia de potencial en la resistencia}{89}{subsubsection.alph5.Alph5.2.3}%
+\contentsline {subsubsection}{\numberline {E.2.4}Diferencia de potencial en el condensador}{89}{subsubsection.alph5.Alph5.2.4}%
+\contentsline {subsection}{\numberline {E.3}Energía almacenada en un condensador}{89}{subsection.alph5.Alph5.3}%
+\contentsline {section}{Apéndice \numberline {F}Resolución matemática del circuito RL}{91}{appendix.alph6.Alph6}%
+\contentsline {subsection}{\numberline {F.1}Estado de almacenamiento de energía}{91}{subsection.alph6.Alph6.1}%
+\contentsline {subsubsection}{\numberline {F.1.1}Intensidad de corriente}{91}{subsubsection.alph6.Alph6.1.1}%
+\contentsline {subsubsection}{\numberline {F.1.2}Diferencia de potencial en la resistencia}{92}{subsubsection.alph6.Alph6.1.2}%
+\contentsline {subsubsection}{\numberline {F.1.3}Diferencia de potencial en la bobina}{92}{subsubsection.alph6.Alph6.1.3}%
+\contentsline {subsection}{\numberline {F.2}Estado de disipación de energía}{93}{subsection.alph6.Alph6.2}%
+\contentsline {subsubsection}{\numberline {F.2.1}Intensidad de corriente}{93}{subsubsection.alph6.Alph6.2.1}%
+\contentsline {subsubsection}{\numberline {F.2.2}Diferencia de potencial en la resistencia}{93}{subsubsection.alph6.Alph6.2.2}%
+\contentsline {subsubsection}{\numberline {F.2.3}Diferencia de potencial en la bobina}{94}{subsubsection.alph6.Alph6.2.3}%
+\contentsline {subsection}{\numberline {F.3}Energía almacenada}{94}{subsection.alph6.Alph6.3}%
+\contentsline {subsection}{\numberline {F.4}Flujo magnético}{95}{subsection.alph6.Alph6.4}%
