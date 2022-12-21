@@ -608,11 +608,19 @@ export default class SimpleRl extends Component {
                                                             <CartesianGrid strokeDasharray="3 3" />
                                                             <XAxis dataKey="t" tick={false} label={{'value': 'Tiempo (s)', 'position' : 'insideRight'}}/>
                                                             <YAxis type="number" tick={false} label={{'value' : 'I (amperios)', 'angle' : '-90'}}/>
-            
-                                                            <Tooltip formatter={(value, name, props) =>{ 
-                                                                        return [`${Number.parseFloat(value).toExponential(3)} A`,'I(t)' ]
-                                                                    }}
-                                                         cursor={false}/>
+                                                            {
+                                                                (() => {
+                                                                    if (!this.state.running) {
+                                                                        return (
+                                                                            <Tooltip formatter={(value, name, props) =>{ 
+                                                                                return [`${Number.parseFloat(value).toExponential(3)} A`,'I(t)' ]
+                                                                            }}
+                                                                            cursor={false}/>
+                                                                        )
+                                                                    }
+                                                                })()
+                                                            }
+                                                           
                                                             <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                             <Line type="monotone" dataKey="I(t)" stroke="orange" strokeWidth={3} dot={false} isAnimationActive={false} />
                                                             {
@@ -661,11 +669,21 @@ export default class SimpleRl extends Component {
                                                             <CartesianGrid strokeDasharray="3 3" />
                                                             <XAxis dataKey="t" tick={false} label={{'value': 'Tiempo (s)', 'position' : 'insideRight'}}/>
                                                             <YAxis type="number" tick={false} label={this.state.inductorCharging ? {'value' : 'Vl (voltios)', 'angle' : '-90'} : {'value' : '- Vl (voltios)', 'angle' : '-90'}}/>
-            
-                                                            <Tooltip formatter={(value, name, props) =>{ 
-                                                                        return [`${Number.parseFloat(value).toExponential(3)} V`,'Vl(t)' ]
-                                                                    }}
-                                                         cursor={false}/>
+                                                            
+                                                            {
+                                                                (() => {
+                                                                    if (!this.state.running) {
+                                                                        return (
+                                                                            <Tooltip formatter={(value, name, props) =>{ 
+                                                                                return [`${Number.parseFloat(value).toExponential(3)} V`,'Vl(t)' ]
+                                                                            }}
+                                                                            cursor={false}/>
+                                                                        )
+                                                                    }
+                                                                })()
+                                                            }
+
+                                                            
                                                             <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                             <Line type="monotone" dataKey="Vl(t)" stroke="blue" strokeWidth={3} dot={false} isAnimationActive={false} />
                                                             {
@@ -715,11 +733,21 @@ export default class SimpleRl extends Component {
                                                             <CartesianGrid strokeDasharray="3 3" />
                                                             <XAxis dataKey="t" tick={false} label={{'value': 'Tiempo (s)', 'position' : 'insideRight'}}/>
                                                             <YAxis type="number" tick={false} label={{'value' : 'Vr (voltios)', 'angle' : '-90'}}/>
-            
-                                                            <Tooltip formatter={(value, name, props) =>{ 
-                                                                        return [`${Number.parseFloat(value).toExponential(3)} V`,'Vr(t)' ]
-                                                                    }}
-                                                         cursor={false}/>
+                                                            
+                                                            {
+                                                                (() => {
+                                                                    if (!this.state.running) {
+                                                                        return (
+                                                                            <Tooltip formatter={(value, name, props) =>{ 
+                                                                                return [`${Number.parseFloat(value).toExponential(3)} V`,'Vr(t)' ]
+                                                                            }}
+                                                                            cursor={false}/>
+                                                                        )
+                                                                    }
+                                                                })()
+                                                            }
+
+                                                            
                                                             <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                             <Line type="monotone" dataKey="Vr(t)" stroke="green" strokeWidth={3} dot={false} isAnimationActive={false} />
                                                             {
@@ -765,11 +793,19 @@ export default class SimpleRl extends Component {
                                                             <CartesianGrid strokeDasharray="3 3" />
                                                             <XAxis dataKey="t" tick={false} label={{'value': 'Tiempo (s)', 'position' : 'insideRight'}}/>
                                                             <YAxis type="number" tick={false} label={{'value' : 'E (julios)', 'angle' : '-90'}}/>
-            
-                                                            <Tooltip formatter={(value, name, props) =>{ 
-                                                                        return [`${Number.parseFloat(value).toExponential(3)} J`,'E(t)' ]
-                                                                    }}
-                                                         cursor={false}/>
+                                                            {
+                                                                (() => {
+                                                                    if (!this.state.running) {
+                                                                        return (
+                                                                            <Tooltip formatter={(value, name, props) =>{ 
+                                                                                return [`${Number.parseFloat(value).toExponential(3)} J`,'E(t)' ]
+                                                                            }}
+                                                                            cursor={false}/>
+                                                                        )
+                                                                    }
+                                                                })()
+                                                            }
+                                                            
                                                             <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                             <Line type="monotone" dataKey="E(t)" stroke="#eb3474" strokeWidth={3} dot={false} isAnimationActive={false} />
                                                             {
@@ -817,11 +853,20 @@ export default class SimpleRl extends Component {
                                                             <CartesianGrid strokeDasharray="3 3" />
                                                             <XAxis dataKey="t" tick={false} label={{'value': 'Tiempo (s)', 'position' : 'insideRight'}}/>
                                                             <YAxis type="number" tick={false} label={{'value' : 'Φ (weber)', 'angle' : '-90'}}/>
-            
-                                                            <Tooltip formatter={(value, name, props) =>{ 
-                                                                        return [`${Number.parseFloat(value).toExponential(3)} Wb`,'Φ(t)' ]
-                                                                    }}
-                                                         cursor={false}/>
+                                                            {
+                                                                (() => {
+                                                                    if (!this.state.running) {
+                                                                        return (
+                                                                            <Tooltip formatter={(value, name, props) =>{ 
+                                                                                return [`${Number.parseFloat(value).toExponential(3)} Wb`,'Φ(t)' ]
+                                                                            }}
+                                                                        cursor={false}/>
+                                                                        )
+                                                                        
+                                                                    }
+                                                                })()
+                                                            }
+                                                            
                                                             <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                             <Line type="monotone" dataKey="Φ(t)" stroke="red" strokeWidth={3} dot={false} isAnimationActive={false} />
                                                             {

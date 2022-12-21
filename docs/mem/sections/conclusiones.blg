@@ -1,0 +1,9 @@
+[0] Config.pm:307> INFO - This is Biber 2.17
+[0] Config.pm:310> INFO - Logfile is 'sections/conclusiones.blg'
+[43] biber:340> INFO - === mié dic 21, 2022, 11:47:36
+[51] Biber.pm:418> INFO - Reading 'sections/conclusiones.bcf'
+[89] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
+[97] bbl.pm:654> INFO - Writing 'sections/conclusiones.bbl' with encoding 'UTF-8'
+[99] bbl.pm:757> INFO - Output to sections/conclusiones.bbl
+[99] Biber.pm:130> WARN - The file 'sections/conclusiones.bcf' does not contain any citations!
+[99] Biber.pm:132> INFO - WARNINGS: 1

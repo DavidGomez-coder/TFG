@@ -246,7 +246,7 @@ export default class SimpleRC extends Component {
             }
 
 
-        }, SIMULATION_EXEC);
+        }, (SIMULATION_EXEC) );
 
 
         //update time interval id
@@ -660,11 +660,19 @@ export default class SimpleRC extends Component {
                                                 <CartesianGrid strokeDasharray="3 3" />
                                                 <XAxis dataKey="t" tick={false} label={{'value': 'Tiempo (s)', 'position' : 'insideRight'}}/>
                                                 <YAxis type="number" tick={false} label={{'value' : 'Q (culombios)', 'angle' : '-90'}}/>
-
-                                                <Tooltip formatter={(value, name, props) =>{ 
-                                                                        return [`${Number.parseFloat(value).toExponential(3)} C`,'q(t)' ]
-                                                                    }}
-                                                         cursor={false}/>
+                                                {
+                                                    (() => {
+                                                        if (!this.state.running) {
+                                                            return (
+                                                                <Tooltip formatter={(value, name, props) =>{ 
+                                                                    return [`${Number.parseFloat(value).toExponential(3)} C`,'q(t)' ]
+                                                                }}
+                                                                cursor={false}/>
+                                                            )
+                                                        }
+                                                    })()
+                                                }
+                                                
                                                 <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                 <Line type="monotone" dataKey="Q(t)" stroke="orange" strokeWidth={3} dot={false} isAnimationActive={false} />
 
@@ -672,7 +680,7 @@ export default class SimpleRC extends Component {
                                                     this.state.show_reference_lines ?
                                                         this.state.referenced_lines.map((r_line) => {
                                                             return (
-                                                                <ReferenceLine key={`q_${this.state.t_a}_${Math.random() * 10 + this.state.t_a}`} x={r_line} stroke="black" strokeWidth={1} strokeDasharray="3 3" />
+                                                                <ReferenceLine key={`q_${this.state.t_a}_${Math.random() * 1000 + this.state.t_a}`} x={r_line} stroke="black" strokeWidth={1} strokeDasharray="3 3" />
                                                             )
                                                         }) : "reference_line not showed"
                                                 }
@@ -714,11 +722,19 @@ export default class SimpleRC extends Component {
                                                 <XAxis dataKey="t" tick={false} label={{'value': 'Tiempo (s)', 'position' : 'insideRight'}}/>
                                                 <YAxis type="number" tick={false} label={this.state.capacitorCharging ? {'value' : 'I (amperios)', 'angle' : '-90'} : {'value' : '- I (amperios)', 'angle' : '-90'}}/>
                                                 
-
-                                                <Tooltip formatter={(value, name, props) =>{ 
-                                                                        return [`${Number.parseFloat(value).toExponential(3)} A`,'I(t)' ]
-                                                                    }}
-                                                         cursor={false}/>
+                                                {
+                                                    (() => {
+                                                        if (!this.state.running) {
+                                                            return (
+                                                                <Tooltip formatter={(value, name, props) =>{ 
+                                                                    return [`${Number.parseFloat(value).toExponential(3)} A`,'I(t)' ]
+                                                                }}
+                                                                cursor={false}/>
+                                                            )
+                                                        }
+                                                    })()
+                                                }
+                                                
                                                 <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                 <Line type="monotone" dataKey="I(t)" stroke="blue" strokeWidth={3} dot={false} isAnimationActive={false} />
                                                 {
@@ -767,11 +783,18 @@ export default class SimpleRC extends Component {
                                                 <CartesianGrid strokeDasharray="3 3" />
                                                 <XAxis dataKey="t" tick={false} label={{'value': 'Tiempo (s)', 'position' : 'insideRight'}}/>
                                                 <YAxis type="number" tick={false} label={{'value' : 'Vc (voltios)', 'angle' : '-90'}}/>
-
-                                                <Tooltip formatter={(value, name, props) =>{ 
-                                                                        return [`${Number.parseFloat(value).toExponential(3)} V`,'Vc(t)' ]
-                                                                    }}
-                                                         cursor={false}/>
+                                                
+                                                {
+                                                    (() => {
+                                                        if (!this.state.running) {
+                                                            return( <Tooltip formatter={(value, name, props) =>{ 
+                                                                return [`${Number.parseFloat(value).toExponential(3)} V`,'Vc(t)' ]
+                                                            }}
+                                                            cursor={false}/>)
+                                                        }
+                                                    })()
+                                                }
+                                                
                                                 <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                 <Line type="monotone" dataKey="Vc(t)" stroke="green" strokeWidth={3} dot={false} isAnimationActive={false} />
                                                 {
@@ -818,10 +841,18 @@ export default class SimpleRC extends Component {
                                                 <XAxis dataKey="t" tick={false} label={{'value': 'Tiempo (s)', 'position' : 'insideRight'}}/>
                                                 <YAxis type="number" tick={false} label={this.state.capacitorCharging ? {'value' : 'Vr (voltios)', 'angle' : '-90'} : {'value' : '- Vr (voltios)', 'angle' : '-90'}}/>
 
-                                                <Tooltip formatter={(value, name, props) =>{ 
-                                                                        return [`${Number.parseFloat(value).toExponential(3)} V`,'Vr(t)' ]
-                                                                    }}
-                                                         cursor={false}/>
+                                                {
+                                                    (() => {
+                                                        if (!this.state.running) {
+                                                            return (<Tooltip formatter={(value, name, props) =>{ 
+                                                                return [`${Number.parseFloat(value).toExponential(3)} V`,'Vr(t)' ]
+                                                            }}
+                                                            cursor={false}/> )
+                                                        }
+                                                    })()
+                                                }
+
+                                                
                                                 <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
                                                 <Line type="monotone" dataKey="Vr(t)" stroke="#eb3474" strokeWidth={3} dot={false} isAnimationActive={false} />
                                                 {
@@ -869,11 +900,20 @@ export default class SimpleRC extends Component {
                                                 <CartesianGrid strokeDasharray="3 3" />
                                                 <XAxis dataKey="t" tick={false} label={{'value': 'Tiempo (s)', 'position' : 'insideRight'}}/>
                                                 <YAxis type="number" tick={false} label={{'value' : 'E (julios)', 'angle' : '-90'}}/>
-
-                                                <Tooltip formatter={(value, name, props) =>{ 
-                                                                        return [`${Number.parseFloat(value).toExponential(3)} J`,'E(t)' ]
-                                                                    }}
-                                                         cursor={false}/>
+                                            
+                                                {
+                                                    (() => {
+                                                        if (!this.state.running) {
+                                                            return (
+                                                                <Tooltip formatter={(value, name, props) =>{ 
+                                                                    return [`${Number.parseFloat(value).toExponential(3)} J`,'E(t)' ]
+                                                                }}
+                                                                cursor={false}/>
+                                                            )
+                                                        }
+                                                    })()
+                                                }
+                                                
                                                 <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }}  />
                                                 <Line type="monotone" dataKey="E(t)" stroke="red" strokeWidth={3} dot={false} isAnimationActive={false} />
                                                 {
