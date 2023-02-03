@@ -274,10 +274,10 @@ export default class SimpleRl extends Component {
         switch(this.state.inductorCharging) {
             case true:
 
-                if (!this.state.running)
-                    return rl_charge_background;
-                
-                if (this.state.i_percent <= 63.2)
+                if (!this.state.running && this.state.i_percent == 100)
+                    return rl_charge_0_63;
+
+                if (this.state.i_percent>0 &&this.state.i_percent <= 63.2)
                     return rl_charge_90_99;
                 else if (this.state.i_percent > 63.2 && this.state.i_percent <= 80)
                     return rl_charge_80_90;
@@ -286,14 +286,11 @@ export default class SimpleRl extends Component {
                 else if (this.state.i_percent > 90 && this.state.i_percent <= 100)
                     return rl_charge_0_63;
 
-
                 return rl_charge_background;
 
                 case false:
-                    if (!this.state.running)
-                        return rl_discharge_background;
-                    
-                    if (this.state.i_percent <= 10) 
+
+                    if (this.state.i_percent>0 && this.state.i_percent <= 10) 
                         return rl_discharge_90_99;
                     else if (this.state.i_percent > 10 && this.state.i_percent <= 20) 
                         return rl_discharge_80_90;
@@ -301,10 +298,10 @@ export default class SimpleRl extends Component {
                         return rl_discharge_63_80;
                     else if (this.state.i_percent > 37.7 && this.state.i_percent <= 100) 
                         return rl_discharge_0_63;
-                    
+
                     return rl_discharge_background;
         }
-        
+
         //return undefined;
     }
 

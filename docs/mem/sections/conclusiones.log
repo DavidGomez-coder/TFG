@@ -1,17 +1,17 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  21 DEC 2022 11:47
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  13 JAN 2023 18:36
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/david/Documentos/TFG/docs/mem/sections/conclusiones.tex
-(/home/david/Documentos/TFG/docs/mem/sections/conclusiones.tex
+**conclusiones.tex
+(./conclusiones.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-01-21> (/usr/share/texlive/texmf-dist/tex/latex/subfiles/subfiles.cls
 Document Class: subfiles 2020/11/14 v2.2 Multi-file projects (class)
 Preamble taken from file `../main.tex'
 (/usr/share/texlive/texmf-dist/tex/latex/import/import.sty
 Package: import 2020/04/01  v 6.2
-) (sections/../main.tex (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+) (../main.tex (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
 File: size12.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
@@ -43,9 +43,13 @@ Package babel Info: Making " an active character on input line 570.
 Package babel Info: Making . an active character on input line 675.
 Package babel Info: Making < an active character on input line 722.
 Package babel Info: Making > an active character on input line 722.
-)) (./umatfgspanish.sty
+)) (..//umatfgspanish.sty
+
+LaTeX Warning: You have requested package `..//umatfgspanish',
+               but the package provides `umatfgspanish'.
+
 Package: umatfgspanish 
- (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2021/02/14 v1.3d Input encoding file
 \inpenc@prehook=\toks17
 \inpenc@posthook=\toks18
@@ -828,25 +832,83 @@ LaTeX Info: Redefining \[ on input line 2938.
 LaTeX Info: Redefining \] on input line 2939.
 )
 Requested font "[Iosevka].ttf" at 11.99997pt
- -> ./Iosevka.ttf
-Requested font "[Iosevka].ttf/OT" at 12.00003pt
- -> ./Iosevka.ttf
-Requested font "[Iosevka].ttf/OT:script=latn;language=dflt;" at 12.00002pt
- -> ./Iosevka.ttf
-Requested font "[Iosevka]/BI.ttf/OT:script=latn;language=dflt;" at 12.00002pt
- -> ./Iosevka.ttf
-Requested font "[Iosevka]/B.ttf/OT:script=latn;language=dflt;" at 12.00002pt
- -> ./Iosevka.ttf
-Requested font "[Iosevka]/I.ttf/OT:script=latn;language=dflt;" at 12.00002pt
- -> ./Iosevka.ttf
-Requested font "[Iosevka].ttf/OT:script=latn;language=dflt;" at 12.00003pt
- -> ./Iosevka.ttf
-Requested font "[Iosevka]/B.ttf/OT:script=latn;language=dflt;" at 12.00003pt
- -> ./Iosevka.ttf
-Requested font "[Iosevka]/I.ttf/OT:script=latn;language=dflt;" at 12.00003pt
- -> ./Iosevka.ttf
-Requested font "[Iosevka]/BI.ttf/OT:script=latn;language=dflt;" at 12.00003pt
- -> ./Iosevka.ttf
+ -> font not found, using "nullfont"
+
+
+..//umatfgspanish.sty:21: Package fontspec Error: The font "[Iosevka]" cannot be found.
+
+For immediate help type H <return>.
+ ...                                              
+                                                  
+l.21 
+     
+
+A font might not be found for many reasons.
+ Check the spelling, where the font is installed etc. etc.
+
+ When in doubt, ask someone for help!
+
+
+Requested font "[Iosevka].ttf" at 12.00003pt
+ -> font not found, using "nullfont"
+Requested font "[Iosevka].ttf" at 12.00002pt
+ -> font not found, using "nullfont"
+Requested font "[Iosevka]/BI.ttf" at 12.00002pt
+ -> font not found, using "nullfont"
+
+Package fontspec Info: Could not resolve font "[Iosevka]/BI" (it probably
+(fontspec)             doesn't exist).
+
+Requested font "[Iosevka].ttf" at 12.00002pt
+ -> font not found, using "nullfont"
+Requested font "[Iosevka]/B.ttf" at 12.00002pt
+ -> font not found, using "nullfont"
+
+Package fontspec Info: Could not resolve font "[Iosevka]/B" (it probably
+(fontspec)             doesn't exist).
+
+Requested font "[Iosevka].ttf" at 12.00002pt
+ -> font not found, using "nullfont"
+Requested font "[Iosevka]/I.ttf" at 12.00002pt
+ -> font not found, using "nullfont"
+
+Package fontspec Info: Could not resolve font "[Iosevka]/I" (it probably
+(fontspec)             doesn't exist).
+
+Requested font "[Iosevka].ttf" at 12.00003pt
+ -> font not found, using "nullfont"
+
+..//umatfgspanish.sty:21: Package fontspec Error: The font "[Iosevka]" cannot be found.
+
+For immediate help type H <return>.
+ ...                                              
+                                                  
+l.21 
+     
+
+A font might not be found for many reasons.
+ Check the spelling, where the font is installed etc. etc.
+
+ When in doubt, ask someone for help!
+
+
+Requested font "[Iosevka].ttf" at 12.00003pt
+ -> font not found, using "nullfont"
+
+..//umatfgspanish.sty:21: Package fontspec Error: The font "[Iosevka]" cannot be found.
+
+For immediate help type H <return>.
+ ...                                              
+                                                  
+l.21 
+     
+
+A font might not be found for many reasons.
+ Check the spelling, where the font is installed etc. etc.
+
+ When in doubt, ask someone for help!
+
+
 
 Package fontspec Info: Font family '[Iosevka.ttf](0)' created for font
 (fontspec)             '[Iosevka.ttf]' with options
@@ -855,33 +917,9 @@ Package fontspec Info: Font family '[Iosevka.ttf](0)' created for font
 (fontspec)              This font family consists of the following NFSS
 (fontspec)             series/shapes:
 (fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->"[Iosevka].ttf/OT:script=latn;language=dflt;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
-(fontspec)             and font adjustment code:
-(fontspec)             \fontdimen 2\font =1\fontdimen 2\font \fontdimen 3\font
-(fontspec)             =0\fontdimen 3\font \fontdimen 4\font =0\fontdimen
-(fontspec)             4\font \fontdimen 7\font =0\fontdimen 2\font
-(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->"[Iosevka]/B.ttf/OT:script=latn;language=dflt;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
-(fontspec)             and font adjustment code:
-(fontspec)             \fontdimen 2\font =1\fontdimen 2\font \fontdimen 3\font
-(fontspec)             =0\fontdimen 3\font \fontdimen 4\font =0\fontdimen
-(fontspec)             4\font \fontdimen 7\font =0\fontdimen 2\font
-(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->"[Iosevka]/I.ttf/OT:script=latn;language=dflt;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.: 
-(fontspec)             and font adjustment code:
-(fontspec)             \fontdimen 2\font =1\fontdimen 2\font \fontdimen 3\font
-(fontspec)             =0\fontdimen 3\font \fontdimen 4\font =0\fontdimen
-(fontspec)             4\font \fontdimen 7\font =0\fontdimen 2\font
-(fontspec)             \tex_hyphenchar:D \font =-1\scan_stop: 
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->"[Iosevka]/BI.ttf/OT:script=latn;language=dflt;"
-(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
+(fontspec)             - 'normal' (m/n) with NFSS spec.: <->"[Iosevka].ttf"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
+(fontspec)             <->"[Iosevka].ttf"
 (fontspec)             and font adjustment code:
 (fontspec)             \fontdimen 2\font =1\fontdimen 2\font \fontdimen 3\font
 (fontspec)             =0\fontdimen 3\font \fontdimen 4\font =0\fontdimen
@@ -1509,8 +1547,8 @@ File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \c@pgfplotslibrarysurf@no=\count535
  (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/sys/pgflibrarypgfplots.surfshading.pgfsys-xetex.def (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/sys/pgflibrarypgfplots.surfshading.pgfsys-dvipdfmx.def
 \c@pgfplotslibrarysurf@streamlen=\count536
-)))) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotscolormap.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotscolor.code.tex)) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsstackedplots.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsplothandlers.code.tex
-(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplothandler.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplotimage.code.tex))) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.scaling.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotscoordprocessing.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.errorbars.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.markers.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsticks.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.paths.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
+)))) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotscolormap.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/util/pgfplotscolor.code.tex)) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsstackedplots.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsplothandlers.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplothandler.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplotimage.code.tex))) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.scaling.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotscoordprocessing.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.errorbars.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.markers.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotsticks.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.paths.code.tex) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
 \pgfdecoratedcompleteddistance=\dimen321
 \pgfdecoratedremainingdistance=\dimen322
 \pgfdecoratedinputsegmentcompleteddistance=\dimen323
@@ -1546,10 +1584,7 @@ runsystem(which pygmentize && touch conclusiones.aex)...executed.
 
 runsystem(rm conclusiones.aex)...executed.
 
-(sections/conclusiones.aux
-LaTeX Info: Redefining \. on input line 26.
-LaTeX Info: Redefining \% on input line 26.
-)
+(./conclusiones.aux)
 \openout1 = `conclusiones.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 3.
@@ -1690,13 +1725,16 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 3.
 LaTeX Info: Redefining \pageref on input line 3.
 LaTeX Info: Redefining \nameref on input line 3.
- (sections/conclusiones.out) (sections/conclusiones.out)
 \@outlinefile=\write8
 \openout8 = `conclusiones.out'.
 
+
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
+
 Package biblatex Info: Trying to load language 'spanish'...
 Package biblatex Info: ... file 'spanish.lbx' found.
- (/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/spanish.lbx
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/spanish.lbx
 File: spanish.lbx 2022/02/02 v3.17 biblatex localization (PK/MW)
 )
 Package biblatex Info: XeTeX detected.
@@ -1706,14 +1744,15 @@ Package biblatex Info: Automatic encoding selection.
 \openout3 = `conclusiones.bcf'.
 
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'conclusiones.bbl' found.
- (sections/conclusiones.bbl)
+Package biblatex Info: ... file 'conclusiones.bbl' not found.
+
+No file conclusiones.bbl.
 Package biblatex Info: Reference section=0 on input line 3.
 Package biblatex Info: Reference segment=0 on input line 3.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: longtable package is loaded.
- (/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
+(/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
 Package: ltcaption 2020/05/30 v1.4b longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
@@ -1721,41 +1760,55 @@ Package caption Info: End \AtBeginDocument code.
 Package pgfplots notification 'compat/show suggested version=true': document has been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 14.4pt on input line 5.
+(Font)              scaled to size 14.4pt on input line 8.
 Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 14.4pt
  -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_R.otf
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/b/n' will be
-(Font)              scaled to size 14.4pt on input line 5.
+(Font)              scaled to size 14.4pt on input line 8.
 Requested font "[LinLibertine_RB.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 14.4pt
  -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_RB.otf
 
 Package blindtext Warning: spanish not defined, using English instead.
-(blindtext)                 on input line 7.
+(blindtext)                 on input line 12.
 
 
 Package blindtext Warning: spanish not defined, using English instead.
-(blindtext)                 on input line 10.
+(blindtext)                 on input line 15.
 
 [1
 
-] (sections/conclusiones.aux
+] (./conclusiones.aux
 LaTeX Info: Redefining \sptext on input line 26.
 LaTeX Info: Redefining \. on input line 26.
 LaTeX Info: Redefining \% on input line 26.
 )
-Package rerunfilecheck Info: File `conclusiones.out' has not changed.
-(rerunfilecheck)             Checksum: C00A5E89DD6458AB6ED1A91E38B117A2;232.
+
+LaTeX Warning: There were undefined references.
+
+
+Package rerunfilecheck Warning: File `conclusiones.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `conclusiones.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  C00A5E89DD6458AB6ED1A91E38B117A2;232.
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                conclusiones
+(biblatex)                and rerun LaTeX afterwards.
+
 Package logreq Info: Writing requests to 'conclusiones.run.xml'.
 \openout1 = `conclusiones.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 57669 strings out of 476191
- 1320453 string characters out of 5812071
- 2126745 words of memory out of 5000000
- 77613 multiletter control sequences out of 15000+600000
- 473271 words of font info for 76 fonts, out of 8000000 for 9000
+ 57635 strings out of 476191
+ 1319150 string characters out of 5812071
+ 2124405 words of memory out of 5000000
+ 77597 multiletter control sequences out of 15000+600000
+ 473191 words of font info for 66 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 123i,5n,155p,1182b,3934s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 123i,5n,155p,1137b,3934s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on sections/conclusiones.pdf (1 page).
+Output written on conclusiones.pdf (1 page).

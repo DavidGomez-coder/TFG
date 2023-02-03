@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  21 DEC 2022 11:39
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  13 JAN 2023 18:36
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -2519,21 +2519,17 @@ Package blindtext Warning: spanish not defined, using English instead.
 ] [72] (./sections/conclusiones.tex
 
 Package blindtext Warning: spanish not defined, using English instead.
-(blindtext)                 on input line 7.
+(blindtext)                 on input line 12.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 9--10
+Package blindtext Warning: spanish not defined, using English instead.
+(blindtext)                 on input line 15.
 
- []
+) [73
 
+] [74
 
-Underfull \hbox (badness 10000) in paragraph at lines 13--14
-
- []
-
-[73
-
-]) [74]
+]
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/sc' will be
 (Font)              scaled to size 12.0pt on input line 79.
 Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;+smcp;mapping=tex-text;" at 12.0pt
@@ -2553,9 +2549,7 @@ Overfull \hbox (18.78261pt too wide) in paragraph at lines 80--80
 []\TU/LinLibertine(0)/m/n/12 Wikipedia la enciclopedia libre. \TU/LinLibertine(0)/m/it/12 Simulación por computadora\TU/LinLibertine(0)/m/n/12 . \TU/LinLibertine(0)/m/sc/12 url\TU/LinLibertine(0)/m/n/12 : [][]$[][][][][] [] [] [] [][] [] [][][][][][][][][] []
  []
 
-[75
-
-]
+[75]
 Overfull \hbox (30.89859pt too wide) in paragraph at lines 80--80
 []\TU/LinLibertine(0)/m/n/12 openstax. \TU/LinLibertine(0)/m/it/12 Circuitos RC\TU/LinLibertine(0)/m/n/12 . \TU/LinLibertine(0)/m/sc/12 url\TU/LinLibertine(0)/m/n/12 : [][]$[][][][][] [] [] [] [][][][][][][][] [] [][][] [] [][][][][] [] [] [] [][] [] [][][][][][] [][] [][][][][][][][][][][][][] [][]
  []
