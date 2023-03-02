@@ -2,9 +2,9 @@
 .resistor-box {
     background: linear-gradient(rgb(230, 198, 156), rgb(139, 102, 55));
     height: 6.25rem;
-    width: 60%;
+    width: 50%;
     margin-top: 3%;
-    margin-left: 20%;
+    margin-left: 25%;
     border-radius: 10px;
       
   }
