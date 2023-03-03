@@ -2,7 +2,7 @@
 .resistor-box {
     background: linear-gradient(rgb(230, 198, 156), rgb(139, 102, 55));
     height: 6.25rem;
-    width: 50%;
+    width: 60%;
     margin-top: 3%;
     margin-left: 25%;
     border-radius: 10px;
@@ -10,11 +10,11 @@
   }
 
   .resistor-box:hover {
-    -webkit-transform:scale(1.05);
-    -moz-transform:scale(1.05);
-    -ms-transform:scale(1.05);
-    -o-transform:scale(1.05);
-    transform:scale(1.05);
+    -webkit-transform:scale(1.15);
+    -moz-transform:scale(1.15);
+    -ms-transform:scale(1.15);
+    -o-transform:scale(1.15);
+    transform:scale(1.15);
 }
   
   .resistor-band-1 {

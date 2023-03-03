@@ -92,10 +92,10 @@
 }
 
 .percent_charge {
-    top: 25%;
-    left: 10%;
+    top: 30%;
+    left: 15%;
     transform: rotate(180deg);
-    font-size: 200%;
+    font-size: 150%;
     position: absolute;
 }
 

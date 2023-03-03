@@ -12,7 +12,7 @@ class ExternalView extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      wndow: "rc-sim"
+      wndow: "rc-simulation"
     }
   }
 
@@ -33,12 +33,12 @@ class ExternalView extends Component {
             </Navbar.Brand>
             <Nav className='me-auto'>
               {/*<Nav.Link href="#teoria" onClick={(ev) => { this.updateWindow("teoria");  window.location.reload(false);} }>Teoría</Nav.Link>*/}
-              <Nav.Link href="#rc-sim" onClick={(ev) => { this.updateWindow("rc-sim"); }}>Simulación RC</Nav.Link>
+              { /*<Nav.Link href="#rc-sim" onClick={(ev) => { this.updateWindow("rc-sim"); }}>Simulación RC</Nav.Link> */}
+              <Nav.Link href="#rc-simulation" onClick={(ev) => { this.updateWindow("rc-simulation"); }}>Simulación RC</Nav.Link>
               <Nav.Link href="#rl-sim" onClick={(ev) => { this.updateWindow("rl-sim"); }}>Simulación RL</Nav.Link>
-              <Nav.Link href="#rc-simulation" onClick={(ev) => { this.updateWindow("rc-simulation"); }}>Simulación RC 2</Nav.Link>
             </Nav>
             <Nav>
-              <Nav.Link>Ⓒ2022 David Gómez Pérez</Nav.Link>
+              <Nav.Link>Ⓒ2023 David Gómez Pérez</Nav.Link>
             </Nav>
           </Container>
         </Navbar>

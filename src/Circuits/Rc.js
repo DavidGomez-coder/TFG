@@ -2,6 +2,7 @@ import { Component } from "react";
 
 // boostrap
 import { Row, Col, Container, Alert, Button, OverlayTrigger, Form, Tooltip as ToolTipReact, FormControl, ListGroup, Card } from "react-bootstrap";
+import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap';
 import './SimpleRC.css'
@@ -38,7 +39,31 @@ import rc_discharge_80_90 from "../assets/animations/rc-discharge/rc_discharge_8
 import rc_discharge_90_99 from "../assets/animations/rc-discharge/rc_discharge_90_99.gif";
 import rc_discharge_100 from "../assets/animations/rc-discharge/rc_discharge_100.png";
 import rc_discharge_background from "../assets/animations/rc-discharge/rc_discharge_background.png";
-import { Carousel } from "bootstrap/dist/js/bootstrap";
+
+//others
+import balance_energetico from "../assets/formula/balance_energetico.PNG";
+import definicion_potencia_2 from "../assets/formula/definicion_potencia_2.png";
+import definicion_potencia_3 from "../assets/formula/definicion_potencia_3.png";
+import capacidad_condensador_1 from "../assets/formula/capacidad_condensador_1.png";
+import capacidad_condensador_2 from "../assets/formula/capacidad_condensador_2.png";
+import intensidad_capacidad_condensador from "../assets/formula/intensidad_capacidad_condensador.png";
+import eq_diff_energia from "../assets/formula/eq_diff_energia.png";
+import eq_energia_condensador from "../assets/formula/eq_energia_condensador.png";
+import eq_diff_balance from "../assets/formula/eq_diff_balance.png";
+import carga_condensador_en_carga from "../assets/formula/carga_condensador_en_carga.png";
+import carga_condensador_en_descarga from "../assets/formula/carga_condensador_en_descarga.png";
+import definicion_intensidad_corriente from "../assets/formula/definicion_intensidad_corriente.png";
+import intensidad_condensador_en_carga from "../assets/formula/intensidad_condensador_en_carga.png";
+import intensidad_condensador_en_descarga from "../assets/formula/intensidad_condensador_en_descarga.png"; 
+
+import ley_ohm_1 from "../assets/formula/ley_ohm_1.png";
+import ley_ohm_2 from "../assets/formula/ley_ohm_2.png";
+import varepsilon from "../assets/formula/varepsilon.png";
+import vr_carga_condensador from "../assets/formula/vr_carga_condensador.png";
+import vr_descarga_condensador from "../assets/formula/vr_descarga_condensador.png";
+import vc_carga_condensador from "../assets/formula/vc_carga_condensador.png";
+import vc_descarga_condensador from "../assets/formula/vc_descarga_condensador.png";
+
 
 // screen max width
 const MAX_WIDTH = 1280;
@@ -429,6 +454,32 @@ export default class Rc extends Component {
         });
     }
 
+
+    // **************************************
+    //          CANVAS
+    // **************************************
+    turnOnCanvas(canvas) {
+        if (this.state.running)
+            this.updateRunning()
+
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                showCanvas: true,
+                currentCanvas: canvas
+            }
+        });
+    }
+
+    turnOffCanvas() {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                showCanvas: false
+            }
+        });
+    }
+
     // **************************************
     //      UPDATE MAX. VALUES
     // **************************************
@@ -543,324 +594,325 @@ export default class Rc extends Component {
     render() {
         return this.state.width >= MAX_WIDTH ? (
             /* MAIN */
-            <div style={{ 'paddinglef': '1%', 'paddingRight': '1%' }}>
+            <div style={{ 'marginLeft': '1%', 'marginRight': '1%' }}>
                 {/* */}
-                <Row style={{ 'marginTop': '1%' }}>
-                    <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
-                        {/* DATA CHARTS */}
-                        <Row className="d-flex p-15">
-                            {/* CHARGE */}
-                            <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6} onClick={(ev) => { this.turnOnCanvas(CHARGE_CANVAS) }}>
-                                <div style={{
-                                    paddingBottom: '50%', /* 16:9 */
-                                    position: 'relative',
-                                    height: 0
-                                }} >
+                <Row style={{ 'marginTop': '0.5%' }}>
+                    <Col xs={7} sm={7} md={7} lg={7} xl={7} xxl={7} style={{'marginTop' : '5%'}}>
+                        <Carousel variant="dark" interval={null} controls={true} style={{'padding' : '5%'}} slide={false}>
+                            {/*  CHARGE*/}
+                            <Carousel.Item>
+                                <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                                     <div style={{
-                                        position: 'absolute',
-                                        top: '0',
-                                        left: '0',
-                                        width: '100%',
-                                        height: '100%'
-                                    }}>
-                                        <ResponsiveContainer width="100%" height="98%">
-                                            <LineChart
-                                                width={400}
-                                                height={250}
-                                                data={this.state.q_data}
-                                                margin={{
-                                                    top: 5,
-                                                    right: 30,
-                                                    left: 20,
-                                                    bottom: 5,
-                                                }}
-                                            >
-                                                <CartesianGrid strokeDasharray="3 3" />
-                                                <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
-                                                <YAxis type="number" tick={false} label={{ 'value': 'Q (culombios)', 'angle': '-90' }} domain={[0, MAX_CHARGE_ALLOWED]} />
-                                                <ReferenceLine x={this.state.C * this.state.R} label="Max" stroke="red" strokeDasharray="3 3" />
+                                        paddingBottom: '50%', /* 16:9 */
+                                        position: 'relative',
+                                        height: 0
+                                    }} >
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: '0',
+                                            left: '7%',
+                                            width: '100%',
+                                            height: '100%'
+                                        }}>
+                                            <ResponsiveContainer width="85%" height="100%">
+                                                <LineChart
+                                                    width={400}
+                                                    height={250}
+                                                    data={this.state.q_data}
+                                                    margin={{
+                                                        top: 5,
+                                                        right: 30,
+                                                        left: 20,
+                                                        bottom: 5,
+                                                    }}
+                                                >
+                                                    <CartesianGrid strokeDasharray="3 3" />
+                                                    <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
+                                                    <YAxis type="number" tick={false} label={{ 'value': 'Q (culombios)', 'angle': '-90' }} domain={[0, MAX_CHARGE_ALLOWED]} />
+                                                    <ReferenceLine x={this.state.C * this.state.R} label="Max" stroke="red" strokeDasharray="3 3" />
 
-                                                {
-                                                    (() => {
-                                                        if (!this.state.running) {
-                                                            return (
-                                                                <Tooltip formatter={(value, name, props) => {
-                                                                    return [`${Number.parseFloat(value).toExponential(3)} C`, 'q(t)']
-                                                                }}
-                                                                    cursor={false} />
-                                                            )
-                                                        }
-                                                    })()
-                                                }
+                                                    {
+                                                        (() => {
+                                                            if (!this.state.running) {
+                                                                return (
+                                                                    <Tooltip formatter={(value, name, props) => {
+                                                                        return [`${Number.parseFloat(value).toExponential(3)} C`, 'q(t)']
+                                                                    }}
+                                                                        cursor={false} />
+                                                                )
+                                                            }
+                                                        })()
+                                                    }
 
-                                                <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
-                                                <Line type="monotone" dataKey="Q(t)" stroke="orange" strokeWidth={3} dot={false} isAnimationActive={false} />
+                                                    <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
+                                                    <Line type="monotone" dataKey="Q(t)" stroke="orange" strokeWidth={3} dot={false} isAnimationActive={false} />
 
-                                                {
-                                                    this.state.show_reference_lines ?
-                                                        this.state.referenced_lines.map((r_line) => {
-                                                            return (
-                                                                <ReferenceLine key={`q_${this.state.t_a}_${Math.random() * 1000 + this.state.t_a}`} x={r_line} stroke="black" strokeWidth={1} strokeDasharray="3 3" />
-                                                            )
-                                                        }) : "reference_line not showed"
-                                                }
-                                            </LineChart>
-                                        </ResponsiveContainer>
+                                                    {
+                                                        this.state.show_reference_lines ?
+                                                            this.state.referenced_lines.map((r_line) => {
+                                                                return (
+                                                                    <ReferenceLine key={`q_${this.state.t_a}_${Math.random() * 1000 + this.state.t_a}`} x={r_line} stroke="black" strokeWidth={1} strokeDasharray="3 3" />
+                                                                )
+                                                            }) : "reference_line not showed"
+                                                    }
+                                                </LineChart>
+                                            </ResponsiveContainer>
+                                        </div>
                                     </div>
-                                </div>
 
 
-                            </Col>
+                                </Col>
+                                <br /> <br /> <br />
+                                <Carousel.Caption>
+                                    <Button variant="outline-secondary" onClick={(ev) => {this.turnOnCanvas(CHARGE_CANVAS)}}>Carga del condensador</Button>
+                                </Carousel.Caption>
+                            </Carousel.Item>
+
                             {/* CURRENT */}
-                            <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6} onClick={(ev) => { this.turnOnCanvas(CURRENT_I_CANVAS) }}>
-                                <div style={{
-                                    paddingBottom: '50%', /* 16:9 */
-                                    position: 'relative',
-                                    height: 0
-                                }}>
+                            <Carousel.Item>
+                                <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                                     <div style={{
-                                        position: 'absolute',
-                                        top: '0',
-                                        left: '0',
-                                        width: '100%',
-                                        height: '100%'
+                                        paddingBottom: '50%', /* 16:9 */
+                                        position: 'relative',
+                                        height: 0
                                     }}>
-                                        <ResponsiveContainer width="100%" height="98%">
-                                            <LineChart
-                                                width={400}
-                                                height={250}
-                                                data={this.state.i_data}
-                                                margin={{
-                                                    top: 5,
-                                                    right: 30,
-                                                    left: 20,
-                                                    bottom: 5,
-                                                }}
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: '0',
+                                            left: '7%',
+                                            width: '100%',
+                                            height: '100%'
+                                        }}>
+                                            <ResponsiveContainer width="85%" height="100%">
+                                                <LineChart
+                                                    width={400}
+                                                    height={250}
+                                                    data={this.state.i_data}
+                                                    margin={{
+                                                        top: 5,
+                                                        right: 30,
+                                                        left: 20,
+                                                        bottom: 5,
+                                                    }}
 
-                                            >
-                                                <CartesianGrid strokeDasharray="3 3" />
-                                                <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
-                                                <YAxis type="number" tick={false} label={this.state.capacitorCharging ? { 'value': 'I (amperios)', 'angle': '-90' } : { 'value': '- I (amperios)', 'angle': '-90' }}
-                                                    domain={[0, MAX_CU_ALLOWED]} />
+                                                >
+                                                    <CartesianGrid strokeDasharray="3 3" />
+                                                    <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
+                                                    <YAxis type="number" tick={false} label={this.state.capacitorCharging ? { 'value': 'I (amperios)', 'angle': '-90' } : { 'value': '- I (amperios)', 'angle': '-90' }}
+                                                        domain={[0, MAX_CU_ALLOWED]} />
 
-                                                {
-                                                    (() => {
-                                                        if (!this.state.running) {
-                                                            return (
-                                                                <Tooltip formatter={(value, name, props) => {
-                                                                    return [`${Number.parseFloat(value).toExponential(3)} A`, 'I(t)']
-                                                                }}
-                                                                    cursor={false} />
-                                                            )
-                                                        }
-                                                    })()
-                                                }
+                                                    {
+                                                        (() => {
+                                                            if (!this.state.running) {
+                                                                return (
+                                                                    <Tooltip formatter={(value, name, props) => {
+                                                                        return [`${Number.parseFloat(value).toExponential(3)} A`, 'I(t)']
+                                                                    }}
+                                                                        cursor={false} />
+                                                                )
+                                                            }
+                                                        })()
+                                                    }
 
-                                                <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
-                                                <Line type="monotone" dataKey="I(t)" stroke="blue" strokeWidth={3} dot={false} isAnimationActive={false} />
-                                                {
-                                                    this.state.show_reference_lines ?
-                                                        this.state.referenced_lines.map((r_line) => {
-                                                            return (
-                                                                <ReferenceLine key={`i_${this.state.t_a}_${Math.random() * 10 + this.state.t_a}`} x={r_line} stroke="black" strokeWidth={1} strokeDasharray="3 3" />
-                                                            )
-                                                        }) : "reference_line not showed"
-                                                }
-                                            </LineChart>
-                                        </ResponsiveContainer>
+                                                    <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
+                                                    <Line type="monotone" dataKey="I(t)" stroke="blue" strokeWidth={3} dot={false} isAnimationActive={false} />
+                                                    {
+                                                        this.state.show_reference_lines ?
+                                                            this.state.referenced_lines.map((r_line) => {
+                                                                return (
+                                                                    <ReferenceLine key={`i_${this.state.t_a}_${Math.random() * 10 + this.state.t_a}`} x={r_line} stroke="black" strokeWidth={1} strokeDasharray="3 3" />
+                                                                )
+                                                            }) : "reference_line not showed"
+                                                    }
+                                                </LineChart>
+                                            </ResponsiveContainer>
+                                        </div>
                                     </div>
-                                </div>
 
 
-                            </Col>
-                        </Row>
-                        <Row>
+                                </Col>
+                                <br /> <br /> <br />
+                                <Carousel.Caption>
+                                    <Button variant="outline-secondary" onClick={(ev) => {this.turnOnCanvas(CURRENT_I_CANVAS)}}>Intensidad de corriente</Button>
+                                </Carousel.Caption>
+                            </Carousel.Item>
+
                             {/* VC */}
-                            <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6} onClick={(ev) => { this.turnOnCanvas(VC_CANVAS) }}>
-                                <div style={{
-                                    paddingBottom: '50%', /* 16:9 */
-                                    position: 'relative',
-                                    height: 0
-                                }}>
+                            <Carousel.Item>
+                                <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                                     <div style={{
-                                        position: 'absolute',
-                                        top: '0',
-                                        left: '0',
-                                        width: '100%',
-                                        height: '100%'
+                                        paddingBottom: '50%', /* 16:9 */
+                                        position: 'relative',
+                                        height: 0
                                     }}>
-                                        <ResponsiveContainer width="100%" height="98%">
-                                            <LineChart
-                                                width={400}
-                                                height={250}
-                                                data={this.state.vc_data}
-                                                margin={{
-                                                    top: 5,
-                                                    right: 30,
-                                                    left: 20,
-                                                    bottom: 5,
-                                                }}
-                                            >
-                                                <CartesianGrid strokeDasharray="3 3" />
-                                                <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
-                                                <YAxis type="number" tick={false} label={{ 'value': 'Vc (voltios)', 'angle': '-90' }} domain={[0, MAX_VC_ALLOWED]} />
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: '0',
+                                            left: '7%',
+                                            width: '100%',
+                                            height: '100%'
+                                        }}>
+                                            <ResponsiveContainer width="85%" height="100%">
+                                                <LineChart
+                                                    width={400}
+                                                    height={250}
+                                                    data={this.state.vc_data}
+                                                    margin={{
+                                                        top: 5,
+                                                        right: 30,
+                                                        left: 20,
+                                                        bottom: 5,
+                                                    }}
+                                                >
+                                                    <CartesianGrid strokeDasharray="3 3" />
+                                                    <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
+                                                    <YAxis type="number" tick={false} label={{ 'value': 'Vc (voltios)', 'angle': '-90' }} domain={[0, MAX_VC_ALLOWED]} />
 
-                                                {
-                                                    (() => {
-                                                        if (!this.state.running) {
-                                                            return (<Tooltip formatter={(value, name, props) => {
-                                                                return [`${Number.parseFloat(value).toExponential(3)} V`, 'Vc(t)']
-                                                            }}
-                                                                cursor={false} />)
-                                                        }
-                                                    })()
-                                                }
+                                                    {
+                                                        (() => {
+                                                            if (!this.state.running) {
+                                                                return (<Tooltip formatter={(value, name, props) => {
+                                                                    return [`${Number.parseFloat(value).toExponential(3)} V`, 'Vc(t)']
+                                                                }}
+                                                                    cursor={false} />)
+                                                            }
+                                                        })()
+                                                    }
 
-                                                <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
-                                                <Line type="monotone" dataKey="Vc(t)" stroke="green" strokeWidth={3} dot={false} isAnimationActive={false} />
-                                                {
-                                                    this.state.show_reference_lines ?
-                                                        this.state.referenced_lines.map((r_line) => {
-                                                            return (
-                                                                <ReferenceLine key={`vc_${this.state.t_a}_${Math.random() * 10 + this.state.t_a}`} x={r_line} stroke="black" strokeWidth={1} strokeDasharray="3 3" />
-                                                            )
-                                                        }) : "reference_line not showed"
-                                                }
-                                            </LineChart>
-                                        </ResponsiveContainer>
+                                                    <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
+                                                    <Line type="monotone" dataKey="Vc(t)" stroke="green" strokeWidth={3} dot={false} isAnimationActive={false} />
+
+                                                </LineChart>
+                                            </ResponsiveContainer>
+                                        </div>
                                     </div>
-                                </div>
-                            </Col>
+                                </Col>
+                                <br /> <br /> <br />
+                                <Carousel.Caption>
+                                    <Button variant="outline-secondary" onClick={(ev) => {this.turnOnCanvas(VC_CANVAS)}}>Diferencia de potencial en el condensador</Button>
+                                </Carousel.Caption>
+                            </Carousel.Item>
 
                             {/* VR */}
-                            <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6} onClick={(ev) => { this.turnOnCanvas(VR_CANVAS) }}>
-                                <div style={{
-                                    paddingBottom: '50%', /* 16:9 */
-                                    position: 'relative',
-                                    height: 0
-                                }}>
+                            <Carousel.Item>
+                                <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                                     <div style={{
-                                        position: 'absolute',
-                                        top: '0',
-                                        left: '0',
-                                        width: '100%',
-                                        height: '100%'
+                                        paddingBottom: '50%', /* 16:9 */
+                                        position: 'relative',
+                                        height: 0
                                     }}>
-                                        <ResponsiveContainer width="100%" height="98%">
-                                            <LineChart
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: '0',
+                                            left: '7%',
+                                            width: '100%',
+                                            height: '100%'
+                                        }}>
+                                            <ResponsiveContainer width="85%" height="100%">
+                                                <LineChart
 
-                                                width={400}
-                                                height={250}
-                                                data={this.state.vr_data}
-                                                margin={{
-                                                    top: 5,
-                                                    right: 30,
-                                                    left: 20,
-                                                    bottom: 5,
-                                                }}
-                                            >
-                                                <CartesianGrid strokeDasharray="3 3" />
-                                                <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
-                                                <YAxis type="number" tick={false} label={this.state.capacitorCharging ? { 'value': 'Vr (voltios)', 'angle': '-90' } : { 'value': '- Vr (voltios)', 'angle': '-90' }}
-                                                    domain={[0, MAX_VR_ALLOWED]} />
+                                                    width={400}
+                                                    height={250}
+                                                    data={this.state.vr_data}
+                                                    margin={{
+                                                        top: 5,
+                                                        right: 30,
+                                                        left: 20,
+                                                        bottom: 5,
+                                                    }}
+                                                >
+                                                    <CartesianGrid strokeDasharray="3 3" />
+                                                    <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
+                                                    <YAxis type="number" tick={false} label={this.state.capacitorCharging ? { 'value': 'Vr (voltios)', 'angle': '-90' } : { 'value': '- Vr (voltios)', 'angle': '-90' }}
+                                                        domain={[0, MAX_VR_ALLOWED]} />
 
-                                                {
-                                                    (() => {
-                                                        if (!this.state.running) {
-                                                            return (<Tooltip formatter={(value, name, props) => {
-                                                                return [`${Number.parseFloat(value).toExponential(3)} V`, 'Vr(t)']
-                                                            }}
-                                                                cursor={false} />)
-                                                        }
-                                                    })()
-                                                }
-
-
-                                                <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
-                                                <Line type="monotone" dataKey="Vr(t)" stroke="#eb3474" strokeWidth={3} dot={false} isAnimationActive={false} />
-                                                {
-                                                    this.state.show_reference_lines ?
-                                                        this.state.referenced_lines.map((r_line) => {
-                                                            return (
-                                                                <ReferenceLine key={`vr_${this.state.t_a}_${Math.random() * 10 + this.state.t_a}`} x={r_line} stroke="black" strokeWidth={1} strokeDasharray="3 3" />
-                                                            )
-                                                        }) : "reference_line not showed"
-                                                }
-                                            </LineChart>
-                                        </ResponsiveContainer>
-                                    </div>
-                                </div>
-                            </Col>
-
-                        </Row>
-
-                        <Row>
-                            {/* Theory menu */}
-                            <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
-                                {/* TO - DO*/}
-                            </Col>
-                            {/* ENERGY */}
-                            <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6} onClick={(ev) => { this.turnOnCanvas(ENERGY_CANVAS) }}>
-                                <div style={{
-                                    paddingBottom: '50%', /* 16:9 */
-                                    position: 'relative',
-                                    height: 0
-                                }}>
-                                    <div style={{
-                                        position: 'absolute',
-                                        top: '0',
-                                        left: '0',
-                                        width: '100%',
-                                        height: '100%'
-                                    }} onClick={this.setEnergyCanvas}>
-                                        <ResponsiveContainer width="100%" height="98%" >
-                                            <LineChart
-                                                width={400}
-                                                height={250}
-                                                data={this.state.e_data}
-                                                margin={{
-                                                    top: 5,
-                                                    right: 30,
-                                                    left: 20,
-                                                    bottom: 5,
-                                                }}
-                                            >
-                                                <CartesianGrid strokeDasharray="3 3" />
-                                                <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
-                                                <YAxis type="number" tick={false} label={{ 'value': 'Ee (julios)', 'angle': '-90' }} domain={[0, MAX_E_ALLOWED]} />
-
-                                                {
-                                                    (() => {
-                                                        if (!this.state.running) {
-                                                            return (
-                                                                <Tooltip formatter={(value, name, props) => {
-                                                                    return [`${Number.parseFloat(value).toExponential(3)} J`, 'E(t)']
+                                                    {
+                                                        (() => {
+                                                            if (!this.state.running) {
+                                                                return (<Tooltip formatter={(value, name, props) => {
+                                                                    return [`${Number.parseFloat(value).toExponential(3)} V`, 'Vr(t)']
                                                                 }}
-                                                                    cursor={false} />
-                                                            )
-                                                        }
-                                                    })()
-                                                }
+                                                                    cursor={false} />)
+                                                            }
+                                                        })()
+                                                    }
 
-                                                <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
-                                                <Line type="monotone" dataKey="E(t)" stroke="red" strokeWidth={3} dot={false} isAnimationActive={false} />
-                                                {
-                                                    this.state.show_reference_lines ?
-                                                        this.state.referenced_lines.map((r_line) => {
-                                                            return (
-                                                                <ReferenceLine key={`e_${this.state.t_a}_${Math.random() * 10 + this.state.t_a}`} x={r_line} stroke="black" strokeWidth={1} strokeDasharray="3 3" />
-                                                            )
-                                                        }) : "reference_line not showed"
-                                                }
-                                            </LineChart>
-                                        </ResponsiveContainer>
+
+                                                    <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
+                                                    <Line type="monotone" dataKey="Vr(t)" stroke="#eb3474" strokeWidth={3} dot={false} isAnimationActive={false} />
+
+                                                </LineChart>
+                                            </ResponsiveContainer>
+                                        </div>
                                     </div>
-                                </div>
-                            </Col>
-                        </Row>
+                                </Col>
+                                <br /> <br /> <br />
+                                <Carousel.Caption>
+                                    <Button variant="outline-secondary" onClick={(ev) => {this.turnOnCanvas(VR_CANVAS)}}>Diferencia de potencial en la resistencia</Button>
+                                </Carousel.Caption>
+                            </Carousel.Item>
+
+                            {/* ENERGY */}
+                            <Carousel.Item>
+                                <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
+                                    <div style={{
+                                        paddingBottom: '50%', /* 16:9 */
+                                        position: 'relative',
+                                        height: 0
+                                    }}>
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: '0',
+                                            left: '7%',
+                                            width: '100%',
+                                            height: '100%'
+                                        }}>
+                                            <ResponsiveContainer width="85%" height="100%" >
+                                                <LineChart
+                                                    width={400}
+                                                    height={250}
+                                                    data={this.state.e_data}
+                                                    margin={{
+                                                        top: 5,
+                                                        right: 30,
+                                                        left: 20,
+                                                        bottom: 5,
+                                                    }}
+                                                >
+                                                    <CartesianGrid strokeDasharray="3 3" />
+                                                    <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
+                                                    <YAxis type="number" tick={false} label={{ 'value': 'Ee (julios)', 'angle': '-90' }} domain={[0, MAX_E_ALLOWED]} />
+
+                                                    {
+                                                        (() => {
+                                                            if (!this.state.running) {
+                                                                return (
+                                                                    <Tooltip formatter={(value, name, props) => {
+                                                                        return [`${Number.parseFloat(value).toExponential(3)} J`, 'E(t)']
+                                                                    }}
+                                                                        cursor={false} />
+                                                                )
+                                                            }
+                                                        })()
+                                                    }
+
+                                                    <Legend verticalAlign="top" align="right" iconType="circle" margin={{ top: 0, left: 0, right: 0, bottom: 10 }} />
+                                                    <Line type="monotone" dataKey="E(t)" stroke="red" strokeWidth={3} dot={false} isAnimationActive={false} />
+
+                                                </LineChart>
+                                            </ResponsiveContainer>
+                                        </div>
+                                    </div>
+                                </Col>
+                                <br /> <br /> <br />
+                                <Carousel.Caption>
+                                    <Button variant="outline-secondary" onClick={(ev) => {this.turnOnCanvas(ENERGY_CANVAS)}}>Energía almacenada</Button>
+                                </Carousel.Caption>
+                            </Carousel.Item>
+                        </Carousel>
                     </Col>
 
-                    <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
+                    <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
                         { /*  CIRCUIT PICTURE */}
                         <img alt="circuit_animation" src={this.getCurrentAnimation()} className="w-100"></img>
                         <label className="switch">
@@ -940,9 +992,6 @@ export default class Rc extends Component {
                             </Row>
                             <br></br>
                             <Row>
-
-
-
                             </Row>
 
 
@@ -976,8 +1025,7 @@ export default class Rc extends Component {
                                             {/* CAPACITOR ANIMATION */}
                                             <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                                                 <div className="charge-box">
-                                                    <div className={this.state.running ? "charge" : (this.state.q_percent == 0 ? "charge_discharge_complete" : "charge_charge_complete")} style={{ "background": this.state.capacitorCharging ? "#569c02" : "#c94f1e" }}
-                                                        onClick={(ev) => { this.turnOnCanvas(CAPACIDAD_CONDUCTOR_CANVAS) }}>
+                                                    <div className={this.state.running ? "charge" : (this.state.q_percent == 0 ? "charge_discharge_complete" : "charge_charge_complete")} style={{ "background": this.state.capacitorCharging ? "#569c02" : "#c94f1e" }}>
                                                         {
                                                             (() => {
                                                                 if (this.state.width >= 1100) {
@@ -1023,7 +1071,7 @@ export default class Rc extends Component {
                                             <Container>
                                                 <Row>
                                                     <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12} >
-                                                        <div className='resistor-box' onClick={(ev) => { this.turnOnCanvas(LEY_OHM_CANVAS) }}>
+                                                        <div className='resistor-box'>
                                                             <div className='resistor-band-1' style={{ "background": this.state.R_color_bands[0] }}></div>
                                                             <div className='resistor-band-2' style={{ "background": this.state.R_color_bands[1] }}></div>
                                                             <div className='resistor-band-3' style={{ "background": this.state.R_color_bands[2] }}></div>
@@ -1045,6 +1093,182 @@ export default class Rc extends Component {
                         </Row>
                     </Col>
                 </Row>
+
+                {/*  THEORY CANVAS */}
+                <Offcanvas show={this.state.showCanvas} onHide={(ev) => { this.turnOffCanvas() }} placement="end">
+                    <Offcanvas.Header closeButton>
+                        <Offcanvas.Title>
+                            <h1>Circuito RC</h1>
+                        </Offcanvas.Title>
+                    </Offcanvas.Header>
+                    <Offcanvas.Body>
+                        {
+                            (() => {
+                                if (this.state.currentCanvas === CHARGE_CANVAS) {
+                                    /* CAPACITOR CHARGE THEORY */
+                                    return (
+                                        <>
+                                            <h4>Carga del condensador</h4>
+                                            <br />
+                                            Para hallar una expresión que modele la carga del condensador realizaremos un <strong>balance energético</strong> de los componentes del circuito, es decir,
+                                            la diferencia de potencial suministrada por la pila debe de ser equivalente a la consumida por los componentes pasivos (la resistencia y el condensador).
+                                            <br /><br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="balance_energetico" src={balance_energetico} style={{ "width": "50%" }}></img>
+                                            </div>
+                                            <br />
+                                            Así que por definición de <strong>capacidad de un condensador</strong>, de <strong>intensidad de corriente</strong> y la <strong>Ley de Ohm</strong>
+                                            ,sustituimos en la expresión resultante de realizar el balance energético y nos queda la siguiente ecuación diferencial a resolver:
+                                            <br /><br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="eq_diff_balance" src={eq_diff_balance} style={{ "width": "50%" }}></img>
+                                            </div>
+                                            <br />
+                                            Para resolverla, supondremos los siguientes casos iniciales dependiendo del estado en el que nos encontremos:
+                                            <br />
+                                            <ul>
+                                                <li>Durante la <strong>carga</strong> del condensador, supondremos inicialmente que este está vacío (carga en el instante cero es nula).
+                                                    <br /><br />
+                                                    <div style={{ "textAlign": "center" }}>
+                                                        <img alt="carga_condensador_en_carga" src={carga_condensador_en_carga} style={{ "width": "50%" }}></img>
+                                                    </div>
+                                                    <br />
+                                                </li>
+                                                <li>Por otro lado, en el caso de <strong>descarga</strong>, comenzaremos con una carga máxima. Es decir, puesto que esta depende del valor de la fuente y de la capcidad del condensador,
+                                                    dicha <i>carga máxima</i> será la multiplicación de ambas.
+                                                    <br /><br />
+                                                    <div style={{ "textAlign": "center" }}>
+                                                        <img alt="carga_condensador_en_descarga" src={carga_condensador_en_descarga} style={{ "width": "40%" }}></img>
+                                                    </div>
+                                                    <br />
+                                                </li>
+                                            </ul>
+                                        </>
+
+                                    )
+                                } else if (this.state.currentCanvas === CURRENT_I_CANVAS) {
+                                    /* CURRENT THEORY */
+                                    return (
+                                        <>
+                                            <h4>Intensidad de corriente</h4>
+                                            <br />
+                                            Definimos <strong>intensidad de corriente</strong> como la cantidad de carga eléctrica que circula
+                                            por unidad de tiempo a través de un conductor.
+                                            <br /> <br/>
+                                            <div style={{"textAlign" : "center"}}>
+                                                <img alt="definicion_intensidad_corriente" src={definicion_intensidad_corriente} style={{"width" : "30%"}}></img>
+                                            </div>
+                                            <br />
+                                            Aplicando la expresión de carga del condensador dependiendo de si su estado está en almacenamiento o disipación
+                                            de energía, obtenemos que: <br/>
+                                            <ul>
+                                                <li>Durante la <strong>carga</strong> del condensador, la expresión que modela el comportamiento de la intensidad de corriente es
+                                                    <br /> <br/>
+                                                    <div style={{"textAlign" : "center"}}>
+                                                        <img alt="intensidad_condensador_en_carga" src={intensidad_condensador_en_carga} style={{"width" : "40%"}}></img>
+                                                    </div>
+                                                    <br/>
+                                                </li>
+                                                <li>
+                                                    Mientras que durante su <strong>descarga</strong>
+                                                    <br /> <br/>
+                                                    <div style={{"textAlign" : "center"}}>
+                                                        <img alt="intensidad_condensador_en_descarga" src={intensidad_condensador_en_descarga} style={{"width" : "40%"}}></img>
+                                                    </div>
+                                                    <br/>   
+                                                </li>
+                                            </ul>
+                                        </>
+                                    )
+                                } else if (this.state.currentCanvas === VR_CANVAS) {
+                                    /*  VR CANVAS */
+                                    return (
+                                        <>
+                                            <h4>Diferencia de potencial en la resistencia</h4>
+                                            <br></br>
+                                            Utilizando la <i>Ley de Ohm</i>, podemos obtener cuál es la diferencia de potencial en los bornes 
+                                            de la resistencia. Este dato, junto a la ddp en el condensador, puede llegar a ser de utilidad para comprobar que, 
+                                            efectivamente, se cumple la propiedad de conservación de energía en el circuito. Las expresiones que modelan esta magnitud física 
+                                            son: 
+                                            <br /> <br/>
+                                            <div style={{"textAlign" : "center"}}>
+                                                <img alt="vr_carga_condensador" src={vr_carga_condensador} style={{"width" : "40%"}}></img>
+                                            </div>
+                                            <br /> <br/>
+                                            <div style={{"textAlign" : "center"}}>
+                                                <img alt= "vr_descarga_condensador" src={vr_descarga_condensador} style={{"width" : "40%"}}></img>
+                                            </div>
+                                            <br/>
+                                            , durante la <strong>carga</strong> y <strong>descarga</strong> del condensador respectivamente.
+                                        </>
+                                    )
+                                } else if (this.state.currentCanvas === VC_CANVAS) {
+                                    /*  VC CANVAS */
+                                    return (
+                                        <>
+                                            <h4>Diferencia de potencial en el condensador</h4>
+                                            <br></br>
+                                            Para obtener la diferencia de potencial que existe entre los bornes del condensador, basta con aplicar la definición de <strong>capacidad del condensador</strong>. Este
+                                            parámetro al igual que la ddp en la resistencia, es de utilidad para comprobar que realmente se cumple la conservación de energía en el circuito. Dependiendo de si el condensador 
+                                            se encuentra en estado de <strong>carga</strong> o <strong>descarga</strong> obtenemos las siguientes expresiones respectivamente:
+                                            <br /> <br/>
+                                            <div style={{"textAlign" : "center"}}>
+                                                <img alt="vc_carga_condensador" src={vc_carga_condensador} style={{"width" : "40%"}}></img>
+                                            </div>
+                                            <br /> <br/>
+                                            <div style={{"textAlign" : "center"}}>
+                                                <img alt="vc_descarga_condensador" src={vc_descarga_condensador} style={{"width" : "40%"}}></img>
+                                            </div>
+
+                                            <br/>
+
+                                        </>
+                                    )
+                                } else if (this.state.currentCanvas === ENERGY_CANVAS) {
+                                    /*  ENERGY CANVAS */
+                                    return (
+                                        <>
+                                        <h4>Energía almacenada</h4>
+                                        <br />
+                                        Para hallar la energía que almacena un condensador, tenemos que aplicar el concepto de <strong>potencia en un conductor</strong>. Definimos
+                                        como potencia al trabajo realizado por el <i>campo eléctrico</i> aplicado sobre un conductor para trasladar una carga entre dos puntos del mismo, entre 
+                                        los cuales existe una diferencia de potencial. 
+                                        <br /> <br />
+                                        <div style={{"textAlign" : "center"}}>
+                                            <img alt="definicion_potencia_2" src={definicion_potencia_2} style={{"width" : "40%"}}></img>
+                                        </div>
+                                        <br />
+                                        , la cuál podemos formalizar de la siguiente manera:
+                                        <br /> <br />
+                                        <div style={{"textAlign" : "center"}}>
+                                            <img alt="definicion_potencia_3" src={definicion_potencia_3} style={{"width" : "40%"}}></img>
+                                        </div>
+                                        <br />
+                                        Por las definiciones de <strong>capacidad de un condensador</strong> y de <strong>intensidad de corriente</strong>,
+                                        se nos queda planteada entonces la siguiente ecuación diferencial
+                                        <br /> <br />
+                                        <div style={{"textAlign" : "center"}}>
+                                            <img alt="eq_diff_energia" src={eq_diff_energia} style={{"width" : "55%"}}></img>
+                                        </div>
+                                        <br />
+                                        , la cuál si resolvemos, obtenemos que la energía almacenada en el condensador a lo largo del tiempo
+                                        sigue la siguiente expresión
+                                        <br /> <br />
+                                        <div style={{"textAlign" : "center"}}>
+                                            <img alt="eq_energia_condensador" src={eq_energia_condensador} style={{"width" : "50%"}}></img>
+                                        </div>
+                                        <br /> <br />
+                                        </>        
+                                    )
+                                } else {
+                                    return (
+                                        <h2>ERROR</h2>
+                                    )
+                                }
+                            })()
+                        }
+                    </Offcanvas.Body>
+                </Offcanvas>
             </div>
 
         ) : (
