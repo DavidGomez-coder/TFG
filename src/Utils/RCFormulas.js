@@ -44,3 +44,21 @@ export function getDischargeInstant(t, q_0, V, C, R){
         "E"  : getE(C, getQ_discharge(t, q_0, R, C) / C)
     }
 }
+
+
+//it --> time increment in 1 second
+export function getChargeTimeData(init, final, it, q_0, V, C, R) {
+    let result = [];
+    for (let i=init; i<final; i+=it){
+        result = [...result, {"time" : i, "data" : getChargeInstant(i, q_0, V, C, R)}];
+    }
+    return result;
+}
+
+export function getDischargeTimeData(init, final, it, q_0, V, C, R){
+    let result = [];
+    for(let i=init; i<final; i+=it){
+        result = [...result, {"time" : i, "data" : getDischargeInstant(i, q_0, V, C, R)}];
+    }
+    return result;
+}

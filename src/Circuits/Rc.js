@@ -19,7 +19,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { EXACT_TIME, MAX_DATA, PERCENT_Q, QUESTION_ICON, Q_VALUE, SIMULATION_EXEC, SIMULATION_STEP, WITHOUT_RESTRICTIONS } from "../Utils/Utils";
 
 // functions
-import { getChargeInstant, getDischargeInstant } from "../Utils/RCFormulas";
+import { getChargeInstant, getChargeTimeData, getDischargeInstant, getDischargeTimeData } from "../Utils/RCFormulas";
 import { calculateColorBands, valueOfMultiplier } from "./Resistor/Resistor";
 import { getCapacitorMult } from "./Capacitor/CapacitorData";
 import { getCellMultiplier } from "./Cell/Cell";
@@ -54,7 +54,7 @@ import carga_condensador_en_carga from "../assets/formula/carga_condensador_en_c
 import carga_condensador_en_descarga from "../assets/formula/carga_condensador_en_descarga.png";
 import definicion_intensidad_corriente from "../assets/formula/definicion_intensidad_corriente.png";
 import intensidad_condensador_en_carga from "../assets/formula/intensidad_condensador_en_carga.png";
-import intensidad_condensador_en_descarga from "../assets/formula/intensidad_condensador_en_descarga.png"; 
+import intensidad_condensador_en_descarga from "../assets/formula/intensidad_condensador_en_descarga.png";
 
 import ley_ohm_1 from "../assets/formula/ley_ohm_1.png";
 import ley_ohm_2 from "../assets/formula/ley_ohm_2.png";
@@ -65,15 +65,10 @@ import vc_carga_condensador from "../assets/formula/vc_carga_condensador.png";
 import vc_descarga_condensador from "../assets/formula/vc_descarga_condensador.png";
 
 
-// screen max width
+// screen min width
 const MAX_WIDTH = 1280;
-
-// max values allowed
-const MAX_CHARGE_ALLOWED = 0.000009 * 6;
-const MAX_VC_ALLOWED = 6;
-const MAX_VR_ALLOWED = 6;
-const MAX_CU_ALLOWED = 6 / 1000; //max. current reached with minimum resistor value
-const MAX_E_ALLOWED = (1 / 2) * 0.000009 * Math.pow(6, 2);
+const MEGA = 1000000;
+const KILO = 1000;
 
 // canvas
 const ENERGY_CANVAS = 1;
@@ -86,6 +81,10 @@ const VR_CANVAS = 7;
 const VC_CANVAS = 8;
 
 export default class Rc extends Component {
+
+    // *************************************
+    //      CONSTRUCTOR
+    // *************************************
     constructor(props) {
         super(props);
         this.state = {
@@ -94,11 +93,19 @@ export default class Rc extends Component {
             // time controller
             t_i: 0,
             t_a: 0,
-            simulation_step_multiplier: 0.001,
+            // other time 
+            simulation_step: SIMULATION_STEP,
+            simulation_step_multiplier: 1,
             //stop conditions
             selected_stop_condition: WITHOUT_RESTRICTIONS,
             value_stop_condition: undefined,
             condition_complete: false,
+            //max data allowed
+            max_charge_allowed: 0,
+            max_vc_allowed: 0,
+            max_vr_allowed: 0,
+            max_cu_allowed: 0,
+            max_e_allowed: 0,
             //data arrays
             q_data: [],
             i_data: [],
@@ -106,14 +113,14 @@ export default class Rc extends Component {
             vr_data: [],
             e_data: [],
             //components values
-            C: 0.000001,
+            C: 0.00001,
             R: 1000,
             R_color_bands: [],
             V: 6,
             //initial capacitor charge
             q_0: 0,
             //components initial values and multipliers
-            C_v: 1,
+            C_v: 10,
             C_m: 0.000001,
             R_v: 1,
             R_m: 1000,
@@ -155,9 +162,12 @@ export default class Rc extends Component {
 
         //controller
         this.updateColorBands(this.state.R_v, this.state.R_m);
+    
         const newInterval = setInterval(() => {
-            this.updateMaxValues();
 
+            this.updateMaxValues();
+            this.updateMaxDataAllowed();
+            
             if (this.state.running) {
                 let oldQData = this.state.q_data;
                 let oldIData = this.state.i_data;
@@ -216,8 +226,10 @@ export default class Rc extends Component {
 
 
                 if (!this.state.condition_complete) {
-                    let nt_i = t_i + ((SIMULATION_STEP * this.state.simulation_step_multiplier) / 1000);
-                    let nt_a = t_a + ((SIMULATION_STEP * this.state.simulation_step_multiplier) / 1000);
+                    //let nt_i = t_i + ((SIMULATION_STEP * this.state.simulation_step_multiplier) / 1000);
+                    //let nt_a = t_a + ((SIMULATION_STEP * this.state.simulation_step_multiplier) / 1000);
+                    let nt_i = t_i +  this.state.simulation_step * SIMULATION_EXEC;
+                    let nt_a = t_a +  this.state.simulation_step * SIMULATION_EXEC;
 
                     this.setState(prevState => {
                         return {
@@ -248,7 +260,8 @@ export default class Rc extends Component {
 
 
             }
-        }, (SIMULATION_EXEC));
+        });
+        
 
         //update time interval id
         this.setState(prevState => {
@@ -266,8 +279,48 @@ export default class Rc extends Component {
     componentWillUnmount() {
         //clear window size
         window.removeEventListener("resize", this.updateDimensions.bind(this));
+        clearInterval(this.state.intervalId);
     }
 
+
+
+
+    // **************************************
+    //      UPDATE SIMULATION STEP
+    // **************************************
+    setSimulationStepMultiplier(val) {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                simulation_step_multiplier: val
+            }
+        });
+    }
+
+    setSimulationStep(val) {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                simulation_step: val,
+            }
+        });
+    }
+
+    // *********************************
+    //      UPDATE MAX DATA ALLOWED
+    // **********************************
+    updateMaxDataAllowed() {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                max_charge_allowed: 0.0001 * prevState.V,
+                max_cu_allowed: prevState.V / (1 * prevState.R_m),
+                max_vr_allowed: prevState.V,
+                max_vc_allowed: prevState.V,
+                max_e_allowed: (1 / 2) * 0.0001 * Math.pow(prevState.V, 2)
+            }
+        });
+    }
 
     // *********************************
     //          DIMENSIONS
@@ -348,7 +401,7 @@ export default class Rc extends Component {
 
     // ************************************
     //      UPDATE CHARGING
-    // ************************************
+    // *************************************
     updateCharging() {
         this.setState(prevState => {
             return {
@@ -367,7 +420,7 @@ export default class Rc extends Component {
                 q_percent: !prevState.capacitorCharging ? 0 : 100
 
             }
-        })
+        });
     }
 
     // ******************************
@@ -443,19 +496,6 @@ export default class Rc extends Component {
     }
 
     // **************************************
-    //       SET RC CONSTANT
-    // **************************************
-    setRcConstant(val) {
-        this.setState(prevState => {
-            return {
-                ...prevState,
-                rc_constant_added: val
-            }
-        });
-    }
-
-
-    // **************************************
     //          CANVAS
     // **************************************
     turnOnCanvas(canvas) {
@@ -488,10 +528,6 @@ export default class Rc extends Component {
             return {
                 ...prevState,
                 q_max: prevState.C * prevState.V,
-                i_max: prevState.V / prevState.R,
-                vc_max: prevState.V,
-                vr_max: prevState.V,
-                e_max: (1 / 2) * prevState.C * Math.pow(prevState.V, 2),
                 q_0: !prevState.capacitorCharging ? 0 : 100,
             }
         });
@@ -591,15 +627,18 @@ export default class Rc extends Component {
         this.updateMaxValues();
     }
 
+    // *************************************
+    //                  RENDER
+    // *************************************
     render() {
         return this.state.width >= MAX_WIDTH ? (
             /* MAIN */
             <div style={{ 'marginLeft': '1%', 'marginRight': '1%' }}>
                 {/* */}
                 <Row style={{ 'marginTop': '0.5%' }}>
-                    <Col xs={7} sm={7} md={7} lg={7} xl={7} xxl={7} style={{'marginTop' : '5%'}}>
-                        <Carousel variant="dark" interval={null} controls={true} style={{'padding' : '5%'}} slide={false}>
-                            {/*  CHARGE*/}
+                    <Col xs={7} sm={7} md={7} lg={7} xl={7} xxl={7} style={{ 'marginTop': '5%' }}>
+                        <Carousel variant="dark" interval={null} controls={true} style={{ 'padding': '5.5%' }} slide={false}>
+                            {/*  CHARGE AND CURRENT GRAPHS*/}
                             <Carousel.Item>
                                 <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                                     <div style={{
@@ -611,7 +650,7 @@ export default class Rc extends Component {
                                             position: 'absolute',
                                             top: '0',
                                             left: '7%',
-                                            width: '100%',
+                                            width: '50%',
                                             height: '100%'
                                         }}>
                                             <ResponsiveContainer width="85%" height="100%">
@@ -628,8 +667,8 @@ export default class Rc extends Component {
                                                 >
                                                     <CartesianGrid strokeDasharray="3 3" />
                                                     <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
-                                                    <YAxis type="number" tick={false} label={{ 'value': 'Q (culombios)', 'angle': '-90' }} domain={[0, MAX_CHARGE_ALLOWED]} />
-                                                    <ReferenceLine x={this.state.C * this.state.R} label="Max" stroke="red" strokeDasharray="3 3" />
+                                                    <YAxis type="number" tick={false} label={{ 'value': 'Q (culombios)', 'angle': '-90' }} domain={[0, this.state.max_charge_allowed]} />
+                                                    
 
                                                     {
                                                         (() => {
@@ -658,29 +697,12 @@ export default class Rc extends Component {
                                                 </LineChart>
                                             </ResponsiveContainer>
                                         </div>
-                                    </div>
 
-
-                                </Col>
-                                <br /> <br /> <br />
-                                <Carousel.Caption>
-                                    <Button variant="outline-secondary" onClick={(ev) => {this.turnOnCanvas(CHARGE_CANVAS)}}>Carga del condensador</Button>
-                                </Carousel.Caption>
-                            </Carousel.Item>
-
-                            {/* CURRENT */}
-                            <Carousel.Item>
-                                <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
-                                    <div style={{
-                                        paddingBottom: '50%', /* 16:9 */
-                                        position: 'relative',
-                                        height: 0
-                                    }}>
                                         <div style={{
                                             position: 'absolute',
                                             top: '0',
-                                            left: '7%',
-                                            width: '100%',
+                                            left: '50%',
+                                            width: '50%',
                                             height: '100%'
                                         }}>
                                             <ResponsiveContainer width="85%" height="100%">
@@ -699,7 +721,7 @@ export default class Rc extends Component {
                                                     <CartesianGrid strokeDasharray="3 3" />
                                                     <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
                                                     <YAxis type="number" tick={false} label={this.state.capacitorCharging ? { 'value': 'I (amperios)', 'angle': '-90' } : { 'value': '- I (amperios)', 'angle': '-90' }}
-                                                        domain={[0, MAX_CU_ALLOWED]} />
+                                                        domain={this.state.capacitorCharging ? [0, this.state.max_cu_allowed] : [-this.state.max_cu_allowed, 0]} />
 
                                                     {
                                                         (() => {
@@ -728,16 +750,23 @@ export default class Rc extends Component {
                                             </ResponsiveContainer>
                                         </div>
                                     </div>
-
-
                                 </Col>
                                 <br /> <br /> <br />
                                 <Carousel.Caption>
-                                    <Button variant="outline-secondary" onClick={(ev) => {this.turnOnCanvas(CURRENT_I_CANVAS)}}>Intensidad de corriente</Button>
+                                    <Row>
+                                        <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
+                                            <Button variant="outline-secondary" onClick={(ev) => { this.turnOnCanvas(CHARGE_CANVAS) }}>Carga del condensador</Button>
+                                        </Col>
+                                        <Col></Col>
+                                        <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
+                                            <Button variant="outline-secondary" onClick={(ev) => { this.turnOnCanvas(CURRENT_I_CANVAS) }}>Intensidad de corriente</Button>
+                                        </Col>
+                                    </Row>
+
                                 </Carousel.Caption>
                             </Carousel.Item>
 
-                            {/* VC */}
+                            {/* VR AND VL GRAPHS */}
                             <Carousel.Item>
                                 <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                                     <div style={{
@@ -749,7 +778,7 @@ export default class Rc extends Component {
                                             position: 'absolute',
                                             top: '0',
                                             left: '7%',
-                                            width: '100%',
+                                            width: '50%',
                                             height: '100%'
                                         }}>
                                             <ResponsiveContainer width="85%" height="100%">
@@ -766,7 +795,7 @@ export default class Rc extends Component {
                                                 >
                                                     <CartesianGrid strokeDasharray="3 3" />
                                                     <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
-                                                    <YAxis type="number" tick={false} label={{ 'value': 'Vc (voltios)', 'angle': '-90' }} domain={[0, MAX_VC_ALLOWED]} />
+                                                    <YAxis type="number" tick={false} label={{ 'value': 'Vc (voltios)', 'angle': '-90' }} domain={[0, this.state.max_vc_allowed]} />
 
                                                     {
                                                         (() => {
@@ -785,27 +814,12 @@ export default class Rc extends Component {
                                                 </LineChart>
                                             </ResponsiveContainer>
                                         </div>
-                                    </div>
-                                </Col>
-                                <br /> <br /> <br />
-                                <Carousel.Caption>
-                                    <Button variant="outline-secondary" onClick={(ev) => {this.turnOnCanvas(VC_CANVAS)}}>Diferencia de potencial en el condensador</Button>
-                                </Carousel.Caption>
-                            </Carousel.Item>
 
-                            {/* VR */}
-                            <Carousel.Item>
-                                <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
-                                    <div style={{
-                                        paddingBottom: '50%', /* 16:9 */
-                                        position: 'relative',
-                                        height: 0
-                                    }}>
                                         <div style={{
                                             position: 'absolute',
                                             top: '0',
-                                            left: '7%',
-                                            width: '100%',
+                                            left: '50%',
+                                            width: '50%',
                                             height: '100%'
                                         }}>
                                             <ResponsiveContainer width="85%" height="100%">
@@ -824,7 +838,7 @@ export default class Rc extends Component {
                                                     <CartesianGrid strokeDasharray="3 3" />
                                                     <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
                                                     <YAxis type="number" tick={false} label={this.state.capacitorCharging ? { 'value': 'Vr (voltios)', 'angle': '-90' } : { 'value': '- Vr (voltios)', 'angle': '-90' }}
-                                                        domain={[0, MAX_VR_ALLOWED]} />
+                                                        domain={this.state.capacitorCharging ? [0, this.state.max_vr_allowed] : [-this.state.max_vr_allowed, 0]} />
 
                                                     {
                                                         (() => {
@@ -842,13 +856,25 @@ export default class Rc extends Component {
                                                     <Line type="monotone" dataKey="Vr(t)" stroke="#eb3474" strokeWidth={3} dot={false} isAnimationActive={false} />
 
                                                 </LineChart>
+
                                             </ResponsiveContainer>
                                         </div>
                                     </div>
+
+
                                 </Col>
                                 <br /> <br /> <br />
                                 <Carousel.Caption>
-                                    <Button variant="outline-secondary" onClick={(ev) => {this.turnOnCanvas(VR_CANVAS)}}>Diferencia de potencial en la resistencia</Button>
+                                    <Row>
+                                        <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
+                                            <Button variant="outline-secondary" onClick={(ev) => { this.turnOnCanvas(VC_CANVAS) }}>DDP Condensador</Button>
+                                        </Col>
+                                        <Col></Col>
+                                        <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
+                                            <Button variant="outline-secondary" onClick={(ev) => { this.turnOnCanvas(VR_CANVAS) }}>DDP Resistencia</Button>
+                                        </Col>
+                                    </Row>
+
                                 </Carousel.Caption>
                             </Carousel.Item>
 
@@ -881,7 +907,7 @@ export default class Rc extends Component {
                                                 >
                                                     <CartesianGrid strokeDasharray="3 3" />
                                                     <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
-                                                    <YAxis type="number" tick={false} label={{ 'value': 'Ee (julios)', 'angle': '-90' }} domain={[0, MAX_E_ALLOWED]} />
+                                                    <YAxis type="number" tick={false} label={{ 'value': 'Ee (julios)', 'angle': '-90' }} domain={[0, this.state.max_e_allowed]} />
 
                                                     {
                                                         (() => {
@@ -906,7 +932,7 @@ export default class Rc extends Component {
                                 </Col>
                                 <br /> <br /> <br />
                                 <Carousel.Caption>
-                                    <Button variant="outline-secondary" onClick={(ev) => {this.turnOnCanvas(ENERGY_CANVAS)}}>Energía almacenada</Button>
+                                    <Button variant="outline-secondary" onClick={(ev) => { this.turnOnCanvas(ENERGY_CANVAS) }}>Energía eléctrica almacenada</Button>
                                 </Carousel.Caption>
                             </Carousel.Item>
                         </Carousel>
@@ -921,6 +947,7 @@ export default class Rc extends Component {
                             }} />
                             <span className="slider"></span>
                         </label>
+
                         {/* BUTTONS CONTROLLER */}
                         <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                             <Row>
@@ -930,24 +957,25 @@ export default class Rc extends Component {
                                         placement="top"
                                         overlay={
                                             <ToolTipReact id={`tooltip-top-3`}>
-                                                Los resultados obtenidos dependerán de la <strong>escala de tiempo</strong> utilizada.
+                                                El tiempo de la simulación podrá no ajustarse al tiempo real del experimento debido a
+                                                la escala utilizada en la generación de los datos. Concretamente, los datos son representados cada
+                                                <strong> 1 ms</strong>, por lo que utilizar un circuito con una constante de tiempo muy grande
+                                                puede ralentizar la obtención de resultados. Todo esto influye directamente en la pausa de la simulación
+                                                si se utilizan las condiciones de parada.
                                             </ToolTipReact>
                                         }>
 
                                         {QUESTION_ICON}
 
-                                    </OverlayTrigger> Condiciones de parada (aprox.): </strong>
+                                    </OverlayTrigger> Condiciones de parada: </strong>
                                 <Col xs={3} sm={3} md={3} lg={3} xl={3} xxl={3}>
                                     <Form.Select onChange={(ev) => {
                                         this.updateSelectedCondition(ev.target.value);
                                         this.updateConditionState(false);
                                     }} disabled={this.state.running}>
                                         <option defaultValue={true} value={WITHOUT_RESTRICTIONS}>Ninguna</option>
-                                        <option value={PERCENT_Q}>Carga del condensador (%)</option>
-                                        <option value={Q_VALUE}>Carga del condensador (C)</option>
                                         <option value={EXACT_TIME}>Tiempo de simulación (s)</option>
                                     </Form.Select>
-
                                 </Col>
 
                                 <Col xs={3} sm={3} md={3} lg={3} xl={3} xxl={3}>
@@ -983,7 +1011,6 @@ export default class Rc extends Component {
                                             this.resetArrayData();
                                             this.resetTimes();
                                             this.updateMaxValues();
-                                            this.setRcConstant(false);
                                         }} size="xs" >RELOAD</Button>
                                     </div>
 
@@ -1005,7 +1032,7 @@ export default class Rc extends Component {
                                         <Row>
                                             { /* CAPACITOR VALUE */}
                                             <Col sm={12} md={12} lg={12} xl={12} xxl={12}>
-                                                <input type="range" className="form-range" min="1" max="9" step="0.01"
+                                                <input type="range" className="form-range" min="1" max="100" step="1"
                                                     onChange={(ev) => {
                                                         this.updateCapacitorValue(ev.target.value);
 
@@ -1154,28 +1181,28 @@ export default class Rc extends Component {
                                             <br />
                                             Definimos <strong>intensidad de corriente</strong> como la cantidad de carga eléctrica que circula
                                             por unidad de tiempo a través de un conductor.
-                                            <br /> <br/>
-                                            <div style={{"textAlign" : "center"}}>
-                                                <img alt="definicion_intensidad_corriente" src={definicion_intensidad_corriente} style={{"width" : "30%"}}></img>
+                                            <br /> <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="definicion_intensidad_corriente" src={definicion_intensidad_corriente} style={{ "width": "30%" }}></img>
                                             </div>
                                             <br />
                                             Aplicando la expresión de carga del condensador dependiendo de si su estado está en almacenamiento o disipación
-                                            de energía, obtenemos que: <br/>
+                                            de energía, obtenemos que: <br />
                                             <ul>
                                                 <li>Durante la <strong>carga</strong> del condensador, la expresión que modela el comportamiento de la intensidad de corriente es
-                                                    <br /> <br/>
-                                                    <div style={{"textAlign" : "center"}}>
-                                                        <img alt="intensidad_condensador_en_carga" src={intensidad_condensador_en_carga} style={{"width" : "40%"}}></img>
+                                                    <br /> <br />
+                                                    <div style={{ "textAlign": "center" }}>
+                                                        <img alt="intensidad_condensador_en_carga" src={intensidad_condensador_en_carga} style={{ "width": "40%" }}></img>
                                                     </div>
-                                                    <br/>
+                                                    <br />
                                                 </li>
                                                 <li>
                                                     Mientras que durante su <strong>descarga</strong>
-                                                    <br /> <br/>
-                                                    <div style={{"textAlign" : "center"}}>
-                                                        <img alt="intensidad_condensador_en_descarga" src={intensidad_condensador_en_descarga} style={{"width" : "40%"}}></img>
+                                                    <br /> <br />
+                                                    <div style={{ "textAlign": "center" }}>
+                                                        <img alt="intensidad_condensador_en_descarga" src={intensidad_condensador_en_descarga} style={{ "width": "40%" }}></img>
                                                     </div>
-                                                    <br/>   
+                                                    <br />
                                                 </li>
                                             </ul>
                                         </>
@@ -1186,19 +1213,19 @@ export default class Rc extends Component {
                                         <>
                                             <h4>Diferencia de potencial en la resistencia</h4>
                                             <br></br>
-                                            Utilizando la <i>Ley de Ohm</i>, podemos obtener cuál es la diferencia de potencial en los bornes 
-                                            de la resistencia. Este dato, junto a la ddp en el condensador, puede llegar a ser de utilidad para comprobar que, 
-                                            efectivamente, se cumple la propiedad de conservación de energía en el circuito. Las expresiones que modelan esta magnitud física 
-                                            son: 
-                                            <br /> <br/>
-                                            <div style={{"textAlign" : "center"}}>
-                                                <img alt="vr_carga_condensador" src={vr_carga_condensador} style={{"width" : "40%"}}></img>
+                                            Utilizando la <i>Ley de Ohm</i>, podemos obtener cuál es la diferencia de potencial en los bornes
+                                            de la resistencia. Este dato, junto a la ddp en el condensador, puede llegar a ser de utilidad para comprobar que,
+                                            efectivamente, se cumple la propiedad de conservación de energía en el circuito. Las expresiones que modelan esta magnitud física
+                                            son:
+                                            <br /> <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="vr_carga_condensador" src={vr_carga_condensador} style={{ "width": "40%" }}></img>
                                             </div>
-                                            <br /> <br/>
-                                            <div style={{"textAlign" : "center"}}>
-                                                <img alt= "vr_descarga_condensador" src={vr_descarga_condensador} style={{"width" : "40%"}}></img>
+                                            <br /> <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="vr_descarga_condensador" src={vr_descarga_condensador} style={{ "width": "40%" }}></img>
                                             </div>
-                                            <br/>
+                                            <br />
                                             , durante la <strong>carga</strong> y <strong>descarga</strong> del condensador respectivamente.
                                         </>
                                     )
@@ -1209,18 +1236,18 @@ export default class Rc extends Component {
                                             <h4>Diferencia de potencial en el condensador</h4>
                                             <br></br>
                                             Para obtener la diferencia de potencial que existe entre los bornes del condensador, basta con aplicar la definición de <strong>capacidad del condensador</strong>. Este
-                                            parámetro al igual que la ddp en la resistencia, es de utilidad para comprobar que realmente se cumple la conservación de energía en el circuito. Dependiendo de si el condensador 
+                                            parámetro al igual que la ddp en la resistencia, es de utilidad para comprobar que realmente se cumple la conservación de energía en el circuito. Dependiendo de si el condensador
                                             se encuentra en estado de <strong>carga</strong> o <strong>descarga</strong> obtenemos las siguientes expresiones respectivamente:
-                                            <br /> <br/>
-                                            <div style={{"textAlign" : "center"}}>
-                                                <img alt="vc_carga_condensador" src={vc_carga_condensador} style={{"width" : "40%"}}></img>
+                                            <br /> <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="vc_carga_condensador" src={vc_carga_condensador} style={{ "width": "40%" }}></img>
                                             </div>
-                                            <br /> <br/>
-                                            <div style={{"textAlign" : "center"}}>
-                                                <img alt="vc_descarga_condensador" src={vc_descarga_condensador} style={{"width" : "40%"}}></img>
+                                            <br /> <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="vc_descarga_condensador" src={vc_descarga_condensador} style={{ "width": "40%" }}></img>
                                             </div>
 
-                                            <br/>
+                                            <br />
 
                                         </>
                                     )
@@ -1228,37 +1255,37 @@ export default class Rc extends Component {
                                     /*  ENERGY CANVAS */
                                     return (
                                         <>
-                                        <h4>Energía almacenada</h4>
-                                        <br />
-                                        Para hallar la energía que almacena un condensador, tenemos que aplicar el concepto de <strong>potencia en un conductor</strong>. Definimos
-                                        como potencia al trabajo realizado por el <i>campo eléctrico</i> aplicado sobre un conductor para trasladar una carga entre dos puntos del mismo, entre 
-                                        los cuales existe una diferencia de potencial. 
-                                        <br /> <br />
-                                        <div style={{"textAlign" : "center"}}>
-                                            <img alt="definicion_potencia_2" src={definicion_potencia_2} style={{"width" : "40%"}}></img>
-                                        </div>
-                                        <br />
-                                        , la cuál podemos formalizar de la siguiente manera:
-                                        <br /> <br />
-                                        <div style={{"textAlign" : "center"}}>
-                                            <img alt="definicion_potencia_3" src={definicion_potencia_3} style={{"width" : "40%"}}></img>
-                                        </div>
-                                        <br />
-                                        Por las definiciones de <strong>capacidad de un condensador</strong> y de <strong>intensidad de corriente</strong>,
-                                        se nos queda planteada entonces la siguiente ecuación diferencial
-                                        <br /> <br />
-                                        <div style={{"textAlign" : "center"}}>
-                                            <img alt="eq_diff_energia" src={eq_diff_energia} style={{"width" : "55%"}}></img>
-                                        </div>
-                                        <br />
-                                        , la cuál si resolvemos, obtenemos que la energía almacenada en el condensador a lo largo del tiempo
-                                        sigue la siguiente expresión
-                                        <br /> <br />
-                                        <div style={{"textAlign" : "center"}}>
-                                            <img alt="eq_energia_condensador" src={eq_energia_condensador} style={{"width" : "50%"}}></img>
-                                        </div>
-                                        <br /> <br />
-                                        </>        
+                                            <h4>Energía almacenada</h4>
+                                            <br />
+                                            Para hallar la energía que almacena un condensador, tenemos que aplicar el concepto de <strong>potencia en un conductor</strong>. Definimos
+                                            como potencia al trabajo realizado por el <i>campo eléctrico</i> aplicado sobre un conductor para trasladar una carga entre dos puntos del mismo, entre
+                                            los cuales existe una diferencia de potencial.
+                                            <br /> <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="definicion_potencia_2" src={definicion_potencia_2} style={{ "width": "40%" }}></img>
+                                            </div>
+                                            <br />
+                                            , la cuál podemos formalizar de la siguiente manera:
+                                            <br /> <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="definicion_potencia_3" src={definicion_potencia_3} style={{ "width": "40%" }}></img>
+                                            </div>
+                                            <br />
+                                            Por las definiciones de <strong>capacidad de un condensador</strong> y de <strong>intensidad de corriente</strong>,
+                                            se nos queda planteada entonces la siguiente ecuación diferencial
+                                            <br /> <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="eq_diff_energia" src={eq_diff_energia} style={{ "width": "55%" }}></img>
+                                            </div>
+                                            <br />
+                                            , la cuál si resolvemos, obtenemos que la energía almacenada en el condensador a lo largo del tiempo
+                                            sigue la siguiente expresión
+                                            <br /> <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="eq_energia_condensador" src={eq_energia_condensador} style={{ "width": "50%" }}></img>
+                                            </div>
+                                            <br /> <br />
+                                        </>
                                     )
                                 } else {
                                     return (

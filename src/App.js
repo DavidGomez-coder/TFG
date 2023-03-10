@@ -6,6 +6,7 @@ import { Component } from 'react';
 import Theory from './Theory/Theory';
 import SimpleRL from './Circuits/SimpleRL';
 import Rc from './Circuits/Rc'
+import Rl from './Circuits/Rl';
 
 
 class ExternalView extends Component {
@@ -35,7 +36,7 @@ class ExternalView extends Component {
               {/*<Nav.Link href="#teoria" onClick={(ev) => { this.updateWindow("teoria");  window.location.reload(false);} }>Teoría</Nav.Link>*/}
               { /*<Nav.Link href="#rc-sim" onClick={(ev) => { this.updateWindow("rc-sim"); }}>Simulación RC</Nav.Link> */}
               <Nav.Link href="#rc-simulation" onClick={(ev) => { this.updateWindow("rc-simulation"); }}>Simulación RC</Nav.Link>
-              <Nav.Link href="#rl-sim" onClick={(ev) => { this.updateWindow("rl-sim"); }}>Simulación RL</Nav.Link>
+              <Nav.Link href="#rl-simulation" onClick={(ev) => { this.updateWindow("rl-simulation"); }}>Simulación RL</Nav.Link>
             </Nav>
             <Nav>
               <Nav.Link>Ⓒ2023 David Gómez Pérez</Nav.Link>
@@ -45,9 +46,10 @@ class ExternalView extends Component {
 
         <Container fluid="xs sm md lg xl xxl">
           {
-            this.state.wndow === "rc-sim" ? <SimpleRC /> :
-            this.state.wndow === "rl-sim" ? <SimpleRL /> : 
-            this.state.wndow === "rc-simulation" ? <Rc /> : undefined
+            this.state.wndow === "rc-sim" ? <SimpleRC /> : //not working
+            this.state.wndow === "rl-sim" ? <SimpleRL /> : // not working
+            this.state.wndow === "rc-simulation" ? <Rc /> :
+            this.state.wndow === "rl-simulation" ? <Rl /> : undefined
             /*this.state.wndow === "teoria" ? <Theory /> : undefined */
           }
         </Container>

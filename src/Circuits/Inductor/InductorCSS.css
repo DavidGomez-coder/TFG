@@ -16,10 +16,10 @@
 }
 
 .label_current {
-    top: -50%;
+    top: -42%;
     right: -25%;
     position: relative;
-    color: whitesmoke;
+    color: rgb(255, 255, 255);
     font-size: larger;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
