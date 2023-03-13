@@ -165,12 +165,12 @@ export default class Rl extends Component {
 
         //controller
         this.updateColorBands(this.state.R_v, this.state.R_m);
-        
+
         const newInterval = setInterval(() => {
             this.updateMaxValues()
             this.updateMaxDataAllowed();
 
-            
+
 
             this.updateMaxValues();
             if (this.state.running) {
@@ -247,9 +247,12 @@ export default class Rl extends Component {
                 if (!this.state.condition_complete) {
                     //let nt_i = t_i + ((SIMULATION_STEP * this.state.simulation_step_multiplier) / 1000);
                     //let nt_a = t_a + ((SIMULATION_STEP * this.state.simulation_step_multiplier) / 1000);
-
-                    let nt_i = t_i +  1e-5;
-                    let nt_a = t_a +  1e-5;
+                    // max L - min R
+                    let MAX_KILO_TIME = 100.10;     // 10.01s
+                    let MAX_MEGA_TIME = 2000;       // 0.2s
+                    let step = this.state.R_m === KILO ? 1/MAX_KILO_TIME : 1/MAX_MEGA_TIME;
+                    let nt_i = t_i + step;
+                    let nt_a = t_a + step;
 
                     this.setState(prevState => {
                         return {
@@ -274,8 +277,8 @@ export default class Rl extends Component {
 
             }
         });
-        
-        
+
+
 
         //update time interval id
         this.setState(prevState => {
@@ -300,7 +303,7 @@ export default class Rl extends Component {
     //      UPDATE SIMULATION STEP
     // ****************************************
     setSimulationStepMultiplier(val) {
-        this.setState(prevState =>  {
+        this.setState(prevState => {
             return {
                 ...prevState,
                 simulation_step_multiplier: val
@@ -509,10 +512,10 @@ export default class Rl extends Component {
         this.setState(prevState => {
             return {
                 ...prevState,
-                max_cu_allowed : prevState.V / (1 * prevState.R_m),
-                max_vr_allowed : prevState.V,
-                max_vl_allowed : prevState.V,
-                max_e_allowed  : (1/2) * 1 * Math.pow(prevState.V / (1 * prevState.R_m),2),
+                max_cu_allowed: prevState.V / (1 * prevState.R_m),
+                max_vr_allowed: prevState.V,
+                max_vl_allowed: prevState.V,
+                max_e_allowed: (1 / 2) * 1 * Math.pow(prevState.V / (1 * prevState.R_m), 2),
                 max_phi_allowed: 1 * prevState.V / (1 * prevState.R_m)
 
             }
@@ -651,8 +654,8 @@ export default class Rl extends Component {
                                                 >
                                                     <CartesianGrid strokeDasharray="3 3" />
                                                     <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
-                                                    <YAxis type="number" tick={false} label={{ 'value': 'I (amperios)', 'angle': '-90' }} 
-                                                      domain={[0,this.state.max_cu_allowed]}/>
+                                                    <YAxis type="number" tick={false} label={{ 'value': 'I (amperios)', 'angle': '-90' }}
+                                                        domain={[0, this.state.max_cu_allowed]} />
                                                     {
                                                         (() => {
                                                             if (!this.state.running) {
@@ -683,7 +686,7 @@ export default class Rl extends Component {
                                 </Col>
                                 <br /> <br /> <br />
                                 <Carousel.Caption>
-                                    <Button variant="outline-secondary" onClick={(ev) => {this.turnOnCanvas(I_CANVAS)}}>Intensidad de corriente</Button>
+                                    <Button variant="outline-secondary" onClick={(ev) => { this.turnOnCanvas(I_CANVAS) }}>Intensidad de corriente</Button>
                                 </Carousel.Caption>
                             </Carousel.Item>
 
@@ -717,8 +720,8 @@ export default class Rl extends Component {
                                                 >
                                                     <CartesianGrid strokeDasharray="3 3" />
                                                     <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
-                                                    <YAxis type="number" tick={false} label={this.state.inductorCharging ? { 'value': 'Vl (voltios)', 'angle': '-90' } : { 'value': '- Vl (voltios)', 'angle': '-90' }} 
-                                                     domain={this.state.inductorCharging ? [0, this.state.max_vl_allowed] : [-this.state.max_vl_allowed, 0]}/>
+                                                    <YAxis type="number" tick={false} label={this.state.inductorCharging ? { 'value': 'Vl (voltios)', 'angle': '-90' } : { 'value': '- Vl (voltios)', 'angle': '-90' }}
+                                                        domain={this.state.inductorCharging ? [0, this.state.max_vl_allowed] : [-this.state.max_vl_allowed, 0]} />
 
                                                     {
                                                         (() => {
@@ -769,8 +772,8 @@ export default class Rl extends Component {
                                                 >
                                                     <CartesianGrid strokeDasharray="3 3" />
                                                     <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
-                                                    <YAxis type="number" tick={false} label={{ 'value': 'Vr (voltios)', 'angle': '-90' }} 
-                                                     domain={[0, this.state.max_vr_allowed]}/>
+                                                    <YAxis type="number" tick={false} label={{ 'value': 'Vr (voltios)', 'angle': '-90' }}
+                                                        domain={[0, this.state.max_vr_allowed]} />
 
                                                     {
                                                         (() => {
@@ -805,7 +808,7 @@ export default class Rl extends Component {
                                 </Col>
                                 <br /> <br /> <br />
                                 <Carousel.Caption>
-                                <Row>
+                                    <Row>
                                         <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
                                             <Button variant="outline-secondary" onClick={(ev) => { this.turnOnCanvas(VL_CANVAS) }}>DDP Inductor</Button>
                                         </Col>
@@ -817,7 +820,7 @@ export default class Rl extends Component {
                                 </Carousel.Caption>
                             </Carousel.Item>
 
-                            
+
                             {/* ENERGY AND PHI GRAPHS*/}
                             <Carousel.Item>
                                 <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
@@ -847,8 +850,8 @@ export default class Rl extends Component {
                                                 >
                                                     <CartesianGrid strokeDasharray="3 3" />
                                                     <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
-                                                    <YAxis type="number" tick={false} label={{ 'value': 'Em (julios)', 'angle': '-90' }} 
-                                                     domain={[0, this.state.max_e_allowed]}/>
+                                                    <YAxis type="number" tick={false} label={{ 'value': 'Em (julios)', 'angle': '-90' }}
+                                                        domain={[0, this.state.max_e_allowed]} />
                                                     {
                                                         (() => {
                                                             if (!this.state.running) {
@@ -897,8 +900,8 @@ export default class Rl extends Component {
                                                 >
                                                     <CartesianGrid strokeDasharray="3 3" />
                                                     <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
-                                                    <YAxis type="number" tick={false} label={{ 'value': 'Φ (weber)', 'angle': '-90' }} 
-                                                     domain={[0, this.state.max_phi_allowed]}/>
+                                                    <YAxis type="number" tick={false} label={{ 'value': 'Φ (weber)', 'angle': '-90' }}
+                                                        domain={[0, this.state.max_phi_allowed]} />
                                                     {
                                                         (() => {
                                                             if (!this.state.running) {
@@ -930,7 +933,7 @@ export default class Rl extends Component {
                                 </Col>
                                 <br /> <br /> <br />
                                 <Carousel.Caption>
-                                <Row>
+                                    <Row>
                                         <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
                                             <Button variant="outline-secondary" onClick={(ev) => { this.turnOnCanvas(ENERGY_CANVAS) }}>Energía Mag. almacenada</Button>
                                         </Col>
@@ -942,10 +945,13 @@ export default class Rl extends Component {
                                 </Carousel.Caption>
                             </Carousel.Item>
 
-                                                </Carousel>
+                        </Carousel>
                     </Col>
 
                     <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
+                        <Alert variant="info">
+                            Al igual que en el laboratorio, el valor de la fuente es de <strong>6V</strong>.
+                        </Alert>
                         {/* CIRCUIT PICTURE */}
                         <img alt="circuit_animation" src={this.getCurrentAnimation()} className="w-100"></img>
                         <label className="switch">
@@ -1032,7 +1038,7 @@ export default class Rl extends Component {
                                     <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                                         <Row>
                                             <Col sm={12} md={12} lg={12} xl={12} xxl={12}>
-                                                <input type="range" className="form-range" min="0.01" max={this.state.L_m === 1 ? 1 : 100} step="0.01"
+                                                <input type="range" className="form-range" min="1" max="1000" step="1"
                                                     onChange={(ev) => {
                                                         this.updateInductorValue(ev.target.value);
 
@@ -1041,10 +1047,9 @@ export default class Rl extends Component {
                                             </Col>
                                             <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                                                 <select className="form-select component-value" aria-label="Default select example" onChange={(ev) => {
-                                                    this.updateInductorMultiplier(ev.target.value)
+                                                    this.updateInductorMultiplier(ev.target.value);
                                                 }} disabled={this.state.showMultipliers === false}>
-                                                    <option defaultValue={true} value="H">{this.state.L_v} H </option>
-                                                    <option value="miliH">{this.state.L_v} miliH</option>
+                                                    <option defaultValue={true} value="miliH">{this.state.L_v} miliH</option>
                                                 </select>
 
                                             </Col>
@@ -1098,7 +1103,7 @@ export default class Rl extends Component {
                                     </Col>
                                 </Row>
                             </Col>
-                            
+
                             {/* RESISTOR CONTROLLER */}
                             <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
                                 <Row>
@@ -1144,179 +1149,179 @@ export default class Rl extends Component {
                     </Col>
                 </Row>
                 {/* THEORY CANVAS */}
-                <Offcanvas show={this.state.showCanvas} onHide={(ev)=> {this.turnOffCanvas()}} placement="end">
-                                                <Offcanvas.Header closeButton>
-                                                    <Offcanvas.Title>
-                                                        <h1>Circuito RL</h1>
-                                                    </Offcanvas.Title>
-                                                </Offcanvas.Header>
-                                                <Offcanvas.Body>
-                                                    {
-                                                        (() => {
-                                                            if (this.state.currentCanvas === I_CANVAS){
-                                                                /* INDUCTOR CURRENT THEORY */
-                                                                return (
-                                                                    <>
-                                                                        <h4>Intensidad de corriente</h4>
-                                                                        <br />
-                                                                        Definimos <strong>intensidad de corriente</strong> como la cantidad de carga eléctrica que circula
-                                                                        por unidad de tiempo a través de un conductor.
-                                                                        <br /> <br/>
-                                                                        <div style={{"textAlign" : "center"}}>
-                                                                            <img alt="definicion_intensidad_corriente" src={definicion_intensidad_corriente} style={{"width" : "35%"}}></img>
-                                                                        </div>
-                                                                        <br />
-                                                                        En este caso, calcularemos la función de la intensidad de corriente utilizando la <strong>ley de Ohm</strong> junto a la <strong>ley de Lenz</strong>, aplicadas a la expresión resultante de realizar un balance energético del circuito, 
-                                                                        <br /> <br/>
-                                                                        <div style={{"textAlign" : "center"}}>
-                                                                            <img alt="balance_energetico_rl" src={balance_energetico_rl} style={{"width" : "45%"}}></img>
-                                                                        </div>
-                                                                        <br />
-                                                                        
-                                                                        quedando planteada la siguiente ecuación diferencial.
-                                                                        <br /> <br/>
-                                                                        <div style={{"textAlign" : "center"}}>
-                                                                            <img alt="eq_diff_intensidad_rl" src={eq_diff_intensidad_rl} style={{"width" : "45%"}}></img>
-                                                                        </div>
-                                                                        <br />
-                                                                        Para resolverla, supondremos los siguientes casos iniciales dependiendo del estado en el que estemos:
-                                                                        <ul>
-                                                                            <li>
-                                                                                Durante el <strong>almacenamiento</strong> de energía en la bobina, consideraremos que inicialmente la intensidad de corriente que 
-                                                                                circula por el circuito es nula, obteniendo el siguiente resultado.
-                                                                                <br /> <br/>
-                                                                                <div style={{"textAlign" : "center"}}>
-                                                                                    <img alt="intensidad_rl_1" src={intensidad_rl_1} style={{"width" : "45%"}}></img>
-                                                                                </div>
-                                                                                <br />
-                                                                            </li>
-                                                                            <li>
-                                                                                Por otro lado, durante el estado de <strong>disipación</strong> de energía, el valor de la fuente es cero y comenzaremos suponiendo que inicialmente 
-                                                                                la intensidad de corriente es máxima, es decir, que el inductor se encuentra almacenando toda la energía posible. La expresión que modela la intensidad de corriente 
-                                                                                en estado de disipación es:
-                                                                                <br /> <br/>
-                                                                                <div style={{"textAlign" : "center"}}>
-                                                                                    <img alt="intensidad_rl_2" src={intensidad_rl_2} style={{"width" : "40%"}}></img>
-                                                                                </div>
-                                                                            </li>
-                                                                        </ul>
-                                                                        
-        
-                                                                        
-                                                                    </>
-                                                                )
-                                                            }else if (this.state.currentCanvas === VR_CANVAS) {
-                                                                /* VR THEORY */
-                                                                return (
-                                                                    <>
-                                                                        <h4>Diferencia de potencial en la resistencia</h4>
-                                                                        Utilizando la <i>Ley de Ohm</i> podemos obtener cuál es la diferencia de potencial entre los bornes 
-                                                                        de la resistencia. Este dato, junto a la <i>ddp</i> en la bobina, pueden ser de utilidad para comprobar que el 
-                                                                        principio de conservación de la energía se cumple en el circuito. Se muestran a continuación, las expresiones que 
-                                                                        modelan el comportamiento de este parámetro,
-                                                                        <br /> <br/>
-                                                                        <div style={{"textAlign" : "center"}}>
-                                                                            <img alt="ddp_resistencia_rl_1" src={ddp_resistencia_rl_1} style={{"width" : "45%"}}></img>
-                                                                        </div>
-                                                                        <br />
-                                                                        <div style={{"textAlign" : "center"}}>
-                                                                            <img alt="ddp_resistencia_rl_2" src={ddp_resistencia_rl_2} style={{"width" : "40%"}}></img>
-                                                                        </div>
-                                                                        <br />.
-                                                                        para los estados de <strong>almacenamiento</strong> y <strong>disipación</strong> de energía respectivamente.
-                                                                    </>
-                                                                )
-                                                            }else if (this.state.currentCanvas === VL_CANVAS) {
-                                                                /* VL THEORY */
-                                                                return (
-                                                                    <>
-                                                                        <h4>Diferencia de potencial en el inductor</h4>
-                                                                        De igual manera que es posible obtener la diferencia de potencial en la resistencia, también podemos hallar esta <i>ddp</i> en los 
-                                                                        bornes de la bobina. La evolución de este parámetro puede ser de utilidad si se quiere comprobar que efectivamente el principio de conservación 
-                                                                        de la energía se cumple. Utilizando la definición de fuerza electromotriz dada por la <strong>Ley de Lenz</strong>, 
-                                                                        <br /> <br/>
-                                                                        <div style={{"textAlign" : "center"}}>
-                                                                            <img alt="ddp_inductor" src={ddp_inductor} style={{"width" : "40%"}}></img>
-                                                                        </div>
-                                                                        <br />
-                                                                        Aplicando las diferentes expresiones obtenidas de la intensidad de corriente, concluimos que la diferencia de potencial en el inductor durante  
-                                                                        el <strong>almacenamiento</strong> y <strong> disipación</strong> de energía son, respectivamente:
-                                                                        <br /> <br/>
-                                                                        <div style={{"textAlign" : "center"}}>
-                                                                            <img alt="ddp_inductor_1" src={ddp_inductor_1} style={{"width" : "40%"}}></img>
-                                                                        </div>
-                                                                        <br />
-                                                                        <div style={{"textAlign" : "center"}}>
-                                                                            <img alt="ddp_inductor_2" src={ddp_inductor_2} style={{"width" : "40%"}}></img>
-                                                                        </div>
-                                                                        <br />
-                                                                    </>
-                                                                )
-                                                            }else if (this.state.currentCanvas === ENERGY_CANVAS) {
-                                                                /* ENERGY THEORY */
-                                                                return (
-                                                                    <>
-                                                                    <h4>Energía almacenada</h4>
-                                                                    Hallamos la energía almacenada en el campo magnético del inductor aplicando el concepto de <strong>potencia consumida</strong> en 
-                                                                    este dispositivo
-                                                                    <br /> <br/>
-                                                                        <div style={{"textAlign" : "center"}}>
-                                                                            <img alt="potencia_consumida_inductor" src={potencia_consumida_inductor} style={{"width" : "40%"}}></img>
-                                                                        </div>
-                                                                        <br />
-                                                                    Y por definición, la energía almacenada es la potencia por unidad de tiempo
-                                                                    <br /> <br/>
-                                                                        <div style={{"textAlign" : "center"}}>
-                                                                            <img alt="energia_consumida" src={energia_consumida} style={{"width" : "40%"}}></img>
-                                                                        </div>
-                                                                        <br />
-                                                                    Dónde obtenemos la siguiente ecuación diferencial a resolver
-                                                                    <br /> <br/>
-                                                                        <div style={{"textAlign" : "center"}}>
-                                                                            <img alt="energia_ec_diff" src={energia_ec_diff} style={{"width" : "45%"}}></img>
-                                                                        </div>
-                                                                        <br />
-                                                                    Partiendo de un circuito en el que la corriente eléctrica que circula es nula y dónde la energía almacenada 
-                                                                    por el inductor también lo es (inicialmente supondremos un estado de equilibrio), la expresión que modela la energía 
-                                                                    almacenada es:
-                                                                    <br /> <br/>
-                                                                        <div style={{"textAlign" : "center"}}>
-                                                                            <img alt="energia_almacenada_rl" src={energia_almacenada_rl} style={{"width" : "50%"}}></img>
-                                                                        </div>
-                                                                        <br />
-                                                                    </>        
-                                                                )
-                                                            }else if (this.state.currentCanvas === PHI_CANVAS) {
-                                                                /* MAGNETIC FLUX THEORY */
-                                                                return (
-                                                                    <>
-                                                                        <h4>Flujo magnético</h4>
-                                                                       Se define <strong>flujo magnético</strong>, como la cantidad de <i>campo magnético</i> que atraviesa una superficie.
-                                                                       <br />
-                                                                       Según esta definición, su expresión es:
-                                                                       <br /> <br/>
-                                                                        <div style={{"textAlign" : "center"}}>
-                                                                            <img alt="def_flujo_magnetico" src={def_flujo_magnetico} style={{"width" : "25%"}}></img>
-                                                                        </div>
-                                                                        <br/>
-                                                                        , aunque la expresión que modela este parámetro en función del tiempo puede obtenerse utilizando la <strong>ley de Lenz</strong>, 
-                                                                        sabiendo que esta es directamente proporcional con la intensidad de corriente y que, a esta constante, es 
-                                                                        el <strong>coeficiente de autoinducción</strong> del inductor.
-                                                                        <br /> <br/>
-                                                                        <div style={{"textAlign" : "center"}}>
-                                                                            <img alt="flujo_magnetico" src={flujo_magnetico} style={{"width" : "30%"}}></img>
-                                                                        </div>
-                                                                        <br/>
-                                                                    </>
-                                                                )
-                                                            }else {
-                                                                return (
-                                                                    <h2>ERROR</h2>
-                                                                )
-                                                            }
-                                                        })()
-                                                    }
-                                                </Offcanvas.Body>
+                <Offcanvas show={this.state.showCanvas} onHide={(ev) => { this.turnOffCanvas() }} placement="end">
+                    <Offcanvas.Header closeButton>
+                        <Offcanvas.Title>
+                            <h1>Circuito RL</h1>
+                        </Offcanvas.Title>
+                    </Offcanvas.Header>
+                    <Offcanvas.Body>
+                        {
+                            (() => {
+                                if (this.state.currentCanvas === I_CANVAS) {
+                                    /* INDUCTOR CURRENT THEORY */
+                                    return (
+                                        <>
+                                            <h4>Intensidad de corriente</h4>
+                                            <br />
+                                            Definimos <strong>intensidad de corriente</strong> como la cantidad de carga eléctrica que circula
+                                            por unidad de tiempo a través de un conductor.
+                                            <br /> <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="definicion_intensidad_corriente" src={definicion_intensidad_corriente} style={{ "width": "35%" }}></img>
+                                            </div>
+                                            <br />
+                                            En este caso, calcularemos la función de la intensidad de corriente utilizando la <strong>ley de Ohm</strong> junto a la <strong>ley de Lenz</strong>, aplicadas a la expresión resultante de realizar un balance energético del circuito,
+                                            <br /> <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="balance_energetico_rl" src={balance_energetico_rl} style={{ "width": "45%" }}></img>
+                                            </div>
+                                            <br />
+
+                                            quedando planteada la siguiente ecuación diferencial.
+                                            <br /> <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="eq_diff_intensidad_rl" src={eq_diff_intensidad_rl} style={{ "width": "45%" }}></img>
+                                            </div>
+                                            <br />
+                                            Para resolverla, supondremos los siguientes casos iniciales dependiendo del estado en el que estemos:
+                                            <ul>
+                                                <li>
+                                                    Durante el <strong>almacenamiento</strong> de energía en la bobina, consideraremos que inicialmente la intensidad de corriente que
+                                                    circula por el circuito es nula, obteniendo el siguiente resultado.
+                                                    <br /> <br />
+                                                    <div style={{ "textAlign": "center" }}>
+                                                        <img alt="intensidad_rl_1" src={intensidad_rl_1} style={{ "width": "45%" }}></img>
+                                                    </div>
+                                                    <br />
+                                                </li>
+                                                <li>
+                                                    Por otro lado, durante el estado de <strong>disipación</strong> de energía, el valor de la fuente es cero y comenzaremos suponiendo que inicialmente
+                                                    la intensidad de corriente es máxima, es decir, que el inductor se encuentra almacenando toda la energía posible. La expresión que modela la intensidad de corriente
+                                                    en estado de disipación es:
+                                                    <br /> <br />
+                                                    <div style={{ "textAlign": "center" }}>
+                                                        <img alt="intensidad_rl_2" src={intensidad_rl_2} style={{ "width": "40%" }}></img>
+                                                    </div>
+                                                </li>
+                                            </ul>
+
+
+
+                                        </>
+                                    )
+                                } else if (this.state.currentCanvas === VR_CANVAS) {
+                                    /* VR THEORY */
+                                    return (
+                                        <>
+                                            <h4>Diferencia de potencial en la resistencia</h4>
+                                            Utilizando la <i>Ley de Ohm</i> podemos obtener cuál es la diferencia de potencial entre los bornes
+                                            de la resistencia. Este dato, junto a la <i>ddp</i> en la bobina, pueden ser de utilidad para comprobar que el
+                                            principio de conservación de la energía se cumple en el circuito. Se muestran a continuación, las expresiones que
+                                            modelan el comportamiento de este parámetro,
+                                            <br /> <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="ddp_resistencia_rl_1" src={ddp_resistencia_rl_1} style={{ "width": "45%" }}></img>
+                                            </div>
+                                            <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="ddp_resistencia_rl_2" src={ddp_resistencia_rl_2} style={{ "width": "40%" }}></img>
+                                            </div>
+                                            <br />.
+                                            para los estados de <strong>almacenamiento</strong> y <strong>disipación</strong> de energía respectivamente.
+                                        </>
+                                    )
+                                } else if (this.state.currentCanvas === VL_CANVAS) {
+                                    /* VL THEORY */
+                                    return (
+                                        <>
+                                            <h4>Diferencia de potencial en el inductor</h4>
+                                            De igual manera que es posible obtener la diferencia de potencial en la resistencia, también podemos hallar esta <i>ddp</i> en los
+                                            bornes de la bobina. La evolución de este parámetro puede ser de utilidad si se quiere comprobar que efectivamente el principio de conservación
+                                            de la energía se cumple. Utilizando la definición de fuerza electromotriz dada por la <strong>Ley de Lenz</strong>,
+                                            <br /> <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="ddp_inductor" src={ddp_inductor} style={{ "width": "40%" }}></img>
+                                            </div>
+                                            <br />
+                                            Aplicando las diferentes expresiones obtenidas de la intensidad de corriente, concluimos que la diferencia de potencial en el inductor durante
+                                            el <strong>almacenamiento</strong> y <strong> disipación</strong> de energía son, respectivamente:
+                                            <br /> <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="ddp_inductor_1" src={ddp_inductor_1} style={{ "width": "40%" }}></img>
+                                            </div>
+                                            <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="ddp_inductor_2" src={ddp_inductor_2} style={{ "width": "40%" }}></img>
+                                            </div>
+                                            <br />
+                                        </>
+                                    )
+                                } else if (this.state.currentCanvas === ENERGY_CANVAS) {
+                                    /* ENERGY THEORY */
+                                    return (
+                                        <>
+                                            <h4>Energía almacenada</h4>
+                                            Hallamos la energía almacenada en el campo magnético del inductor aplicando el concepto de <strong>potencia consumida</strong> en
+                                            este dispositivo
+                                            <br /> <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="potencia_consumida_inductor" src={potencia_consumida_inductor} style={{ "width": "40%" }}></img>
+                                            </div>
+                                            <br />
+                                            Y por definición, la energía almacenada es la potencia por unidad de tiempo
+                                            <br /> <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="energia_consumida" src={energia_consumida} style={{ "width": "40%" }}></img>
+                                            </div>
+                                            <br />
+                                            Dónde obtenemos la siguiente ecuación diferencial a resolver
+                                            <br /> <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="energia_ec_diff" src={energia_ec_diff} style={{ "width": "45%" }}></img>
+                                            </div>
+                                            <br />
+                                            Partiendo de un circuito en el que la corriente eléctrica que circula es nula y dónde la energía almacenada
+                                            por el inductor también lo es (inicialmente supondremos un estado de equilibrio), la expresión que modela la energía
+                                            almacenada es:
+                                            <br /> <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="energia_almacenada_rl" src={energia_almacenada_rl} style={{ "width": "50%" }}></img>
+                                            </div>
+                                            <br />
+                                        </>
+                                    )
+                                } else if (this.state.currentCanvas === PHI_CANVAS) {
+                                    /* MAGNETIC FLUX THEORY */
+                                    return (
+                                        <>
+                                            <h4>Flujo magnético</h4>
+                                            Se define <strong>flujo magnético</strong>, como la cantidad de <i>campo magnético</i> que atraviesa una superficie.
+                                            <br />
+                                            Según esta definición, su expresión es:
+                                            <br /> <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="def_flujo_magnetico" src={def_flujo_magnetico} style={{ "width": "25%" }}></img>
+                                            </div>
+                                            <br />
+                                            , aunque la expresión que modela este parámetro en función del tiempo puede obtenerse utilizando la <strong>ley de Lenz</strong>,
+                                            sabiendo que esta es directamente proporcional con la intensidad de corriente y que, a esta constante, es
+                                            el <strong>coeficiente de autoinducción</strong> del inductor.
+                                            <br /> <br />
+                                            <div style={{ "textAlign": "center" }}>
+                                                <img alt="flujo_magnetico" src={flujo_magnetico} style={{ "width": "30%" }}></img>
+                                            </div>
+                                            <br />
+                                        </>
+                                    )
+                                } else {
+                                    return (
+                                        <h2>ERROR</h2>
+                                    )
+                                }
+                            })()
+                        }
+                    </Offcanvas.Body>
                 </Offcanvas>
             </div>
         ) : (

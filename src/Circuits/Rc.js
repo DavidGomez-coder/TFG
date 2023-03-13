@@ -228,8 +228,12 @@ export default class Rc extends Component {
                 if (!this.state.condition_complete) {
                     //let nt_i = t_i + ((SIMULATION_STEP * this.state.simulation_step_multiplier) / 1000);
                     //let nt_a = t_a + ((SIMULATION_STEP * this.state.simulation_step_multiplier) / 1000);
-                    let nt_i = t_i +  this.state.simulation_step * SIMULATION_EXEC;
-                    let nt_a = t_a +  this.state.simulation_step * SIMULATION_EXEC;
+                    // max C - max R
+                    let MAX_KILO_TIME = 100; // 10s
+                    let MAX_MEGA_TIME = 57;      //5700 s
+                    let step = this.state.R_m === KILO ? 1/MAX_KILO_TIME : 1/MAX_MEGA_TIME;
+                    let nt_i = t_i +  step;
+                    let nt_a = t_a +  step;
 
                     this.setState(prevState => {
                         return {
@@ -939,6 +943,9 @@ export default class Rc extends Component {
                     </Col>
 
                     <Col xs={5} sm={5} md={5} lg={5} xl={5} xxl={5}>
+                        <Alert variant="info">
+                            Al igual que en el laboratorio, el valor de la fuente es de <strong>6V</strong>.
+                        </Alert>
                         { /*  CIRCUIT PICTURE */}
                         <img alt="circuit_animation" src={this.getCurrentAnimation()} className="w-100"></img>
                         <label className="switch">
