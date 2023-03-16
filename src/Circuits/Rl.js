@@ -110,12 +110,12 @@ export default class Rl extends Component {
             //initial current percent
             i_percent: 0,
             // components  values
-            L: 1,
+            L: 10,
             R: 1000,
             R_color_bands: [],
             V: 6,
             //components initial values and multipliers
-            L_v: 1,
+            L_v: 10,
             L_m: 1,
             R_v: 1,
             R_m: 1000,
@@ -249,8 +249,8 @@ export default class Rl extends Component {
                     //let nt_a = t_a + ((SIMULATION_STEP * this.state.simulation_step_multiplier) / 1000);
                     // max L - min R
                     let MAX_KILO_TIME = 100.10;     // 10.01s
-                    let MAX_MEGA_TIME = 2000;       // 0.2s
-                    let step = this.state.R_m === KILO ? 1/MAX_KILO_TIME : 1/MAX_MEGA_TIME;
+                    let MAX_L_TIME = 5;       // 5s
+                    let step = this.state.R_m === KILO ? 1/MAX_KILO_TIME : 1/MAX_L_TIME;
                     let nt_i = t_i + step;
                     let nt_a = t_a + step;
 
@@ -1039,7 +1039,7 @@ export default class Rl extends Component {
                                     <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
                                         <Row>
                                             <Col sm={12} md={12} lg={12} xl={12} xxl={12}>
-                                                <input type="range" className="form-range" min="1" max="1000" step="1"
+                                                <input type="range" className="form-range" min="10" max="1000" step="1"
                                                     onChange={(ev) => {
                                                         this.updateInductorValue(ev.target.value);
 
@@ -1123,8 +1123,8 @@ export default class Rl extends Component {
                                                     this.updateResistorMultiplier(ev.target.value)
                                                     this.updateColorBands(this.state.R_v, valueOfMultiplier(ev.target.value));
                                                 }} disabled={this.state.showMultipliers === false}>
-                                                    <option defaultValue={true} value="x1K">{Number.parseFloat(this.state.R_v).toFixed(2)} KΩ</option>
-                                                    <option value="x1M">  {Number.parseFloat(this.state.R_v).toFixed(2)} MΩ</option>
+                                                    <option defaultValue={true} value="x1">{Number.parseFloat(this.state.R_v).toFixed(2)} Ω </option>
+                                                    <option value="x1K">{Number.parseFloat(this.state.R_v).toFixed(2)} KΩ</option>
                                                 </select>
 
                                             </Col>

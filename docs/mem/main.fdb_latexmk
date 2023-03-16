@@ -1,12 +1,12 @@
 # Fdb version 3
-["biber main"] 1678879869 "main.bcf" "main.bbl" "main" 1678881928
+["biber main"] 1678964038 "main.bcf" "main.bbl" "main" 1678964098
   "bibliography.bib" 1671466358 7519 94a3225a69823d89dd444a98d8239167 ""
-  "main.bcf" 1678881918 108994 e0f7edb6cf217642b069e8c8dc28227e "pdflatex"
+  "main.bcf" 1678964088 108994 e0f7edb6cf217642b069e8c8dc28227e "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1678881908 "/home/david/Documentos/TFG/docs/mem/main.tex" "main.pdf" "main" 1678881928
-  "/dev/null" 1678871042 0 d41d8cd98f00b204e9800998ecf8427e ""
+["pdflatex"] 1678964078 "/home/david/Documentos/TFG/docs/mem/main.tex" "main.pdf" "main" 1678964098
+  "/dev/null" 1678953244 0 d41d8cd98f00b204e9800998ecf8427e ""
   "/etc/texmf/web2c/texmf.cnf" 1671008491 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/david/Documentos/TFG/docs/mem/main.tex" 1678879849 2235 10deba05063d2684911ed82ba52ef296 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -329,14 +329,14 @@
   "images/ventana_datos_2.png" 1671466360 48508 33e1c8de4eba63aaa850d7ddba8a43ee ""
   "images/web1.0.png" 1671466360 38830 1dd35f93828492308a4e454b89f426e5 ""
   "images/web2.0.png" 1671466360 77221 4d1e9c6397c5db332c8ca1fcd23233ef ""
-  "main.aux" 1678881918 44848 86415ca8a98cfd56f4e7d736eb2b8839 "pdflatex"
-  "main.bbl" 1678879870 25114 5682347ea729e9821ea2ec05ce5ee86c "biber main"
-  "main.out" 1678881918 14955 77ec09fec9df7bd98b72699d171b900c "pdflatex"
-  "main.run.xml" 1678881918 2376 a874d24ac4762e38195d4449ba439cea "pdflatex"
+  "main.aux" 1678964088 44848 86415ca8a98cfd56f4e7d736eb2b8839 "pdflatex"
+  "main.bbl" 1678964038 25114 5682347ea729e9821ea2ec05ce5ee86c "biber main"
+  "main.out" 1678964088 14955 77ec09fec9df7bd98b72699d171b900c "pdflatex"
+  "main.run.xml" 1678964088 2376 a874d24ac4762e38195d4449ba439cea "pdflatex"
   "main.tex" 1678879849 2235 10deba05063d2684911ed82ba52ef296 ""
-  "main.toc" 1678881918 6895 efb4735a15c6346938e349a322bc7e23 "pdflatex"
+  "main.toc" 1678964088 6895 efb4735a15c6346938e349a322bc7e23 "pdflatex"
   "sections/abstract.tex" 1671466358 1236 9477038eebdb08a818e3cdccf818d089 ""
-  "sections/circuitosRCyRL.tex" 1678881879 38018 e5816c6a7a28644c437cf1893c6f673b ""
+  "sections/circuitosRCyRL.tex" 1678963958 37853 0b23d31dbff62646119009c9d3005896 ""
   "sections/conclusion.tex" 1671466358 158 f846bc78e25f4cd4858699c710df8eb3 ""
   "sections/conclusiones.tex" 1673631373 156 ddbb9af2645163ae35c68a6e7ecfb81b ""
   "sections/implementacion.tex" 1671536473 22344 61e222713f4556ab3931b324884e9b06 ""

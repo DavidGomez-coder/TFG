@@ -41,11 +41,10 @@ Ya se comentó en la introducción de este capítulo que un circuito RC es una a
     \label{fig::circuito_rc_representación}
 \end{figure}
 
-Partimos entonces de un condensador de capacidad $C$ completamente descargado conectado en serie a una resistencia de valor $R$. En el instante de tiempo $t=0s$, aplicamos una diferencia de potencial de $\varepsilon V$, cuyo valor coincide con el voltaje característico de la fuente utilizada (figura \ref{fig::circuito_rc_representación}).
+Partimos entonces de un condensador de capacidad $C$ completamente descargado conectado en serie a una resistencia de valor $R$. En el instante de tiempo $t=0s$, aplicamos una diferencia de potencial de $\varepsilon$ V, cuyo valor coincide con el voltaje característico de la fuente utilizada (figura \ref{fig::circuito_rc_representación}).
 
-En ese mismo instante, la carga del condensador es nula, así que utilizando la definición de capacidad llegamos a la conclusión de que el potencial en él también lo es. Por el contrario, como siempre debe de cumplirse el principio de conservación de la energía; hablando en términos de potencial eléctrico, el voltaje entre los bornes de la resistencia debe de ser máximo, por lo que la intensidad de corriente que circula en ese momento por el circuito también lo es. 
 
-A medida que el condensador va ganando carga y el potencial eléctrico entre sus placas aumenta, sabiendo que la fuerza electromotriz de la fuente es constante y que debe de cumplirse el principio de conservación energético, el potencial en la resistencia disminuye. Esto se debe a que estos circuitos son estacionarios; es decir, las magnitudes que lo describen varían a lo largo del tiempo.
+En ese mismo instante, la carga del condensador es nula, así que utilizando la definición de capacidad del condensador (\ref{def::capacidad_conductor}) llegamos a la conclusión de que el potencial en él también es cero. Por otro lado, tenemos que la energía potencial entre los bornes de la resistencia ha de ser máxima, y por consiguiente la intensidad de corriente que circula a través de ella. Esto se debe principalmente a que debe de cumplirse el principio de conservación de la energía; que en términos de potencial, la energía suministrada por la fuente debe de ser en todo momento igual a la consumida por los componentes pasivos del circuito: el condensador y la resistencia. 
 
 \begin{figure}[!h]
     \centering
@@ -65,15 +64,15 @@ A medida que el condensador va ganando carga y el potencial eléctrico entre sus
     \label{fig::carga_condensador}
 \end{figure}
 
-Así que para observar con más detalle como evolucionan cada una de las magnitudes basta con realizar un balance energético en términos de potencial, dónde la energía suministrada por la fuente debe de ser en todo momento igual a la consumida por los componentes pasivos del circuito: el condensador y la resistencia.
 
+Este principio, debe de mantenerse durante todo el proceso de carga hasta que la diferencia de potencial en el condensador sea máxima, y por tanto lo sea la carga almacenada en él. Como debe de volver a cumplirse el principio de conservación energético, ahora la energía potencial entre los bornes de la resistencia es cero, y utilizando de nuevo la Ley de Ohm, tenemos que la intensidad de corriente es nula. Matemáticamente, podemos expresar este balance utilizando la siguiente ecuación diferencial:
 
 \begin{equation}
     \varepsilon = V_C(t) + V_R(t) = \frac{q(t)}{C} + R\frac{\partial q(t)}{\partial t}
     \label{eqq::balance_energetico_rc_1}
 \end{equation}
 
-En este caso, tenemos que $\varepsilon$ es la fuerza electromotriz de la fuente (o la energía suministrada por la pila por cada unidad de carga que la atraviesa), $V_C(t)$ hace referencia al potencial eléctrico entre las armaduras del condensador y $V_R(t)$ a la diferencia de potencial en la resistencia. Resolviendo la ecuación diferencial ordinaria anterior, obtenemos las expresiones que modelan la carga del condensador que se muestran en la tabla \ref{tab::ecuaciones_carga_rc}.
+, dónde $\varepsilon$ es la energía suministrada por la fuente por cada unidad de carga que la atraviesa, $V_C(t)$ es la \textit{ddp} en el condensador y $V_R(t)$ la diferencia de potencial en la resistencia. Si la resolvemos, podemos obtener las expresiones recogidas en la tabla \ref{tab::ecuaciones_carga_rc}.
 
 
 \begin{table}[!ht]

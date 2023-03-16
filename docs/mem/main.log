@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  15 MAR 2023 13:05
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  16 MAR 2023 11:54
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1966,11 +1966,11 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: images/Circuito_RC_2.png Graphic file (type bmp)
 <images/Circuito_RC_2.png>
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 7.0pt on input line 55.
+(Font)              scaled to size 7.0pt on input line 54.
 Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 7.0pt
  -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_R.otf
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 55.
+(Font)              scaled to size 5.0pt on input line 54.
 Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 5.0pt
  -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_R.otf
 Requested font "cmex7" at 7.0pt
@@ -1982,21 +1982,20 @@ File: images/Circuito_RC_3.png Graphic file (type bmp)
 File: images/Circuito_RC_4.png Graphic file (type bmp)
 <images/Circuito_RC_4.png>
 
-Overfull \hbox (13.45572pt too wide) in paragraph at lines 55--64
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 54--63
  [][][][][][] 
  []
 
 [20]
-Underfull \hbox (badness 10000) in paragraph at lines 107--108
+Underfull \hbox (badness 10000) in paragraph at lines 106--107
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 110--111
+Underfull \hbox (badness 10000) in paragraph at lines 109--110
 
  []
 
-[21]
 File: images/Circuito_RC_5.png Graphic file (type bmp)
 <images/Circuito_RC_5.png>
 File: images/Circuito_RC_6.png Graphic file (type bmp)
@@ -2004,31 +2003,32 @@ File: images/Circuito_RC_6.png Graphic file (type bmp)
 File: images/Circuito_RC_7.png Graphic file (type bmp)
 <images/Circuito_RC_7.png>
 
-Overfull \hbox (13.45572pt too wide) in paragraph at lines 117--126
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 116--125
  [][][][][][] 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 130--131
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 138--139
+[21]
+Underfull \hbox (badness 10000) in paragraph at lines 129--130
 
  []
 
-[22] [23]
-Underfull \hbox (badness 10000) in paragraph at lines 168--169
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--138
 
  []
 
+[22]
+Underfull \hbox (badness 10000) in paragraph at lines 167--168
+
+ []
+
+[23]
 Missing character: There is no ; ("3B) in font nullfont!
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 333--334
+Underfull \hbox (badness 10000) in paragraph at lines 332--333
 
  []
 
@@ -2040,7 +2040,7 @@ File: images/bobina_espiral.png Graphic file (type bmp)
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 353--354
+Underfull \hbox (badness 10000) in paragraph at lines 352--353
 
  []
 
@@ -2055,7 +2055,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: images/Circuito_RL.png Graphic file (type bmp)
 <images/Circuito_RL.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 362--363
+Underfull \hbox (badness 10000) in paragraph at lines 361--362
 
  []
 
@@ -2065,12 +2065,12 @@ File: images/Circuito_RL.png Graphic file (type bmp)
 File: images/Circuito_RL_2.png Graphic file (type bmp)
 <images/Circuito_RL_2.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 387--389
+Underfull \hbox (badness 10000) in paragraph at lines 386--388
 
  []
 
 [27]
-Underfull \hbox (badness 10000) in paragraph at lines 407--408
+Underfull \hbox (badness 10000) in paragraph at lines 406--407
 
  []
 
@@ -2079,12 +2079,12 @@ File: images/Circuito_RL_3.png Graphic file (type bmp)
 File: images/Circuito_RL_4.png Graphic file (type bmp)
 <images/Circuito_RL_4.png>
 [28]
-Underfull \hbox (badness 10000) in paragraph at lines 428--430
+Underfull \hbox (badness 10000) in paragraph at lines 427--429
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 456--457
+Underfull \hbox (badness 10000) in paragraph at lines 455--456
 
  []
 
@@ -2710,7 +2710,7 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 Here is how much of TeX's memory you used:
  59729 strings out of 476191
  1370607 string characters out of 5812071
- 2269609 words of memory out of 5000000
+ 2268609 words of memory out of 5000000
  79516 multiletter control sequences out of 15000+600000
  478815 words of font info for 112 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
