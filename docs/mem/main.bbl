@@ -384,36 +384,6 @@
       \endverb
       \keyw{física,circuito RC}
     \endentry
-    \entry{tipler}{book}{}
-      \name{author}{2}{}{%
-        {{hash=ff86ef6fbcd6436b08e4b48a7f82dac4}{%
-           family={Tipler},
-           familyi={T\bibinitperiod},
-           given={Paul\bibnamedelima Allen},
-           giveni={P\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
-        {{hash=028521cb21b446864a6a4f23dbe0e505}{%
-           family={Mosca},
-           familyi={M\bibinitperiod},
-           given={Gene},
-           giveni={G\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {Reverté}%
-      }
-      \strng{namehash}{6bf975772733c58a4687096685abb96f}
-      \strng{fullhash}{6bf975772733c58a4687096685abb96f}
-      \strng{bibnamehash}{6bf975772733c58a4687096685abb96f}
-      \strng{authorbibnamehash}{6bf975772733c58a4687096685abb96f}
-      \strng{authornamehash}{6bf975772733c58a4687096685abb96f}
-      \strng{authorfullhash}{6bf975772733c58a4687096685abb96f}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{Física para la ciencia y la tecnología. II}
-      \field{year}{2004}
-      \keyw{física}
-    \endentry
     \entry{web1.0}{online}{}
       \name{author}{1}{}{%
         {{hash=adab353df4c7eaa1c156be19e6681961}{%
@@ -483,8 +453,8 @@
       \strng{authorbibnamehash}{43840330fc650f2216a0c9f6cd30fb91}
       \strng{authornamehash}{43840330fc650f2216a0c9f6cd30fb91}
       \strng{authorfullhash}{43840330fc650f2216a0c9f6cd30fb91}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Aplicaciones y Applets}

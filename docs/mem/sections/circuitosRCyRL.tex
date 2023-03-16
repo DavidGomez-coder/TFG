@@ -20,98 +20,89 @@ Por otro lado tenemos los circuitos RL. Un ejemplo de uso de este tipo de circui
 Además de en motores de combustión de gasolina, este tipo de circuitos podemos hallarlos en dispositivos de filtrado de frecuencia (similares a los construidos con circuitos RC) o en circuitos osciladores. Estos últimos pueden usarse para la construcción de generadores de ondas de radio o televisón y en receptores usados en la telefonía móvil. Estos se encuentran formados por una serie de condensadores, resistencias y bobinas conectadas, también llamados circuitos RLC. Aunque estos sean otro caso de uso de bobinas y condensadores, estos circuitos no son objeto de estudio en este trabajo así que a continuación, nos centraremos en el estudio de los circuitos RC y RL en corriente continua y estado transitorio.
 
 
+\subsection{El condensador y el circuito RL}
+En primer lugar, comenzamos definiendo qué es un condensador. Este se trata de un dispositivo compuesto generalmente por dos placas conductoras aisladas entre sí, a través de un medio vacío, aire o algún material aislante; comunmente llamado diélectrico, en el que podemos almacenar energía eléctrica.\\ 
 
-
-\subsection{El condensador y el circuito RC}
-Supongamos que partimos de un material conductor \footnote{Se dice que un material es conductor cuando la mayoría de los electrones de sus átomos poseen completa libertad, permitiendo así la circulación de corriente eléctrica a través de él.}, como pueden ser el aluminio o el oro. Si tomamos entonces a esta placa conductora \cite{tipler} como una única carga $Q$, y siendo $V$ el potencial eléctrico que esta alcanza de forma aislada, podemos establecer una relación directamente proporcional entre ambas a la que llamaremos \textit{capacidad de un conductor}. 
+La cantidad de energía que puede almacenarse en un condensador depende de la relación que existe entre la carga de cada una de las armaduras y de la diferencia de potencial que se aplica entre ellas. A dicha relación se le conoce como \textit{capacidad} y su unidad de medida en el Sistema Internacional(a partir de ahora S.I.) es el \textit{faradio} ($F$); que es equivalente a un culombio ($C$) de carga por cada voltio ($V$) de potencial eléctrico aplicado.
 
 \begin{equation}
     \label{def::capacidad_conductor}
     C = \frac{Q}{V}
 \end{equation}
 
-Cuanto mayor sea la carga del conductor respecto al potencial, mayor será la capacidad y por lo tanto, mayor energía podrá almacenar. La unidad de medida de esta magnitud en el \textit{Sistema Internacional} es el \textit{faradio} ($F$), que equivale a un culombio ($C$) de carga por cada voltio ($V$) de potencial eléctrico. \\
+Los conductores más utilizados suelen tener forma cilíndrica, aunque también los hay planos o esféricos. La geometría de estos dispositivos afecta directamente a su capacidad, lo que puede complicar su cálculo si la figura del condensador es demasiado compleja. Así que para simplificar lo máximo posible tanto los cálculos como la posterior implementación de un condensador en la simulación, no tendremos en cuenta la forma del condensador sino que se trabajará directamente con la capacidad del mismo.\\ 
 
-A partir de esto, podemos construir lo que se conoce como \textbf{condensador}. Se trata de un dispositivo compuesto por dos placas conductoras separadas entre sí por un aislante, también llamado dieléctrico. Como podemos ver en la figura \ref{fig::tipos-condensadores-geometria}, existen distintos tipos de condensadores dependiendo de su geometría. Además, la capacidad asociada al condensador se encuentra relacionada con la geometría del mismo, por lo que su cálculo se puede complicar si la figura del condensador es demasiado compleja. Para simplificar lo máximo posible estos cálculos y posteriormente la implementación de la simulación, no vamos a tener en cuenta la forma del condensador, sino que usaremos directamente la definición de capacidad.\\
-
-
- \begin{figure}[!h]
-    \centering
-    \subfloat[Plano/común]{
-        \label{fig::1-condensador-plano}
-        \includegraphics[width=0.2\textwidth]{images/condensador-plano.png}
-    }
-    \subfloat[Esférico]{
-         \label{fig::2-condensador-esferico}
-        \includegraphics[width=0.2\textwidth]{images/condensador-esferico.png}
-    }
-    \subfloat[Cilíndrico]{
-         \label{fig::3-condensador-cilindrico}
-        \includegraphics[width=0.2\textwidth]{images/condensador-cilindrico.png}
-    }
-    \caption{Tipos de condensadores según su geometría}
-    \label{fig::tipos-condensadores-geometria}
-\end{figure}
-
-Continuamos entonces con la definición de un circuito RC. Como se comentó anteriormente, se trata de un tipo de circuito dónde sus componentes son una serie de resistencias eléctricas y condensadores. Puesto que el objetivo principal que queremos alcanzar con estos circuitos es comprender el funcionamiento de un condensador así como el comportamiento de las diferentes magnitudes físicas que afectan al circuito, en lugar de analizar circuitos complejos como los vistos en la introducción de este capítulo, el análisis y la simulación se realizará sobre un circuito RC de primer orden, es decir, sobre aquel que se encuentra formado por una resistencia y un condensador conectados en serie\footnote{Se dice que dos componentes de un circuito se encuentran conectados en serie cuando la conexión de los \textit{bornes} de los mismos se hace continuamente. }.\\
-
-Partiendo de un condensador completamente descargado, observemos qué ocurre cuando conectamos una fuente de alimentación (una pila) con un \textit{voltaje característico} $\varepsilon$, en serie a la resistencia y el condensador del circuito anterior (figura \ref{fig::circuito_rc_representación}). El valor de este voltaje lo define la diferencia de potencial que existe entre las terminales de la fuente (cada uno con la misma carga pero de signo opuesto), el cuál se mantiene a través de una serie de reacciones químicas en el interior de la pila.\\
+Ya se comentó en la introducción de este capítulo que un circuito RC es una asociación de resistencias eléctricas y condensadores. Es por eso que, como el objetivo que queremos alcanzar es elaborar una simulación que recoja los fundamentos de la carga y descarga del condensador, nos ceñiremos a los circuitos RC de primer orden en corriente continua; es decir, aquellos que cuentan con una resistencia y un condensador conectados en serie alimentados por una pila.\\ 
 
 \begin{figure}[!h]
-          \centering
-          \includegraphics[width=0.3\textwidth]{images/Circuito_RC.png}
-          \caption{Representación de un circuito RC de primer orden. \url{https://commons.wikimedia.org/wiki/File:Circuito_RC.png}}
-          \label{fig::circuito_rc_representación}
+    \centering
+    \includegraphics[width=0.3\textwidth]{images/Circuito_RC.png}
+    \caption{Representación de un circuito RC de primer orden.}
+    \label{fig::circuito_rc_representación}
 \end{figure}
 
-Cuando conectamos una de las placas del condensador al terminal negativo de la fuente, parte de esta carga se transfiere a dicha placa. Lo mismo ocurre al unir la otra placa con el terminal positivo, solo que en este caso la carga transferida de un lado a otro es positiva. La fuente, se encuentra suministrando energía al condensador, así que para mantener el potencial eléctrico inicial entre sus terminales, se activa una serie de reacciones químicas en su interior que mueve las cargas entre sus bornes para manter así su voltaje característico $\varepsilon$. A medida que el potencial eléctrico en el condensador aumenta, el movimiento de cargas entre los terminales de la pila es menor, pues se necesita menos energía para que el potencial en la fuente sea igual al inicial. La carga del condensador concluye cuando los potenciales en los terminales de la fuente y el condensador se equilibran.
+Partimos entonces de un condensador de capacidad $C$ completamente descargado conectado en serie a una resistencia de valor $R$. En el instante de tiempo $t=0s$, aplicamos una diferencia de potencial de $\varepsilon V$, cuyo valor coincide con el voltaje característico de la fuente utilizada (figura \ref{fig::circuito_rc_representación}).
 
- \begin{figure}[!h]
+En ese mismo instante, la carga del condensador es nula, así que utilizando la definición de capacidad llegamos a la conclusión de que el potencial en él también lo es. Por el contrario, como siempre debe de cumplirse el principio de conservación de la energía; hablando en términos de potencial eléctrico, el voltaje entre los bornes de la resistencia debe de ser máximo, por lo que la intensidad de corriente que circula en ese momento por el circuito también lo es. 
+
+A medida que el condensador va ganando carga y el potencial eléctrico entre sus placas aumenta, sabiendo que la fuerza electromotriz de la fuente es constante y que debe de cumplirse el principio de conservación energético, el potencial en la resistencia disminuye. Esto se debe a que estos circuitos son estacionarios; es decir, las magnitudes que lo describen varían a lo largo del tiempo.
+
+\begin{figure}[!h]
     \centering
-    \subfloat[Cargas en equilibrio electroestático]{
+    \subfloat[$t = 0s$]{
         \label{fig::circuito_rc2}
         \includegraphics[width=0.33\textwidth]{images/Circuito_RC_2.png}
     }
-    \subfloat[Movimiento de cargas eléctricas]{
+    \subfloat[Proceso de carga.]{
         \label{fig::circuito_rc3}
         \includegraphics[width=0.33\textwidth]{images/Circuito_RC_3.png}
     }
-    \subfloat[Carga completada]{
+    \subfloat[Carga completa]{
         \label{fig::circuito_rc4}
         \includegraphics[width=0.33\textwidth]{images/Circuito_RC_4.png}
     }
-    \caption{Fases del estado de carga de un condensador}
+    \caption{Fases del estado de carga de un condensador. Los puntos rojos hacen referencia a los electrones en movimiento.}
     \label{fig::carga_condensador}
 \end{figure}
 
-Otra manera de entender este proceso es seguir la secuencia de imágenes que se presentan en la figura \ref{fig::carga_condensador}. En primer lugar partimos de un condensador en equilibrio electroestático, donde cada una de las placas tiene el mismo número de electrones que protones. Al conectar la fuente de alimentación, se produce un movimiento de electrones entre una de las placas y el cátodo de la pila. La fuente equilibra su potencial liberando un electrón por el ánodo y, como cargas de igual signo se repelen esta se impulsa hasta la otra placa del condensador, cargando así este dispositivo. Este proceso finaliza cuando todas las cargas negativas de una de las placas se hayan movido a la otra. \\
+Así que para observar con más detalle como evolucionan cada una de las magnitudes basta con realizar un balance energético en términos de potencial, dónde la energía suministrada por la fuente debe de ser en todo momento igual a la consumida por los componentes pasivos del circuito: el condensador y la resistencia.
 
-Podemos entonces obtener las expresiones que modelan este estado del circuito si realizamos un \textit{balance energético} de los componentes que lo forman, dónde la energía suministrada por la fuente debe de ser igual a la consumida por el condensador y la resistencia.
 
 \begin{equation}
-    \varepsilon = V_C(t) + V_R(t)
+    \varepsilon = V_C(t) + V_R(t) = \frac{q(t)}{C} + R\frac{\partial q(t)}{\partial t}
     \label{eqq::balance_energetico_rc_1}
 \end{equation}
 
-Siendo $V_C(t)$ la diferencia de potencial en el condensador y $V_R(t)$ en la resistencia. De esta expresión deducimos las ecuaciones que se muestran en la tabla \ref{tab::ecuaciones_carga_rc}.
+En este caso, tenemos que $\varepsilon$ es la fuerza electromotriz de la fuente (o la energía suministrada por la pila por cada unidad de carga que la atraviesa), $V_C(t)$ hace referencia al potencial eléctrico entre las armaduras del condensador y $V_R(t)$ a la diferencia de potencial en la resistencia. Resolviendo la ecuación diferencial ordinaria anterior, obtenemos las expresiones que modelan la carga del condensador que se muestran en la tabla \ref{tab::ecuaciones_carga_rc}.
+
 
 \begin{table}[!ht]
-        \begin{center}
-            \begin{tabular}{|| c | c | c ||}
-                \hline
-                \textbf{Concepto} & \textbf{Expresión} &  \textbf{Resolución}\\ \hline
-                Carga del condensador & $q(t) = C\varepsilon \left( 1 - e^{\frac{-t}{RC}} \right)$ & \ref{part::carga_condensador_1} \\
-                Intensidad de corriente & $I(t) = \frac{\varepsilon}{R}e^{\frac{-t}{RC}}$ & \ref{part::carga_condensador_2} \\
-                Diferencia de potencial resistencia & $V_R(t) = \varepsilon \cdot e^{\frac{-t}{RC}}$ & \ref{part::carga_condensador_3} \\ 
-                Diferencia de potencial condensador & $V_C(t) = \varepsilon \left(1- e^{\frac{-t}{RC}}\right)$ & \ref{part::carga_condensador_4} \\ 
-                Energía del condensador & $E(t) = \frac{1}{2}CV_C(t)^2 $ & \ref{part::energia_condensador}
-                \\
-                \hline
-                \end{tabular}
-                \caption{Modelado del estado de carga del condensador}
-                \label{tab::ecuaciones_carga_rc}
-        \end{center}
-    \end{table}
+    \begin{center}
+        \begin{tabular}{|| c | c | c ||}
+            \hline
+            \textbf{Concepto} & \textbf{Expresión} &  \textbf{Resolución}\\ \hline
+            Carga del condensador & $q(t) = C\varepsilon \left( 1 - e^{\frac{-t}{RC}} \right)$ & \ref{part::carga_condensador_1} \\
+            Intensidad de corriente & $I(t) = \frac{\varepsilon}{R}e^{\frac{-t}{RC}}$ & \ref{part::carga_condensador_2} \\
+            Diferencia de potencial resistencia & $V_R(t) = \varepsilon \cdot e^{\frac{-t}{RC}}$ & \ref{part::carga_condensador_3} \\ 
+            Diferencia de potencial condensador & $V_C(t) = \varepsilon \left(1- e^{\frac{-t}{RC}}\right)$ & \ref{part::carga_condensador_4} \\ 
+            Energía del condensador & $E(t) = \frac{1}{2}CV_C(t)^2 $ & \ref{part::energia_condensador}
+            \\
+            \hline
+            \end{tabular}
+            \caption{Modelado del estado de carga del condensador.}
+            \label{tab::ecuaciones_carga_rc}
+    \end{center}
+\end{table}
+
+
+
+
+
+\subsection{El condensador y el circuito RC}
+
+
+
+
     
 Con esto ya conocemos cuáles son las expresiones que se encargan de modelar la carga del condensador y que utilizaremos posteriormente cuando hagamos la implementación de este apartado de la simulacion del circuito RC. \\
 

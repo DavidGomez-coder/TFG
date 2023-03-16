@@ -5,8 +5,9 @@
 \contentsline {subsection}{\numberline {1.3}Estructura del documento}{13}{subsection.1.3}%
 \contentsline {subsection}{\numberline {1.4}Tecnologías usadas}{14}{subsection.1.4}%
 \contentsline {section}{\numberline {2}Circuitos RC y RL}{17}{section.2}%
-\contentsline {subsection}{\numberline {2.1}El condensador y el circuito RC}{19}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}El inductor y el circuito RL}{26}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.1}El condensador y el circuito RL}{19}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}El condensador y el circuito RC}{21}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}El inductor y el circuito RL}{24}{subsection.2.3}%
 \contentsline {section}{\numberline {3}Estudio de las tecnologías}{33}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Tipos de aplicaciones según la compatibilidad}{33}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}La web y su evolución}{35}{subsection.3.2}%

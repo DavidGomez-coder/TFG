@@ -724,8 +724,9 @@ export default class Rc extends Component {
                                                 >
                                                     <CartesianGrid strokeDasharray="3 3" />
                                                     <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
-                                                    <YAxis type="number" tick={false} label={this.state.capacitorCharging ? { 'value': 'I (amperios)', 'angle': '-90' } : { 'value': '- I (amperios)', 'angle': '-90' }}
-                                                        domain={this.state.capacitorCharging ? [0, this.state.max_cu_allowed] : [-this.state.max_cu_allowed, 0]} />
+                                                    {/* <YAxis type="number" tick={false} label={this.state.capacitorCharging ? { 'value': 'I (amperios)', 'angle': '-90' } : { 'value': '- I (amperios)', 'angle': '-90' }}
+                                                        domain={this.state.capacitorCharging ? [0, this.state.max_cu_allowed] : [-this.state.max_cu_allowed, 0]} /> */}
+                                                    <YAxis type="number" tick={false} label={{ 'value': 'I (amperios)', 'angle': '-90' }} domain={[0, this.state.max_cu_allowed]}/>
 
                                                     {
                                                         (() => {
@@ -841,8 +842,9 @@ export default class Rc extends Component {
                                                 >
                                                     <CartesianGrid strokeDasharray="3 3" />
                                                     <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
-                                                    <YAxis type="number" tick={false} label={this.state.capacitorCharging ? { 'value': 'Vr (voltios)', 'angle': '-90' } : { 'value': '- Vr (voltios)', 'angle': '-90' }}
-                                                        domain={this.state.capacitorCharging ? [0, this.state.max_vr_allowed] : [-this.state.max_vr_allowed, 0]} />
+                                                    {/*<YAxis type="number" tick={false} label={this.state.capacitorCharging ? { 'value': 'Vr (voltios)', 'angle': '-90' } : { 'value': '- Vr (voltios)', 'angle': '-90' }}
+                                                        domain={this.state.capacitorCharging ? [0, this.state.max_vr_allowed] : [-this.state.max_vr_allowed, 0]} /> */}
+                                                    <YAxis type="number" tick={false} label={{ 'value': 'Vr (voltios)', 'angle': '-90' }} domain={[0, this.state.max_vr_allowed]}/>
 
                                                     {
                                                         (() => {

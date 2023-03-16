@@ -720,8 +720,9 @@ export default class Rl extends Component {
                                                 >
                                                     <CartesianGrid strokeDasharray="3 3" />
                                                     <XAxis dataKey="t" tick={false} label={{ 'value': 'Tiempo (s)', 'position': 'insideRight' }} />
-                                                    <YAxis type="number" tick={false} label={this.state.inductorCharging ? { 'value': 'Vl (voltios)', 'angle': '-90' } : { 'value': '- Vl (voltios)', 'angle': '-90' }}
-                                                        domain={this.state.inductorCharging ? [0, this.state.max_vl_allowed] : [-this.state.max_vl_allowed, 0]} />
+                                                    {/* <YAxis type="number" tick={false} label={this.state.inductorCharging ? { 'value': 'Vl (voltios)', 'angle': '-90' } : { 'value': '- Vl (voltios)', 'angle': '-90' }}
+                                                        domain={this.state.inductorCharging ? [0, this.state.max_vl_allowed] : [-this.state.max_vl_allowed, 0]} /> */}
+                                                    <YAxis type="number" tick={false} label={{ 'value': 'Vl (voltios)', 'angle': '-90' }} domain={[0, this.state.max_vl_allowed]} />
 
                                                     {
                                                         (() => {

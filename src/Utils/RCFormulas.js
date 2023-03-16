@@ -18,7 +18,7 @@ function getI_charge(t, q_0, V, C, R) {
 }
 
 function getI_discharge(t, q_0, C, R){
-    return (-q_0/(R*C)) * Math.pow(Math.E, (-t) / (R * C));
+    return Math.abs((-q_0/(R*C)) * Math.pow(Math.E, (-t) / (R * C)));
 }
 
 function getE(C, V) {
