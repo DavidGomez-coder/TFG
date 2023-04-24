@@ -47,6 +47,7 @@ class RLSimulation:
         self.axis[0, 1].margins(x=0, y=0)
         self.axis[0, 1].axvline(self.time_char, color='gray', linestyle='dashed')
         self.axis[0, 1].axvline(self.time_dis, color='gray' , linestyle='dashed')
+        self.axis[0, 1].axhline(0.0, color="grey", linewidth = 1, linestyle="-")
 
         vr_on_charge_v    = np.vectorize(self.formula.VR_ON_CHARGE)
         vr_on_discharge_v = np.vectorize(self.formula.VR_ON_DISCHARGE)
@@ -75,7 +76,7 @@ class RLSimulation:
         phi_on_discharge_v = np.vectorize(self.formula.PHI_ON_DISCHARGE)
         self.axis[2, 0].plot(self.x_charge, phi_on_charge_v(self.x_charge))
         self.axis[2, 0].plot(self.x_discharge, phi_on_discharge_v(self.x_discharge))
-        self.axis[2, 0].set_title("Energía almacenada",fontsize=9, fontweight="bold")
+        self.axis[2, 0].set_title("Flujo magnético",fontsize=9, fontweight="bold")
         self.axis[2, 0].set_xlabel("Tiempo (s)", fontsize=9)
         self.axis[2, 0].set_ylabel("Φ (Weber)", fontsize=9)
         self.axis[2, 0].margins(x=0, y=0)

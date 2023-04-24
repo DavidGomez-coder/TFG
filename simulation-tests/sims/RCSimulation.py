@@ -47,6 +47,7 @@ class RCSimulation:
         self.axis[0, 1].margins(x=0, y=0)
         self.axis[0, 1].axvline(self.time_char, color='gray', linestyle='dashed')
         self.axis[0, 1].axvline(self.time_dis, color='gray' , linestyle='dashed')
+        self.axis[0, 1].axhline(0.0, color="grey", linewidth = 1, linestyle="-")
 
         vc_on_charge_v    = np.vectorize(self.formula.VC_ON_CHARGE)
         vc_on_discharge_v = np.vectorize(self.formula.VC_ON_DISCHARGE)
@@ -69,6 +70,7 @@ class RCSimulation:
         self.axis[1, 1].margins(x=0, y=0)
         self.axis[1, 1].axvline(self.time_char, color='gray', linestyle='dashed')
         self.axis[1, 1].axvline(self.time_dis, color='gray' , linestyle='dashed')
+        self.axis[1, 1].axhline(0.0, color="grey", linewidth = 1, linestyle="-")
 
         e_on_charge_v    = np.vectorize(self.formula.E_ON_CHARGE)
         e_on_discharge_v = np.vectorize(self.formula.E_ON_DISCHARGE)

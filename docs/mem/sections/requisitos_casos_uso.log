@@ -1,10 +1,10 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  15 MAR 2023 13:04
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  21 APR 2023 11:41
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/david/Documentos/TFG/docs/mem/sections/circuitosRCyRL.tex
-(/home/david/Documentos/TFG/docs/mem/sections/circuitosRCyRL.tex
+**/home/david/Documentos/TFG/docs/mem/sections/requisitos_casos_uso.tex
+(/home/david/Documentos/TFG/docs/mem/sections/requisitos_casos_uso.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-01-21> (/usr/share/texlive/texmf-dist/tex/latex/subfiles/subfiles.cls
 Document Class: subfiles 2020/11/14 v2.2 Multi-file projects (class)
@@ -1270,10 +1270,10 @@ Package: ifplatform 2017/10/13 v0.4a Testing for the operating system
  (/usr/share/texlive/texmf-dist/tex/generic/catchfile/catchfile.sty
 Package: catchfile 2019/12/09 v1.8 Catch the contents of a file (HO)
 )
-runsystem(uname -s > "circuitosRCyRL.w18")...executed.
+runsystem(uname -s > "requisitos_casos_uso.w18")...executed.
 
- (./circuitosRCyRL.w18)
-runsystem(rm -- "circuitosRCyRL.w18")...executed.
+ (./requisitos_casos_uso.w18)
+runsystem(rm -- "requisitos_casos_uso.w18")...executed.
 
 ) (/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.sty (/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.tex
 \integerpart=\count503
@@ -1296,7 +1296,7 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \@float@every@listing=\toks35
 \c@listing=\count507
 )
-runsystem(mkdir -p _minted-circuitosRCyRL)...executed.
+runsystem(mkdir -p _minted-requisitos_casos_uso)...executed.
 
  (/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
 Package: tabularx 2020/01/15 v2.11c `tabularx' package (DPC)
@@ -1550,19 +1550,15 @@ Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 
 \@quotelevel=\count539
 \@quotereset=\count540
-runsystem(which pygmentize && touch circuitosRCyRL.aex)...executed.
+runsystem(which pygmentize && touch requisitos_casos_uso.aex)...executed.
 
-runsystem(rm circuitosRCyRL.aex)...executed.
+runsystem(rm requisitos_casos_uso.aex)...executed.
 
-(sections/circuitosRCyRL.aux
-LaTeX Info: Redefining \. on input line 28.
-LaTeX Info: Redefining \% on input line 28.
-
-
-LaTeX Warning: Label `fig::carga_bobina' multiply defined.
-
+(sections/requisitos_casos_uso.aux
+LaTeX Info: Redefining \. on input line 30.
+LaTeX Info: Redefining \% on input line 30.
 )
-\openout1 = `circuitosRCyRL.aux'.
+\openout1 = `requisitos_casos_uso.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 3.
 LaTeX Font Info:    ... okay on input line 3.
@@ -1702,9 +1698,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 3.
 LaTeX Info: Redefining \pageref on input line 3.
 LaTeX Info: Redefining \nameref on input line 3.
- (sections/circuitosRCyRL.out) (sections/circuitosRCyRL.out)
+ (sections/requisitos_casos_uso.out) (sections/requisitos_casos_uso.out)
 \@outlinefile=\write8
-\openout8 = `circuitosRCyRL.out'.
+\openout8 = `requisitos_casos_uso.out'.
 
 Package biblatex Info: Trying to load language 'spanish'...
 Package biblatex Info: ... file 'spanish.lbx' found.
@@ -1715,11 +1711,11 @@ Package biblatex Info: XeTeX detected.
 (biblatex)             Assuming input encoding 'utf8'.
 Package biblatex Info: Automatic encoding selection.
 (biblatex)             Assuming data encoding 'utf8'.
-\openout3 = `circuitosRCyRL.bcf'.
+\openout3 = `requisitos_casos_uso.bcf'.
 
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'circuitosRCyRL.bbl' found.
- (sections/circuitosRCyRL.bbl)
+Package biblatex Info: ... file 'requisitos_casos_uso.bbl' found.
+ (sections/requisitos_casos_uso.bbl)
 Package biblatex Info: Reference section=0 on input line 3.
 Package biblatex Info: Reference segment=0 on input line 3.
 Package caption Info: Begin \AtBeginDocument code.
@@ -1732,314 +1728,50 @@ Package caption Info: End \AtBeginDocument code.
 
 Package pgfplots notification 'compat/show suggested version=true': document has been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/it' will be
-(Font)              scaled to size 12.0pt on input line 5.
-Requested font "[LinLibertine_RI.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 12.0pt
- -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_RI.otf
-
-Underfull \hbox (badness 10000) in paragraph at lines 5--6
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 7--8
-
- []
-
-File: images/foto_estroboscópica.png Graphic file (type bmp)
-<images/foto_estroboscópica.png>
-Requested font "[Iosevka].ttf/OT:script=latn;language=dflt;" at 12.0pt
- -> ./Iosevka.ttf
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 14.
-Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 8.0pt
- -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_R.otf
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 14.
-Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 6.0pt
- -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_R.otf
-Requested font "cmmi12" at 12.0pt
- -> /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
-Requested font "cmmi8" at 8.0pt
- -> /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm
-Requested font "cmmi6" at 6.0pt
- -> /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm
-Requested font "cmsy10" at 12.0pt
- -> /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
-Requested font "cmsy8" at 8.0pt
- -> /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm
-Requested font "cmsy6" at 6.0pt
- -> /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
-Requested font "cmex10" at 12.0pt
- -> /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
-Requested font "cmex8" at 8.0pt
- -> /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm
-Requested font "cmex7" at 6.0pt
- -> /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
-Requested font "cmr12" at 12.0pt
- -> /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
-Requested font "cmr8" at 8.0pt
- -> /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
-Requested font "cmr6" at 6.0pt
- -> /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \vbox (badness 1895) has occurred while \output is active []
-
- [1
-
-]
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 14.4pt on input line 23.
+(Font)              scaled to size 14.4pt on input line 5.
 Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 14.4pt
  -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_R.otf
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/b/n' will be
-(Font)              scaled to size 14.4pt on input line 23.
+(Font)              scaled to size 14.4pt on input line 5.
 Requested font "[LinLibertine_RB.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 14.4pt
  -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_RB.otf
-
-Underfull \hbox (badness 10000) in paragraph at lines 24--25
-
- []
-
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 33--34
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 35--36
-
- []
-
-File: images/Circuito_RC.png Graphic file (type bmp)
-<images/Circuito_RC.png>
-[3]
-File: images/Circuito_RC_2.png Graphic file (type bmp)
-<images/Circuito_RC_2.png>
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 55.
-Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 10.0pt
- -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_R.otf
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 7.0pt on input line 55.
-Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 7.0pt
- -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_R.otf
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 55.
-Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 5.0pt
- -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_R.otf
-Requested font "cmex7" at 7.0pt
- -> /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
-Requested font "cmex7" at 5.0pt
- -> /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
-File: images/Circuito_RC_3.png Graphic file (type bmp)
-<images/Circuito_RC_3.png>
-File: images/Circuito_RC_4.png Graphic file (type bmp)
-<images/Circuito_RC_4.png>
-
-Overfull \hbox (13.45572pt too wide) in paragraph at lines 55--64
- [][][][][][] 
- []
-
-[4]
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/b/n' will be
-(Font)              scaled to size 12.0pt on input line 83.
+(Font)              scaled to size 12.0pt on input line 6.
 Requested font "[LinLibertine_RB.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 12.0pt
  -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_RB.otf
 
-
-LaTeX Warning: Reference `part::carga_condensador_1' on page 5 undefined on input line 84.
-
-
-LaTeX Warning: Reference `part::carga_condensador_2' on page 5 undefined on input line 85.
-
-
-LaTeX Warning: Reference `part::carga_condensador_3' on page 5 undefined on input line 86.
-
-
-LaTeX Warning: Reference `part::carga_condensador_4' on page 5 undefined on input line 87.
-
-
-LaTeX Warning: Reference `part::energia_condensador' on page 5 undefined on input line 88.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 107--108
+Underfull \hbox (badness 10000) in paragraph at lines 6--7
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 110--111
-
- []
-
-File: images/Circuito_RC_5.png Graphic file (type bmp)
-<images/Circuito_RC_5.png>
-File: images/Circuito_RC_6.png Graphic file (type bmp)
-<images/Circuito_RC_6.png>
-File: images/Circuito_RC_7.png Graphic file (type bmp)
-<images/Circuito_RC_7.png>
-
-Overfull \hbox (13.45572pt too wide) in paragraph at lines 117--126
- [][][][][][] 
- []
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 130--131
-
- []
-
-[5]
-Underfull \hbox (badness 10000) in paragraph at lines 138--139
-
- []
-
-
-LaTeX Warning: Reference `part::descarga_condensador_1' on page 6 undefined on input line 145.
-
-
-LaTeX Warning: Reference `part::descarga_condensador_2' on page 6 undefined on input line 146.
-
-
-LaTeX Warning: Reference `part::descarga_condensador_3' on page 6 undefined on input line 147.
-
-
-LaTeX Warning: Reference `part::descarga_condensador_4' on page 6 undefined on input line 148.
-
-
-LaTeX Warning: Reference `part::energia_condensador' on page 6 undefined on input line 149.
-
-[6]
-Underfull \hbox (badness 10000) in paragraph at lines 168--169
-
- []
-
-[7]
-Missing character: There is no ; ("3B) in font nullfont!
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 333--334
-
- []
-
-File: images/bobina_toroidal.png Graphic file (type bmp)
-<images/bobina_toroidal.png>
-File: images/bobina_espiral.png Graphic file (type bmp)
-<images/bobina_espiral.png>
-
-Underfull \hbox (badness 10000) in paragraph at lines 353--354
-
- []
-
-[9]
-File: images/Circuito_RL.png Graphic file (type bmp)
-<images/Circuito_RL.png>
-
-Underfull \hbox (badness 10000) in paragraph at lines 362--363
-
- []
-
-[10]
-File: images/Circuito_RL.png Graphic file (type bmp)
-<images/Circuito_RL.png>
-File: images/Circuito_RL_2.png Graphic file (type bmp)
-<images/Circuito_RL_2.png>
-
-Underfull \hbox (badness 10000) in paragraph at lines 387--389
-
- []
-
-
-LaTeX Warning: Reference `part::carga_inductor_1' on page 11 undefined on input line 395.
-
-
-LaTeX Warning: Reference `part::carga_inductor_2' on page 11 undefined on input line 396.
-
-
-LaTeX Warning: Reference `part::carga_inductor_3' on page 11 undefined on input line 397.
-
-
-LaTeX Warning: Reference `part::energía_inductor' on page 11 undefined on input line 398.
-
-
-LaTeX Warning: Reference `part::flujo_magnetico_inductor' on page 11 undefined on input line 399.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 407--408
-
- []
-
-File: images/Circuito_RL_3.png Graphic file (type bmp)
-<images/Circuito_RL_3.png>
-File: images/Circuito_RL_4.png Graphic file (type bmp)
-<images/Circuito_RL_4.png>
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[11]
-Underfull \hbox (badness 10000) in paragraph at lines 428--430
-
- []
-
-[12]
-
-LaTeX Warning: Reference `part::descarga_inductor1' on page 13 undefined on input line 436.
-
-
-LaTeX Warning: Reference `part::descarga_inductor_2' on page 13 undefined on input line 437.
-
-
-LaTeX Warning: Reference `part::descarga_inductor_3' on page 13 undefined on input line 438.
-
-
-LaTeX Warning: Reference `part::energía_inductor' on page 13 undefined on input line 439.
-
-
-LaTeX Warning: Reference `part::flujo_magnetico_inductor' on page 13 undefined on input line 440.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 456--457
-
- []
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[13]
-
-LaTeX Warning: Text page 14 contains only floats.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [14] [15] (sections/circuitosRCyRL.aux
-LaTeX Info: Redefining \sptext on input line 28.
-LaTeX Info: Redefining \. on input line 28.
-LaTeX Info: Redefining \% on input line 28.
+LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/it' will be
+(Font)              scaled to size 12.0pt on input line 8.
+Requested font "[LinLibertine_RI.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 12.0pt
+ -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_RI.otf
+[1
+
+] [2]
+File: images/casos_de_uso.PNG Graphic file (type bmp)
+<images/casos_de_uso.PNG>
+ [3] [4] (sections/requisitos_casos_uso.aux
+LaTeX Info: Redefining \sptext on input line 30.
+LaTeX Info: Redefining \. on input line 30.
+LaTeX Info: Redefining \% on input line 30.
 )
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
-Package rerunfilecheck Info: File `circuitosRCyRL.out' has not changed.
-(rerunfilecheck)             Checksum: DD69FFE0265D26E316DC88A11CC830A2;639.
-Package logreq Info: Writing requests to 'circuitosRCyRL.run.xml'.
-\openout1 = `circuitosRCyRL.run.xml'.
+Package rerunfilecheck Info: File `requisitos_casos_uso.out' has not changed.
+(rerunfilecheck)             Checksum: A9361E9B5E4AD1E82F0410543F232AE6;212.
+Package logreq Info: Writing requests to 'requisitos_casos_uso.run.xml'.
+\openout1 = `requisitos_casos_uso.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 58733 strings out of 476191
- 1347187 string characters out of 5812071
- 2153356 words of memory out of 5000000
- 78636 multiletter control sequences out of 15000+600000
- 477484 words of font info for 98 fonts, out of 8000000 for 9000
+ 57746 strings out of 476191
+ 1322265 string characters out of 5812071
+ 2143290 words of memory out of 5000000
+ 77678 multiletter control sequences out of 15000+600000
+ 473287 words of font info for 78 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 123i,12n,155p,1184b,4898s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 123i,9n,155p,1190b,3934s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on sections/circuitosRCyRL.pdf (15 pages).
+Output written on sections/requisitos_casos_uso.pdf (4 pages).

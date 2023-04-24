@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  16 MAR 2023 11:54
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  24 APR 2023 11:20
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1558,6 +1558,9 @@ LaTeX Info: Redefining \% on input line 26.
 
 LaTeX Warning: Label `fig::carga_bobina' multiply defined.
 
+
+LaTeX Warning: Label `fig::carga_bobina_2' multiply defined.
+
 )
 \openout1 = `main.aux'.
 
@@ -1772,25 +1775,59 @@ LaTeX Font Info:    Font shape `TU/LinLibertine(0)/b/n' will be
 Requested font "[LinLibertine_RB.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 48.0pt
  -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_RB.otf
 
+Underfull \hbox (badness 10000) in paragraph at lines 20--21
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 22--23
 
  []
 
+LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/it' will be
+(Font)              scaled to size 12.0pt on input line 24.
+Requested font "[LinLibertine_RI.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 12.0pt
+ -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_RI.otf
+
+Underfull \hbox (badness 10000) in paragraph at lines 24--25
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 26--27
+
+ []
+
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/b/n' will be
-(Font)              scaled to size 12.0pt on input line 26.
+(Font)              scaled to size 12.0pt on input line 30.
 Requested font "[LinLibertine_RB.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 12.0pt
  -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_RB.otf
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/b/n' will be
-(Font)              scaled to size 14.4pt on input line 26.
+(Font)              scaled to size 14.4pt on input line 30.
 Requested font "[LinLibertine_RB.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 14.4pt
  -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_RB.otf
 
-Overfull \hbox (2.79869pt too wide) in paragraph at lines 26--27
+Overfull \hbox (2.79869pt too wide) in paragraph at lines 30--31
 []\TU/LinLibertine(0)/b/n/14.4 Keywords: \TU/LinLibertine(0)/b/n/12 simulation, RC circuit, RL circuit, direct current, transient
  []
 
 ) [2] (./sections/resumen.tex
+Underfull \hbox (badness 10000) in paragraph at lines 33--34
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 35--36
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 37--38
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--40
 
  []
 
@@ -1832,10 +1869,6 @@ Requested font "cmr8" at 8.0pt
  -> /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
 Requested font "cmr6" at 6.0pt
  -> /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
-LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/it' will be
-(Font)              scaled to size 12.0pt on input line 15.
-Requested font "[LinLibertine_RI.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 12.0pt
- -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_RI.otf
  [5] [6])
 \tf@toc=\write9
 \openout9 = `main.toc'.
@@ -1932,8 +1965,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 7--8
 
 File: images/foto_estroboscópica.png Graphic file (type bmp)
 <images/foto_estroboscópica.png>
-Requested font "[Iosevka].ttf/OT:script=latn;language=dflt;" at 12.0pt
- -> ./Iosevka.ttf
 
 Underfull \vbox (badness 2326) has occurred while \output is active []
 
@@ -1966,11 +1997,11 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: images/Circuito_RC_2.png Graphic file (type bmp)
 <images/Circuito_RC_2.png>
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 7.0pt on input line 54.
+(Font)              scaled to size 7.0pt on input line 55.
 Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 7.0pt
  -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_R.otf
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 54.
+(Font)              scaled to size 5.0pt on input line 55.
 Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;mapping=tex-text;" at 5.0pt
  -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_R.otf
 Requested font "cmex7" at 7.0pt
@@ -1982,17 +2013,12 @@ File: images/Circuito_RC_3.png Graphic file (type bmp)
 File: images/Circuito_RC_4.png Graphic file (type bmp)
 <images/Circuito_RC_4.png>
 
-Overfull \hbox (13.45572pt too wide) in paragraph at lines 54--63
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 55--64
  [][][][][][] 
  []
 
 [20]
-Underfull \hbox (badness 10000) in paragraph at lines 106--107
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 109--110
+Underfull \hbox (badness 10000) in paragraph at lines 97--98
 
  []
 
@@ -2003,59 +2029,57 @@ File: images/Circuito_RC_6.png Graphic file (type bmp)
 File: images/Circuito_RC_7.png Graphic file (type bmp)
 <images/Circuito_RC_7.png>
 
-Overfull \hbox (13.45572pt too wide) in paragraph at lines 116--125
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 107--116
  [][][][][][] 
  []
 
-[21]
-Underfull \hbox (badness 10000) in paragraph at lines 129--130
+[21] [22]
+File: images/resultados_ejemplo_circuitoRC.png Graphic file (type bmp)
+<images/resultados_ejemplo_circuitoRC.png>
 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 137--138
-
- []
-
-[22]
-Underfull \hbox (badness 10000) in paragraph at lines 167--168
-
- []
-
-[23]
-Missing character: There is no ; ("3B) in font nullfont!
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 332--333
+Underfull \hbox (badness 10000) in paragraph at lines 167--168
 
  []
 
+File: images/resultados_ejemplo_circuitoRC2.png Graphic file (type bmp)
+<images/resultados_ejemplo_circuitoRC2.png>
+[23]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 180--181
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 182--183
+
+ []
+
+[24]
 File: images/bobina_toroidal.png Graphic file (type bmp)
 <images/bobina_toroidal.png>
 File: images/bobina_espiral.png Graphic file (type bmp)
 <images/bobina_espiral.png>
 
+
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 352--353
+Underfull \hbox (badness 10000) in paragraph at lines 198--199
 
  []
 
-[24]
-
-LaTeX Warning: Text page 25 contains only floats.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [25]
+[25]
 File: images/Circuito_RL.png Graphic file (type bmp)
 <images/Circuito_RL.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 361--362
+Underfull \hbox (badness 10000) in paragraph at lines 208--209
 
  []
 
@@ -2065,41 +2089,39 @@ File: images/Circuito_RL.png Graphic file (type bmp)
 File: images/Circuito_RL_2.png Graphic file (type bmp)
 <images/Circuito_RL_2.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--388
+Underfull \vbox (badness 3375) has occurred while \output is active []
+
+ [27]
+Underfull \hbox (badness 10000) in paragraph at lines 236--237
 
  []
 
-[27]
-Underfull \hbox (badness 10000) in paragraph at lines 406--407
+
+Underfull \hbox (badness 10000) in paragraph at lines 255--256
 
  []
 
-File: images/Circuito_RL_3.png Graphic file (type bmp)
-<images/Circuito_RL_3.png>
 File: images/Circuito_RL_4.png Graphic file (type bmp)
 <images/Circuito_RL_4.png>
-[28]
-Underfull \hbox (badness 10000) in paragraph at lines 427--429
+File: images/Circuito_RL_5.png Graphic file (type bmp)
+<images/Circuito_RL_5.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 278--279
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 455--456
+[28]
+Underfull \hbox (badness 10000) in paragraph at lines 304--305
 
  []
 
 [29]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-) [30]
-
-LaTeX Warning: Text page 31 contains only floats.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [31] [32
+File: images/resultados_ejemplo_circuitoRL.png Graphic file (type bmp)
+<images/resultados_ejemplo_circuitoRL.png>
+ [30]) [31] [32
 
 ] (./sections/tecnologias.tex
 File: images/aplicaciones_nativas.png Graphic file (type bmp)
@@ -2389,12 +2411,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 133--134
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [59] [60]
-Underfull \hbox (badness 10000) in paragraph at lines 146--147
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 148--149
+Underfull \hbox (badness 10000) in paragraph at lines 145--146
 
  []
 
@@ -2404,147 +2421,148 @@ File: images/carga-condicion-2.PNG Graphic file (type bmp)
 <images/carga-condicion-2.PNG>
 File: images/carga-condicion-1.PNG Graphic file (type bmp)
 <images/carga-condicion-1.PNG>
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 179--180
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 182--183
-
- []
-
 [61]
-Underfull \hbox (badness 10000) in paragraph at lines 188--189
-
- []
-
-File: images/cp1-app.PNG Graphic file (type bmp)
-<images/cp1-app.PNG>
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-File: images/cp1.1-app.PNG Graphic file (type bmp)
-<images/cp1.1-app.PNG>
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 205--206
+Underfull \hbox (badness 10000) in paragraph at lines 195--196
 
  []
 
 [62]
+Underfull \hbox (badness 10000) in paragraph at lines 199--200
 
-LaTeX Warning: Text page 63 contains only floats.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 209--210
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 211--212
+
+ []
+
+File: images/caso_prueba_rc_1_app_1.png Graphic file (type bmp)
+<images/caso_prueba_rc_1_app_1.png>
+File: images/caso_prueba_rc_1_app_2.png Graphic file (type bmp)
+<images/caso_prueba_rc_1_app_2.png>
+File: images/caso_prueba_rc_1_app_3.png Graphic file (type bmp)
+<images/caso_prueba_rc_1_app_3.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+File: images/caso_prueba_rc_1_app_4.png Graphic file (type bmp)
+<images/caso_prueba_rc_1_app_4.png>
+File: images/caso_prueba_rc_1_app_5.png Graphic file (type bmp)
+<images/caso_prueba_rc_1_app_5.png>
+File: images/caso_prueba_rc_1_app_6.png Graphic file (type bmp)
+<images/caso_prueba_rc_1_app_6.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+File: images/caso_prueba_rc_1.png Graphic file (type bmp)
+<images/caso_prueba_rc_1.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 266--267
+
+ []
 
 [63]
-File: images/cp1-py.png Graphic file (type bmp)
-<images/cp1-py.png>
-
-Underfull \hbox (badness 10000) in paragraph at lines 215--216
-
- []
-
-File: images/cp2-app.PNG Graphic file (type bmp)
-<images/cp2-app.PNG>
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-File: images/cp2.1-app.PNG Graphic file (type bmp)
-<images/cp2.1-app.PNG>
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[64]
-
-LaTeX Warning: Text page 65 contains only floats.
-
-
-Underfull \vbox (badness 3068) has occurred while \output is active []
-
- [65]
-File: images/cp2-py.png Graphic file (type bmp)
-<images/cp2-py.png>
-File: images/cp3-1.PNG Graphic file (type bmp)
-<images/cp3-1.PNG>
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-File: images/cp3-1.1.PNG Graphic file (type bmp)
-<images/cp3-1.1.PNG>
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 258--259
-
- []
-
-[66]
-File: images/cp3-py.png Graphic file (type bmp)
-<images/cp3-py.png>
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 271--272
+Underfull \hbox (badness 10000) in paragraph at lines 273--274
 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [67]
-File: images/cp4-1.png Graphic file (type bmp)
-<images/cp4-1.png>
+ [64]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-File: images/cp4-1.1.png Graphic file (type bmp)
-<images/cp4-1.1.png>
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 289--290
+ [65]
+Underfull \hbox (badness 10000) in paragraph at lines 275--276
 
  []
 
-File: images/cp4-py.png Graphic file (type bmp)
-<images/cp4-py.png>
+File: images/caso_prueba_rl_1_app_1.png Graphic file (type bmp)
+<images/caso_prueba_rl_1_app_1.png>
+File: images/caso_prueba_rl_1_app_2.png Graphic file (type bmp)
+<images/caso_prueba_rl_1_app_2.png>
+File: images/caso_prueba_rl_1_app_3.png Graphic file (type bmp)
+<images/caso_prueba_rl_1_app_3.png>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-) [68] [69] [70] (./sections/conclusion.tex
+File: images/caso_prueba_rl_1_app_4.png Graphic file (type bmp)
+<images/caso_prueba_rl_1_app_4.png>
+File: images/caso_prueba_rl_1_app_5.png Graphic file (type bmp)
+<images/caso_prueba_rl_1_app_5.png>
+File: images/caso_prueba_rl_1_app_6.png Graphic file (type bmp)
+<images/caso_prueba_rl_1_app_6.png>
 
-Package blindtext Warning: spanish not defined, using English instead.
-(blindtext)                 on input line 7.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+File: images/caso_prueba_rl_1.png Graphic file (type bmp)
+<images/caso_prueba_rl_1.png>
 
-Package blindtext Warning: spanish not defined, using English instead.
-(blindtext)                 on input line 10.
-
-) [71
-
-] [72] (./sections/conclusiones.tex
-
-Package blindtext Warning: spanish not defined, using English instead.
-(blindtext)                 on input line 12.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Package blindtext Warning: spanish not defined, using English instead.
-(blindtext)                 on input line 15.
+Underfull \hbox (badness 10000) in paragraph at lines 331--332
 
-) [73
+ []
 
-] [74
+[66]
+Underfull \hbox (badness 10000) in paragraph at lines 333--334
+
+ []
+
+[67] [68]) [69] [70
+
+] (./sections/conclusion.tex
+Underfull \hbox (badness 10000) in paragraph at lines 6--7
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--12
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--16
+
+ []
+
+[71] [72]) [73] [74
+
+] (./sections/conclusiones.tex
+Underfull \hbox (badness 10000) in paragraph at lines 9--10
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--12
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--15
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 18--19
+
+ []
+
+[75]
+Underfull \hbox (badness 10000) in paragraph at lines 22--23
+
+ []
+
+[76]) [77] [78
 
 ]
 Overfull \hbox (0.1676pt too wide) in paragraph at lines 83--83
@@ -2555,6 +2573,8 @@ LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/sc' will be
 (Font)              scaled to size 12.0pt on input line 82.
 Requested font "[LinLibertine_R.otf]/OT:script=latn;language=dflt;+tnum;+lnum;+smcp;mapping=tex-text;" at 12.0pt
  -> /usr/share/texlive/texmf-dist/fonts/opentype/public/libertine/LinLibertine_R.otf
+Requested font "[Iosevka].ttf/OT:script=latn;language=dflt;" at 12.0pt
+ -> ./Iosevka.ttf
 
 Overfull \hbox (18.78261pt too wide) in paragraph at lines 83--83
 []\TU/LinLibertine(0)/m/n/12 Wikipedia la enciclopedia libre. \TU/LinLibertine(0)/m/it/12 Simulación por computadora\TU/LinLibertine(0)/m/n/12 . \TU/LinLibertine(0)/m/sc/12 url\TU/LinLibertine(0)/m/n/12 : [][]$[][][][][] [] [] [] [][] [] [][][][][][][][][] []
@@ -2565,12 +2585,12 @@ Overfull \hbox (2.48659pt too wide) in paragraph at lines 83--83
 []\TU/LinLibertine(0)/m/n/12 University of Colorado Boulder. \TU/LinLibertine(0)/m/it/12 Interactive Simulations for Science and Math\TU/LinLibertine(0)/m/n/12 . \TU/LinLibertine(0)/m/sc/12 url\TU/LinLibertine(0)/m/n/12 : [][]$[][][][][] []
  []
 
-[75]
+[79]
 Overfull \hbox (30.89859pt too wide) in paragraph at lines 83--83
 []\TU/LinLibertine(0)/m/n/12 openstax. \TU/LinLibertine(0)/m/it/12 Circuitos RC\TU/LinLibertine(0)/m/n/12 . \TU/LinLibertine(0)/m/sc/12 url\TU/LinLibertine(0)/m/n/12 : [][]$[][][][][] [] [] [] [][][][][][][][] [] [][][] [] [][][][][] [] [] [] [][] [] [][][][][][] [][] [][][][][][][][][][][][][] [][]
  []
 
-[76] (./sections/resumen_ecuaciones.tex
+[80] (./sections/resumen_ecuaciones.tex
 Overfull \hbox (50.692pt too wide) in alignment at lines 8--11
  [] [] [] [] [] [] 
  []
@@ -2580,16 +2600,27 @@ Overfull \hbox (50.692pt too wide) in alignment at lines 11--31
  [] [] [] [] [] [] 
  []
 
-) [77
+) [81
 
-] [78
+] [82
 
 ] (./sections/resolucionEcuaciones.tex
 Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
-[79]
+File: images/Circuito_RC_2.png Graphic file (type bmp)
+<images/Circuito_RC_2.png>
+File: images/Circuito_RC_3.png Graphic file (type bmp)
+<images/Circuito_RC_3.png>
+File: images/Circuito_RC_4.png Graphic file (type bmp)
+<images/Circuito_RC_4.png>
+
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 13--22
+ [][][][][][] 
+ []
+
+[83]
 Requested font "cmmi12" at 14.4pt
  -> /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
 Requested font "cmsy10" at 14.4pt
@@ -2598,19 +2629,44 @@ Requested font "cmex10" at 14.4pt
  -> /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 Requested font "cmr12" at 14.4pt
  -> /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
- [80] [81] [82] [83]) [84] (./sections/resolucionEcuaciones2.tex [85
+ [84]
+File: images/Circuito_RC_5.png Graphic file (type bmp)
+<images/Circuito_RC_5.png>
+File: images/Circuito_RC_6.png Graphic file (type bmp)
+<images/Circuito_RC_6.png>
+File: images/Circuito_RC_7.png Graphic file (type bmp)
+<images/Circuito_RC_7.png>
 
-] [86] [87] [88]) [89] [90
+Overfull \hbox (13.45572pt too wide) in paragraph at lines 112--121
+ [][][][][][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[85] [86] [87] [88]) [89] [90
+
+] (./sections/resolucionEcuaciones2.tex
+File: images/Circuito_RL.png Graphic file (type bmp)
+<images/Circuito_RL.png>
+File: images/Circuito_RL_2.png Graphic file (type bmp)
+<images/Circuito_RL_2.png>
+ [91] [92]
+File: images/Circuito_RL_4.png Graphic file (type bmp)
+<images/Circuito_RL_4.png>
+File: images/Circuito_RL_5.png Graphic file (type bmp)
+<images/Circuito_RL_5.png>
+ [93] [94]) [95] [96
 
 ] (./sections/requisitos_casos_uso.tex
 Underfull \hbox (badness 10000) in paragraph at lines 6--7
 
  []
 
-[91] [92] [93]
+[97] [98] [99]
 File: images/casos_de_uso.PNG Graphic file (type bmp)
 <images/casos_de_uso.PNG>
-) [94] (./sections/manual_instalacion.tex
+) [100] (./sections/manual_instalacion.tex
 Requested font "[Iosevka].ttf/OT:script=latn;language=dflt;" at 10.0pt
  -> ./Iosevka.ttf
  (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -2625,7 +2681,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 32--33
 
 Underfull \vbox (badness 1178) has occurred while \output is active []
 
- [95
+ [101
 
 ]
 File: images/interfaz-usuario.png Graphic file (type bmp)
@@ -2645,15 +2701,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 51--52
 File: images/resultados.png Graphic file (type bmp)
 <images/resultados.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 60--61
-
- []
-
-[96]
 Underfull \hbox (badness 10000) in paragraph at lines 62--63
 
  []
 
+[102]
 File: images/condiciones-escala.png Graphic file (type bmp)
 <images/condiciones-escala.png>
 File: images/botones.png Graphic file (type bmp)
@@ -2663,35 +2715,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 83--84
 
  []
 
-
-Underfull \vbox (badness 2103) has occurred while \output is active []
-
- [97]
 File: images/controladores.png Graphic file (type bmp)
 <images/controladores.png>
- [98]
+
+Underfull \vbox (badness 3942) has occurred while \output is active []
+
+ [103]
 File: images/teorico.png Graphic file (type bmp)
 <images/teorico.png>
- [99]
-Overfull \hbox (19.66484pt too wide) in alignment at lines 125--155
+ [104]
+Overfull \hbox (19.66484pt too wide) in alignment at lines 117--147
  [] [] [] 
  []
 
-[100])
+[105])
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
- [101]
+ [106]
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
 File: backcover.pdf Graphic file (type pdf)
 <use backcover.pdf, page 1>
- [102] (./main.aux
+ [107] (./main.aux
 LaTeX Info: Redefining \sptext on input line 26.
 LaTeX Info: Redefining \. on input line 26.
 LaTeX Info: Redefining \% on input line 26.
@@ -2700,7 +2751,7 @@ LaTeX Info: Redefining \% on input line 26.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 77EC09FEC9DF7BD98B72699D171B900C;14955.
+(rerunfilecheck)             Checksum: FEF6D5A4706450AC8443A4E4C180F03B;14142.
 runsystem(rm main.pyg)...executed.
 
 Package logreq Info: Writing requests to 'main.run.xml'.
@@ -2708,12 +2759,12 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 59729 strings out of 476191
- 1370607 string characters out of 5812071
- 2268609 words of memory out of 5000000
- 79516 multiletter control sequences out of 15000+600000
+ 59709 strings out of 476191
+ 1372905 string characters out of 5812071
+ 2261419 words of memory out of 5000000
+ 79491 multiletter control sequences out of 15000+600000
  478815 words of font info for 112 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  103i,17n,138p,1461b,5385s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.pdf (103 pages).
+Output written on main.pdf (108 pages).
