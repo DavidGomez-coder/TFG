@@ -1,9 +1,0 @@
-[0] Config.pm:307> INFO - This is Biber 2.17
-[0] Config.pm:310> INFO - Logfile is 'sections/resumen.blg'
-[42] biber:340> INFO - === vie may 12, 2023, 10:54:17
-[50] Biber.pm:418> INFO - Reading 'sections/resumen.bcf'
-[89] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
-[96] bbl.pm:654> INFO - Writing 'sections/resumen.bbl' with encoding 'UTF-8'
-[96] bbl.pm:757> INFO - Output to sections/resumen.bbl
-[96] Biber.pm:130> WARN - The file 'sections/resumen.bcf' does not contain any citations!
-[96] Biber.pm:132> INFO - WARNINGS: 1

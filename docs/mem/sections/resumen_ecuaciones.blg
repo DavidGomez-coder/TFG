@@ -1,9 +1,0 @@
-[0] Config.pm:307> INFO - This is Biber 2.17
-[0] Config.pm:310> INFO - Logfile is 'sections/resumen_ecuaciones.blg'
-[51] biber:340> INFO - === vie abr 21, 2023, 13:39:22
-[60] Biber.pm:418> INFO - Reading 'sections/resumen_ecuaciones.bcf'
-[100] Biber.pm:972> INFO - Found 0 citekeys in bib section 0
-[108] bbl.pm:654> INFO - Writing 'sections/resumen_ecuaciones.bbl' with encoding 'UTF-8'
-[109] bbl.pm:757> INFO - Output to sections/resumen_ecuaciones.bbl
-[109] Biber.pm:130> WARN - The file 'sections/resumen_ecuaciones.bcf' does not contain any citations!
-[109] Biber.pm:132> INFO - WARNINGS: 1

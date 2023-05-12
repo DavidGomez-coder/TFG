@@ -1,5 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-
-        \PYG{p}{\PYGZlt{}}\PYG{n+nt}{nombre\PYGZhy{}etiqueta} \PYG{n+na}{atributo1}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}valor\PYGZus{}atributo\PYGZus{}1\PYGZdq{}} \PYG{n+na}{atributo2}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}valor\PYGZus{}atributo\PYGZus{}2\PYGZdq{}}\PYG{p}{\PYGZgt{}} ... \PYG{p}{\PYGZlt{}/}\PYG{n+nt}{nombre\PYGZhy{}etiqueta}\PYG{p}{\PYGZgt{}}
-
-\end{Verbatim}
