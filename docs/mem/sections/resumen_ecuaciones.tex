@@ -1,0 +1,34 @@
+\documentclass[../main.tex]{subfiles}
+
+
+
+\begin{document}
+\label{resumen_ecuaciones}
+
+\begin{longtable}[c]{||l|l|c|c|c|c||}
+ \hline
+ & \textbf{}         & \multicolumn{2}{l}{\textbf{Almacenamiento de energía}} & \multicolumn{2}{|l||}{\textbf{Disipación de energía}} \\ \hline
+\endhead
+%
+ & \textbf{Concepto} & \textbf{Expresión}        & \textbf{Resolución}        & \textbf{Expresión}      & \textbf{Resolución}      \\ \hline
+\multirow{5}{*}{\textbf{RC}} 
+& \textbf{Carga del condensador $q(t)$}   & $C\varepsilon(1-e^{-t/RC})$ & \ref{part::carga_condensador_1} & $C \varepsilon e^{-t/RC} $& \ref{part::descarga_condensador_1} \\
+& \textbf{Intensidad de corriente $I(t)$} & $\frac{\varepsilon}{R} \cdot e^{-t/RC}$ & \ref{part::carga_condensador_2} & $- \frac{\varepsilon}{R} \cdot e^{-t/RC}$ & \ref{part::descarga_condensador_2} \\
+                             & \textbf{DDP resistencia $V_R(t)$}         & $\varepsilon \cdot e^{-t/RC}$ & \ref{part::carga_condensador_3} & $- \varepsilon \cdot e^{-t/RC}$  & \ref{part::descarga_condensador_3} \\
+                             & \textbf{DDP condensador $V_C(t)$}         &  $\varepsilon (1-e^{-t/RC})$ & \ref{part::carga_condensador_4}  & $\varepsilon \cdot e^{-t/RC}$ & \ref{part::descarga_condensador_4} \\
+                             
+                             & \textbf{Energía almacenada $E(t)$} & $\frac{1}{2}CV_C(t)^2$ & \ref{part::energia_condensador} & $\frac{1}{2}CV_C(t)^2$ & \ref{part::energia_condensador} \\ \hline
+                             &                                  &  &  &  &  \\ \hline
+\multirow{5}{*}{\textbf{RL}} & \textbf{Intensidad de corriente $I(t)$} & $\frac{\varepsilon}{R}(1-e^{-Rt/L})$ & \ref{part::carga_inductor_1} & $\frac{\varepsilon}{R}e^{-Rt/L}$ & \ref{part::descarga_inductor1} \\
+                             & \textbf{DDP resistencia $V_R(t)$}         & $\varepsilon(1-e^{-Rt/L})$ & \ref{part::carga_inductor_2} & $\varepsilon \cdot e^{-Rt/L}$ & \ref{part::descarga_inductor_2}  \\
+                             & \textbf{DDP inductor $V_L(t)$}            &  $\varepsilon \cdot e^{-Rt/L} $&  \ref{part::carga_inductor_3}& $- \varepsilon \cdot e^{-Rt/L} $ & \ref{part::descarga_inductor_3} \\
+                            
+                             & \textbf{Energía almacenada $E(t)$}      & $\frac{1}{2}LI(t)^2$ & \ref{part::energía_inductor} & $\frac{1}{2}LI(t)^2$ &  \ref{part::energía_inductor}\\ 
+                              & \textbf{Flujo magnético $\phi(t)$}    & $L \cdot I(t)$ & $L \cdot I(t)$ & \ref{part::flujo_magnetico_inductor}  & \ref{part::flujo_magnetico_inductor}  \\
+                             \hline
+\caption{Modelado de los circuitos RC y RL}
+\label{tab:ecuaciones_todas}\\
+\end{longtable}
+
+
+\end{document}

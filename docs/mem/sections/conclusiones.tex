@@ -1,0 +1,62 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+
+
+
+\subsection{Conclusiones}
+Tal y como se comentó a lo largo del primer capítulo, el objetivo principal a cubrir en esta línea de trabajo era elaborar material docente para el alumnado de las asignaturas de física para reforzar la comprensión de los circuitos RC y RL de primer orden, a través de simulaciones informáticas.\\ 
+
+
+
+
+
+\begin{itemize}
+
+    \item Una de los primeros planteamientos fue seleccionar una aplicación adecuada entre las siguientes: nativas, híbridas y web, de las que finalmente la escogida fue la aplicación web, sobre todo por la usabilidad en los diferentes dispositivos del mercado. Una vez hecho esto, entramos en el desarrollo de la propia aplicación, en la que cumplimos los siguientes objetivos en cada una de las etapas del mismo.
+
+    \item Se ha desarrollado una primera etapa de análisis de las necesidades académicas de las que se han extraido los requisitos funcionales (tabla \ref{tab::requisitos}) y de diseño que se han integrado posteriormente a la aplicación informática; principalmente, la posibilidad de visualizar a tiempo real la evolución temporal de las magnitudes eléctricas de cada circuito.\\ 
+    
+    La aplicación permite seleccionar los valores de las diferentes magnitudes características dentro de un intervalo de uso común en el laboratorio real, al mismo tiempo que se pueden visualizar las expresiones matemáticas que justifican el comportamiento de los circuitos.  
+
+    \item Tras realizar un análisis completo de la aplicación, se llevó a cabo un estudio en el que se barajó varios candidatos como posibles tecnologías a utilizar, como el tipo de aplicación y los lenguajes de programación. Al principio, el objetivo fue utilizar Java como lenguaje, aunque finalmente optamos por hacer uso de tecnologías más actuales del desarrollo web.\\ 
+    
+    En esta fase, el principal objetivo aprender a dominar los diferentes \textit{frameworks} y lenguajes de programación que se utilizan en la implementación, aprendiendo prácticamente la mayoría desde cero.
+    
+    Entre estas tecnologías, nos encontramos con \textit{ReactJS}, un \textit{framework} \textit{frontend} orientado a la programación de vistas basado en la construcción de componentes. Una de las características que hacen que esta tecnología sea de las más utilizadas actualmente es por su curva de aprendizaje respecto a otros \textit{frameworks} con el mismo propósito. Puesto que esta librería se encuentra escrita en \textit{JavaScript}, este es el lenguaje utilizado internamente en el proyecto, junto a \textit{HTML} y \textit{CSS}, esenciales en la programación web.
+
+    Por su puesto, usamos la versión web de \textit{git}: \textit{GitHub}, para llevar así un control sobre las actualizaciones del proyecto. Este también permite configurarlo para poder desplegar este código y que sea accesible desde cualquier navegador, facilitando el acceso a la web a todo el mundo. 
+    
+    \item Una vez aprendidas las tecnologías llegamos al apartado de la implementación. Lo más destacable es el algoritmo utilizado en la generación de los datos, en el que aprovechamos el ciclo de vida de un componente en \textit{react} para generar, tratar y representar los resultados correspondientes a cada una de las magnitudes físicas de la simulación.
+    
+    \item Como toda aplicación, es necesario comprobar que funciona según los requisitos. Ya que se trata de una aplicación completamente visual y lo que nos interesa es que las gráficas generadas sean las correctas, las pruebas realizadas no son más que una comparación entre los resultados generados por la aplicación y los obtenidos por un \textit{script} de \textit{python}. 
+    
+    
+    \item Una vez la aplicación está completa, debemos de dar acceso a ella públicamente, realizando un despliegue del \textit{software} para su uso en un navegador web. Esta es la parte más sencilla, pues el entorno de desarrollo permite integrar una opción de despliegue bastante fácil de utilizar.
+    
+\end{itemize}
+
+Se ha desarrollado una aplicación web completamente funcional acorde a las necesidades especificadas, accesible desde casi cualquier dispositivo con un navegador web. La interfaz de usuario intuitiva, lo que permite al usuario navegar con facilidad a través de ella. Además, junto a las simulaciones, existen apartados teóricos que refuerzan el objetivo de la docencia, simulando completamente una clase teórica-práctica del funcionamiento de los circuitos RC y RL en corriente continua y estado transitorio.
+
+
+
+
+\subsection{Líneas Futuras}
+Como líneas futuras a este, se pueden proponer los siguientes.
+
+\begin{itemize}
+    \item \textbf{Portal para la asignatura de física. }Una de las líneas a proponer sería el desarrollo de un portal web en el que recoger toda la información sobre la asignatura; por ejemplo, las simulaciones realizadas, apartados teóricos y prácticos para el alumno, un sistema de \textit{login} para permitir el acceso solo a los alumnos de la asignatura, étc. 
+
+
+    \item \textbf{Simulación de circuitos RC y RL en corriente continua y alterna}. Esta línea tendría como principal objetivo el aprendizaje de los circuitos RC y RL en general, en los que el alumno pueda construir su propio circuito. Podría ser interesante observar cómo evolucionan la intensidad de corriente en cada malla del circuito, la carga de todos los condensadores o el flujo magnético en las bobinas empleadas. Podría emplearse para ello la \textbf{API} de \textbf{simulink}, un entorno de programación de muy alto nivel de \textit{Matlab} usado normalmente para resolver ecuaciones diferenciales. En este caso, las ecuaciones a implementar tendríamos que tener en cuenta el tipo de corriente utilizada, por lo que habría que relizar un análisis de estos circuitos para corriente alterna.
+    
+    \item \textbf{Simulaciones físicas para la docencia. }Esta línea de trabajo trataría de extender la solución propuesta en este. Podrían añadirse nuevas simulaciones simples a las ya existentes, como simular la interacción entre cargas eléctricas o añadir nuevos dispositivos a los circuitos existentes, como diodos o transistores.
+    
+
+\end{itemize}
+
+
+
+
+\end{document}
