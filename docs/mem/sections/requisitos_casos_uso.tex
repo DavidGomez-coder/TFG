@@ -19,18 +19,14 @@ A continuación, se muestra una tabla con los requisitos del software que se ha 
             \textbf{R-1.1} & Cambio de la capacidad del condensador & En un circuito RC, el usuario podrá cambiar el valor de la capacidad del condensador. \\ \hline
             
             \textbf{R-1.2} & Cambio del coeficiente de autoinducción de la bobina & En un circuito RL, el usuario podrá cambiar el valor del coeficiente de autoinducción del inductor.  \\ \hline
+        
+            \textbf{R-1.3} & Cambio valor óhmico de la resistencia & El usuario podrá cambiar el valor de la resistencia del circuito que esté simulando. \\ \hline
             
-            \textbf{R-1.3} & Cambio del voltaje de la fuente & Los circuitos a implementar serán en corriente continua; así que se usará una pila, permitiendo así cambiar el valor del voltaje suministrado por la ella. Esta dispondrá de un interruptor interno, que permitirá alternar entre los dos estados del circuito (almacenamiento y disipación de energía). \\ \hline
-            
-            \textbf{R-1.4} & Cambio valor óhmico de la resistencia & El usuario podrá cambiar el valor de la resistencia del circuito que esté simulando. \\ \hline
-            
-            \textbf{R-1.4.1} & Bandas de la resistencia interactivas & Las resistencias usadas en las simulaciones serán de cuatro bandas. El color de cada una de ellas cambiará dependiendo del valor óhmico de este componente. La cuarta banda (asociada a la tolerancia) será fija, ya que se usará el valor teórico de la resistencia. \\ \hline
+            \textbf{R-1.3.1} & Bandas de la resistencia interactivas & Las resistencias usadas en las simulaciones serán de cuatro bandas. El color de cada una de ellas cambiará dependiendo del valor óhmico de este componente. La cuarta banda (asociada a la tolerancia) será fija, ya que se usará el valor teórico de la resistencia. \\ \hline
             
             \textbf{R-2} & Tiempo interactivo & Durante la ejecución de la simulación, la obtención de resultados se podrá pausar o reanudar según sea conveniente; pudiendo además volver a reanudarla. \\ \hline
             
-            \textbf{R-2.1} & Escala de tiempo & Dado que en ocasiones el estado de equilibrio se obtiene demasiado rápido, las curvas características de estos circuitos de cada una de las magnitudes físicas no pueden verse correctamente. Se permite entonces ajustar esta escala de tiempo, pudiendo simular para valores en segundos, milisegundos, microsegundos, ... \\ \hline
-            
-            \textbf{R-2.2} & Condiciones de parada & La simulación se podrá parar dada una condición de parada. El ajuste de los resultados obtenidos será mejor cuanto menor sea la escala de tiempo. \\ \hline
+            \textbf{R-2.1} & Condiciones de parada & La simulación se podrá parar dada una condición de parada. El ajuste de los resultados obtenidos será mejor cuanto menor sea la escala de tiempo. \\ \hline
             
             \textbf{R-3} & Gráficas de las magnitudes físicas & Se dispondrá de una serie de gráficas en la que se podrán ver la evolución de cada una de las magnitudes físicas asociadas a los circuitos. \\ \hline
             
@@ -52,7 +48,7 @@ A continuación, se muestra una tabla con los requisitos del software que se ha 
 \subsection{Casos de uso}
 Definimos como \textit{casos de uso} a la representación en forma de diagrama de cada uno de los \textit{requisitos funcionales}. Estos, se hacen mediante la definición de \textit{actores} (el usuario y el sistema), quienes interactúan con la aplicación y realizan ciertas acciones. Como se puede ver en la figura \ref{fig::casos_de_uso}, el usuario puede cambiar los valores de cada uno de los componentes, cambiar la escala de tiempo de la simulación, añadir condiciones de parada o ver la teoría correspondiente a cada uno de los circuitos. Y en cuanto al sistema o aplicación, sus funciones son proporcionar los resultados de la simulación y la animación de los circuitos.
 
-\begin{figure}
+\begin{figure}[!h]
     \centering
     \includegraphics{images/casos_de_uso.PNG}
     \caption{Diagrama de casos de uso}

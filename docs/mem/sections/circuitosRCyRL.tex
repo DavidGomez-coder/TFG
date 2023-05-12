@@ -73,7 +73,8 @@ Este principio, debe de mantenerse durante todo el proceso de carga hasta que la
     \label{eqq::balance_energetico_rc_1}
 \end{equation}
 
-, dónde $\varepsilon$ es la energía suministrada por la fuente por cada unidad de carga que la atraviesa, $V_C(t)$ es la \textit{ddp} en el condensador y $V_R(t)$ la diferencia de potencial en la resistencia. Si la resolvemos, podemos obtener las expresiones recogidas en la tabla \ref{tab::ecuaciones_carga_rc}.
+
+, dónde $\varepsilon$ es la energía suministrada por la fuente por cada unidad de carga que la atraviesa, $V_C(t)$ es la \textit{ddp} en el condensador y $V_R(t)$ la diferencia de potencial en la resistencia. Si la resolvemos, podemos obtener las expresiones recogidas en la tabla \ref{tab::ecuaciones_carga_rc}.\\
 
 
 \begin{table}[!ht]
@@ -94,9 +95,11 @@ Este principio, debe de mantenerse durante todo el proceso de carga hasta que la
     \end{center}
 \end{table}
 
-Sin embargo, si partimos de un condensador previamente cargado con una carga $q_{max}$ y de capacidad $C$, conectado a una resistencia $R$ en serie, el escenario en el que nos encontramos es diferente. En el mismo instante en el que cerramos el circuito ($t=0s$) los electrones libres de la armadura cargada negativamente provocan una corriente eléctrica en el circuito desplazándose hacia la placa de carga positiva. Dicha corriente, ocasiona una diferencia de potencial de signo negativo en la resistencia y, como debe de cumplirse el principio de conservación energético y no se dispone de una fuente de energía, el potencial en el condensador es igual en todo momento, solo que de signo contrario (ambos se anulan entre sí). \\
+Sin embargo, si tenemos un circuito sin fuente de fuerza electromotriz y partimos de un condensador previamente cargado con una carga $q_{max}$ y de capacidad $C$, conectado a una resistencia $R$ en serie, el escenario en el que nos encontramos es diferente. 
 
-Como ya se ha comentado, no existe una fuente de energía que aplique un potencial a los componentes del circuito, es por eso que la suma de los potenciales de la resistencia y el condensador debe de ser cero en todo momento. Podemos plantear la ecuación diferencial (\ref{eqq::balance_energetico_rc_2}) para estudiar el comportamiento del circuito en el estado de descarga del condensador.
+En el mismo instante en el que cerramos el circuito ($t=0s$) los electrones libres de la armadura cargada negativamente provocan una corriente eléctrica en el circuito desplazándose hacia la placa de carga positiva. Dicha corriente, ocasiona una disminución del potencial eléctrico en la resistencia y, como debe de cumplirse el principio de conservación de la energía y no se dispone de una fuente de energía, el condensador hace las veces de ésta y el potencial en el mismo se incrementa de forma que el balance energético en el circuito es cero (ambos se anulan entre sí). \\
+
+Como ya se ha comentado, no existe una fuente de energía que aplique un potencial a los componentes del circuito, es por eso que la suma de los potenciales de la resistencia y el condensador debe de ser cero en todo momento. Podemos plantear la ecuación diferencial (\ref{eqq::balance_energetico_rc_2}) para estudiar el comportamiento del circuito en el estado de descarga del condensador.\\
 
 
 \begin{figure}[!h]
@@ -122,7 +125,9 @@ Como ya se ha comentado, no existe una fuente de energía que aplique un potenci
     \label{eqq::balance_energetico_rc_2}
 \end{equation}
 
-Si resolvemos la ecuación diferencial planteada (\ref{tab::ecuaciones_descarga_rc}) podemos obtener las expresiones que se muestran en la tabla \ref{tab::ecuaciones_descarga_rc} que modelan el comportamiento de las diferentes magnitudes físicas de la descarga de un condensador; suponiendo que la carga inicial del mismo es la máxima permitida.
+Si resolvemos la ecuación diferencial planteada (\ref{eqq::balance_energetico_rc_2}) podemos obtener las expresiones que se muestran en la tabla \ref{tab::ecuaciones_descarga_rc} que modelan el comportamiento de las diferentes magnitudes físicas de la descarga de un condensador; suponiendo que la carga inicial del mismo es la máxima permitida.\\
+
+
 
 \begin{table}[!ht]
     \begin{center}
@@ -142,40 +147,40 @@ Si resolvemos la ecuación diferencial planteada (\ref{tab::ecuaciones_descarga_
 \end{table}
 
 
-
+\newpage
 Si estudiamos las expresiones matemáticas de cada una de las magnitudes físicas del circuito, observamos que todas ellas dependen del tiempo transcurrido $t$; es decir, las magnitudes de un circuito RC de primer orden varían a lo lo largo del tiempo. Además, este tiempo se ve afectado por un valor constante que viene dado por el producto de la capacidad del condensador y del valor óhmico de la resistencia. Definimos a este valor como la \textit{constante de tiempo RC} (\ref{eqq::constante_tiempo_rc}). 
 
 Esa constante, indica el tiempo que ha de transcurrir para que el condensador alcance el $63.2\%$ de su carga máxima; o dicho de otra manera, es el tiempo que tarda el condensador en cargarse completamente si la corriente fuese siempre la inicial. Cuanto menor sea este valor, más rápida es la carga o la descarga del condensador.
-
-
 \begin{equation}
     \tau_{RC} = R \cdot C
     \label{eqq::constante_tiempo_rc}
 \end{equation}
 
-Para comprobar que efectivamente el comportamiento de cada una de las magnitudes es el esperado, vamos a analizar los resultados de un circuito de ejemplo, tomando una fuente con un voltaje de $\varepsilon = 6V$, una resistencia $R=1000\Omega$ y un condensador de capacidad $C=10 \mu F$. Para ello, vamos a utilizar un \textit{script} de \textit{python} que, dado estos datos, nos devuelve las gráficas de ambos estados del circuito. 
+Para comprobar que efectivamente el comportamiento de cada una de las magnitudes es el esperado, vamos a analizar los resultados de un circuito de ejemplo, tomando una fuente con un voltaje de $\varepsilon = 6V$, una resistencia $R=1000\Omega$ y un condensador de capacidad $C=10 \mu F$. Para ello, vamos a utilizar un \textit{script} de \textit{python} que, dado estos datos, nos devuelve las gráficas de ambos estados del circuito.
 
-\begin{figure}[!h]
+\begin{figure}[h!]
     \centering
     \includegraphics[width=0.9\textwidth]{images/resultados_ejemplo_circuitoRC.png}
-    \caption{Simulación de carga (azul) y descarga(naranja) de un condensador, para $\varepsilon=6V$, $R=1000 \Omega$ y $C=10 \mu F$.}
+    \caption{Simulación de carga(azul) y descarga(naranja) de un condensador, para $\varepsilon=6V$, $R=1000 \Omega$ y $C=10 \mu F$.}
     \label{fig::sim_ejemplo_rc}
 \end{figure}
 
-Analizamos entonces los resultados obtenidos (figura \ref{fig::sim_ejemplo_rc}). Cuando el circuito se encuentra dispuesto para la carga del condensador, podemos observar que a medida que transcurre el tiempo, la carga de este dispositivo aumenta y, por lo tanto lo hacen la diferencia de potencial y la energía almacenada en el mismo. Puesto que el número de electrones que pueden desplazarse de una placa a la otra del condensador será cada vez menor, la intensidad de corriente irá disminuyendo hasta ser prácticamente cero. De la misma forma, el potencial en la resistencia también disminuye. 
+\newpage
+Analizamos entonces los resultados obtenidos (figura \ref{fig::sim_ejemplo_rc}). Cuando el circuito se encuentra dispuesto para la carga del condensador, podemos observar que a medida que transcurre el tiempo, la carga de este dispositivo aumenta y, por lo tanto lo hacen la diferencia de potencial y la energía almacenada en el mismo. Puesto que el número de electrones que pueden desplazarse de una placa a la otra del condensador será cada vez menor, la intensidad de corriente irá disminuyendo hasta ser prácticamente cero. De la misma forma, el potencial en la resistencia también disminuye.\\ 
 
-En el proceso de descarga, el movimiento de los electrones es en sentido contrario a la carga, y por lo tanto también lo sería la intensidad de corriente. El condensador actúa como una pila, por lo que el desplazamiento de los electrones de la armadura cargada negativamente hacia la otra hace que la carga del condensador disminuya junto a la diferencia potencial entre sus placas y la energía almacenada en él hasta ser cero. \\
+En el proceso de descarga, el movimiento de los electrones es en sentido contrario a la carga, y por lo tanto también lo sería la intensidad de corriente. El condensador actúa como una pila, por lo que el desplazamiento de los electrones de la armadura cargada negativamente hacia la otra hace que la carga del condensador disminuya, igual que la diferencia de potencial y la energía almacenada, hasta ser cero.\\
 
-Además, como la constante de tiempo es muy pequeña, el tiempo empleado en la carga y descarga es de apenas 0.005 segundos. Si utilizamos una resistencia mayor, por ejemplo de $1M \Omega$, el tiempo en completarse la carga o la descarga del condensador asciende hasta los 5 segundos (figura \ref{fig::sim_ejemplo_rc2}).  
+Además, como la constante de tiempo es muy pequeña, el tiempo empleado en la carga y descarga es de apenas 0.005 segundos. Si utilizamos una resistencia mayor, por ejemplo de $1M \Omega$, el tiempo en completarse la carga o la descarga del condensador asciende hasta los 5 segundos (figura \ref{fig::sim_ejemplo_rc2}).
 
 
-\begin{figure}[!h]
+\begin{figure}[h!]
     \centering
     \includegraphics[width=0.9\textwidth]{images/resultados_ejemplo_circuitoRC2.png}
     \caption{Simulación de carga (azul) y descarga(naranja) de un condensador, para $\varepsilon=6V$, $R=1M \Omega$ y $C=10 \mu F$.}
     \label{fig::sim_ejemplo_rc2}
 \end{figure}
 
+\newpage
 \subsection{El inductor y el circuito RL}
 Tal y como se comentó durante la introducción de este capitulo, podemos hacer uso de los circuitos RL para incrementar la intensidad de corriente y así, conseguir por ejemplo, aumentar la tensión y crear un arco voltaico con energía suficiente para quemar combustible en un motor de gasolina. Para ello, utilizaremos la bobina, un dispositivo compuesto por un hilo conductor enrollado alrededor de un núcleo, normalmente de aire o de algún material ferruginoso (como el hierro o la ferrita).\\ 
 
@@ -207,7 +212,7 @@ Puesto que esa intensidad de corriente a cambiado, el campo magnético creado po
 
 Ya sabiendo qué es una bobina, un circuito RL es un conjunto de resistencias eléctricas y bobinas conectadas a una fuente de alimentación. El principal objetivo es comprender la evolución de las diferentes magnitudes físicas que afectan al circuito al inducir corriente eléctrica con estos dispositivos; así que en lugar de analizar un circuito complejo, el análisis y la simulación del mismo se realizará sobre un circuito RL de primer orden. Esto es, un circuito formado por una resistencia y una bobina conectadas en serie. \\
 
-Partimos entonces de un circuito RL de primer orden, donde inicialmente supondremos que la intensidad de corriente que circula por él es nula. En el momento en el que aplicamos una diferencia de potencial al circuito utilizando una fuente de alimentación con un voltaje característico de $\varepsilon$ V, se produce una emisión de cargas negativas desde el terminal con carga negativa de la pila. El movimiento de estas cargas provocan un campo magnético en la bobina cuando esta es atravesada por la corriente eléctrica generada. Además, por el fenómeno de autoinducción altera el campo magnético creado en la bobina provocando un incremento en la intensidad de corriente.  
+Partimos entonces de un circuito RL de primer orden, donde inicialmente supondremos que la intensidad de corriente que circula por él es nula. En el momento en el que aplicamos una diferencia de potencial al circuito utilizando una fuente de alimentación con un voltaje característico $\varepsilon$, se produce una emisión de cargas negativas desde el terminal con carga negativa de la pila. El movimiento de estas cargas provocan un campo magnético en la bobina cuando esta es atravesada por la corriente eléctrica generada. Además, en estado transitorio, esta corriente aumenta y por tanto el campo y el flujo magnético en la misma, originando un fenómeno de autoinducción según el cual, la bobina se opone a que la corriente cambie, relantizando en el tiempo el incremento de ésta. 
 
 \begin{figure}[!h]
     \centering
@@ -230,7 +235,7 @@ Obtenemos entonces las expresiones que modelan el circuito RL realizando un bala
 
 \begin{equation}
     \label{eqq::carga_bobina}
-    \varepsilon = V_L(t) + V_R(t) = L \frac{\partial I(t)}{\partial t} + R I(t)
+    \varepsilon = V_L(t) + V_R(t) = L \frac{d I(t)}{d t} + R I(t)
 \end{equation}
 
 , dónde $V_L(t)$ es la diferencia de potencial en el inductor y $V_R(t)$ en la resistencia. De esta ecuación, podemos deducir las expresiones que se muestran en la tabla \ref{tab::ecuaciones_carga_rl}.\\
@@ -251,8 +256,9 @@ Obtenemos entonces las expresiones que modelan el circuito RL realizando un bala
                 \label{tab::ecuaciones_carga_rl}
         \end{center}
     \end{table}
+
     
-Por otro lado, tenemos el caso de que ya tengamos cierta cantidad de energía magnética almacenada en nuestra bobina, partiendo en el estado descrito por la figura \ref{fig::circuito_rl_2}, cuando la intensidad de corriente que circula por el circuito es máxima. El proceso de disipación de la energía almacenada en el campo magnético de la bobina comienza cuando dejamos de suministrar energía con la fuente de alimentación, es decir, cuando $\varepsilon = 0$ (figura \ref{fig::circuito_rl_3}). \\
+Por otro lado, una vez que la corriente que circula por el circuito alcanza su valor máximo y es constante, cesa la autoinducción y la bobina almacena energía magnética (figura \ref{fig::circuito_rl_2}). El proceso de disipación de la energía almacenada en el campo magnético de la bobina comienza cuando quitamos la fuente de fuerza electromotriz y deja de suministrar energía, es decir, cuando $\varepsilon = 0$ (figura \ref{fig::circuito_rl_3}). \\
     
 
  \begin{figure}[!h]
@@ -269,10 +275,10 @@ Por otro lado, tenemos el caso de que ya tengamos cierta cantidad de energía ma
     \label{fig::carga_bobina}
 \end{figure}
 
-Toda la energía cinética de las cargas en movimiento se disipan en forma de calor cuando estas chocan con las paredes del conductor, disminuyendo así la intensidad de corriente hasta ser cero. Puesto que la intensidad ha sufrido una variación respecto a su valor inicial, el campo magnético sufre variaciones (de nuevo por el fenómeno de autoinducción). Además, conforme la intensidad disminuye también lo hacen las tensiones de la resistencia y el inductor, y con ellos la energía almacenada y el flujo magnético de la bobina. Realizando un nuevo balance energético del circuito, obtenemos la siguiente ecuación a resolver, 
+Toda la energía cinética de las cargas en movimiento se disipan en forma de calor en la resistencia eléctrica del circuito, disminuyendo así la intensidad de corriente hasta ser cero. Puesto que la intensidad ha sufrido una variación respecto a su valor inicial, el campo magnético sufre variaciones (de nuevo por el fenómeno de autoinducción). Además, conforme la intensidad disminuye también lo hacen las tensiones de la resistencia y el inductor, y con ellos la energía almacenada y el flujo magnético de la bobina. Realizando un nuevo balance energético del circuito, obtenemos la siguiente ecuación a resolver, 
 \begin{equation}
     \label{eqq::descarga_bobina}
-    0 = V_L(t) + V_R(t) = L \frac{\partial I(t)}{\partial t} + R I(t)
+    0 = V_L(t) + V_R(t) = L \frac{d I(t)}{d t} + R I(t)
 \end{equation}
 
 , a partir de la cuál podemos deducir las expresiones que modelan el comportamiento de cada una de las magnitudes físicas que afectan al circuito durante la descarga de la bobina, tal y como se muestran en la tabla \ref{tab::ecuaciones_descarga_rl}.\\
@@ -313,7 +319,7 @@ Comprobamos entonces que el comportamiento de cada una de las magnitudes física
 \end{figure}
 
 
-Analizamos entonces los resultados que hemos obtenido en la figura \ref{fig::sim_ejemplo_rl}. Cuando la bobina el circuito se encuentra en disposición para almacenar energía en la bobina, debido al fenómeno de autoinducción, tanto la intensidad de corriente como la cantidad de campo magnético aumentan; y por lo tanto, lo hacen la energía magnética que se almacena en este dispositivo y la diferencia de potencial de la resistencia. Esta última, como se puede ver en los resultados, aumenta hasta tener un valor igual al de la fuente de alimentación. Como además debe de cumplirse el principio de conservación energético, la diferencia de potencial en la bobina cae hasta ser cero. 
+Analizamos entonces los resultados que hemos obtenido en la figura \ref{fig::sim_ejemplo_rl}. Cuando el circuito se encuentra en disposición para almacenar energía en la bobina, debido al fenómeno de autoinducción, tanto la intensidad de corriente como la cantidad de campo magnético aumentan; y por lo tanto, lo hacen la energía magnética que se almacena en este dispositivo y la diferencia de potencial de la resistencia. Esta última, como se puede ver en los resultados, aumenta hasta tener un valor igual al de la fuente de alimentación. Como además debe de cumplirse el principio de conservación energético, la diferencia de potencial en la bobina cae hasta ser cero. 
 
 Por otro lado cuando partimos de una intensidad de corriente máxima en el circuito y eliminamos la fuente de alimentación, la propia bobina actúa como un generador. Así que podremos observar como se sufre una caída en la intensidad de corriente, por lo que tanto la energía magnética almacenada como la energía potencial en la resistencia y el inductor, disminuirán hasta que la corriente que circula por el circuito sea completamente cero. En otras palabras, la energía magnética que quedará almacenada en la bobina será nula.
 

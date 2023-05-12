@@ -6,7 +6,7 @@
 \contentsline {subsection}{\numberline {1.4}Tecnologías usadas}{14}{subsection.1.4}%
 \contentsline {section}{\numberline {2}Circuitos RC y RL}{17}{section.2}%
 \contentsline {subsection}{\numberline {2.1}El condensador y el circuito RC}{19}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}El inductor y el circuito RL}{24}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.2}El inductor y el circuito RL}{26}{subsection.2.2}%
 \contentsline {section}{\numberline {3}Estudio de las tecnologías}{33}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Tipos de aplicaciones según la compatibilidad}{33}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}La web y su evolución}{35}{subsection.3.2}%
@@ -30,7 +30,7 @@
 \contentsline {subsection}{\numberline {5.2}Future lines of Research}{72}{subsection.5.2}%
 \contentsline {section}{\numberline {6}Conclusiones y Líneas Futuras}{75}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Conclusiones}{75}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Líneas Futuras}{76}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.2}Líneas Futuras}{77}{subsection.6.2}%
 \contentsline {section}{Apéndice \numberline {A}Modelado de los circuitos RC y RL}{81}{appendix.alph1.Alph1}%
 \contentsline {section}{Apéndice \numberline {B}Resolución matemática del circuito RC}{83}{appendix.alph2.Alph2}%
 \contentsline {subsection}{\numberline {B.1}Circuito RC en carga}{83}{subsection.alph2.Alph2.1}%
