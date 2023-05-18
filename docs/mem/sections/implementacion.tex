@@ -25,7 +25,7 @@ Comenzamos entonces identificando cuáles son las etapas en las que podemos divi
    
 \end{itemize}
 
-Para comprender mejor el funcionamiento global de la simulación, se ha elaborado el diagrama de la figura \ref{fig::diagrama-algoritmo}, en el que se puede ver con mayor detalle la interacción entre los diferentes subprocesos.\\
+Para comprender mejor el funcionamiento global de la simulación, se ha elaborado el diagrama de la figura \ref{fig::diagrama-algoritmo}, en el que se puede ver con mayor detalle la interacción entre los diferentes subprocesos.
 
 
 \begin{figure}[!h]
@@ -35,13 +35,13 @@ Para comprender mejor el funcionamiento global de la simulación, se ha elaborad
     \label{fig::diagrama-algoritmo}
 \end{figure}
 
+\hphantom{1}\\
  A continuación presentamos los aspectos más importantes de las simulaciones, en los que trataremos conceptos como \textit{ventana de datos} o \textit{condiciones de parada}.
-
 
 \subsubsection{Generación de datos}
 Que el sistema se encuentre en las etapas de \textit{stop} o \textit{reload} depende más de las acciones que tome el usuario de la aplicación que del propio flujo del proceso, por lo que nos centraremos en la etapa activa para la generación de datos en tiempo real. Nos apoyeremos entonces en el método \textit{componentDidMount} del componente de la simulación, que como ya sabemos, solamente se ejecuta una vez durante la vida de un componente (concretamente durante su creación). \\
 
-Aprovechando la capacidad de JavaScript para crear funciones privadas en el cuerpo de otros métodos y funciones, crearemos la instancia de una nueva función local y asíncrona dentro del procedimiento \textit{componentDidMount}, la cuál se ejecutará repetitivamente cada cierto tiempo, como por ejemplo cada 150 milisegundos. A estas funciones también se le conocen como \textit{setInterval}. La elección del valor de este intervalo se toma en base a la velocidad de generación de los datos que queramos. Si este es muy grande, el tiempo de espera entre la producción de dos valores crece demasiado, ralentizando así la representación de los mismos; pero si es muy pequeño, la cantidad de información generada podría llegar a ser demasiado grande, pudiendo llegar a colapsar la propia aplicación. Frente a las alternativas que presenta este dilema nos quedamos con la segunda opción, pues podemos hacer uso de una \textit{ventana de datos} de longitud fija para almacenar los resultados.
+Aprovechando la capacidad de JavaScript para crear funciones privadas en el cuerpo de otros métodos y funciones, crearemos la instancia de una nueva función local y asíncrona dentro del procedimiento \textit{componentDidMount}, la cuál se ejecutará repetitivamente cada cierto tiempo, como por ejemplo cada 150 milisegundos. A estas funciones también se le conocen como \textit{setInterval}. La elección del valor de este intervalo se toma en base a la velocidad de generación de los datos que queramos. Si este es muy grande, el tiempo de espera entre la producción de dos valores crece demasiado, ralentizando así la representación de los mismos; pero si es muy pequeño, la cantidad de información generada podría llegar a ser demasiado grande, pudiendo llegar a colapsar la propia aplicación. Frente a las alternativas que presenta este dilema nos quedamos con la segunda opción, pues podemos hacer uso de una \textit{ventana de datos} de longitud fija para almacenar los resultados.\\
 
 Por cada magnitud física a representar, utilizaremos una ventana de datos diferente. Se trata de una lista de longitud no variable sobre la que debemos de controlar la inserción de nuevos resultados. Cuando el número de datos de la ventana es inferior a su longitud no existe ningún problema, pues podemos ir añadiendo otros  nuevos al final de la misma y mantener así el orden de producción (figura \ref{fig::ventana_datos_1}). Sin embargo, si excedemos el límite, lo que haremos será eliminar el de mayor antigüedad, desplazando el resto una posición hacia la izquierda (\textit{shift}) y obteniendo así un hueco libre para añadir nueva información (figura \ref{fig::ventana_datos_2}). El objetivo de esto no es otro que mantener el orden de llegada para que la representación de los resultados sea lo más cómoda posible. \\
 
@@ -60,18 +60,15 @@ Por cada magnitud física a representar, utilizaremos una ventana de datos difer
     \label{fig::ventana_datos_2}
 \end{figure}
 
-Además, las funciones del tipo \textit{setInterval} retornan un valor identificativo que hacen referencia al temporizador de la función. Este será utilizado por el componente asociado al simulador en su etapa de destrucción para eliminar la llamada reiterativa de este proceso. Y aunque realmente esta limpieza no es necesaria (ya que solamente tendremos una función de este tipo ejecutándose al mismo tiempo), si que es de buena práctica llevarla a cabo, pues si el número de funciones \textit{setInterval} utilizadas es mayor puede causar problemas de rendimiento en la aplicación si no se toman este tipo de medidas.\\
-
+Además, las funciones del tipo \textit{setInterval} retornan un valor identificativo que hacen referencia al temporizador de la función. Este será utilizado por el componente asociado al simulador en su etapa de destrucción para eliminar la llamada reiterativa de este proceso. Y aunque realmente esta limpieza no es necesaria (ya que solamente tendremos una función de este tipo ejecutándose al mismo tiempo), si que es de buena práctica llevarla a cabo, pues si el número de funciones \textit{setInterval} utilizadas es mayor puede causar problemas de rendimiento en la aplicación si no se toman este tipo de medidas.
 \subsubsection{Tiempo absoluto y tiempo relativo de la simulación}
 Por otro lado, para garantizar la correcta visualización de los datos correspondientes a cada una de las magnitudes físicas en las gráficas, tenemos que considerar dos valores de tiempo diferentes, los cuales vamos a denominar como \textit{tiempo absoluto} y \textit{tiempo relativo} de la simulación.\\
 
-El primero de ellos, al que hemos llamado como \textit{tiempo absoluto}, será de utilidad para la representación de cada una de las magnitudes en un mismo eje. Como es lógico, esta variable de tiempo se verá incrementada a medida que se van obteniendo nuevos resultados de la simulación, tomando solamente valor nulo cuando se cree por primera vez la instancia del circuito o bien, la simulación sea reiniciada manualmente por el usuario en la etapa de \textit{reload}. 
+El primero de ellos, al que hemos llamado como \textit{tiempo absoluto}, será de utilidad para la representación de cada una de las magnitudes en un mismo eje. Como es lógico, esta variable de tiempo se verá incrementada a medida que se van obteniendo nuevos resultados de la simulación, tomando solamente valor nulo cuando se cree por primera vez la instancia del circuito o bien, la simulación sea reiniciada manualmente por el usuario en la etapa de \textit{reload}.\\ 
 
 Sin embargo, para calcular los resultados de cada una de las magnitudes físicas que describen el circuito en un instante de tiempo determinado, utilizaremos el \textit{tiempo relativo} de la simulación, el cuál tomará siempre valor cero cada vez que alguno de los componentes del circuito sea alterado y que se verá incrementado a la par que lo hace la variable de \textit{tiempo absoluto}.\\
 
-De esta manera, utilizando una variable para el tiempo relativo podremos obtener los resultados de la simulación utilizando las expresiones del modelado en un instante de tiempo determinado y, al mismo tiempo, dicho valor lo almacenaremos con el valor de la variable de tiempo absoluto de la simulación. Esto permite visualizar en un mismo eje los resultados obtenidos de varias simulaciones, facilitando así la comparación entre ellos. Por ejemplo, en la figura \ref{fig::tiempos_simulacion} podemos observar con más detalle el uso de cada una de estas variables durante la simulación de un circuito RC, en el que vemos la evolución de la carga de un condensador cuando pasamos de una fuente de $12V$ a una de $6V$.\\
-
-
+De esta manera, utilizando una variable para el tiempo relativo podremos obtener los resultados de la simulación utilizando las expresiones del modelado en un instante de tiempo determinado y, al mismo tiempo, dicho valor lo almacenaremos con el valor de la variable de tiempo absoluto de la simulación. Esto permite visualizar en un mismo eje los resultados obtenidos de varias simulaciones, facilitando así la comparación entre ellos. Por ejemplo, en la figura \ref{fig::tiempos_simulacion} podemos observar con más detalle el uso de cada una de estas variables durante la simulación de un circuito RC, en el que vemos la evolución de la carga de un condensador cuando pasamos de una fuente de $12V$ a una de $6V$.
 
 
  \begin{figure}[!h]
@@ -128,7 +125,7 @@ De esta manera, utilizando una variable para el tiempo relativo podremos obtener
         \label{fig::tiempos_simulacion}
     \end{figure}
 
-
+    \hphantom{1}\\
 \subsubsection{Condiciones de parada y escala de tiempo}
 Otro de los aspectos a tener en cuenta en la implementación es saber cuándo dar por finalizada la simulación de un circuito. Por defecto, una simulación termina cuando las magnitudes físicas del circuito alcanzan su valor máximo o mínimo, dependiendo de si estas son crecientes o no en el tiempo. Sin embargo, habrá ocasiones en las que nos interesará simular mientras se cumpla una restricción.\\ 
 
@@ -194,7 +191,7 @@ Finalmente, para simplificar lo máximo posible la implementación de las condic
 \subsection{Comparación de resultados}
 Para comprobar que efectivamente los resultados que se están generando en la aplicación son realmente los esperados y se aproximan suficientemente a los reales, realizaremos un par de pruebas utilizando un \textit{script} de \textit{python} que hemos elaborado haciendo uso de librerías como \textit{numpy} \cite{numpy} y \textit{matplotlib} \cite{matplotlib}, las cuáles nos van a facilitar la creación de ejes cartesianos para mostrar los resultados de cada una de las magnitudes; además, añadiremos información adicional como el tiempo empleado en la simulación. Como es lógico; al igual que en la aplicación, en el \textit{script} deberemos de indicar además del valor de cada uno de los componentes y el tipo de circuito, la escala de tiempo a utilizar (ver tabla \ref{tab::argumentos-script} en el apéndice \ref{app::manual_instalacion}).\\ 
 
-La ejecución de estas pruebas son prácticamente instantáneas, por lo que tenemos libertad en usar escalas de tiempo muy pequeñas sin ningún problema. Sin embargo, esto puede dar problemas de precisión, pues el tiempo empleado en la simulación del \textit{script} puede ser que no coincida con el de la aplicación; ya que al estar utilizando escalas de tiempo muy inferiores (o superiores dependiendo del caso) se pueden generar más o menos datos, mostrando así curvas más o menos precisas. 
+La ejecución de estas pruebas son prácticamente instantáneas, por lo que tenemos libertad en usar escalas de tiempo muy pequeñas sin ningún problema. Sin embargo, esto puede dar problemas de precisión, pues el tiempo empleado en la simulación del \textit{script} puede ser que no coincida con el de la aplicación; ya que al estar utilizando escalas de tiempo muy inferiores (o superiores dependiendo del caso) se pueden generar más o menos datos, mostrando así curvas más o menos precisas. \\
 
 Para abordar este problema utilizaremos la \textit{flag ``-t''} del programa en python. Esta nos permite indicar durante cuanto tiempo queremos obtener datos y plasmarlos en las gráficas que este genera, de tal forma que se prolonguen lo máximo posible en el tiempo acorde a los resultados de la aplicación; todo ello independientemente de la escala de tiempo utilizada.\\ 
 

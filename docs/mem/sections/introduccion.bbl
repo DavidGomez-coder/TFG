@@ -1,0 +1,362 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{historiacomputador}{article}{}
+      \name{author}{1}{}{%
+        {{hash=5e393be04e890f48f54affe0d7824337}{%
+           family={Heredia},
+           familyi={H\bibinitperiod},
+           given={Diego\bibnamedelima Pareja},
+           giveni={D\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+      }
+      \strng{namehash}{5e393be04e890f48f54affe0d7824337}
+      \strng{fullhash}{5e393be04e890f48f54affe0d7824337}
+      \strng{bibnamehash}{5e393be04e890f48f54affe0d7824337}
+      \strng{authorbibnamehash}{5e393be04e890f48f54affe0d7824337}
+      \strng{authornamehash}{5e393be04e890f48f54affe0d7824337}
+      \strng{authorfullhash}{5e393be04e890f48f54affe0d7824337}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{BREVE HISTORIA DEL COMPUTADOR.}
+      \field{year}{2008}
+      \field{pages}{16\bibrangedash 17}
+      \range{pages}{2}
+      \keyw{Z1,historia,computadores}
+    \endentry
+    \entry{computadorCuanticoIBM}{online}{}
+      \name{author}{1}{}{%
+        {{hash=57f201ba27db06cbe85c5423a401d8f6}{%
+           family={Chow\bibnamedelima J.},
+           familyi={C\bibinitperiod\bibinitdelim J\bibinitperiod},
+           given={Dial\bibnamedelimb O.\bibnamedelimi y\bibnamedelimb Gambetta\bibnamedelima J.},
+           giveni={D\bibinitperiod\bibinitdelim O\bibinitperiod\bibinitdelim y\bibinitperiod\bibinitdelim G\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{57f201ba27db06cbe85c5423a401d8f6}
+      \strng{fullhash}{57f201ba27db06cbe85c5423a401d8f6}
+      \strng{bibnamehash}{57f201ba27db06cbe85c5423a401d8f6}
+      \strng{authorbibnamehash}{57f201ba27db06cbe85c5423a401d8f6}
+      \strng{authornamehash}{57f201ba27db06cbe85c5423a401d8f6}
+      \strng{authorfullhash}{57f201ba27db06cbe85c5423a401d8f6}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{IBM Quantum breaks the 100 qubit processor barrier | IBM Research Blog. IBM Research}
+      \verb{urlraw}
+      \verb https://research.ibm.com/blog/127-qubit-quantum-processor-eagle?social_post=5922821977&amp;linkId=140350920
+      \endverb
+      \verb{url}
+      \verb https://research.ibm.com/blog/127-qubit-quantum-processor-eagle?social_post=5922821977&amp;linkId=140350920
+      \endverb
+      \keyw{quantum,physics,computer}
+    \endentry
+    \entry{simulacionComputador}{online}{}
+      \name{author}{1}{}{%
+        {{hash=adab353df4c7eaa1c156be19e6681961}{%
+           family={libre},
+           familyi={l\bibinitperiod},
+           given={Wikipedia},
+           giveni={W\bibinitperiod},
+           prefix={la\bibnamedelima enciclopedia},
+           prefixi={l\bibinitperiod\bibinitdelim e\bibinitperiod}}}%
+      }
+      \strng{namehash}{adab353df4c7eaa1c156be19e6681961}
+      \strng{fullhash}{adab353df4c7eaa1c156be19e6681961}
+      \strng{bibnamehash}{adab353df4c7eaa1c156be19e6681961}
+      \strng{authorbibnamehash}{adab353df4c7eaa1c156be19e6681961}
+      \strng{authornamehash}{adab353df4c7eaa1c156be19e6681961}
+      \strng{authorfullhash}{adab353df4c7eaa1c156be19e6681961}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Simulación por computadora}
+      \verb{urlraw}
+      \verb https://es.wikipedia.org/wiki/Simulaci%C3%B3n_por_computadora#:%7E:text=La%20simulaci%C3%B3n%20por%20computadora%20se,emple%C3%B3%20el%20M%C3%A9todo%20de%20Montecarlo.
+      \endverb
+      \verb{url}
+      \verb https://es.wikipedia.org/wiki/Simulaci%C3%B3n_por_computadora#:%7E:text=La%20simulaci%C3%B3n%20por%20computadora%20se,emple%C3%B3%20el%20M%C3%A9todo%20de%20Montecarlo.
+      \endverb
+      \keyw{computador,simulaciones}
+    \endentry
+    \entry{publicacionSimulacionNasa}{online}{}
+      \name{author}{1}{}{%
+        {{hash=0a668f5c75e1556dbe205a4d00a149e3}{%
+           family={[@NASA]},
+           familyi={[\bibinitperiod},
+           given={NASA},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{0a668f5c75e1556dbe205a4d00a149e3}
+      \strng{fullhash}{0a668f5c75e1556dbe205a4d00a149e3}
+      \strng{bibnamehash}{0a668f5c75e1556dbe205a4d00a149e3}
+      \strng{authorbibnamehash}{0a668f5c75e1556dbe205a4d00a149e3}
+      \strng{authornamehash}{0a668f5c75e1556dbe205a4d00a149e3}
+      \strng{authorfullhash}{0a668f5c75e1556dbe205a4d00a149e3}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Visualize a mind-bending black hole. The gravity of a black hole is so intense, it distorts its surroundings like.}
+      \field{year}{2019}
+      \verb{urlraw}
+      \verb https://twitter.com/nasa/status/1177025023867006976
+      \endverb
+      \verb{url}
+      \verb https://twitter.com/nasa/status/1177025023867006976
+      \endverb
+      \keyw{black hole,simulacion}
+    \endentry
+    \entry{simulacionesColorado}{online}{}
+      \name{author}{1}{}{%
+        {{hash=2a91637c33fc8c4580d9e644b5da8417}{%
+           family={Colorado\bibnamedelima Boulder},
+           familyi={C\bibinitperiod\bibinitdelim B\bibinitperiod},
+           given={University},
+           giveni={U\bibinitperiod},
+           prefix={of},
+           prefixi={o\bibinitperiod}}}%
+      }
+      \strng{namehash}{2a91637c33fc8c4580d9e644b5da8417}
+      \strng{fullhash}{2a91637c33fc8c4580d9e644b5da8417}
+      \strng{bibnamehash}{2a91637c33fc8c4580d9e644b5da8417}
+      \strng{authorbibnamehash}{2a91637c33fc8c4580d9e644b5da8417}
+      \strng{authornamehash}{2a91637c33fc8c4580d9e644b5da8417}
+      \strng{authorfullhash}{2a91637c33fc8c4580d9e644b5da8417}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Interactive Simulations for Science and Math}
+      \verb{urlraw}
+      \verb https://phet.colorado.edu/
+      \endverb
+      \verb{url}
+      \verb https://phet.colorado.edu/
+      \endverb
+      \keyw{física,matemáticas,ciencias,simulaciones}
+    \endentry
+    \entry{metodologiasSoftware}{article}{}
+      \name{author}{2}{}{%
+        {{hash=56fdf4ba92e4f5446cfa32830c4a106b}{%
+           family={Ojeda},
+           familyi={O\bibinitperiod},
+           given={J.\bibnamedelimi Cervantes},
+           giveni={J\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=9607ea7b642f92b66348e635e2a93297}{%
+           family={Carmen\bibnamedelimb Gómez\bibnamedelima Fuentes},
+           familyi={C\bibinitperiod\bibinitdelim G\bibinitperiod\bibinitdelim F\bibinitperiod},
+           given={María},
+           giveni={M\bibinitperiod},
+           prefix={del},
+           prefixi={d\bibinitperiod}}}%
+      }
+      \strng{namehash}{50cf54e66645dc252fd23589c9c02303}
+      \strng{fullhash}{50cf54e66645dc252fd23589c9c02303}
+      \strng{bibnamehash}{50cf54e66645dc252fd23589c9c02303}
+      \strng{authorbibnamehash}{50cf54e66645dc252fd23589c9c02303}
+      \strng{authornamehash}{50cf54e66645dc252fd23589c9c02303}
+      \strng{authorfullhash}{50cf54e66645dc252fd23589c9c02303}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Taxonomía de los modelos y metodologías de desarrollo de software más utilizados.}
+      \field{year}{2012}
+      \keyw{software,planificación}
+    \endentry
+    \entry{vsCode}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=140864078aeca1c7c35b4beb33c53c34}{%
+           family={Microsoft},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{140864078aeca1c7c35b4beb33c53c34}
+      \strng{fullhash}{140864078aeca1c7c35b4beb33c53c34}
+      \strng{bibnamehash}{140864078aeca1c7c35b4beb33c53c34}
+      \strng{authorbibnamehash}{140864078aeca1c7c35b4beb33c53c34}
+      \strng{authornamehash}{140864078aeca1c7c35b4beb33c53c34}
+      \strng{authorfullhash}{140864078aeca1c7c35b4beb33c53c34}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Visual Studio Code}
+      \verb{urlraw}
+      \verb https://code.visualstudio.com/
+      \endverb
+      \verb{url}
+      \verb https://code.visualstudio.com/
+      \endverb
+      \keyw{editor,programación}
+    \endentry
+    \entry{htmldef}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=fde1dedc8f996843b619bff586309536}{%
+           family={(WHATWG)},
+           familyi={(\bibinitperiod},
+           given={Web\bibnamedelimb Hypertext\bibnamedelimb Application\bibnamedelimb Technology\bibnamedelimb Working\bibnamedelima Group},
+           giveni={W\bibinitperiod\bibinitdelim H\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim T\bibinitperiod\bibinitdelim W\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \strng{namehash}{fde1dedc8f996843b619bff586309536}
+      \strng{fullhash}{fde1dedc8f996843b619bff586309536}
+      \strng{bibnamehash}{fde1dedc8f996843b619bff586309536}
+      \strng{authorbibnamehash}{fde1dedc8f996843b619bff586309536}
+      \strng{authornamehash}{fde1dedc8f996843b619bff586309536}
+      \strng{authorfullhash}{fde1dedc8f996843b619bff586309536}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://html.spec.whatwg.org/}}
+      \field{title}{HTML}
+      \keyw{web,programación}
+    \endentry
+    \entry{cssdef}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=47680d67712e1edb0433fdd99edd667f}{%
+           family={(W3C)},
+           familyi={(\bibinitperiod},
+           given={World\bibnamedelimb Wide\bibnamedelimb Web\bibnamedelima Consortium},
+           giveni={W\bibinitperiod\bibinitdelim W\bibinitperiod\bibinitdelim W\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \strng{namehash}{47680d67712e1edb0433fdd99edd667f}
+      \strng{fullhash}{47680d67712e1edb0433fdd99edd667f}
+      \strng{bibnamehash}{47680d67712e1edb0433fdd99edd667f}
+      \strng{authorbibnamehash}{47680d67712e1edb0433fdd99edd667f}
+      \strng{authornamehash}{47680d67712e1edb0433fdd99edd667f}
+      \strng{authorfullhash}{47680d67712e1edb0433fdd99edd667f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.w3.org/Style/CSS/Overview.en.html}}
+      \field{title}{CSS: Cascading Style Sheets}
+      \keyw{web,programación,estilos en cascada}
+    \endentry
+    \entry{jsdef}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=0536dfa83384c5ba3805472619b3a594}{%
+           family={MDN},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{0536dfa83384c5ba3805472619b3a594}
+      \strng{fullhash}{0536dfa83384c5ba3805472619b3a594}
+      \strng{bibnamehash}{0536dfa83384c5ba3805472619b3a594}
+      \strng{authorbibnamehash}{0536dfa83384c5ba3805472619b3a594}
+      \strng{authornamehash}{0536dfa83384c5ba3805472619b3a594}
+      \strng{authorfullhash}{0536dfa83384c5ba3805472619b3a594}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://developer.mozilla.org/en-US/docs/Web/JavaScript}}
+      \field{title}{JavaScript}
+      \keyw{web,programación}
+    \endentry
+    \entry{numpy}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://numpy.org/}}
+      \field{title}{numpy}
+      \keyw{maths,numpy,python,charts}
+    \endentry
+    \entry{matplotlib}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://matplotlib.org/}}
+      \field{title}{Matplotlib}
+      \keyw{maths,matplotlib,python,charts}
+    \endentry
+    \entry{nodejsdef}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=37ad480f97bed434bd748fcd4aa11d40}{%
+           family={Foundation},
+           familyi={F\bibinitperiod},
+           given={OpenJS},
+           giveni={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{37ad480f97bed434bd748fcd4aa11d40}
+      \strng{fullhash}{37ad480f97bed434bd748fcd4aa11d40}
+      \strng{bibnamehash}{37ad480f97bed434bd748fcd4aa11d40}
+      \strng{authorbibnamehash}{37ad480f97bed434bd748fcd4aa11d40}
+      \strng{authornamehash}{37ad480f97bed434bd748fcd4aa11d40}
+      \strng{authorfullhash}{37ad480f97bed434bd748fcd4aa11d40}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://nodejs.org/en/}}
+      \field{title}{NodeJs}
+      \keyw{programación,JavaScript,entorno}
+    \endentry
+    \entry{reactjsdef}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=5d6be59629590db603a6099cf0659ec4}{%
+           family={Walke},
+           familyi={W\bibinitperiod},
+           given={Jordan},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{5d6be59629590db603a6099cf0659ec4}
+      \strng{fullhash}{5d6be59629590db603a6099cf0659ec4}
+      \strng{bibnamehash}{5d6be59629590db603a6099cf0659ec4}
+      \strng{authorbibnamehash}{5d6be59629590db603a6099cf0659ec4}
+      \strng{authornamehash}{5d6be59629590db603a6099cf0659ec4}
+      \strng{authorfullhash}{5d6be59629590db603a6099cf0659ec4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://reactjs.org/}}
+      \field{title}{React}
+      \keyw{programación,JavaScript,UI,web}
+    \endentry
+    \entry{bootstrapdef}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=55eb5d8e0890bdd7e3a69445ed0c1969}{%
+           family={Mark\bibnamedelima Otto},
+           familyi={M\bibinitperiod\bibinitdelim O\bibinitperiod},
+           given={Jacob\bibnamedelima Thornton},
+           giveni={J\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+      }
+      \strng{namehash}{55eb5d8e0890bdd7e3a69445ed0c1969}
+      \strng{fullhash}{55eb5d8e0890bdd7e3a69445ed0c1969}
+      \strng{bibnamehash}{55eb5d8e0890bdd7e3a69445ed0c1969}
+      \strng{authorbibnamehash}{55eb5d8e0890bdd7e3a69445ed0c1969}
+      \strng{authornamehash}{55eb5d8e0890bdd7e3a69445ed0c1969}
+      \strng{authorfullhash}{55eb5d8e0890bdd7e3a69445ed0c1969}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://getbootstrap.com/docs/5.2/getting-started/introduction/}}
+      \field{title}{Bootstrap}
+      \keyw{programación,CSS,UI,web}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

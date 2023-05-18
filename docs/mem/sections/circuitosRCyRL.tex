@@ -6,7 +6,7 @@ El corazón humano contrae sus músculos mediante pulsos eléctricos, pero en al
 
 Las aplicaciones de este tipo de circuitos no se centran solamente en el área de la medicina, sino que también podemos encontrarlos en objetos de uso cotidiano. Si observamos algunos de los auriculares de última generación que llevan incorporados una serie de funciones que permiten aislar ruido del exterior, vemos que estos utilizan lo que se conoce como \textit{filtros de paso}, que dependiendo de si se quieren escuchar frecuencias altas, bajas o en un rango, se utilizarán respectivamente los filtros de paso alto, bajo o de banda. Estos filtros no son más que circuitos RC dónde sus componentes se encuentran dispuestos de diferente manera según el objetivo que se quiere conseguir. Y, aunque normalmente las frecuencias de filtrado ya vienen configuradas de fábrica, existen modelos en los que estas pueden cambiarse mediante el uso de resistencias variables.\\
 
-Otro uso de estos circuitos serían en las \textit{fuentes de luz estroboscópicas}. Se trata de una fuente de luz cuya emisión se produce de forma intermitente. Este tipo de dispositivos podemos encontrarlos en los \textit{strobes} de un avión (los focos de color rojo y verde que se sitúan en los extremos de las alas y cuya función es posicionar a la aeronave para evitar colisiones) o en cámaras de fotografía para tomar instantáneas de objetos en movimiento, como se puede ver en la figura \ref{foto_estroboscópica}.
+Otro uso de estos circuitos serían en las \textit{fuentes de luz estroboscópicas}. Se trata de una fuente de luz cuya emisión se produce de forma intermitente. Este tipo de dispositivos podemos encontrarlos en los \textit{strobes} de un avión (los focos de color rojo y verde que se sitúan en los extremos de las alas y cuya función es posicionar a la aeronave para evitar colisiones) o en cámaras de fotografía para tomar instantáneas de objetos en movimiento, como se puede ver en la figura \ref{foto_estroboscópica}.\\
 
 \begin{figure}[!h]
           \centering
@@ -15,7 +15,7 @@ Otro uso de estos circuitos serían en las \textit{fuentes de luz estroboscópic
           \label{foto_estroboscópica}
 \end{figure}
 
-Por otro lado tenemos los circuitos RL. Un ejemplo de uso de este tipo de circuitos lo encontramos durante el proceso de combustión en un motor de gasolina. Para que esta se lleve a cabo, el combustible debe de mezclarse con una serie de gases inflamables a alta presión y posteriormente, se debe de producir una chispa que queme esta mezcla. Para ello se hace uso de las bujías, unos dispositivos compuestos por dos hilos separados entre sí entre los que se produce una alta diferencia de potencial creando así un arco voltaico que es capaz de iniciar la combustión en el interior del motor. Pero normalmente los vehículos que emplean estos motores suelen ser alimentados por baterías de 12V o 24V, siendo estos voltajes insuficientes para que las bujías puedan llegar a inducir esa chispa.
+Por otro lado tenemos los circuitos RL. Un ejemplo de uso de este tipo de circuitos lo encontramos durante el proceso de combustión en un motor de gasolina. Para que esta se lleve a cabo, el combustible debe de mezclarse con una serie de gases inflamables a alta presión y posteriormente, se debe de producir una chispa que queme esta mezcla. Para ello se hace uso de las bujías, unos dispositivos compuestos por dos hilos separados entre sí entre los que se produce una alta diferencia de potencial creando así un arco voltaico que es capaz de iniciar la combustión en el interior del motor. Pero normalmente los vehículos que emplean estos motores suelen ser alimentados por baterías de 12V o 24V, siendo estos voltajes insuficientes para que las bujías puedan llegar a inducir esa chispa.\\
 
 Además de en motores de combustión de gasolina, este tipo de circuitos podemos hallarlos en dispositivos de filtrado de frecuencia (similares a los construidos con circuitos RC) o en circuitos osciladores. Estos últimos pueden usarse para la construcción de generadores de ondas de radio o televisón y en receptores usados en la telefonía móvil. Estos se encuentran formados por una serie de condensadores, resistencias y bobinas conectadas, también llamados circuitos RLC. Aunque estos sean otro caso de uso de bobinas y condensadores, estos circuitos no son objeto de estudio en este trabajo así que a continuación, nos centraremos en el estudio de los circuitos RC y RL en corriente continua y estado transitorio.
 
@@ -41,7 +41,7 @@ Ya se comentó en la introducción de este capítulo que un circuito RC es una a
     \label{fig::circuito_rc_representación}
 \end{figure}
 
-Partimos entonces de un condensador de capacidad $C$ completamente descargado conectado en serie a una resistencia de valor $R$. En el instante de tiempo $t=0s$, aplicamos una diferencia de potencial $\varepsilon$ , cuyo valor coincide con el voltaje característico de la fuente utilizada (figura \ref{fig::circuito_rc_representación}).
+Partimos entonces de un condensador de capacidad $C$ completamente descargado conectado en serie a una resistencia de valor $R$. En el instante de tiempo $t=0s$, aplicamos una diferencia de potencial $\varepsilon$ , cuyo valor coincide con el voltaje característico de la fuente utilizada (figura \ref{fig::circuito_rc_representación}).\\
 
 
 En ese mismo instante, la carga del condensador es nula, así que utilizando la definición de capacidad del condensador (\ref{def::capacidad_conductor}) llegamos a la conclusión de que el potencial en él también es cero. Por otro lado, tenemos que la energía potencial entre los bornes de la resistencia ha de ser máxima, y por consiguiente la intensidad de corriente que circula a través de ella también ha de serlo. Esto se debe principalmente a que debe de cumplirse el principio de conservación de la energía; que si hablamos en términos de potencial eléctrico, lo podemos traducir en que la energía suministrada por la fuente debe de ser en todo momento igual a la consumida por los componentes pasivos del circuito: el condensador y la resistencia.
@@ -67,12 +67,10 @@ En ese mismo instante, la carga del condensador es nula, así que utilizando la 
 
 
 Este principio, debe de mantenerse durante todo el proceso de carga hasta que la diferencia de potencial en el condensador sea máxima, y por tanto lo sea la carga almacenada en él. Como debe de volver a cumplirse el principio de conservación energético, ahora la energía potencial entre los bornes de la resistencia es cero, y utilizando de nuevo la Ley de Ohm, tenemos que la intensidad de corriente ha de ser nula. Matemáticamente, podemos expresar este balance utilizando la siguiente ecuación diferencial:
-
 \begin{equation}
     \varepsilon = V_C(t) + V_R(t) = \frac{q(t)}{C} + R\frac{d q(t)}{d t}
     \label{eqq::balance_energetico_rc_1}
 \end{equation}
-
 
 , dónde $\varepsilon$ es la energía suministrada por la fuente por cada unidad de carga que la atraviesa, $V_C(t)$ es la \textit{ddp} en el condensador y $V_R(t)$ la diferencia de potencial en la resistencia. Si la resolvemos, podemos obtener las expresiones recogidas en la tabla \ref{tab::ecuaciones_carga_rc}.\\
 
@@ -95,12 +93,11 @@ Este principio, debe de mantenerse durante todo el proceso de carga hasta que la
     \end{center}
 \end{table}
 
-Sin embargo, si tenemos un circuito sin fuente de fuerza electromotriz y partimos de un condensador previamente cargado con una carga $q_{max}$ y de capacidad $C$, conectado a una resistencia $R$ en serie, el escenario en el que nos encontramos es diferente. 
+Sin embargo, si tenemos un circuito sin fuente de fuerza electromotriz y partimos de un condensador previamente cargado con una carga $q_{max}$ y de capacidad $C$, conectado a una resistencia $R$ en serie, el escenario en el que nos encontramos es diferente.\\ 
 
 En el mismo instante en el que cerramos el circuito ($t=0s$) los electrones libres de la armadura cargada negativamente provocan una corriente eléctrica en el circuito desplazándose hacia la placa de carga positiva. Dicha corriente, ocasiona una disminución del potencial eléctrico en la resistencia y, como debe de cumplirse el principio de conservación de la energía y no se dispone de una fuente de energía, el condensador hace las veces de ésta y el potencial en el mismo se incrementa de forma que el balance energético en el circuito es cero (ambos se anulan entre sí). \\
 
-Como ya se ha comentado, no existe una fuente de energía que aplique un potencial a los componentes del circuito, es por eso que la suma de los potenciales de la resistencia y el condensador debe de ser cero en todo momento. Podemos plantear la ecuación diferencial (\ref{eqq::balance_energetico_rc_2}) para estudiar el comportamiento del circuito en el estado de descarga del condensador.\\
-
+Como ya se ha comentado, no existe una fuente de energía que aplique un potencial a los componentes del circuito, es por eso que la suma de los potenciales de la resistencia y el condensador debe de ser cero en todo momento. Podemos plantear la ecuación diferencial (\ref{eqq::balance_energetico_rc_2}) para estudiar el comportamiento del circuito en el estado de descarga del condensador.
 
 \begin{figure}[!h]
     \centering
@@ -119,12 +116,11 @@ Como ya se ha comentado, no existe una fuente de energía que aplique un potenci
     \caption{Fases del estado de descarga de un condensador. Los puntos rojos hacen referencia a los electrones en movimiento.}
     \label{fig::descarga_condensador}
 \end{figure}
-
 \begin{equation}
     0 = V_C(t) + V_R(t) = \frac{q(t)}{C} + R\frac{d q(t)}{d t}
     \label{eqq::balance_energetico_rc_2}
 \end{equation}
-
+\hphantom{1}\\
 Si resolvemos la ecuación diferencial planteada (\ref{eqq::balance_energetico_rc_2}) podemos obtener las expresiones que se muestran en la tabla \ref{tab::ecuaciones_descarga_rc} que modelan el comportamiento de las diferentes magnitudes físicas de la descarga de un condensador; suponiendo que la carga inicial del mismo es la máxima permitida.\\
 
 
@@ -228,17 +224,13 @@ Partimos entonces de un circuito RL de primer orden, donde inicialmente supondre
     \label{fig::carga_bobina}
 \end{figure}
 
-Por supuesto, el \textit{principio de conservación de la energía} debe de cumplirse. Si bien el potencial en los bornes de la bobina disminuye a medida que se incrementa la intensidad de corriente, la diferencia de potencial en la resistencia aumenta. Cuando esta ddp en la resistencia se iguale al valor de la fuente $\varepsilon$, la intensidad del circuito será máxima y por lo tanto, la energía almacenada en el inductor en forma de campo magnético también lo es.
-
-Obtenemos entonces las expresiones que modelan el circuito RL realizando un balance energético en términos de potencial del circuito.
-
-
+Por supuesto, el \textit{principio de conservación de la energía} debe de cumplirse. Si bien el potencial en los bornes de la bobina disminuye a medida que se incrementa la intensidad de corriente, la diferencia de potencial en la resistencia aumenta. Cuando esta ddp en la resistencia se iguale al valor de la fuente $\varepsilon$, la intensidad del circuito será máxima y por lo tanto, la energía almacenada en el inductor en forma de campo magnético también lo es. Obtenemos entonces las expresiones que modelan el circuito RL realizando un balance energético en términos de potencial del circuito.
 \begin{equation}
     \label{eqq::carga_bobina}
     \varepsilon = V_L(t) + V_R(t) = L \frac{d I(t)}{d t} + R I(t)
 \end{equation}
 
-, dónde $V_L(t)$ es la diferencia de potencial en el inductor y $V_R(t)$ en la resistencia. De esta ecuación, podemos deducir las expresiones que se muestran en la tabla \ref{tab::ecuaciones_carga_rl}.\\
+, dónde $V_L(t)$ es la diferencia de potencial en el inductor y $V_R(t)$ en la resistencia. De esta ecuación, podemos deducir las expresiones que se muestran en la tabla \ref{tab::ecuaciones_carga_rl}.
 
 \begin{table}[!ht]
         \begin{center}
@@ -257,7 +249,7 @@ Obtenemos entonces las expresiones que modelan el circuito RL realizando un bala
         \end{center}
     \end{table}
 
-    
+\hphantom{1}\\    
 Por otro lado, una vez que la corriente que circula por el circuito alcanza su valor máximo y es constante, cesa la autoinducción y la bobina almacena energía magnética (figura \ref{fig::circuito_rl_2}). El proceso de disipación de la energía almacenada en el campo magnético de la bobina comienza cuando quitamos la fuente de fuerza electromotriz y deja de suministrar energía, es decir, cuando $\varepsilon = 0$ (figura \ref{fig::circuito_rl_3}). \\
     
 
@@ -319,7 +311,7 @@ Comprobamos entonces que el comportamiento de cada una de las magnitudes física
 \end{figure}
 
 
-Analizamos entonces los resultados que hemos obtenido en la figura \ref{fig::sim_ejemplo_rl}. Cuando el circuito se encuentra en disposición para almacenar energía en la bobina, debido al fenómeno de autoinducción, tanto la intensidad de corriente como la cantidad de campo magnético aumentan; y por lo tanto, lo hacen la energía magnética que se almacena en este dispositivo y la diferencia de potencial de la resistencia. Esta última, como se puede ver en los resultados, aumenta hasta tener un valor igual al de la fuente de alimentación. Como además debe de cumplirse el principio de conservación energético, la diferencia de potencial en la bobina cae hasta ser cero. 
+Analizamos entonces los resultados que hemos obtenido en la figura \ref{fig::sim_ejemplo_rl}. Cuando el circuito se encuentra en disposición para almacenar energía en la bobina, debido al fenómeno de autoinducción, tanto la intensidad de corriente como la cantidad de campo magnético aumentan; y por lo tanto, lo hacen la energía magnética que se almacena en este dispositivo y la diferencia de potencial de la resistencia. Esta última, como se puede ver en los resultados, aumenta hasta tener un valor igual al de la fuente de alimentación. Como además debe de cumplirse el principio de conservación energético, la diferencia de potencial en la bobina cae hasta ser cero.\\ 
 
 Por otro lado cuando partimos de una intensidad de corriente máxima en el circuito y eliminamos la fuente de alimentación, la propia bobina actúa como un generador. Así que podremos observar como se sufre una caída en la intensidad de corriente, por lo que tanto la energía magnética almacenada como la energía potencial en la resistencia y el inductor, disminuirán hasta que la corriente que circula por el circuito sea completamente cero. En otras palabras, la energía magnética que quedará almacenada en la bobina será nula.
 

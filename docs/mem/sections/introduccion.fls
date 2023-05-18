@@ -1525,6 +1525,16 @@ INPUT /usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.st
 INPUT /usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+INPUT sections/introduccion.out
+INPUT sections/introduccion.out
+INPUT sections/introduccion.out
+INPUT sections/introduccion.out
+INPUT sections/introduccion.out
+INPUT sections/introduccion.out
+INPUT sections/introduccion.out
+INPUT sections/introduccion.out
+INPUT sections/introduccion.out
+INPUT sections/introduccion.out
 OUTPUT sections/introduccion.out
 INPUT /usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/spanish.lbx
 INPUT /usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/spanish.lbx

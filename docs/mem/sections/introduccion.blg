@@ -1,0 +1,17 @@
+[0] Config.pm:307> INFO - This is Biber 2.17
+[0] Config.pm:310> INFO - Logfile is 'sections/introduccion.blg'
+[45] biber:340> INFO - === jue may 18, 2023, 08:49:33
+[54] Biber.pm:418> INFO - Reading 'sections/introduccion.bcf'
+[93] Biber.pm:972> INFO - Found 15 citekeys in bib section 0
+[102] Biber.pm:4383> INFO - Processing section 0
+[109] Biber.pm:4574> INFO - Looking for bibtex file 'bibliography.bib' for section 0
+[110] bibtex.pm:1713> INFO - LaTeX decoding ...
+[121] bibtex.pm:1518> INFO - Found BibTeX data source 'bibliography.bib'
+[172] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[173] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
+[173] Biber.pm:4203> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'es-ES'
+[180] bbl.pm:654> INFO - Writing 'sections/introduccion.bbl' with encoding 'UTF-8'
+[183] bbl.pm:757> INFO - Output to sections/introduccion.bbl
+[183] Biber.pm:130> WARN - Duplicate entry key: 'cssdef' in file 'bibliography.bib', skipping ...
+[183] Biber.pm:130> WARN - BibTeX subsystem: warning: comma(s) at end of name (removing)
+[183] Biber.pm:132> INFO - WARNINGS: 2

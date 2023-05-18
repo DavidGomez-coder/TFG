@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  12 MAY 2023 10:20
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  18 MAY 2023 08:49
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1554,7 +1554,10 @@ runsystem(which pygmentize && touch introduccion.aex)...executed.
 
 runsystem(rm introduccion.aex)...executed.
 
-(sections/introduccion.aux)
+(sections/introduccion.aux
+LaTeX Info: Redefining \. on input line 36.
+LaTeX Info: Redefining \% on input line 36.
+)
 \openout1 = `introduccion.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 3.
@@ -1695,16 +1698,13 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 3.
 LaTeX Info: Redefining \pageref on input line 3.
 LaTeX Info: Redefining \nameref on input line 3.
+ (sections/introduccion.out) (sections/introduccion.out)
 \@outlinefile=\write8
 \openout8 = `introduccion.out'.
 
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
-
 Package biblatex Info: Trying to load language 'spanish'...
 Package biblatex Info: ... file 'spanish.lbx' found.
-(/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/spanish.lbx
+ (/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/spanish.lbx
 File: spanish.lbx 2022/02/02 v3.17 biblatex localization (PK/MW)
 )
 Package biblatex Info: XeTeX detected.
@@ -1800,15 +1800,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 27--28
 
 LaTeX Warning: Citation 'metodologiasSoftware' on page 3 undefined on input line 29.
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 29--30
-
- []
-
 [3]
-
-LaTeX Warning: Reference `fig:1.2' on page 4 undefined on input line 40.
-
 File: images/Figura1.2.png Graphic file (type bmp)
 <images/Figura1.2.png>
 
@@ -1886,13 +1878,16 @@ File: images/csslogo.png Graphic file (type bmp)
 <images/csslogo.png>
 File: images/jslogo.png Graphic file (type bmp)
 <images/jslogo.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Citation 'nodejsdef' on page 7 undefined on input line 113.
+
+
+LaTeX Warning: Citation 'reactjsdef' on page 7 undefined on input line 114.
+
 [7]
-
-LaTeX Warning: Citation 'nodejsdef' on page 8 undefined on input line 113.
-
-
-LaTeX Warning: Citation 'reactjsdef' on page 8 undefined on input line 114.
-
 
 LaTeX Warning: Citation 'bootstrapdef' on page 8 undefined on input line 115.
 
@@ -1907,14 +1902,8 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-
-Package rerunfilecheck Warning: File `introduccion.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `introduccion.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  FC2DA0E28C3A995A8EC33FE20090FE59;591.
+Package rerunfilecheck Info: File `introduccion.out' has not changed.
+(rerunfilecheck)             Checksum: FC2DA0E28C3A995A8EC33FE20090FE59;591.
 
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                introduccion
@@ -1925,10 +1914,10 @@ Package logreq Info: Writing requests to 'introduccion.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 57995 strings out of 476191
- 1326914 string characters out of 5812071
- 2132638 words of memory out of 5000000
- 77915 multiletter control sequences out of 15000+600000
+ 58002 strings out of 476191
+ 1327051 string characters out of 5812071
+ 2134498 words of memory out of 5000000
+ 77918 multiletter control sequences out of 15000+600000
  476900 words of font info for 94 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  123i,10n,155p,1182b,4879s stack positions out of 5000i,500n,10000p,200000b,80000s
