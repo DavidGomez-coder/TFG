@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  18 MAY 2023 10:20
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  18 MAY 2023 13:10
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -2549,34 +2549,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 330--331
 
 [67] [68]) [69] [70
 
-] (./sections/conclusion.tex
-Underfull \hbox (badness 10000) in paragraph at lines 7--8
+] (./sections/conclusion.tex [71] [72]) [73] [74
 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 16--17
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 20--21
-
- []
-
-[71] [72]) [73] [74
-
-] (./sections/conclusiones.tex
-Underfull \hbox (badness 10000) in paragraph at lines 21--22
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--24
-
- []
-
-[75] [76]) [77] [78
+] (./sections/conclusiones.tex [75] [76]) [77] [78
 
 ]
 Overfull \hbox (0.1676pt too wide) in paragraph at lines 83--83
