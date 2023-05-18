@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  18 MAY 2023 13:10
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.12.19)  18 MAY 2023 13:17
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -2364,11 +2364,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 336--337
 
 ) [54] (./sections/implementacion.tex
 Underfull \hbox (badness 10000) in paragraph at lines 6--7
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 12--13
 
  []
 
