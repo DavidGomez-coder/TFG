@@ -90,11 +90,11 @@ export default class SimpleRl extends Component {
             phi_data: [],
             //components value
             L: 10,
-            R: 3,
+            R: 1,
             V: 5,
             i_0: 0,
             //others
-            R_v: 3,
+            R_v: 1,
             R_m: 1,
             R_color_bands: [],
             L_v: 10,
@@ -300,6 +300,8 @@ export default class SimpleRl extends Component {
                         return rl_discharge_0_63;
 
                     return rl_discharge_background;
+                default: 
+                    return;
         }
 
         //return undefined;

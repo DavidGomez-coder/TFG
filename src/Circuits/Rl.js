@@ -111,14 +111,14 @@ export default class Rl extends Component {
             i_percent: 0,
             // components  values
             L: 10,
-            R: 1000,
+            R: 1,
             R_color_bands: [],
             V: 6,
             //components initial values and multipliers
             L_v: 10,
             L_m: 1,
             R_v: 1,
-            R_m: 1000,
+            R_m: 1,
             V_v: 6,
             V_m: 1,
             // circuit state
@@ -365,6 +365,9 @@ export default class Rl extends Component {
                     return rl_discharge_0_63;
 
                 return rl_discharge_background;
+            
+            default: 
+                return;
         }
 
         //return undefined;
