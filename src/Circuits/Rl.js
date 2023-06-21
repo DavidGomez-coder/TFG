@@ -194,7 +194,7 @@ export default class Rl extends Component {
                 //new values
                 let instant_values = this.state.inductorCharging ? getChargeInstant(t_i, this.state.i_max, this.state.V, this.state.L, this.state.R) :
                     getDischargeInstant(t_i, this.state.i_max, this.state.V, this.state.L, this.state.R);
-
+                //console.log("IV" + instant_values.I)
                 //condiciones más restrictivas
                 if (this.state.value_stop_condition !== undefined) {
                     if ((this.state.selected_stop_condition === PERCENT_I && this.state.inductorCharging && this.state.value_stop_condition >= 100) ||
@@ -222,7 +222,7 @@ export default class Rl extends Component {
                 }
 
                 //auto stop simulation
-                if (this.state.inductorCharging && this.state.i_percent == 100) {
+                if (this.state.inductorCharging && this.state.i_percent >= 100) {
                     this.updateRunning();
                     this.updateConditionState(true);
                     this.setState((prevState) => {
@@ -248,7 +248,7 @@ export default class Rl extends Component {
                     //let nt_i = t_i + ((SIMULATION_STEP * this.state.simulation_step_multiplier) / 1000);
                     //let nt_a = t_a + ((SIMULATION_STEP * this.state.simulation_step_multiplier) / 1000);
                     // max L - min R
-                    let MAX_KILO_TIME = 100.10;     // 10.01s
+                    let MAX_KILO_TIME = 10.01;     // 10.01s
                     let MAX_L_TIME = 5;       // 5s
                     let step = this.state.R_m === KILO ? 1/MAX_KILO_TIME : 1/MAX_L_TIME;
                     let nt_i = t_i + step;

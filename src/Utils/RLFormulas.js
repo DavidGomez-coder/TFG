@@ -29,7 +29,7 @@ export function getChargeInstant(t, i_0, V, L, R) {
 }
 
 export function getDischargeInstant (t, i_0, V, L, R){
-    let i_t = getI_discharge(t, i_0, undefined, L, R);
+    let i_t = getI_discharge(t, i_0, V, L, R);
     return {
         "I" : i_t,
         "Vr" : i_t * R,
